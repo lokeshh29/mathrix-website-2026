@@ -32,6 +32,9 @@ body {
   /* Size for dots */
   min-height: 100vh;
   overflow-x: hidden;
+  font-size: 1.125rem;
+  /* Increased base font size (18px) */
+  line-height: 1.6;
 }
 
 a {

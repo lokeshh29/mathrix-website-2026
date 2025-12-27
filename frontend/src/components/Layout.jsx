@@ -1,11 +1,13 @@
 import React from 'react';
 import Navbar from './Navbar';
+import ThreeBackground from './ThreeBackground';
 
 const Layout = ({ children }) => {
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col relative">
+            <ThreeBackground />
             <Navbar />
-            <main className="flex-grow pt-16">
+            <main className="flex-grow pt-28 relative z-10">
                 {children}
             </main>
             <footer className="glass border-t border-white/10 py-8 mt-20">

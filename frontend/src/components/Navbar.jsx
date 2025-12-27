@@ -17,12 +17,12 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b border-white/5 bg-[#0f0518]/70 h-16">
-      <div className="container h-full mx-auto flex items-center justify-between px-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b border-white/5 bg-[#0f0518]/70 h-24">
+      <div className="container h-full mx-auto flex items-center justify-between px-6">
         {/* Logo */}
-        <NavLink to="/" className="flex items-center gap-2 text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity group">
-          <div className="p-1 rounded-lg bg-pink-500/10 group-hover:bg-pink-500/20 transition-colors">
-            <Rocket className="text-pink-500 transform group-hover:-translate-y-0.5 transition-transform" size={24} />
+        <NavLink to="/" className="flex items-center gap-3 text-3xl font-bold tracking-tighter hover:opacity-80 transition-opacity group">
+          <div className="p-2 rounded-xl bg-pink-500/10 group-hover:bg-pink-500/20 transition-colors">
+            <Rocket className="text-pink-500 transform group-hover:-translate-y-1 transition-transform" size={32} />
           </div>
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-200 to-pink-400 font-extrabold"
             style={{ backgroundSize: '200% auto' }}>
@@ -31,13 +31,13 @@ const Navbar = () => {
         </NavLink>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {navItems.map((item) => (
             <NavLink
               key={item.name}
               to={item.path}
               className={({ isActive }) =>
-                `text-sm font-medium transition-all duration-300 relative py-1 hover:text-white ${isActive ? 'text-pink-400' : 'text-gray-400'
+                `text-base font-semibold transition-all duration-300 relative py-1 hover:text-white tracking-wide ${isActive ? 'text-pink-400' : 'text-gray-400'
                 }`
               }
             >
@@ -55,8 +55,8 @@ const Navbar = () => {
               )}
             </NavLink>
           ))}
-          <a href="/contact" className="ml-4 px-5 py-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-sm font-semibold transition-all hover:scale-105 active:scale-95 text-pink-300 hover:text-pink-200 hover:border-pink-500/30">
-            Register
+          <a href="/contact" className="ml-6 px-7 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-base font-bold transition-all hover:scale-105 active:scale-95 text-pink-300 hover:text-pink-200 hover:border-pink-500/30 shadow-lg shadow-pink-500/10">
+            Register Now
           </a>
         </div>
 
