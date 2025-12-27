@@ -107,13 +107,59 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="md:w-1/2 flex justify-center">
-                            {/* Abstract 3D shape or Image placeholder */}
-                            <div className="w-64 h-64 md:w-80 md:h-80 relative">
-                                <div className="absolute inset-0 border-2 border-pink-500/30 rounded-full animate-[spin_10s_linear_infinite]" />
-                                <div className="absolute inset-4 border-2 border-rose-500/30 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <Calendar size={64} className="text-white/20" />
+                        <div className="md:w-1/2 flex justify-center relative">
+                            {/* Coding Terminal Animation */}
+                            <div className="relative w-72 h-48 md:w-96 md:h-64 flex items-center justify-center">
+                                {/* Glowing backdrop */}
+                                <div className="absolute inset-0 bg-pink-500/20 blur-[60px] rounded-full animate-pulse" />
+
+                                <motion.div
+                                    animate={{
+                                        y: [0, -10, 0],
+                                    }}
+                                    transition={{
+                                        duration: 6,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                    className="relative z-10 w-full"
+                                >
+                                    <div className="glass-card p-4 rounded-xl border border-pink-500/30 bg-black/60 shadow-[0_0_30px_rgba(236,72,153,0.15)]">
+                                        {/* Terminal Header */}
+                                        <div className="flex items-center gap-2 mb-4 border-b border-white/10 pb-2">
+                                            <div className="w-3 h-3 rounded-full bg-red-500" />
+                                            <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                                            <div className="w-3 h-3 rounded-full bg-green-500" />
+                                            <div className="text-xs text-gray-500 ml-2 font-mono">user@mathrix:~/events</div>
+                                        </div>
+
+                                        {/* Terminal Content */}
+                                        <div className="font-mono text-sm space-y-2">
+                                            <div className="flex items-center gap-2 text-green-400">
+                                                <span>➜</span>
+                                                <span className="text-pink-400">mathrix</span>
+                                                <span className="text-white">init --force</span>
+                                            </div>
+                                            <div className="text-gray-300 pl-4">
+                                                <div className="animate-[typing_3s_steps(20)_infinite]">Loading modules...</div>
+                                                <div className="text-blue-400">Importing AI_Models...</div>
+                                                <div className="text-purple-400">Compiling logic...</div>
+                                                <div className="text-green-400 font-bold mt-2">Success! System Online.</div>
+                                            </div>
+                                            <div className="flex items-center gap-2 text-green-400 animate-pulse">
+                                                <span>➜</span>
+                                                <span className="w-2 h-4 bg-gray-400 block" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+
+                                {/* Background Geometric floaters */}
+                                <div className="absolute -top-10 -right-10 text-pink-500/20 animate-bounce delay-700">
+                                    <code className="text-6xl font-bold">{`{}`}</code>
+                                </div>
+                                <div className="absolute -bottom-5 -left-5 text-blue-500/20 animate-bounce">
+                                    <code className="text-6xl font-bold">{`</>`}</code>
                                 </div>
                             </div>
                         </div>

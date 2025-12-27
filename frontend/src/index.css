@@ -195,3 +195,21 @@ h2 {
   transform: translateY(-3px);
   box-shadow: 0 5px 20px rgba(244, 114, 182, 0.2);
 }
+
+@keyframes scan {
+
+  0%,
+  100% {
+    top: 30%;
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    top: 70%;
+    opacity: 0;
+  }
+}
