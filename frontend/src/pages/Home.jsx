@@ -28,7 +28,7 @@ const Home = () => {
                         </h2>
                         <h1 className="text-7xl md:text-9xl font-extrabold mb-8 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-pink-200 drop-shadow-[0_0_25px_rgba(219,39,119,0.3)] leading-tight">
                             MATHRIX <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400">2025</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400">2026</span>
                         </h1>
 
                         <CountdownTimer />

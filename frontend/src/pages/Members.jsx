@@ -21,7 +21,7 @@ const Members = () => {
             >
                 <h1 className="text-4xl md:text-6xl font-bold mb-4">Meet The Team</h1>
                 <p className="text-gray-400 max-w-2xl mx-auto">
-                    The brilliant minds working behind the scenes to make Mathrix 2025 a reality.
+                    The brilliant minds working behind the scenes to make Mathrix 2026 a reality.
                 </p>
             </motion.div>
 
