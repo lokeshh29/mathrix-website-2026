@@ -34,7 +34,7 @@ const Home = () => {
                         <CountdownTimer />
 
                         <p className="text-gray-300 text-lg md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed text-balance mt-8">
-                            Where Logic Meets Creativity. Join us for a symposium celebrating the beauty of mathematics through innovation and technology.
+                            Where Logic Meets Creativity. Join us for a Mathrix celebrating the beauty of mathematics through innovation and technology.
                         </p>
 
                         <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-12">
@@ -83,10 +83,10 @@ const Home = () => {
                     <div className="absolute top-0 right-0 p-40 bg-pink-600/10 blur-[100px] rounded-full" />
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
                         <div className="md:w-1/2">
-                            <h2 className="text-4xl font-bold mb-2">About The Symposium</h2>
+                            <h2 className="text-4xl font-bold mb-2">About Mathrix</h2>
                             <h3 className="text-xl font-medium text-pink-400 tracking-[0.3em] uppercase mb-6">Epsilon to Infinity</h3>
                             <p className="text-gray-300 mb-6 leading-relaxed">
-                                Mathrix is the annual intercollegiate symposium where mathematics meets technology! Hosted by the Department of Mathematics, College of Engineering Guindy, Anna University, Mathrix is a one-of-a-kind fest that brings together logic, innovation, and problem-solving under one roof. Organized by the brilliant minds of M.Sc. Computer Science (5 years), M.Sc. Information Technology (5 years), and M.Sc. Mathematics (2 years), Mathrix is more than just a symposium—it's a fusion of numbers, algorithms, and cutting-edge tech. With a perfect blend of mathematical and technical events, this fest is designed to challenge intellects, spark creativity, and push boundaries. From thrilling competitions that test your mathematical prowess to tech-driven challenges that fuel your coding skills, Mathrix is the ultimate arena for innovators, problem-solvers, and future disruptors.
+                                Mathrix is the annual intercollegiate Mathrix where mathematics meets technology! Hosted by the Department of Mathematics, College of Engineering Guindy, Anna University, Mathrix is a one-of-a-kind fest that brings together logic, innovation, and problem-solving under one roof. Organized by the brilliant minds of M.Sc. Computer Science (5 years), M.Sc. Information Technology (5 years), and M.Sc. Mathematics (2 years), Mathrix is more than just a Mathrix—it's a fusion of numbers, algorithms, and cutting-edge tech. With a perfect blend of mathematical and technical events, this fest is designed to challenge intellects, spark creativity, and push boundaries. From thrilling competitions that test your mathematical prowess to tech-driven challenges that fuel your coding skills, Mathrix is the ultimate arena for innovators, problem-solvers, and future disruptors.
                             </p>
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center mt-8">
                                 <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
