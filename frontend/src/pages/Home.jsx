@@ -85,22 +85,24 @@ const Home = () => {
                         <div className="md:w-1/2">
                             <h2 className="text-4xl font-bold mb-6">About The Symposium</h2>
                             <p className="text-gray-300 mb-6 leading-relaxed">
-                                Mathrix is the annual technical symposium organized by the Department of Mathematics.
-                                It serves as a platform for students to explore the convergence of mathematics and technology.
-                                This year, we are pushing boundaries with a focus on AI, Cryptography, and Computational Logic.
+                                Mathrix is the annual intercollegiate symposium where mathematics meets technology! Hosted by the Department of Mathematics, College of Engineering Guindy, Anna University, Mathrix is a one-of-a-kind fest that brings together logic, innovation, and problem-solving under one roof. Organized by the brilliant minds of M.Sc. Computer Science (5 years), M.Sc. Information Technology (5 years), and M.Sc. Mathematics (2 years), Mathrix is more than just a symposium—it's a fusion of numbers, algorithms, and cutting-edge tech. With a perfect blend of mathematical and technical events, this fest is designed to challenge intellects, spark creativity, and push boundaries. From thrilling competitions that test your mathematical prowess to tech-driven challenges that fuel your coding skills, Mathrix is the ultimate arena for innovators, problem-solvers, and future disruptors.
                             </p>
-                            <div className="flex gap-8 text-center">
-                                <div>
-                                    <div className="text-3xl font-bold text-rose-400">10+</div>
-                                    <div className="text-sm text-gray-500 uppercase tracking-wider">Events</div>
+                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center mt-8">
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
+                                    <div className="text-3xl font-bold text-rose-400 mb-1">10+</div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Tech Events</div>
                                 </div>
-                                <div>
-                                    <div className="text-3xl font-bold text-pink-400">500+</div>
-                                    <div className="text-sm text-gray-500 uppercase tracking-wider">Participants</div>
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
+                                    <div className="text-3xl font-bold text-pink-400 mb-1">4+</div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Non-Tech Events</div>
                                 </div>
-                                <div>
-                                    <div className="text-3xl font-bold text-pink-400">₹50K</div>
-                                    <div className="text-sm text-gray-500 uppercase tracking-wider">Prize Pool</div>
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
+                                    <div className="text-3xl font-bold text-purple-400 mb-1">2+</div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Workshops</div>
+                                </div>
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
+                                    <div className="text-3xl font-bold text-indigo-400 mb-1">500+</div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Participants</div>
                                 </div>
                             </div>
                         </div>
