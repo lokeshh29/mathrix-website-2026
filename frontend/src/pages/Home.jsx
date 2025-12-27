@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, Users, Zap, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import CountdownTimer from '../components/CountdownTimer';
 
 const Home = () => {
     return (
@@ -29,7 +30,10 @@ const Home = () => {
                             MATHRIX <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400">2025</span>
                         </h1>
-                        <p className="text-gray-300 text-lg md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed text-balance">
+
+                        <CountdownTimer />
+
+                        <p className="text-gray-300 text-lg md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed text-balance mt-8">
                             Where Logic Meets Creativity. Join us for a symposium celebrating the beauty of mathematics through innovation and technology.
                         </p>
 
