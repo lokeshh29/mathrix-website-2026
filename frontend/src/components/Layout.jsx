@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from './Navbar';
 import ThreeBackground from './ThreeBackground';
 
+import ChatBot from './ChatBot';
+
 const Layout = ({ children }) => {
     return (
         <div className="min-h-screen flex flex-col relative">
@@ -10,6 +12,7 @@ const Layout = ({ children }) => {
             <main className="flex-grow pt-28 relative z-10">
                 {children}
             </main>
+            <ChatBot />
             <footer className="glass border-t border-white/10 py-8 mt-20">
                 <div className="container mx-auto px-4 text-center text-gray-400">
                     <p>© 2026 Mathrix Mathrix. All rights reserved.</p>
