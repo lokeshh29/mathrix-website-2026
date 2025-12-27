@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { Menu, X, Rocket } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+import logo from '../assets/logo.png';
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -21,8 +23,8 @@ const Navbar = () => {
       <div className="container h-full mx-auto flex items-center justify-between px-6">
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-3 text-3xl font-bold tracking-tighter hover:opacity-80 transition-opacity group">
-          <div className="p-2 rounded-xl bg-pink-500/10 group-hover:bg-pink-500/20 transition-colors">
-            <Rocket className="text-pink-500 transform group-hover:-translate-y-1 transition-transform" size={32} />
+          <div className="p-1 rounded-xl bg-pink-500/10 group-hover:bg-pink-500/20 transition-colors">
+            <img src={logo} alt="Mathrix Logo" className="w-14 h-14 object-contain transform group-hover:-translate-y-1 transition-transform" />
           </div>
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-200 to-pink-400 font-extrabold"
             style={{ backgroundSize: '200% auto' }}>
