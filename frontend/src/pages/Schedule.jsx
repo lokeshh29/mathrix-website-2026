@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const scheduleData = [
     {
         day: 'Day 1',
-        date: 'March 15',
+        date: 'Febraury 21',
         events: [
             { time: '09:00 AM', title: 'Inauguration', location: 'Main Audi' },
             { time: '10:00 AM', title: 'Code Relay', location: 'Lab 1' },
@@ -15,7 +15,7 @@ const scheduleData = [
     },
     {
         day: 'Day 2',
-        date: 'March 16',
+        date: 'Febraury 21',
         events: [
             { time: '09:00 AM', title: 'Workshop: AI in Math', location: 'Lab 2' },
             { time: '12:00 PM', title: 'Guest Lecture', location: 'Seminar Hall' },
