@@ -48,24 +48,8 @@ const Contact = () => {
                                 <h3 className="text-xl font-bold mb-2">Visit Us</h3>
                                 <p className="text-gray-400">
                                     Department of Mathematics,<br />
-                                    Institute of Technology,<br />
-                                    University Campus, 123456
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="glass-card p-8 hover:bg-white/5 transition-colors">
-                        <div className="flex items-start gap-4">
-                            <div className="p-3 bg-pink-500/20 rounded-lg text-pink-400">
-                                <MapPin size={24} />
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-bold mb-2">Visit Us</h3>
-                                <p className="text-gray-400">
-                                    Department of Mathematics,<br />
-                                    Institute of Technology,<br />
-                                    University Campus, 123456
+                                    College of Engineering Guindy,<br />
+                                    Anna University, Chennai - 600 025.
                                 </p>
                             </div>
                         </div>
@@ -78,8 +62,7 @@ const Contact = () => {
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold mb-2">Email Us</h3>
-                                <p className="text-gray-400">contact@mathrix2026.com</p>
-                                <p className="text-gray-400">sponsorship@mathrix2026.com</p>
+                                <p className="text-gray-400">mathrix.ceg@gmail.com</p>
                             </div>
                         </div>
                     </div>
@@ -91,8 +74,8 @@ const Contact = () => {
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold mb-2">Call Us</h3>
-                                <p className="text-gray-400">+91 98765 43210</p>
-                                <p className="text-gray-400">+91 12345 67890</p>
+                                <p className="text-gray-400">+91 63825 10480</p>
+                                <p className="text-gray-400">+91 93612 69964</p>
                             </div>
                         </div>
                     </div>

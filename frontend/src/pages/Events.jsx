@@ -37,14 +37,16 @@ const eventsData = [
 
 const Events = () => {
     return (
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-32">
             <motion.h1
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-4xl md:text-6xl font-bold mb-12 text-center"
+                className="text-4xl md:text-6xl font-bold mb-32 text-center relative z-10"
             >
                 Upcoming Events
             </motion.h1>
+
+            <div className="h-10"></div> {/* Explicit spacer just in case */}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {eventsData.map((event, index) => (
