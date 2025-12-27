@@ -90,14 +90,16 @@ h4,
 h5,
 h6 {
   margin: 0;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-weight: 800;
+  /* Bolder headings */
+  letter-spacing: -0.03em;
+  /* Tighter tracking for modern look */
 }
 
 h1 {
-  font-size: 3.5rem;
+  font-size: 4rem;
   line-height: 1.1;
-  background: linear-gradient(135deg, #fff 0%, #a78bfa 100%);
+  background: linear-gradient(135deg, #fff 30%, #f472b6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -114,7 +116,7 @@ h2 {
   }
 
   50% {
-    box-shadow: 0 0 20px var(--primary), 0 0 10px var(--accent);
+    box-shadow: 0 0 25px var(--primary), 0 0 10px var(--accent);
   }
 
   100% {
@@ -127,43 +129,69 @@ h2 {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
+  /* Wider container for modern feel */
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  /* Pill shape */
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(109, 40, 217, 0.4);
+  box-shadow: 0 0 20px rgba(219, 39, 119, 0.4);
+  /* Base glow */
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary:hover {
-  filter: brightness(1.2);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(109, 40, 217, 0.6);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 40px rgba(219, 39, 119, 0.6);
+  /* Intensified glow */
+  filter: brightness(1.1);
 }
 
 .btn-outline {
-  background: transparent;
-  border: 1px solid var(--primary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--text-main);
+  backdrop-filter: blur(10px);
 }
 
 .btn-outline:hover {
-  background: rgba(109, 40, 217, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(244, 114, 182, 0.2);
 }

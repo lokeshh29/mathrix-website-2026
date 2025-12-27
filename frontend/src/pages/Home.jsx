@@ -20,22 +20,25 @@ const Home = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-pink-400 font-medium tracking-widest text-sm md:text-base uppercase mb-4">
+                        <h2 className="text-pink-300 font-semibold tracking-[0.2em] text-sm md:text-lg uppercase mb-6 flex items-center justify-center gap-4">
+                            <span className="h-px w-8 bg-pink-500/50"></span>
                             Department of Mathematics Presents
+                            <span className="h-px w-8 bg-pink-500/50"></span>
                         </h2>
-                        <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-pink-200 drop-shadow-[0_0_15px_rgba(219,39,119,0.5)]">
-                            MATHRIX <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400">2025</span>
+                        <h1 className="text-7xl md:text-9xl font-extrabold mb-8 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-pink-200 drop-shadow-[0_0_25px_rgba(219,39,119,0.3)] leading-tight">
+                            MATHRIX <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400">2025</span>
                         </h1>
                         <p className="text-gray-300 text-lg md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed text-balance">
                             Where Logic Meets Creativity. Join us for a symposium celebrating the beauty of mathematics through innovation and technology.
                         </p>
 
-                        <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-                            <Link to="/events" className="btn btn-primary group">
+                        <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-12">
+                            <Link to="/events" className="btn btn-primary group text-lg px-10 py-4 shadow-[0_0_30px_rgba(219,39,119,0.3)]">
                                 Explore Events
                                 <ArrowRight className="group-hover:translate-x-1 transition-transform" />
                             </Link>
-                            <Link to="/schedule" className="btn btn-outline">
+                            <Link to="/schedule" className="btn btn-outline text-lg px-10 py-4">
                                 View Schedule
                             </Link>
                         </div>
@@ -60,11 +63,11 @@ const Home = () => {
                             whileHover={{ y: -5, transition: { duration: 0.2 } }}
                             className="glass-card p-6 md:p-8 text-center flex flex-col items-center hover:bg-white/5 transition-all border border-white/5 group"
                         >
-                            <div className="mb-5 p-4 bg-white/5 rounded-2xl ring-1 ring-white/10 group-hover:ring-pink-500/30 group-hover:shadow-[0_0_20px_rgba(236,72,153,0.2)] transition-all duration-500">
+                            <div className="mb-6 p-5 bg-gradient-to-br from-white/10 to-transparent rounded-2xl ring-1 ring-white/20 group-hover:ring-pink-500/40 group-hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] transition-all duration-500 transform group-hover:-translate-y-2">
                                 {item.icon}
                             </div>
-                            <h3 className="text-xl font-bold mb-3 group-hover:text-pink-200 transition-colors">{item.title}</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                            <h3 className="text-2xl font-bold mb-4 group-hover:text-pink-200 transition-colors tracking-tight">{item.title}</h3>
+                            <p className="text-gray-400 text-base leading-relaxed max-w-xs">{item.desc}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -112,9 +115,10 @@ const Home = () => {
             </section>
 
             {/* Call to Action */}
-            <section className="container mx-auto px-4 text-center py-10">
-                <h2 className="text-3xl md:text-5xl font-bold mb-8">Ready to Participate?</h2>
-                <Link to="/contact" className="btn btn-primary text-lg px-8 py-4 rounded-full">
+            <section className="container mx-auto px-4 text-center py-20 relative z-10">
+                <div className="absolute inset-0 bg-gradient-to-t from-pink-900/10 to-transparent pointer-events-none" />
+                <h2 className="text-4xl md:text-6xl font-extrabold mb-8 tracking-tight">Ready to <span className="text-pink-400">Participate?</span></h2>
+                <Link to="/contact" className="btn btn-primary text-xl px-12 py-5 shadow-[0_0_40px_rgba(219,39,119,0.4)]">
                     Register Now
                 </Link>
             </section>
