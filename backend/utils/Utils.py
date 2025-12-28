@@ -30,9 +30,9 @@ def parse_event(event: Dict[str, Any]) -> Dict[str, Any]:
         input_block = event
 
     text = input_block.get("text") or input_block.get("inputText") or None
-    agent_session_id = input_block.get("agent_session_id")
+    # agent_session_id = input_block.get("agent_session_id")
     return {
         "text": text,
-        "agent_session_id": agent_session_id,
+        # "agent_session_id": agent_session_id,
         "raw_event": event,
     }

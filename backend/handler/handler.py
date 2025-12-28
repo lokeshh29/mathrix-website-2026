@@ -23,16 +23,11 @@ def internal_handle(event: Dict[str, Any]) -> Dict[str, Any]:
         payload = AnswerRequestPayload.model_validate(data)
         text = payload.text
         
-        session_id = payload.agent_session_id
-        set_agent_session_id(session_id)
+        # session_id = payload.agent_session_id
+        # set_agent_session_id(session_id)
 
         if not text:
             raise ValueError("Query text is required")
-
-        logger.info("Request processing session_id=%s query=%s", session_id, text)
-
-        # Run Agent directly
-        # We assume single KB ID from env
         kb_id = DEFAULT_KB_ID
         
         agent_output = run_agent(text, kb_id)

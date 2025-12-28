@@ -19,16 +19,16 @@ def retrieve_from_kb(query: str, kb_id: str, top_k: int = KB_RETRIEVE_NUM_OF_RES
         - Joined text if results found
         - "NO_KB_RESULTS" if empty
     """
-    session_id = get_agent_session_id()
-    if session_id:
-        logger.info(
-            "Tool retrieve_from_kb called session_id=%s kb_id=%s top_k=%s",
-            session_id,
-            kb_id,
-            top_k,
-        )
-    else:
-        logger.info("Tool retrieve_from_kb called with kb_id=%s top_k=%s", kb_id, top_k)
+    # session_id = get_agent_session_id()
+    # if session_id:
+    #     logger.info(
+    #         "Tool retrieve_from_kb called session_id=%s kb_id=%s top_k=%s",
+    #         session_id,
+    #         kb_id,
+    #         top_k,
+    #     )
+    # else:
+    logger.info("Tool retrieve_from_kb called with kb_id=%s top_k=%s", kb_id, top_k)
     
     if not kb_id:
         return "NO_KB_RESULTS"
@@ -64,5 +64,8 @@ def retrieve_from_kb(query: str, kb_id: str, top_k: int = KB_RETRIEVE_NUM_OF_RES
         return joined_snippets
 
     except Exception as e:
+        print(f"CRITICAL ERROR in retrieve_from_kb: {e}")
+        import traceback
+        traceback.print_exc()
         logger.error(f"retrieve_from_kb error: {e}", exc_info=True)
         return "NO_KB_RESULTS"

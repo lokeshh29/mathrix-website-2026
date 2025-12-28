@@ -8,21 +8,54 @@ const ChatBot = () => {
         { id: 1, text: "Hello! I am Cipher. How can I assist you with Mathrix 2026 today?", sender: 'bot' }
     ]);
     const [input, setInput] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const messagesEndRef = React.useRef(null);
 
-    const handleSend = (e) => {
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    React.useEffect(() => {
+        scrollToBottom();
+    }, [messages, isLoading, isOpen]);
+
+    const handleSend = async (e) => {
         e.preventDefault();
         if (!input.trim()) return;
 
-        // Add user message
-        const userMsg = { id: Date.now(), text: input, sender: 'user' };
+        const userText = input;
+        const userMsg = { id: Date.now(), text: userText, sender: 'user' };
+
         setMessages(prev => [...prev, userMsg]);
         setInput("");
+        setIsLoading(true);
 
-        // Simulate bot response
-        setTimeout(() => {
-            const botMsg = { id: Date.now() + 1, text: "I'm currently in demo mode! I'll be fully operational soon to help with event registrations and queries.", sender: 'bot' };
+        try {
+            const response = await fetch("http://localhost:8080/invocations", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    input: {
+                        text: userText
+                    }
+                }),
+            });
+
+            const data = await response.json();
+            const botResponse = data.output?.answers?.[0]?.answer || "I'm having trouble connecting to my brain right now.";
+
+            const botMsg = { id: Date.now() + 1, text: botResponse, sender: 'bot' };
             setMessages(prev => [...prev, botMsg]);
-        }, 1000);
+
+        } catch (error) {
+            console.error("Chat Error:", error);
+            const errorMsg = { id: Date.now() + 1, text: "Connection error. Is the backend running?", sender: 'bot' };
+            setMessages(prev => [...prev, errorMsg]);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -51,6 +84,8 @@ const ChatBot = () => {
                                         Online
                                     </span>
                                 </div>
+
+
                             </div>
                             <button
                                 onClick={() => setIsOpen(false)}
@@ -77,6 +112,16 @@ const ChatBot = () => {
                                     </div>
                                 </div>
                             ))}
+                            {isLoading && (
+                                <div className="flex justify-start pl-4 pb-2">
+                                    <div className="flex items-center gap-1.5 grayscale opacity-70">
+                                        <div className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                                        <div className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                                        <div className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                                    </div>
+                                </div>
+                            )}
+                            <div ref={messagesEndRef} />
                         </div>
 
                         {/* Input Area */}
@@ -150,7 +195,7 @@ const ChatBot = () => {
                     </span>
                 </div>
             </motion.div>
-        </div>
+        </div >
     );
 };
 
