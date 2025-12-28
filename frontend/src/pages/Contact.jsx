@@ -53,6 +53,20 @@ const Contact = () => {
                                 </p>
                             </div>
                         </div>
+                        <div className="mt-6 rounded-xl overflow-hidden shadow-lg border border-white/10 h-48 w-full">
+                            <iframe
+                                width="100%"
+                                height="100%"
+                                src="https://maps.google.com/maps?q=Department%20of%20Mathematics,%20Anna%20University,%20Chennai&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                frameBorder="0"
+                                scrolling="no"
+                                marginHeight="0"
+                                marginWidth="0"
+                                title="Location Map"
+                                className="grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100"
+                            >
+                            </iframe>
+                        </div>
                     </div>
 
                     <div className="glass-card p-8 hover:bg-white/5 transition-colors">
