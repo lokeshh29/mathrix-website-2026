@@ -58,6 +58,30 @@ const ChatBot = () => {
         }
     };
 
+    const renderMessageText = (text) => {
+        // Strict regex for email extraction
+        const emailRegex = /([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})/g;
+
+        // Split keeps the separators (emails) because of capturing group
+        const parts = text.split(emailRegex);
+
+        return parts.map((part, index) => {
+            // Check if this part is an email
+            if (part.match(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+                return (
+                    <a
+                        key={index}
+                        href={`mailto:${part}`}
+                        className="text-pink-400 hover:text-pink-300 underline underline-offset-2 break-all"
+                    >
+                        {part}
+                    </a>
+                );
+            }
+            return part;
+        });
+    };
+
     return (
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none"> {/* Container to manage layout, pointer-events-none to let clicks pass through empty space */}
 
@@ -108,7 +132,7 @@ const ChatBot = () => {
                                             : 'bg-[#1a1a2e] text-gray-100 border border-white/5 rounded-bl-none'
                                             }`}
                                     >
-                                        {msg.text}
+                                        {renderMessageText(msg.text)}
                                     </div>
                                 </div>
                             ))}
