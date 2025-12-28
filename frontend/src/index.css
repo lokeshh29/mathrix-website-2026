@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -16,6 +17,10 @@
   /* Pinkish border */
   --glass-blur: 16px;
   /* Increased blur for better effect */
+}
+
+.font-tech {
+  font-family: 'Orbitron', sans-serif;
 }
 
 body {

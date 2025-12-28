@@ -39,7 +39,7 @@ const CountdownTimer = () => {
     const TimerBox = ({ label, value }) => (
         <div className="flex flex-col items-center mx-2 md:mx-4">
             <div className="glass-card w-16 h-16 md:w-24 md:h-24 flex items-center justify-center mb-2 bg-white/5 border border-pink-500/20 shadow-[0_0_15px_rgba(236,72,153,0.15)] backdrop-blur-md rounded-xl">
-                <span className="text-xl md:text-3xl font-bold text-white font-mono">
+                <span className="text-xl md:text-3xl font-bold text-white font-tech">
                     {String(value).padStart(2, '0')}
                 </span>
             </div>

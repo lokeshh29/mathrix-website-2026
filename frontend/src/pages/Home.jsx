@@ -21,14 +21,14 @@ const Home = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-pink-300 font-semibold tracking-[0.2em] text-sm md:text-lg uppercase mb-6 flex items-center justify-center gap-4">
+                        <h2 className="text-pink-300 font-semibold tracking-[0.2em] text-sm md:text-lg uppercase mb-6 flex items-center justify-center gap-4 font-tech">
                             <span className="h-px w-8 bg-pink-500/50"></span>
                             Department of Mathematics Presents
                             <span className="h-px w-8 bg-pink-500/50"></span>
                         </h2>
-                        <h1 className="text-7xl md:text-9xl font-extrabold mb-8 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-pink-200 drop-shadow-[0_0_25px_rgba(219,39,119,0.3)] leading-tight">
+                        <h1 className="text-7xl md:text-9xl font-extrabold mb-8 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-pink-200 drop-shadow-[0_0_25px_rgba(219,39,119,0.3)] leading-tight font-tech">
                             MATHRIX <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400">2026</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400 font-tech">2026</span>
                         </h1>
 
                         <CountdownTimer />
