@@ -190,7 +190,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'TBA',
                             category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1470&auto=format&fit=crop'
+                            icon: Projector,
+                            color: 'text-blue-400'
                         },
                         {
                             id: 2,
@@ -200,7 +201,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'Offline',
                             category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1470&auto=format&fit=crop'
+                            icon: Brain,
+                            color: 'text-yellow-400'
                         },
                         {
                             id: 3,
@@ -210,7 +212,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'Lab',
                             category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1470&auto=format&fit=crop'
+                            icon: Database,
+                            color: 'text-emerald-400'
                         },
                         {
                             id: 4,
@@ -220,7 +223,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'TBA',
                             category: 'Non Technical',
-                            image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1400&auto=format&fit=crop'
+                            icon: Palette,
+                            color: 'text-pink-400'
                         },
                         {
                             id: 5,
@@ -230,7 +234,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'Lab',
                             category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1470&auto=format&fit=crop'
+                            icon: Terminal,
+                            color: 'text-cyan-400'
                         },
                         {
                             id: 6,
@@ -240,7 +245,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'Offline',
                             category: 'Non Technical',
-                            image: 'https://images.unsplash.com/photo-1536697246787-1f7ae568d89a?q=80&w=1287&auto=format&fit=crop'
+                            icon: Compass,
+                            color: 'text-orange-400'
                         }
                     ].map((event, index) => (
                         <motion.div
@@ -251,14 +257,10 @@ const Home = () => {
                             transition={{ delay: index * 0.1 }}
                             className="glass-card overflow-hidden group hover:border-purple-500/50 w-full md:w-[45%] lg:w-[30%]"
                         >
-                            <div className="h-48 overflow-hidden relative">
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-transparent to-transparent z-10" />
-                                <img
-                                    src={event.image}
-                                    alt={event.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <span className="absolute top-4 right-4 z-20 bg-purple-600 text-white border-0 px-3 py-1 rounded-full text-xs font-bold uppercase shadow-[0_0_10px_rgba(147,51,234,0.5)]">
+                            <div className="h-48 relative flex-shrink-0 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center group-hover:bg-gray-900/80 transition-colors">
+                                <div className={`absolute inset-0 opacity-20 ${event.color} blur-3xl`} />
+                                <event.icon className={`w-16 h-16 ${event.color} drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] transform group-hover:scale-110 transition-transform duration-500`} />
+                                <span className="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
                                     {event.category}
                                 </span>
                             </div>

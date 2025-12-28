@@ -5,6 +5,174 @@ import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle,
 const Events = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
 
+    const eventList = [
+        {
+            id: 1,
+            title: 'Paper Presentation',
+            description: 'A platform to present your innovative technical papers and research ideas. Showcase your knowledge, communication, and problem-solving skills.',
+            details: {
+                description: 'The Paper Presentation event is a platform for students to showcase their research ideas and technical knowledge. Participants present their papers on various technical topics to a panel of judges.',
+                rounds: [
+                    { title: 'Abstract Submission', desc: 'Submit your abstract for review.' },
+                    { title: 'Final Presentation', desc: 'Present your paper in front of judges (10 mins + 2 mins Q&A).' }
+                ],
+                rules: [
+                    'Team Size: 2-3 members.',
+                    'Paper Limit: 6 pages double column.',
+                    'Presentation Time: 10 minutes.',
+                    'Q&A Session: 2 minutes.'
+                ],
+                teamSize: '2-3 Members',
+                judging: 'Novelty, Clarity, Presentation Skills, Technical Content.',
+                prize: '1st: ₹3000, 2nd: ₹2000',
+                coordinator: 'Arun Kumar (9876543210)'
+            },
+            date: 'February 21, 2026',
+            time: '10:00 AM',
+            location: 'Auditorium',
+            category: 'Technical',
+            icon: Projector,
+            color: 'text-blue-400'
+        },
+        {
+            id: 2,
+            title: 'Algo Maze',
+            description: 'A logic-intensive competitive event consisting of twisted logic problems. Focuses on mathematical reasoning and algorithmic thinking.',
+            details: {
+                description: 'Algo Maze tests your logical reasoning and algorithmic thinking skills. Solve complex puzzles and mazes using code and logic.',
+                rounds: [
+                    { title: 'Round 1: Logic Puzzle', desc: 'Solve logic puzzles to qualify.' },
+                    { title: 'Round 2: The Maze', desc: 'Navigate the algorithmic maze to win.' }
+                ],
+                rules: [
+                    'Individual participation.',
+                    'No electronic gadgets allowed.',
+                    'Time limit: 60 minutes.'
+                ],
+                teamSize: 'Individual',
+                judging: 'Speed, Accuracy, Logic.',
+                prize: '1st: ₹2000, 2nd: ₹1000',
+                coordinator: 'Priya S (9876543211)'
+            },
+            date: 'February 21, 2026',
+            time: '11:00 AM',
+            location: 'Lab 1',
+            category: 'Technical',
+            icon: Brain,
+            color: 'text-yellow-400'
+        },
+        {
+            id: 3,
+            title: 'SQL – Query Quest',
+            description: 'Assess you knowledge in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving with rapid-fire rounds.',
+            details: {
+                description: 'Query Quest challenges your SQL skills. Write efficient queries to solve data problems under time pressure.',
+                rounds: [
+                    { title: 'Round 1: Schema Design', desc: 'Design a schema for a given problem.' },
+                    { title: 'Round 2: Query Optimization', desc: 'Optimize complex queries for performance.' }
+                ],
+                rules: [
+                    'Team Size: 2 members.',
+                    'Standard SQL syntax.',
+                    'Internet access allowed for documentation only.'
+                ],
+                teamSize: '2 Members',
+                judging: 'Efficiency, Correctness, Speed.',
+                prize: '1st: ₹2500, 2nd: ₹1500',
+                coordinator: 'Rahul M (9876543212)'
+            },
+            date: 'February 21, 2026',
+            time: '02:00 PM',
+            location: 'Lab 2',
+            category: 'Technical',
+            icon: Database,
+            color: 'text-emerald-400'
+        },
+        {
+            id: 4,
+            title: 'Design Event',
+            description: 'Unleash your creativity in this non-technical design challenge. Perfect for those with an eye for aesthetics and user experience.',
+            details: {
+                description: 'Showcase your creative design skills. Create stunning visuals, posters, or UI designs based on a theme.',
+                rounds: [
+                    { title: 'Round 1: Poster Design', desc: 'Design a poster for a given topic.' },
+                    { title: 'Round 2: UI/UX Challenge', desc: 'Design a landing page for a product.' }
+                ],
+                rules: [
+                    'Individual participation.',
+                    'Software: Photoshop/Figma/Illustrator.',
+                    'Assets must be original or royalty-free.'
+                ],
+                teamSize: 'Individual',
+                judging: 'Creativity, Aesthetics, Relevance.',
+                prize: '1st: ₹2000, 2nd: ₹1000',
+                coordinator: 'Sneha R (9876543213)'
+            },
+            date: 'February 21, 2026',
+            time: '10:00 AM',
+            location: 'Design Studio',
+            category: 'Non Technical',
+            icon: Palette,
+            color: 'text-pink-400'
+        },
+        {
+            id: 5,
+            title: 'Code Mathrix',
+            description: 'Decode. Divide. Conquer. A collaborative coding challenge where two teammates solve split problems with strict turn-based coding rules.',
+            details: {
+                description: 'A unique coding relay where teammates swap roles. One codes while the other guides, switching periodically.',
+                rounds: [
+                    { title: 'Round 1: Relay Coding', desc: 'Switch roles every 10 minutes.' },
+                    { title: 'Round 2: Blind Coding', desc: 'Code without seeing the screen.' }
+                ],
+                rules: [
+                    'Team Size: 2 members.',
+                    'Languages: C/C++/Python/Java.',
+                    'Strict adherence to switch timings.'
+                ],
+                teamSize: '2 Members',
+                judging: 'Code Quality, Output, Teamwork.',
+                prize: '1st: ₹3000, 2nd: ₹2000',
+                coordinator: 'Vikram S (9876543214)'
+            },
+            date: 'February 21, 2026',
+            time: '11:00 AM',
+            location: 'Lab 3',
+            category: 'Technical',
+            icon: Terminal,
+            color: 'text-cyan-400'
+        },
+        {
+            id: 6,
+            title: 'Treasure Hunt',
+            description: 'An exploration-based team event blending logic, observation, and teamwork. Follow clues, solve riddles, and uncover the final treasure.',
+            details: {
+                description: 'The Treasure Hunt is an exploration-based team event that blends logic, observation, teamwork, and quick decision-making. Participants follow clues, solve riddles, and navigate through checkpoints to uncover the final treasure.',
+                rounds: [
+                    { title: 'Round 1: Prelims (20 mins)', desc: 'Aptitude questions. Top 5 teams chosen.' },
+                    { title: 'Round 2: The Final Trail (1 hour)', desc: 'Logical puzzles and location-based challenges. Piece together clues to reach the final treasure.' }
+                ],
+                rules: [
+                    'Team Size: 2-3 members per team.',
+                    'Mobile phones strictly prohibited unless specified.',
+                    'Teams must stay within the designated hunt area.',
+                    'Clues must not be shared with other teams.',
+                    'Do not tamper with or remove clues from checkpoints.'
+                ],
+                teamSize: '2-3 Members per Team',
+                judging: 'Speed, Strategy, Accuracy, Coordination.',
+                prize: '1st, 2nd, 3rd Prizes.',
+                coordinator: 'Subramanian N (9840623264)'
+            },
+            date: 'February 21, 2026',
+            time: '02:00 PM',
+            location: 'Campus Wide',
+            category: 'Non Technical',
+            icon: Compass,
+            color: 'text-orange-400'
+        }
+    ];
+
     return (
         <div className="container mx-auto px-4 py-32 flex flex-col gap-24">
             <motion.h1
@@ -18,167 +186,7 @@ const Events = () => {
             {/* Events Grid */}
             <div className="container mx-auto px-4 py-10">
                 <div className="flex flex-wrap justify-center gap-8">
-                    {[
-                        {
-                            id: 1,
-                            title: 'Paper Presentation',
-                            description: 'A platform to present your innovative technical papers and research ideas. Showcase your knowledge, communication, and problem-solving skills.',
-                            details: {
-                                description: 'The Paper Presentation event is a platform for students to showcase their research ideas and technical knowledge. Participants present their papers on various technical topics to a panel of judges.',
-                                rounds: [
-                                    { title: 'Abstract Submission', desc: 'Submit your abstract for review.' },
-                                    { title: 'Final Presentation', desc: 'Present your paper in front of judges (10 mins + 2 mins Q&A).' }
-                                ],
-                                rules: [
-                                    'Team Size: 2-3 members.',
-                                    'Paper Limit: 6 pages double column.',
-                                    'Presentation Time: 10 minutes.',
-                                    'Q&A Session: 2 minutes.'
-                                ],
-                                teamSize: '2-3 Members',
-                                judging: 'Novelty, Clarity, Presentation Skills, Technical Content.',
-                                prize: '1st: ₹3000, 2nd: ₹2000',
-                                coordinator: 'Arun Kumar (9876543210)'
-                            },
-                            date: 'February 21, 2026',
-                            time: '10:00 AM',
-                            location: 'Auditorium',
-                            category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1470&auto=format&fit=crop'
-                        },
-                        {
-                            id: 2,
-                            title: 'Algo Maze',
-                            description: 'A logic-intensive competitive event consisting of twisted logic problems. Focuses on mathematical reasoning and algorithmic thinking.',
-                            details: {
-                                description: 'Algo Maze tests your logical reasoning and algorithmic thinking skills. Solve complex puzzles and mazes using code and logic.',
-                                rounds: [
-                                    { title: 'Round 1: Logic Puzzle', desc: 'Solve logic puzzles to qualify.' },
-                                    { title: 'Round 2: The Maze', desc: 'Navigate the algorithmic maze to win.' }
-                                ],
-                                rules: [
-                                    'Individual participation.',
-                                    'No electronic gadgets allowed.',
-                                    'Time limit: 60 minutes.'
-                                ],
-                                teamSize: 'Individual',
-                                judging: 'Speed, Accuracy, Logic.',
-                                prize: '1st: ₹2000, 2nd: ₹1000',
-                                coordinator: 'Priya S (9876543211)'
-                            },
-                            date: 'February 21, 2026',
-                            time: '11:00 AM',
-                            location: 'Lab 1',
-                            category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=1470&auto=format&fit=crop'
-                        },
-                        {
-                            id: 3,
-                            title: 'SQL – Query Quest',
-                            description: 'Assess you knowledge in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving with rapid-fire rounds.',
-                            details: {
-                                description: 'Query Quest challenges your SQL skills. Write efficient queries to solve data problems under time pressure.',
-                                rounds: [
-                                    { title: 'Round 1: Schema Design', desc: 'Design a schema for a given problem.' },
-                                    { title: 'Round 2: Query Optimization', desc: 'Optimize complex queries for performance.' }
-                                ],
-                                rules: [
-                                    'Team Size: 2 members.',
-                                    'Standard SQL syntax.',
-                                    'Internet access allowed for documentation only.'
-                                ],
-                                teamSize: '2 Members',
-                                judging: 'Efficiency, Correctness, Speed.',
-                                prize: '1st: ₹2500, 2nd: ₹1500',
-                                coordinator: 'Rahul M (9876543212)'
-                            },
-                            date: 'February 21, 2026',
-                            time: '02:00 PM',
-                            location: 'Lab 2',
-                            category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1470&auto=format&fit=crop'
-                        },
-                        {
-                            id: 4,
-                            title: 'Design Event',
-                            description: 'Unleash your creativity in this non-technical design challenge. Perfect for those with an eye for aesthetics and user experience.',
-                            details: {
-                                description: 'Showcase your creative design skills. Create stunning visuals, posters, or UI designs based on a theme.',
-                                rounds: [
-                                    { title: 'Round 1: Poster Design', desc: 'Design a poster for a given topic.' },
-                                    { title: 'Round 2: UI/UX Challenge', desc: 'Design a landing page for a product.' }
-                                ],
-                                rules: [
-                                    'Individual participation.',
-                                    'Software: Photoshop/Figma/Illustrator.',
-                                    'Assets must be original or royalty-free.'
-                                ],
-                                teamSize: 'Individual',
-                                judging: 'Creativity, Aesthetics, Relevance.',
-                                prize: '1st: ₹2000, 2nd: ₹1000',
-                                coordinator: 'Sneha R (9876543213)'
-                            },
-                            date: 'February 21, 2026',
-                            time: '10:00 AM',
-                            location: 'Design Studio',
-                            category: 'Non Technical',
-                            image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1400&auto=format&fit=crop'
-                        },
-                        {
-                            id: 5,
-                            title: 'Code Mathrix',
-                            description: 'Decode. Divide. Conquer. A collaborative coding challenge where two teammates solve split problems with strict turn-based coding rules.',
-                            details: {
-                                description: 'A unique coding relay where teammates swap roles. One codes while the other guides, switching periodically.',
-                                rounds: [
-                                    { title: 'Round 1: Relay Coding', desc: 'Switch roles every 10 minutes.' },
-                                    { title: 'Round 2: Blind Coding', desc: 'Code without seeing the screen.' }
-                                ],
-                                rules: [
-                                    'Team Size: 2 members.',
-                                    'Languages: C/C++/Python/Java.',
-                                    'Strict adherence to switch timings.'
-                                ],
-                                teamSize: '2 Members',
-                                judging: 'Code Quality, Output, Teamwork.',
-                                prize: '1st: ₹3000, 2nd: ₹2000',
-                                coordinator: 'Vikram S (9876543214)'
-                            },
-                            date: 'February 21, 2026',
-                            time: '11:00 AM',
-                            location: 'Lab 3',
-                            category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1470&auto=format&fit=crop'
-                        },
-                        {
-                            id: 6,
-                            title: 'Treasure Hunt',
-                            description: 'An exploration-based team event blending logic, observation, and teamwork. Follow clues, solve riddles, and uncover the final treasure.',
-                            details: {
-                                description: 'The Treasure Hunt is an exploration-based team event that blends logic, observation, teamwork, and quick decision-making. Participants follow clues, solve riddles, and navigate through checkpoints to uncover the final treasure.',
-                                rounds: [
-                                    { title: 'Round 1: Prelims (20 mins)', desc: 'Aptitude questions. Top 5 teams chosen.' },
-                                    { title: 'Round 2: The Final Trail (1 hour)', desc: 'Logical puzzles and location-based challenges. Piece together clues to reach the final treasure.' }
-                                ],
-                                rules: [
-                                    'Team Size: 2-3 members per team.',
-                                    'Mobile phones strictly prohibited unless specified.',
-                                    'Teams must stay within the designated hunt area.',
-                                    'Clues must not be shared with other teams.',
-                                    'Do not tamper with or remove clues from checkpoints.'
-                                ],
-                                teamSize: '2-3 Members per Team',
-                                judging: 'Speed, Strategy, Accuracy, Coordination.',
-                                prize: '1st, 2nd, 3rd Prizes.',
-                                coordinator: 'Subramanian N (9840623264)'
-                            },
-                            date: 'February 21, 2026',
-                            time: '02:00 PM',
-                            location: 'Campus Wide',
-                            category: 'Non Technical',
-                            image: 'https://images.unsplash.com/photo-1536697246787-1f7ae568d89a?q=80&w=1287&auto=format&fit=crop'
-                        }
-                    ].map((event, index) => (
+                    {eventList.map((event, index) => (
                         <motion.div
                             key={event.id}
                             initial={{ opacity: 0, y: 30 }}
@@ -188,14 +196,10 @@ const Events = () => {
                             onClick={() => setSelectedEvent(event)}
                             className="glass-card overflow-hidden group hover:border-purple-500/50 cursor-pointer w-full md:w-[45%] lg:w-[30%]"
                         >
-                            <div className="h-48 overflow-hidden relative">
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] via-transparent to-transparent z-10" />
-                                <img
-                                    src={event.image}
-                                    alt={event.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <span className="absolute top-4 right-4 z-20 bg-purple-600 text-white border-0 px-3 py-1 rounded-full text-xs font-bold uppercase shadow-[0_0_10px_rgba(147,51,234,0.5)]">
+                            <div className="h-48 relative flex-shrink-0 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center group-hover:bg-gray-900/80 transition-colors">
+                                <div className={`absolute inset-0 opacity-20 ${event.color} blur-3xl`} />
+                                <event.icon className={`w-16 h-16 ${event.color} drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] transform group-hover:scale-110 transition-transform duration-500`} />
+                                <span className="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
                                     {event.category}
                                 </span>
                             </div>
