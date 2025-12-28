@@ -190,7 +190,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'TBA',
                             category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=1470&auto=format&fit=crop'
+                            icon: Projector,
+                            color: 'text-blue-400'
                         },
                         {
                             id: 2,
@@ -200,7 +201,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'Offline',
                             category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1470&auto=format&fit=crop'
+                            icon: Brain,
+                            color: 'text-yellow-400'
                         },
                         {
                             id: 3,
@@ -210,7 +212,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'Lab',
                             category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1470&auto=format&fit=crop'
+                            icon: Database,
+                            color: 'text-emerald-400'
                         },
                         {
                             id: 4,
@@ -220,7 +223,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'TBA',
                             category: 'Non Technical',
-                            image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1400&auto=format&fit=crop'
+                            icon: Palette,
+                            color: 'text-pink-400'
                         },
                         {
                             id: 5,
@@ -230,7 +234,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'Lab',
                             category: 'Technical',
-                            image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1469&auto=format&fit=crop'
+                            icon: Terminal,
+                            color: 'text-cyan-400'
                         },
                         {
                             id: 6,
@@ -240,7 +245,8 @@ const Home = () => {
                             time: 'TBA',
                             location: 'Offline',
                             category: 'Non Technical',
-                            image: 'https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=1470&auto=format&fit=crop'
+                            icon: Compass,
+                            color: 'text-orange-400'
                         }
                     ].map((event, index) => (
                         <motion.div
@@ -251,23 +257,19 @@ const Home = () => {
                             transition={{ delay: index * 0.1 }}
                             className="glass-card overflow-hidden group hover:border-purple-500/50 w-full md:w-[45%] lg:w-[30%]"
                         >
-                            <div className="h-48 overflow-hidden relative">
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] to-transparent z-10" />
-                                <img
-                                    src={event.image}
-                                    alt={event.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <span className="absolute top-4 right-4 z-20 bg-purple-600 px-3 py-1 rounded-full text-xs font-bold uppercase">
+                            <div className="h-48 relative flex-shrink-0 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center group-hover:bg-gray-900/80 transition-colors">
+                                <div className={`absolute inset-0 opacity-20 ${event.color} blur-3xl`} />
+                                <event.icon className={`w-16 h-16 ${event.color} drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] transform group-hover:scale-110 transition-transform duration-500`} />
+                                <span className="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
                                     {event.category}
                                 </span>
                             </div>
 
-                            <div className="p-6 relative z-20 -mt-6">
-                                <h3 className="text-2xl font-bold mb-2 group-hover:text-purple-400 transition-colors">{event.title}</h3>
+                            <div className="p-6 relative z-20 flex flex-col flex-grow">
+                                <h3 className={`text-2xl font-bold mb-2 group-hover:${event.color} transition-colors`}>{event.title}</h3>
                                 <p className="text-gray-400 text-sm mb-4 line-clamp-3">{event.description}</p>
 
-                                <div className="flex flex-col gap-2 text-sm text-gray-300">
+                                <div className="flex flex-col gap-2 text-sm text-gray-300 mb-6">
                                     <div className="flex items-center gap-2">
                                         <Calendar size={16} className="text-purple-400" />
                                         <span>{event.date}</span>
@@ -282,7 +284,7 @@ const Home = () => {
                                     </div>
                                 </div>
 
-                                <Link to="/events" className="w-full mt-6 btn btn-outline group-hover:bg-purple-600 group-hover:border-purple-600 group-hover:text-white block text-center">
+                                <Link to="/events" className="w-full mt-auto btn btn-outline group-hover:bg-white/10 group-hover:text-white block text-center border-white/10">
                                     View Details
                                 </Link>
                             </div>

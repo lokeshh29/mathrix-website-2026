@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle } from 'lucide-react';
+import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector } from 'lucide-react';
 
 const eventsData = [
     {
@@ -28,7 +28,8 @@ const eventsData = [
         time: 'TBA',
         location: 'TBA',
         category: 'Technical',
-        image: 'https://images.unsplash.com/photo-1544531586-fde5298cdd40?q=80&w=1470&auto=format&fit=crop'
+        icon: Projector,
+        color: 'text-blue-400'
     },
     {
         id: 2,
@@ -53,7 +54,8 @@ const eventsData = [
         time: 'TBA',
         location: 'Offline',
         category: 'Technical',
-        image: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=1470&auto=format&fit=crop'
+        icon: Brain,
+        color: 'text-yellow-400'
     },
     {
         id: 3,
@@ -80,7 +82,8 @@ const eventsData = [
         time: 'TBA',
         location: 'Lab',
         category: 'Technical',
-        image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1470&auto=format&fit=crop'
+        icon: Database,
+        color: 'text-emerald-400'
     },
     {
         id: 4,
@@ -101,7 +104,8 @@ const eventsData = [
         time: 'TBA',
         location: 'TBA',
         category: 'Non Technical',
-        image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1400&auto=format&fit=crop'
+        icon: Palette,
+        color: 'text-pink-400'
     },
     {
         id: 5,
@@ -128,7 +132,8 @@ const eventsData = [
         time: 'TBA',
         location: 'Lab',
         category: 'Technical',
-        image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1469&auto=format&fit=crop'
+        icon: Terminal,
+        color: 'text-cyan-400'
     },
     {
         id: 6,
@@ -156,7 +161,8 @@ const eventsData = [
         time: 'TBA',
         location: 'Offline',
         category: 'Non Technical',
-        image: 'https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=1470&auto=format&fit=crop'
+        icon: Compass,
+        color: 'text-orange-400'
     }
 ];
 
@@ -186,20 +192,16 @@ const Events = () => {
                             onClick={() => setSelectedEvent(event)}
                             className="glass-card overflow-hidden group hover:border-purple-500/50 cursor-pointer w-full md:w-[45%] lg:w-[30%]"
                         >
-                            <div className="h-48 overflow-hidden relative flex-shrink-0">
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a1a] to-transparent z-10" />
-                                <img
-                                    src={event.image}
-                                    alt={event.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                />
-                                <span className="absolute top-4 right-4 z-20 bg-purple-600 px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
+                            <div className="h-48 relative flex-shrink-0 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center group-hover:bg-gray-900/80 transition-colors">
+                                <div className={`absolute inset-0 opacity-20 ${event.color} blur-3xl`} />
+                                <event.icon className={`w-16 h-16 ${event.color} drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] transform group-hover:scale-110 transition-transform duration-500`} />
+                                <span className="absolute top-4 right-4 z-20 bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
                                     {event.category}
                                 </span>
                             </div>
 
-                            <div className="p-6 relative z-20 -mt-6 flex flex-col flex-grow">
-                                <h3 className="text-2xl font-bold mb-2 group-hover:text-purple-400 transition-colors">{event.title}</h3>
+                            <div className="p-6 relative z-20 flex flex-col flex-grow">
+                                <h3 className={`text-2xl font-bold mb-2 group-hover:${event.color} transition-colors`}>{event.title}</h3>
                                 <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">{event.description}</p>
 
                                 <div className="flex flex-col gap-2 text-sm text-gray-300 mt-auto">
@@ -209,13 +211,13 @@ const Events = () => {
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Clock size={16} className="text-green-400" />
-                                        <span>{event.details.coordinator.split('-')[0]}</span>
+                                        <span>{event.details.coordinator.split('(')[0].trim()}</span>
                                     </div>
                                 </div>
 
                                 <button
                                     onClick={() => setSelectedEvent(event)}
-                                    className="w-full mt-6 btn btn-outline group-hover:bg-purple-600 group-hover:border-purple-600 group-hover:text-white transition-all flex items-center justify-center gap-2"
+                                    className={`w-full mt-6 btn btn-outline group-hover:bg-white/10 group-hover:text-white transition-all flex items-center justify-center gap-2 border-white/10`}
                                 >
                                     <Info size={18} />
                                     View Details & Register
@@ -252,13 +254,13 @@ const Events = () => {
 
                                 {/* Scrollable Content */}
                                 <div className="overflow-y-auto flex-1 scrollbar-hide">
-                                    {/* Modal Header Image */}
-                                    <div className="h-64 relative flex-shrink-0">
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0f0518] to-transparent z-10" />
-                                        <img src={selectedEvent.image} alt={selectedEvent.title} className="w-full h-full object-cover" />
+                                    {/* Modal Header Icon */}
+                                    <div className="h-64 relative flex-shrink-0 bg-gradient-to-b from-gray-900 to-[#0f0518] flex items-center justify-center">
+                                        <div className={`absolute inset-0 opacity-10 ${selectedEvent.color} blur-[100px]`} />
+                                        <selectedEvent.icon className={`w-32 h-32 ${selectedEvent.color} drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]`} />
 
                                         <div className="absolute bottom-6 left-6 z-20">
-                                            <span className="bg-purple-600 px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg mb-2 inline-block">
+                                            <span className="bg-white/10 backdrop-blur-md border border-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg mb-2 inline-block">
                                                 {selectedEvent.category}
                                             </span>
                                             <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">{selectedEvent.title}</h2>
