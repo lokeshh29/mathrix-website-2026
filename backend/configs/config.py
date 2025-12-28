@@ -7,7 +7,7 @@ os.environ["AWS_PROFILE"] = "assisthub"
 
 AWS_REGION = os.getenv('AWS_REGION', "us-east-1")
 DEFAULT_MODEL_ID = os.getenv('DEFAULT_MODEL_ID', "amazon.nova-pro-v1:0")
-DEFAULT_KB_ID = os.getenv('DEFAULT_KB_ID', "NGFR1KI84N")
+DEFAULT_KB_ID = os.getenv('DEFAULT_KB_ID', "UMM4HXPEKQ")
 
 # Default canned message
 DEFAULT_CANNED_MESSAGE = os.getenv(
