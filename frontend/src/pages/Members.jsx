@@ -44,7 +44,7 @@ const Members = () => {
                 { name: "Himasni" },
                 { name: "Kaviya" },
                 { name: "Udhaya Kesavan" },
-                { name: "Dhwaraka" }
+                { name: "Dhwaraka S N" }
             ]
         },
         {
@@ -61,7 +61,7 @@ const Members = () => {
                 { name: "Edwin Joyel", role: "Social Media" },
                 { name: "Gayathri M", role: "Designing" },
                 { name: "Yogasri", role: "Invitation" },
-                { name: "Dhwaraka", role: "Reception" },
+                { name: "Dhwaraka S N", role: "Reception" },
                 { name: "Santhoshini R", role: "Decoration" },
                 { name: "Nivetha", role: "Souvenir" },
                 { name: "Himasni", role: "Documentation" }
