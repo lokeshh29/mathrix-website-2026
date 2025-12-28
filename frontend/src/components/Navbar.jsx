@@ -21,16 +21,17 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b border-white/5 bg-[#0f0518]/70 h-24">
       <div className="container h-full mx-auto flex items-center justify-between px-6">
-        {/* Logo */}
-        <NavLink to="/" className="flex items-center gap-3 text-3xl font-bold tracking-tighter hover:opacity-80 transition-opacity group">
-          <div className="p-1 rounded-xl bg-pink-500/10 group-hover:bg-pink-500/20 transition-colors">
-            <img src={logo} alt="Mathrix Logo" className="w-14 h-14 object-contain transform group-hover:-translate-y-1 transition-transform" />
-          </div>
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-pink-200 to-pink-400 font-extrabold"
-            style={{ backgroundSize: '200% auto' }}>
-            Mathrix
-          </span>
-        </NavLink>
+        {/* Logo & Brand */}
+        <div className="flex items-center gap-3">
+          <NavLink to="/" className="group flex items-center gap-3">
+            <div className="relative w-10 h-10 md:w-12 md:h-12 overflow-hidden rounded-xl bg-white/5 border border-white/10 group-hover:border-purple-500/50 transition-all flex items-center justify-center shadow-lg group-hover:shadow-purple-500/20">
+              <img src={logo} alt="Mathrix Logo" className="w-full h-full object-contain p-1" />
+            </div>
+            <span className="text-2xl md:text-3xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400 font-tech uppercase drop-shadow-[0_2px_10px_rgba(255,255,255,0.1)]">
+              Mathrix
+            </span>
+          </NavLink>
+        </div>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10">
