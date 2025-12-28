@@ -54,25 +54,29 @@ const Home = () => {
             <section className="container mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     {[
-                        { icon: <Zap size={32} className="text-yellow-400" />, title: 'Tech Events', desc: 'Coding, hacking, and soldering logic circuits.' },
-                        { icon: <Users size={32} className="text-pink-400" />, title: 'Workshops', desc: 'Hands-on sessions with industry experts.' },
-                        { icon: <Award size={32} className="text-rose-400" />, title: 'Competitions', desc: 'Showcase your skills and win exciting prizes.' },
+                        { icon: <Zap size={32} className="text-yellow-400" />, title: 'Tech Events', desc: 'Coding, hacking, and soldering logic circuits.', link: '/events' },
+                        { icon: <Users size={32} className="text-pink-400" />, title: 'Workshops', desc: 'Hands-on sessions with industry experts.', link: '/workshops' },
+                        { icon: <Award size={32} className="text-rose-400" />, title: 'Non-Tech Events', desc: 'Showcase your skills and win exciting prizes.', link: '/events' },
                     ].map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ delay: index * 0.1, duration: 0.5 }}
-                            whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                            className="glass-card p-6 md:p-8 text-center flex flex-col items-center hover:bg-white/5 transition-all border border-white/5 group"
-                        >
-                            <div className="mb-6 p-5 bg-gradient-to-br from-white/10 to-transparent rounded-2xl ring-1 ring-white/20 group-hover:ring-pink-500/40 group-hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] transition-all duration-500 transform group-hover:-translate-y-2">
-                                {item.icon}
-                            </div>
-                            <h3 className="text-2xl font-bold mb-4 group-hover:text-pink-200 transition-colors tracking-tight">{item.title}</h3>
-                            <p className="text-gray-400 text-base leading-relaxed max-w-xs">{item.desc}</p>
-                        </motion.div>
+                        <Link to={item.link} key={index} className="contents">
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ delay: index * 0.1, duration: 0.5 }}
+                                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                                className="glass-card p-6 md:p-8 text-center flex flex-col items-center hover:bg-white/5 transition-all border border-white/5 group cursor-pointer relative overflow-hidden"
+                            >
+                                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-2 group-hover:translate-x-0">
+                                    <ArrowRight className="text-pink-400" size={20} />
+                                </div>
+                                <div className="mb-6 p-5 bg-gradient-to-br from-white/10 to-transparent rounded-2xl ring-1 ring-white/20 group-hover:ring-pink-500/40 group-hover:shadow-[0_0_30px_rgba(236,72,153,0.2)] transition-all duration-500 transform group-hover:-translate-y-2">
+                                    {item.icon}
+                                </div>
+                                <h3 className="text-2xl font-bold mb-4 group-hover:text-pink-200 transition-colors tracking-tight">{item.title}</h3>
+                                <p className="text-gray-400 text-base leading-relaxed max-w-xs">{item.desc}</p>
+                            </motion.div>
+                        </Link>
                     ))}
                 </div>
             </section>
