@@ -1,0 +1,21 @@
+[project]
+name = "chatbot-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aws-opentelemetry-distro>=0.10.0",
+    "bedrock-agentcore>=1.0.6",
+    "boto3>=1.40.75",
+    "fastapi>=0.121.2",
+    "httpx>=0.28.1",
+    "pydantic>=2.12.4",
+    "strands-agents[otel]>=1.16.0",
+    "uvicorn[standard]>=0.38.0",
+]
+
+[dependency-groups]
+dev = [
+    "bedrock-agentcore-starter-toolkit>=0.1.34",
+]

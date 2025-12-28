@@ -33,9 +33,9 @@ const Members = () => {
                 { name: "Santhoshini R" },
                 // 3rd Years
                 { name: "Yogashri" },
-                { name: "Varunesh" },
-                { name: "Edwin Joyel" },
-                { name: "Irfana" }
+                { name: "Varunessh S" },
+                { name: "Edwin Joyel J S" },
+                { name: "Irfana A" }
             ]
         },
         {
@@ -51,16 +51,16 @@ const Members = () => {
             title: "Student Incharges",
             members: [
                 { name: "Lokesh Kumar R", role: "Sponsorship" },
-                { name: "Irfana", role: "Registration" },
+                { name: "Irfana A", role: "Registration" },
                 { name: "Divya Dharshini B", role: "Marketing & Promotions" },
                 { name: "Barath V", role: "Logistics" },
                 { name: "Shesha N", role: "Workshop" },
-                { name: "Varunesh", role: "Prize & Certificates" },
+                { name: "Varunessh S", role: "Prize & Certificates" },
                 { name: "Kailash N", role: "Stage Arrangements" },
                 { name: "Kaviya", role: "Hospitality & Catering" },
-                { name: "Edwin Joyel", role: "Social Media" },
+                { name: "Edwin Joyel J S", role: "Social Media" },
                 { name: "Gayathri M", role: "Designing" },
-                { name: "Yogasri", role: "Invitation" },
+                { name: "Yogasri R", role: "Invitation" },
                 { name: "Dhwaraka S N", role: "Reception" },
                 { name: "Santhoshini R", role: "Decoration" },
                 { name: "Nivetha", role: "Souvenir" },
