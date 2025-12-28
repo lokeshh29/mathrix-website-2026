@@ -1,58 +1,51 @@
 import logging
-from typing import Any, Dict, Optional, Union
+from typing import Dict, Optional, Union, Any
 
 from strands.agent import Agent
 from strands.experimental.tools import ToolProvider
 from strands.models import BedrockModel
 
-from configs.config import FD_INTEREST_RATE_TOOL_ENABLED, LLMModelConfig
-from prompts.prompt import (
-    LLM_ANSWERING_PROMPT,
-    LLM_FD_INTEREST_RATE_TOOL_PROMPT,
-    LLM_HEADER_PROMPT,
-    get_augmented_prompt,
-)
-from tools.fd_tool import get_fd_interest_rate
+from configs.config import DEFAULT_MODEL_ID
 from tools.kb_tool import retrieve_from_kb
 
 logger = logging.getLogger(__name__)
 
-def run_agent(prompt: str, kb_id: str, model_config: LLMModelConfig,top_k: int = 20) -> Dict[str, str]:
+LLM_ANSWERING_PROMPT = """
+You are a helpful assistant for the Mathrix 2026 event.
+Use the tools provided to answer the user's question.
+If the tool returns "NO_KB_RESULTS", politely say you don't have that information.
+"""
+
+def run_agent(prompt: str, kb_id: str) -> Dict[str, str]:
     """
     Runs the agent workflow using Strands Framework.
-    Creates a new agent instance for each request to ensure fresh context.
     """
     if not prompt:
         return {"output": "No prompt provided."}
 
-    augmented_prompt = get_augmented_prompt(prompt, kb_id, top_k)
-
     try:
-        # Create BedrockModel instance dynamically for each request
+        # Create BedrockModel instance using hardcoded defaults
         model = BedrockModel(
-            model_id=model_config.model_id,
-            temperature=model_config.model_temperature,
-            top_p=model_config.model_top_p,
-            max_tokens=model_config.model_max_tokens,
-            streaming=model_config.model_streaming,
+            model_id=DEFAULT_MODEL_ID,
+            temperature=0.1,
+            top_p=1.0,
+            max_tokens=1024,
+            streaming=False,
         )
 
-        # tools
-        prompt_parts = [LLM_HEADER_PROMPT]
-        tools: Optional[list[Union[str, dict[str, str], "ToolProvider", Any]]] = [retrieve_from_kb]
-        if FD_INTEREST_RATE_TOOL_ENABLED:
-            tools.append(get_fd_interest_rate)
-            prompt_parts.append(LLM_FD_INTEREST_RATE_TOOL_PROMPT)
-        prompt_parts.append(LLM_ANSWERING_PROMPT)
+        tools = [retrieve_from_kb]
 
-        # Create a new agent instance for each request doesn't stores conversation internally
+        # Create a new agent instance for each request
         agent = Agent(
             model=model,
             tools=tools,
-            system_prompt="\n\n".join(prompt_parts)
+            system_prompt=LLM_ANSWERING_PROMPT
         )
+        
+        # Simple augmented prompt to encourage tool use
+        final_prompt = f"Context KB ID: {kb_id}\nUser Query: {prompt}"
 
-        response = agent(augmented_prompt)
+        response = agent(final_prompt)
         output_text = str(response).strip()
 
         if not output_text:
@@ -62,4 +55,4 @@ def run_agent(prompt: str, kb_id: str, model_config: LLMModelConfig,top_k: int =
 
     except Exception as e:
         logger.error(f"run_agent error: {e}", exc_info=True)
-        return {"output": "NO_KB_RESULTS"}
+        return {"output": "Error processing request."}

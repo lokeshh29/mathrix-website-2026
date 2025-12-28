@@ -6,7 +6,7 @@ from configs.config import (
     AWS_REGION,
     KB_RETRIEVE_NUM_OF_RESULTS
 )
-from utils.request_context import get_agent_session_id
+# from utils.request_context import get_agent_session_id
 
 agent_runtime = boto3.client("bedrock-agent-runtime", region_name=AWS_REGION)
 logger = logging.getLogger(__name__)
