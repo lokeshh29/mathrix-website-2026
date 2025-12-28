@@ -26,7 +26,7 @@ const Home = () => {
                             Department of Mathematics Presents
                             <span className="h-px w-8 bg-pink-500/50"></span>
                         </h2>
-                        <h1 className="text-7xl md:text-9xl font-extrabold mb-8 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-pink-200 drop-shadow-[0_0_25px_rgba(219,39,119,0.3)] leading-tight font-tech">
+                        <h1 className="text-5xl md:text-9xl font-extrabold mb-8 tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-pink-200 drop-shadow-[0_0_25px_rgba(219,39,119,0.3)] leading-tight font-tech">
                             MATHRIX <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400 font-tech">2026</span>
                         </h1>
@@ -113,7 +113,7 @@ const Home = () => {
                         </div>
                         <div className="md:w-1/2 flex justify-center relative">
                             {/* Coding Terminal Animation */}
-                            <div className="relative w-72 h-48 md:w-96 md:h-64 flex items-center justify-center">
+                            <div className="relative w-full max-w-[280px] md:max-w-md aspect-video flex items-center justify-center">
                                 {/* Glowing backdrop */}
                                 <div className="absolute inset-0 bg-pink-500/20 blur-[60px] rounded-full animate-pulse" />
 
