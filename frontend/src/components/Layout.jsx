@@ -21,17 +21,7 @@ const Layout = ({ children }) => {
                         <a href="#" className="hover:text-purple-400 transition-colors">LinkedIn</a>
                         <a href="#" className="hover:text-purple-400 transition-colors">Twitter</a>
                     </div>
-
-                    {/* Developer Credit */}
-                    <div className="mt-8 pt-8 border-t border-white/5 flex flex-col items-center gap-3">
-                        <p className="text-xs text-gray-500 uppercase tracking-widest">Designed & Developed by</p>
-                        <div className="flex items-center gap-3 bg-white/5 hover:bg-white/10 transition-colors px-4 py-2 rounded-full border border-white/10 cursor-default group">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-pink-500 to-violet-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                <span className="text-white font-bold text-xs">L</span>
-                            </div>
-                            <span className="text-gray-300 font-medium group-hover:text-white transition-colors">Lokesh</span>
-                        </div>
-                    </div>
+                    
                 </div>
             </footer>
         </div >

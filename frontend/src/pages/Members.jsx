@@ -5,65 +5,65 @@ import { Mail, Github, Linkedin, Send } from 'lucide-react';
 const Members = () => {
     const team = [
         {
-            title: "Chairperson",
+            title: "PRESIDENT",
             members: [
-                { name: "Sanjay S", role: "2nd MSc Maths" }
+                { name: "Sanjay S" }
             ]
         },
         {
-            title: "Vice Chairperson",
+            title: "VICE PRESIDENT",
             members: [
-                { name: "Pradeeshwaran", role: "5th MSc CS/IT" }
+                { name: "Pradeeshwaran" }
             ]
         },
         {
-            title: "Secretaries",
+            title: "SECRETARIES",
             members: [
-                { name: "Divya Dharshini", role: "4th MSc CS/IT" },
-                { name: "Hariharan", role: "4th MSc CS/IT" }
+                { name: "Divya Dharshini B" },
+                { name: "Hariharan T" }
             ]
         },
         {
             title: "Joint Secretaries",
             members: [
                 // 2nd Years
-                { name: "Kailash", role: "2nd Year MSc CS/IT" },
-                { name: "Jeevika", role: "2nd Year MSc CS/IT" },
-                { name: "Shesha", role: "2nd Year MSc CS/IT" },
-                { name: "Santhoshini", role: "2nd Year MSc CS/IT" },
+                { name: "Kailash N" },
+                { name: "Jeevika A" },
+                { name: "Shesha N" },
+                { name: "Santhoshini R" },
                 // 3rd Years
-                { name: "Yogashri", role: "3rd Year MSc CS/IT" },
-                { name: "Varunesh", role: "3rd Year MSc CS/IT" },
-                { name: "Edwin Joyel", role: "3rd Year MSc CS/IT" },
-                { name: "Irfana", role: "3rd Year MSc CS/IT" }
+                { name: "Yogashri" },
+                { name: "Varunesh" },
+                { name: "Edwin Joyel" },
+                { name: "Irfana" }
             ]
         },
         {
             title: "Assistant Secretaries",
             members: [
-                { name: "Himasni", role: "1st MSc Maths" },
-                { name: "Kaviya M", role: "1st MSc Maths" },
-                { name: "Udhaya Kesavan", role: "1st MSc CS/IT" },
-                { name: "Dhwaraka", role: "1st MSc CS/IT" }
+                { name: "Himasni" },
+                { name: "Kaviya" },
+                { name: "Udhaya Kesavan" },
+                { name: "Dhwaraka" }
             ]
         },
         {
             title: "Student Incharges",
             members: [
-                { name: "Kailash", role: "Stage Arrangements" },
-                { name: "Divya Dharshini", role: "Marketing & Promotions" },
-                { name: "Yogasri", role: "Invitation" },
-                { name: "Irfana", role: "Registration" },
-                { name: "Varunesh", role: "Prize & Certificates" },
-                { name: "Kaviya", role: "Hospitality & Catering" },
-                { name: "Dhwaraka", role: "Reception" },
-                { name: "Nivetha", role: "Souvenir" },
-                { name: "Shesha", role: "Workshop" },
-                { name: "Santhoshini", role: "Decoration" },
-                { name: "Edwin Joyel", role: "Social Media" },
-                { name: "Gayathri", role: "Designing" },
                 { name: "Lokesh Kumar R", role: "Sponsorship" },
-                { name: "Barath", role: "Logistics" },
+                { name: "Irfana", role: "Registration" },
+                { name: "Divya Dharshini B", role: "Marketing & Promotions" },
+                { name: "Barath V", role: "Logistics" },
+                { name: "Shesha N", role: "Workshop" },
+                { name: "Varunesh", role: "Prize & Certificates" },
+                { name: "Kailash N", role: "Stage Arrangements" },
+                { name: "Kaviya", role: "Hospitality & Catering" },
+                { name: "Edwin Joyel", role: "Social Media" },
+                { name: "Gayathri M", role: "Designing" },
+                { name: "Yogasri", role: "Invitation" },
+                { name: "Dhwaraka", role: "Reception" },
+                { name: "Santhoshini R", role: "Decoration" },
+                { name: "Nivetha", role: "Souvenir" },
                 { name: "Himasni", role: "Documentation" }
             ]
         }
@@ -78,7 +78,7 @@ const Members = () => {
             >
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Meet The Team</h1>
                 <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
-                    The driving force behind Mathrix 2026.
+                    The driving force behind the Mathrix 2026.
                 </p>
             </motion.div>
 
