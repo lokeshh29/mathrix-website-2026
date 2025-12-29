@@ -3,24 +3,15 @@ import { motion } from 'framer-motion';
 
 const scheduleData = [
     {
-        day: 'Day 1',
-        date: 'Febraury 20',
+        day: 'Event Day',
+        date: 'February 21, 2026',
         events: [
-            { time: '09:00 AM', title: 'Inauguration', location: 'Main Audi' },
-            { time: '10:00 AM', title: 'Code Relay', location: 'Lab 1' },
-            { time: '11:00 AM', title: 'Math Olympiad', location: 'Hall A' },
-            { time: '01:00 PM', title: 'Lunch Break', location: 'Cafeteria' },
-            { time: '02:00 PM', title: 'Paper Presentation', location: 'Seminar Hall' },
-        ]
-    },
-    {
-        day: 'Day 2',
-        date: 'Febraury 20',
-        events: [
-            { time: '09:00 AM', title: 'Workshop: AI in Math', location: 'Lab 2' },
-            { time: '12:00 PM', title: 'Guest Lecture', location: 'Seminar Hall' },
-            { time: '02:00 PM', title: 'Crypto Hunt', location: 'Campus Wide' },
-            { time: '05:00 PM', title: 'Valedictory', location: 'Main Audi' },
+            { time: '10:00 AM', title: 'Paper Presentation', location: 'Auditorium' },
+            { time: '10:00 AM', title: 'Design Event', location: 'TBA' },
+            { time: '11:00 AM', title: 'Algo Maze', location: 'Offline' },
+            { time: '11:00 AM', title: 'Code Mathrix', location: 'Lab 3' },
+            { time: '02:00 PM', title: 'SQL – Query Quest', location: 'Lab 2' },
+            { time: '02:00 PM', title: 'Treasure Hunt', location: 'Campus Wide' },
         ]
     }
 ];

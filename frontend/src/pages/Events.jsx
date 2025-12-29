@@ -8,24 +8,24 @@ const Events = () => {
     const eventList = [
         {
             id: 1,
-            title: 'Paper Presentation',
+            title: 'PAPER PRESENTATION',
             description: 'A platform to present your innovative technical papers and research ideas. Showcase your knowledge, communication, and problem-solving skills.',
             details: {
-                description: 'The Paper Presentation event is a platform for students to showcase their research ideas and technical knowledge. Participants present their papers on various technical topics to a panel of judges.',
+                description: 'A platform to present your innovative technical papers and research ideas. Showcase your knowledge, communication, and problem-solving skills in front of experts and peers.',
                 rounds: [
-                    { title: 'Abstract Submission', desc: 'Submit your abstract for review.' },
-                    { title: 'Final Presentation', desc: 'Present your paper in front of judges (10 mins + 2 mins Q&A).' }
+                    { title: 'Single Round', desc: 'Oral Presentation using PowerPoint (max 10 slides). Duration: 8 minutes presentation + 2 minutes Q&A.' }
                 ],
                 rules: [
-                    'Team Size: 2-3 members.',
-                    'Paper Limit: 6 pages double column.',
-                    'Presentation Time: 10 minutes.',
-                    'Q&A Session: 2 minutes.'
+                    'Topic is chosen by the judging company (e.g., AI, IoT, Robotics, Cybersecurity).',
+                    'Presentation should be original and not copied from published work.',
+                    'Each team must bring a soft copy of the presentation (PPT/PDF).',
+                    'Plagiarism will lead to disqualification.',
+                    'Participants must report 30 minutes before the event starts.'
                 ],
-                teamSize: '2-3 Members',
-                judging: 'Novelty, Clarity, Presentation Skills, Technical Content.',
-                prize: '1st: ₹3000, 2nd: ₹2000',
-                coordinator: 'Arun Kumar (9876543210)'
+                teamSize: 'Individual or Team of 2',
+                judging: 'Originality & innovation, Relevance to domain, Presentation clarity & structure, Technical depth, Q&A handling.',
+                prize: '1st Prize, 2nd Prize, Certificates for all participants.',
+                coordinator: 'Kesavarthini J (9361733387)'
             },
             date: 'February 21, 2026',
             time: '10:00 AM',
@@ -36,27 +36,26 @@ const Events = () => {
         },
         {
             id: 2,
-            title: 'Algo Maze',
-            description: 'A logic-intensive competitive event consisting of twisted logic problems. Focuses on mathematical reasoning and algorithmic thinking.',
+            title: 'ALGO MAZE',
+            description: 'A logic-intensive competitive event focusing on mathematical reasoning, algorithmic thinking, and decision-making skills.',
             details: {
-                description: 'Algo Maze tests your logical reasoning and algorithmic thinking skills. Solve complex puzzles and mazes using code and logic.',
+                description: 'Algo Maze is a logic-intensive competitive event that challenges participants to think beyond formulas and code. It focuses on mathematical reasoning, algorithmic thinking, and decision-making skills through twisted logic problems and real-world algorithm scenarios. Speed alone does not guarantee success, clarity of thought and correctness determine the winners.',
                 rounds: [
-                    { title: 'Round 1: Logic Puzzle', desc: 'Solve logic puzzles to qualify.' },
-                    { title: 'Round 2: The Maze', desc: 'Navigate the algorithmic maze to win.' }
+                    { title: 'Round 1: Prelims (30 mins)', desc: 'MCQs covering twisted logic, mathematics, and algorithms.' },
+                    { title: 'Round 2: Finals (40 mins)', desc: 'Scenario-based questions and algorithm/math decision-making challenges.' }
                 ],
                 rules: [
-                    'Individual participation.',
-                    'No electronic gadgets allowed.',
-                    'Time limit: 60 minutes.'
+                    'Winner selected based on highest score with correct reasoning.',
+                    'Emphasis on optimal and logical decisions.'
                 ],
-                teamSize: 'Individual',
-                judging: 'Speed, Accuracy, Logic.',
-                prize: '1st: ₹2000, 2nd: ₹1000',
-                coordinator: 'Priya S (9876543211)'
+                teamSize: 'Individual Participation',
+                judging: 'Accuracy, Logical reasoning, Performance in decision-making.',
+                prize: '1st Prize, 2nd Prize + Certificates.',
+                coordinator: 'Barath V (8489573989)'
             },
             date: 'February 21, 2026',
             time: '11:00 AM',
-            location: 'Lab 1',
+            location: 'Offline',
             category: 'Technical',
             icon: Brain,
             color: 'text-yellow-400'
@@ -64,22 +63,23 @@ const Events = () => {
         {
             id: 3,
             title: 'SQL – Query Quest',
-            description: 'Assess you knowledge in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving with rapid-fire rounds.',
+            description: 'Assess you knowledge in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving.',
             details: {
-                description: 'Query Quest challenges your SQL skills. Write efficient queries to solve data problems under time pressure.',
+                description: 'SQL – Query Quest is a technical event designed to assess participants’ knowledge and practical skills in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving.',
                 rounds: [
-                    { title: 'Round 1: Schema Design', desc: 'Design a schema for a given problem.' },
-                    { title: 'Round 2: Query Optimization', desc: 'Optimize complex queries for performance.' }
+                    { title: 'Round 1: Prelims (15-20 mins)', desc: '15 MCQs on SQL basics, DDL/DML, Aggregates, Joins. Selection based on score/time.' },
+                    { title: 'Round 2: Finals (30 mins)', desc: 'Execution of 8-10 SQL queries on a provided dataset. Evaluated on correctness and logic.' },
+                    { title: 'Tie-Breaker: Rapid Fire (5 mins)', desc: 'Verbal prediction of query outputs.' }
                 ],
                 rules: [
-                    'Team Size: 2 members.',
-                    'Standard SQL syntax.',
-                    'Internet access allowed for documentation only.'
+                    'Individual participation only.',
+                    'College ID card is mandatory.',
+                    'Malpractice leads to disqualification.'
                 ],
-                teamSize: '2 Members',
-                judging: 'Efficiency, Correctness, Speed.',
-                prize: '1st: ₹2500, 2nd: ₹1500',
-                coordinator: 'Rahul M (9876543212)'
+                teamSize: 'Individual',
+                judging: 'Correctness, Time Efficiency, Logic.',
+                prize: '1st, 2nd, 3rd Prizes + Certificates.',
+                coordinator: 'Menaka RM (8608605321)'
             },
             date: 'February 21, 2026',
             time: '02:00 PM',
@@ -90,27 +90,22 @@ const Events = () => {
         },
         {
             id: 4,
-            title: 'Design Event',
-            description: 'Unleash your creativity in this non-technical design challenge. Perfect for those with an eye for aesthetics and user experience.',
+            title: 'DESIGN EVENT',
+            description: 'Unleash your creativity in this non-technical design challenge. Perfect for those with an eye for aesthetics.',
             details: {
-                description: 'Showcase your creative design skills. Create stunning visuals, posters, or UI designs based on a theme.',
-                rounds: [
-                    { title: 'Round 1: Poster Design', desc: 'Design a poster for a given topic.' },
-                    { title: 'Round 2: UI/UX Challenge', desc: 'Design a landing page for a product.' }
-                ],
+                description: 'COMPANY YET TO DECIDE.',
+                rounds: [],
                 rules: [
-                    'Individual participation.',
-                    'Software: Photoshop/Figma/Illustrator.',
-                    'Assets must be original or royalty-free.'
+                    'COMPANY YET TO DECIDE.'
                 ],
-                teamSize: 'Individual',
-                judging: 'Creativity, Aesthetics, Relevance.',
-                prize: '1st: ₹2000, 2nd: ₹1000',
-                coordinator: 'Sneha R (9876543213)'
+                teamSize: 'Individual or Team of 2',
+                judging: 'Decided by the Company.',
+                prize: '1st Prize, 2nd Prize, Certificates for all participants.',
+                coordinator: 'Pooja Nandhini C (+91 86100 61231)'
             },
             date: 'February 21, 2026',
             time: '10:00 AM',
-            location: 'Design Studio',
+            location: 'TBA',
             category: 'Non Technical',
             icon: Palette,
             color: 'text-pink-400'
@@ -118,22 +113,23 @@ const Events = () => {
         {
             id: 5,
             title: 'Code Mathrix',
-            description: 'Decode. Divide. Conquer. A collaborative coding challenge where two teammates solve split problems with strict turn-based coding rules.',
+            description: 'Decode. Divide. Conquer. A collaborative coding challenge with strict turn-based coding and isolation rules.',
             details: {
-                description: 'A unique coding relay where teammates swap roles. One codes while the other guides, switching periodically.',
+                description: 'Code Mathrix is a collaborative coding challenge that tests logical thinking, coordination, and problem-solving under pressure. Teams work on split problem statements with strict turn-based coding.',
                 rounds: [
-                    { title: 'Round 1: Relay Coding', desc: 'Switch roles every 10 minutes.' },
-                    { title: 'Round 2: Blind Coding', desc: 'Code without seeing the screen.' }
+                    { title: 'Round 1 (30 mins)', desc: 'Logic-based MCQs + dry-run coding questions.' },
+                    { title: 'Round 2 (40 mins)', desc: 'Live Coding Challenge with Turn-based rule (10 mins swap) and Isolation rule.' }
                 ],
                 rules: [
-                    'Team Size: 2 members.',
-                    'Languages: C/C++/Python/Java.',
-                    'Strict adherence to switch timings.'
+                    'Teams of 2 members.',
+                    'Problem split into two parts.',
+                    'Turn-based: Player 1 codes 10 mins, then Player 2.',
+                    'Isolation: Non-coding player cannot view screen or assist.'
                 ],
-                teamSize: '2 Members',
-                judging: 'Code Quality, Output, Teamwork.',
-                prize: '1st: ₹3000, 2nd: ₹2000',
-                coordinator: 'Vikram S (9876543214)'
+                teamSize: '2 Members per Team',
+                judging: 'Logic, Execution, Time, Continuity.',
+                prize: 'Certificates.',
+                coordinator: 'Kishore S (8072651532)'
             },
             date: 'February 21, 2026',
             time: '11:00 AM',
@@ -144,7 +140,7 @@ const Events = () => {
         },
         {
             id: 6,
-            title: 'Treasure Hunt',
+            title: 'TREASURE HUNT',
             description: 'An exploration-based team event blending logic, observation, and teamwork. Follow clues, solve riddles, and uncover the final treasure.',
             details: {
                 description: 'The Treasure Hunt is an exploration-based team event that blends logic, observation, teamwork, and quick decision-making. Participants follow clues, solve riddles, and navigate through checkpoints to uncover the final treasure.',
