@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, X, Send, Bot } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +36,12 @@ const ChatBot = () => {
             const BASE_URL = (import.meta.env.VITE_API_URL || "http://localhost:8080").replace(/\/$/, "");
             const API_URL = `${BASE_URL}/converse`;
 
+            // Prepare history (last 5 messages)
+            const history = messages.slice(-5).map(msg => ({
+                role: msg.sender === 'user' ? 'user' : 'model',
+                content: msg.text
+            }));
+
             const response = await fetch(API_URL, {
                 method: "POST",
                 headers: {
@@ -42,6 +49,7 @@ const ChatBot = () => {
                 },
                 body: JSON.stringify({
                     user_query: userText,
+                    history: history
                 }),
             });
 
@@ -60,29 +68,7 @@ const ChatBot = () => {
         }
     };
 
-    const renderMessageText = (text) => {
-        // Strict regex for email extraction
-        const emailRegex = /([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4})/g;
 
-        // Split keeps the separators (emails) because of capturing group
-        const parts = text.split(emailRegex);
-
-        return parts.map((part, index) => {
-            // Check if this part is an email
-            if (part.match(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
-                return (
-                    <a
-                        key={index}
-                        href={`mailto:${part}`}
-                        className="text-pink-400 hover:text-pink-300 underline underline-offset-2 break-all"
-                    >
-                        {part}
-                    </a>
-                );
-            }
-            return part;
-        });
-    };
 
     return (
         <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end pointer-events-none"> {/* Container to manage layout, pointer-events-none to let clicks pass through empty space */}
@@ -134,7 +120,22 @@ const ChatBot = () => {
                                             : 'bg-[#1a1a2e] text-gray-100 border border-white/5 rounded-bl-none'
                                             }`}
                                     >
-                                        {renderMessageText(msg.text)}
+                                        {msg.sender === 'user' ? (
+                                            msg.text
+                                        ) : (
+                                            <ReactMarkdown
+                                                components={{
+                                                    p: ({ node, ...props }) => <p className="mb-2 last:mb-0" {...props} />,
+                                                    ul: ({ node, ...props }) => <ul className="list-disc ml-4 mb-2 space-y-1" {...props} />,
+                                                    ol: ({ node, ...props }) => <ol className="list-decimal ml-4 mb-2 space-y-1" {...props} />,
+                                                    li: ({ node, ...props }) => <li className="pl-1" {...props} />,
+                                                    strong: ({ node, ...props }) => <strong className="font-semibold text-pink-300" {...props} />,
+                                                    a: ({ node, ...props }) => <a className="text-pink-400 hover:text-pink-300 underline" target="_blank" rel="noopener noreferrer" {...props} />,
+                                                }}
+                                            >
+                                                {msg.text}
+                                            </ReactMarkdown>
+                                        )}
                                     </div>
                                 </div>
                             ))}

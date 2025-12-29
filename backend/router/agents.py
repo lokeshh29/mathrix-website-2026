@@ -12,17 +12,24 @@ logger = logging.getLogger(__name__)
 
 LLM_ANSWERING_PROMPT = """
 You are a helpful assistant for the Mathrix 2026 event.
-1. If the user says "hello", "hi", or greets you, welcome them to Mathrix 2026 and ask how you can help. IGNORE the tool output for greetings.
-2. For other questions, use ONLY the "retrieve_from_kb" tool.
-3. If the tool returns "NO_KB_RESULTS" or information completely unrelated to Mathrix (e.g., about other colleges), you MUST say: "NO_ANSWER_FOUND"
-4. Do NOT answer using your own outside knowledge.
-5. Keep your answer SHORT and CONCISE.
-6. Do NOT include <thinking> tags or internal monologue. Output ONLY the final answer.
+
+INSTRUCTIONS:
+1. GREETINGS: If the user says "hello", "hi", etc., welcome them to Mathrix 2026 and ask how to help. IGNORE the tool output for greetings.
+2. CONTEXT: You will be provided with PREVIOUS CONVERSATION HISTORY. Use this to understand pronouns like "it", "them", "those", "explain each", etc.
+3. TOOL USE:
+   - You MUST use the "retrieve_from_kb" tool to find information.
+   - When calling the tool, formulate a SEARCH QUERY that fully describes what the user is asking about, replacing pronouns with actual names from the history.
+   - Example: If history mentions "Paper Presentation" and user asks "explain it", your tool query should be "Paper Presentation details".
+4. NO RESULTS: If the tool returns "NO_KB_RESULTS" or unrelated info, you MUST say: "NO_ANSWER_FOUND"
+5. Do NOT answer using your own outside knowledge.
+6. Keep your answer SHORT and CONCISE.
+7. FORMAT: STRICTLY OUTPUT THE ANSWER ONLY. DO NOT INCLUDE <thinking> TAGS OR ANY INTERNAL MONOLOGUE.
 """
 
-def run_agent(prompt: str, kb_id: str) -> Dict[str, str]:
+def run_agent(prompt: str, kb_id: str, history: Optional[list[dict]] = None) -> Dict[str, str]:
     """
     Runs the agent workflow using Strands Framework.
+    Accepts history (list of {role, content}) to maintain context.
     """
     if not prompt:
         return {"output": "No prompt provided."}
@@ -46,8 +53,18 @@ def run_agent(prompt: str, kb_id: str) -> Dict[str, str]:
             system_prompt=LLM_ANSWERING_PROMPT
         )
         
-        # Simple augmented prompt to encourage tool use
-        final_prompt = f"Context KB ID: {kb_id}\nUser Query: {prompt}"
+        # --- Context Construction ---
+        context_str = ""
+        if history:
+            context_str = "PREVIOUS CONVERSATION HISTORY(just use this for referance and answer like a follow up (if suits)):\n"
+            for msg in history:
+                role = msg.get("role", "unknown")
+                content = msg.get("content", "")
+                context_str += f"{role.upper()}: {content}\n"
+            context_str += "--- END HISTORY ---\n\n"
+
+        # Simple augmented prompt to encourage tool use + context
+        final_prompt = f"{context_str}Context KB ID: {kb_id}\nUser Query: {prompt}\n(If user asks to 'explain each' or similar, list and explain the items mentioned in the last HISTORY message.)"
 
         response = agent(final_prompt)
         output_text = str(response).strip()

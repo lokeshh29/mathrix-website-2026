@@ -32,6 +32,7 @@ async def converse(request: ConverseRequest):
     """
     event = {
         "text": request.user_query,
+        "history": request.history or []
     }
     
     try:

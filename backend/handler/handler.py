@@ -30,7 +30,8 @@ def internal_handle(event: Dict[str, Any]) -> Dict[str, Any]:
             raise ValueError("Query text is required")
         kb_id = DEFAULT_KB_ID
         
-        agent_output = run_agent(text, kb_id)
+        history = data.get("history", [])
+        agent_output = run_agent(text, kb_id, history)
         msg = agent_output.get("output", "No response.")
 
         answer_obj = {
