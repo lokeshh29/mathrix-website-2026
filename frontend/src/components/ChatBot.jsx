@@ -31,20 +31,22 @@ const ChatBot = () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch("http://localhost:8080/invocations", {
+            // Use environment variable for API URL (fallback to localhost for dev without env)
+            const BASE_URL = (import.meta.env.VITE_API_URL || "http://localhost:8080").replace(/\/$/, "");
+            const API_URL = `${BASE_URL}/converse`;
+
+            const response = await fetch(API_URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    input: {
-                        text: userText
-                    }
+                    user_query: userText,
                 }),
             });
 
             const data = await response.json();
-            const botResponse = data.output?.answers?.[0]?.answer || "I'm having trouble connecting to my brain right now.";
+            const botResponse = data.answer || "I'm having trouble connecting to my brain right now.";
 
             const botMsg = { id: Date.now() + 1, text: botResponse, sender: 'bot' };
             setMessages(prev => [...prev, botMsg]);

@@ -5,3 +5,4 @@ backend/tools/__pycache__/kb_tool.cpython-311.pyc
 backend/utils/__pycache__/Utils.cpython-311.pyc
 backend/.env
 backend/router/__pycache__/agents.cpython-311.pyc
+frontend/.env
