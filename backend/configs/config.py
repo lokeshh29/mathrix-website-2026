@@ -3,7 +3,7 @@ from typing import List, Optional
 from pydantic import BaseModel
 
 # Set local AWS Profile
-os.environ["AWS_PROFILE"] = "assisthub"
+# os.environ["AWS_PROFILE"] = "assisthub"
 
 AWS_REGION = os.getenv('AWS_REGION', "us-east-1")
 DEFAULT_MODEL_ID = os.getenv('DEFAULT_MODEL_ID', "amazon.nova-pro-v1:0")
