@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const scheduleData = [
     {
         day: 'Event Day',
-        date: 'February 21, 2026',
+        date: 'February 20, 2026',
         events: [
             { time: '10:00 AM', title: 'Paper Presentation', location: 'Auditorium' },
             { time: '10:00 AM', title: 'Design Event', location: 'TBA' },

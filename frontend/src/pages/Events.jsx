@@ -27,7 +27,7 @@ const Events = () => {
                 prize: '1st Prize, 2nd Prize, Certificates for all participants.',
                 coordinator: 'Kesavarthini J (9361733387)'
             },
-            date: 'February 21, 2026',
+            date: 'February 20, 2026',
             time: '10:00 AM',
             location: 'Auditorium',
             category: 'Technical',
@@ -53,7 +53,7 @@ const Events = () => {
                 prize: '1st Prize, 2nd Prize + Certificates.',
                 coordinator: 'Barath V (8489573989)'
             },
-            date: 'February 21, 2026',
+            date: 'February 20, 2026',
             time: '11:00 AM',
             location: 'Offline',
             category: 'Technical',
@@ -81,7 +81,7 @@ const Events = () => {
                 prize: '1st, 2nd, 3rd Prizes + Certificates.',
                 coordinator: 'Menaka RM (8608605321)'
             },
-            date: 'February 21, 2026',
+            date: 'February 20, 2026',
             time: '02:00 PM',
             location: 'Lab 2',
             category: 'Technical',
@@ -103,7 +103,7 @@ const Events = () => {
                 prize: '1st Prize, 2nd Prize, Certificates for all participants.',
                 coordinator: 'Pooja Nandhini C (+91 86100 61231)'
             },
-            date: 'February 21, 2026',
+            date: 'February 20, 2026',
             time: '10:00 AM',
             location: 'TBA',
             category: 'Non Technical',
@@ -131,7 +131,7 @@ const Events = () => {
                 prize: 'Certificates.',
                 coordinator: 'Kishore S (8072651532)'
             },
-            date: 'February 21, 2026',
+            date: 'February 20, 2026',
             time: '11:00 AM',
             location: 'Lab 3',
             category: 'Technical',
@@ -160,7 +160,7 @@ const Events = () => {
                 prize: '1st, 2nd, 3rd Prizes.',
                 coordinator: 'Subramanian N (9840623264)'
             },
-            date: 'February 21, 2026',
+            date: 'February 20, 2026',
             time: '02:00 PM',
             location: 'Campus Wide',
             category: 'Non Technical',

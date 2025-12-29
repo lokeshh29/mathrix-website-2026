@@ -33,9 +33,14 @@ const Workshops = () => {
                         <p className="text-gray-300 mb-6 leading-relaxed text-xl">
                             Workshop scheduled during <span className="text-white font-bold">February 2nd week</span>.
                         </p>
-                        <div className="bg-white/5 inline-block px-6 py-3 rounded-xl border border-white/10">
-                            <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">Contact for Details</p>
-                            <p className="text-2xl font-bold text-white">Hari</p>
+                        <div className="flex flex-col items-center gap-6">
+                            <div className="bg-white/5 inline-block px-6 py-3 rounded-xl border border-white/10">
+                                <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">Contact for Details</p>
+                                <p className="text-2xl font-bold text-white">Hari</p>
+                            </div>
+                            <button className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all transform hover:scale-105 active:scale-95">
+                                Register Now
+                            </button>
                         </div>
                     </div>
                 </div>
