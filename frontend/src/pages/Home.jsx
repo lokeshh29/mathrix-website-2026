@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles } from 'lucide-react';
+import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CountdownTimer from '../components/CountdownTimer';
 
@@ -258,6 +258,17 @@ const Home = () => {
                             category: 'Non Technical',
                             icon: Sparkles,
                             color: 'text-purple-400'
+                        },
+                        {
+                            id: 8,
+                            title: 'Math Quiz',
+                            description: 'Test your aptitude, mathematical knowledge, and speed. A competitive event featuring written prelims and a dynamic main quiz round.',
+                            date: 'February 20, 2026',
+                            time: 'TBA',
+                            location: 'Classroom Block',
+                            category: 'Technical',
+                            icon: Sigma,
+                            color: 'text-indigo-400'
                         }
                     ].map((event, index) => (
                         <motion.div

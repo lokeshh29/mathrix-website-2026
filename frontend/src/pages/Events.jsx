@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles } from 'lucide-react';
+import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma } from 'lucide-react';
 
 const Events = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -195,6 +195,34 @@ const Events = () => {
             category: 'Non Technical',
             icon: Sparkles,
             color: 'text-purple-400'
+        },
+        {
+            id: 8,
+            title: 'Math Quiz',
+            description: 'Test your aptitude, mathematical knowledge, and speed. A competitive event featuring written prelims and a dynamic main quiz round.',
+            details: {
+                description: 'Math Quiz is a competitive and engaging technical event designed to test participants’ aptitude, mathematical knowledge, speed, and logical reasoning. The event consists of a preliminary written round followed by a main quiz round featuring various quiz formats.',
+                rounds: [
+                    { title: 'Round 1: Prelims (Written Test - 20 mins)', desc: 'Objective type (MCQ) covering Quantitative Aptitude, Core Mathematics, and General Math. Top teams qualify.' },
+                    { title: 'Round 2: Mains (Quiz Round)', desc: 'Various formats: Identify Mathematician, Find the Error in Theorem, Rapid Fire (10 questions in 60s), and Buzzer-based Competitive Exam questions.' }
+                ],
+                rules: [
+                    'Team Size: 3 members per team.',
+                    'Prelims: Written MCQ test.',
+                    'Mains: Includes visual rounds, rapid fire, and buzzer rounds.',
+                    'Malpractice leads to disqualification.'
+                ],
+                teamSize: '3 Members per Team',
+                judging: 'Accuracy, Speed, Logical Reasoning, Teamwork, Time Management.',
+                prize: '1st, 2nd, 3rd Prizes.',
+                coordinator: 'Safrin S (8667004235)'
+            },
+            date: 'February 20, 2026',
+            time: 'TBA',
+            location: 'Classroom Block',
+            category: 'Technical',
+            icon: Sigma,
+            color: 'text-indigo-400'
         }
     ];
 
