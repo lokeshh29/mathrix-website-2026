@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector } from 'lucide-react';
+import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CountdownTimer from '../components/CountdownTimer';
 
@@ -247,6 +247,17 @@ const Home = () => {
                             category: 'Non Technical',
                             icon: Compass,
                             color: 'text-orange-400'
+                        },
+                        {
+                            id: 7,
+                            title: 'MagicMatix',
+                            description: 'Where logic meets mathematics. A unique crossword challenge bridging numerical precision and Computer Science concepts.',
+                            date: 'February 20, 2026',
+                            time: 'TBA',
+                            location: 'Classroom Block',
+                            category: 'Non Technical',
+                            icon: Sparkles,
+                            color: 'text-purple-400'
                         }
                     ].map((event, index) => (
                         <motion.div

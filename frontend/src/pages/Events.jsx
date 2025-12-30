@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector } from 'lucide-react';
+import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles } from 'lucide-react';
 
 const Events = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -166,6 +166,35 @@ const Events = () => {
             category: 'Non Technical',
             icon: Compass,
             color: 'text-orange-400'
+        },
+        {
+            id: 7,
+            title: 'MagicMatix',
+            description: 'Where logic meets mathematics. A unique crossword challenge bridging numerical precision and Computer Science concepts.',
+            details: {
+                description: 'MagicMatix is a dynamic event where logic meets mathematics in an exhilarating new way. It invites teams to showcase their reasoning and problem-solving skills through a series of unique crossword challenges. By bridging the gap between numerical precision and the dual-meanings of Computer Science, this event fosters collaboration and sharp thinking.',
+                rounds: [
+                    { title: 'Round 1: Number Crossword (30 mins)', desc: 'Solve a 25-question crossword using ONLY numbers. Clues are in English. Ignore decimals/symbols (e.g., Pi = 314).' },
+                    { title: 'Round 2: Acronym Crossword', desc: 'Fill with English text. Answers are acronyms blending Math and CS (e.g., PDF = Probability Density Function / Portable Document Format).' }
+                ],
+                rules: [
+                    'Round 1: Fill with numbers only. Remove special characters.',
+                    'Round 2: Answers must be acronyms.',
+                    'Team Size: Strictly 2 members.',
+                    'Tie-Breaker: Least time taken, then Rapid Fire (5 questions).',
+                    'Malpractice leads to immediate disqualification.'
+                ],
+                teamSize: 'Team of 2',
+                judging: 'Score based (Top 10 for R2, Top 3 for Prizes). Tie-breaker by Time.',
+                prize: '1st, 2nd, 3rd Prizes + Certificates.',
+                coordinator: 'Sundhar Balamoorthy (8248629145)'
+            },
+            date: 'February 20, 2026',
+            time: 'TBA',
+            location: 'Classroom Block',
+            category: 'Non Technical',
+            icon: Sparkles,
+            color: 'text-purple-400'
         }
     ];
 
