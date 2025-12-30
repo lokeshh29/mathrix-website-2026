@@ -6,3 +6,13 @@ backend/utils/__pycache__/Utils.cpython-311.pyc
 backend/.env
 backend/router/__pycache__/agents.cpython-311.pyc
 frontend/.env
+backend/__pycache__/main.cpython-311.pyc
+backend/handler/__pycache__/__init__.cpython-311.pyc
+backend/router/__pycache__/__init__.cpython-311.pyc
+backend/router/__pycache__/agents.cpython-311.pyc
+backend/router/__pycache__/agents.cpython-311.pyc
+backend/router/__pycache__/agents.cpython-311.pyc
+backend/schemas/__pycache__/__init__.cpython-311.pyc
+backend/utils/__pycache__/__init__.cpython-311.pyc
+backend/utils/__pycache__/email_service.cpython-311.pyc
+backend/schemas/__pycache__/chat.cpython-311.pyc

@@ -9,14 +9,39 @@ const Contact = () => {
         message: ''
     });
 
+    const [status, setStatus] = useState("idle"); // idle, loading, success, error
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        alert('Message sent (simulated)!');
-        setFormData({ name: '', email: '', message: '' });
+        setStatus("loading");
+
+        try {
+            const BASE_URL = (import.meta.env.DEV ? "http://127.0.0.1:8000" : (import.meta.env.VITE_API_URL || "http://localhost:8080")).replace(/\/$/, "");
+            const API_URL = `${BASE_URL}/send-email`;
+
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                setStatus("success");
+                setFormData({ name: '', email: '', message: '' });
+                setTimeout(() => setStatus("idle"), 5000);
+            } else {
+                setStatus("error");
+            }
+        } catch (error) {
+            console.error("Email error:", error);
+            setStatus("error");
+        }
     };
 
     return (
@@ -140,8 +165,14 @@ const Contact = () => {
                                     required
                                 ></textarea>
                             </div>
-                            <button type="submit" className="w-full btn btn-primary justify-center text-lg font-bold shadow-lg shadow-pink-500/20 py-4">
-                                Send Message <Send size={20} />
+                            <button
+                                type="submit"
+                                disabled={status === "loading"}
+                                className="w-full btn btn-primary justify-center text-lg font-bold shadow-lg shadow-pink-500/20 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {status === "loading" ? "Sending..." : status === "success" ? "Message Sent! ✅" : status === "error" ? "Failed. Try Again ❌" : (
+                                    <>Send Message <Send size={20} /></>
+                                )}
                             </button>
                         </form>
                     </div>

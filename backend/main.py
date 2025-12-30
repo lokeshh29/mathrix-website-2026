@@ -6,7 +6,9 @@ from mangum import Mangum
 from configs.config import DEFAULT_MODEL_ID
 from handler.handler import internal_handle
 from schemas.chat import ConverseRequest, ConverseResponse
+from utils.email_service import send_email_via_smtp
 
+from schemas.chat import EmailRequest
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -60,6 +62,17 @@ async def converse(request: ConverseRequest):
 async def ping():
     """Health check endpoint"""
     return {"status": "healthy"}
+
+
+@app.post("/send-email")
+async def send_email(request: EmailRequest):
+    """
+    Sends a contact form email via SMTP.
+    """
+    success = send_email_via_smtp(request.name, request.email, request.message)
+    if not success:
+        raise HTTPException(status_code=500, detail="Failed to send email.")
+    return {"status": "success", "message": "Email sent successfully."}
 
 lambda_handler = Mangum(app)
 

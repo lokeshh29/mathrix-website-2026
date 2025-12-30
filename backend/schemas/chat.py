@@ -7,3 +7,8 @@ class ConverseRequest(BaseModel):
 
 class ConverseResponse(BaseModel):
     answer: str
+
+class EmailRequest(BaseModel):
+    name: str
+    email: str
+    message: str
