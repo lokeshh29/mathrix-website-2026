@@ -83,7 +83,19 @@ EVENTS LIST:
    - Coordinator: Madhan.M (9047937541).
 
 WORKSHOPS:
-- Tech Workshop: Scheduled for February 2nd week. Contact Hari for details.
+1. Generative AI Workshop
+   - Date: Feb 10, 2026 (Tuesday)
+   - Time: 10:00 AM - 01:00 PM
+   - Location: RCC
+   - Description: Explore Artificial Intelligence, build and fine-tune generative models.
+   - Contact: Hari
+
+2. Ethical Hacking Bootcamp
+   - Date: Feb 12, 2026 (Thursday)
+   - Time: 02:00 PM - 05:00 PM
+   - Location: RCC
+   - Description: Master cybersecurity, penetration testing, and network defense.
+   - Contact: Hari
 
 COMMON USER QUESTIONS & WORKFLOWS:
 

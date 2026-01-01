@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Terminal, Cpu } from 'lucide-react';
+import { Terminal, Cpu, Brain } from 'lucide-react';
 
 const Workshops = () => {
     const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1qBAEEEM24j9_MJxfSXcaylG4ttRAobLJwMItSqMNaXA/edit?usp=forms_home&ouid=114183402363803052568&ths=true";
@@ -18,38 +18,77 @@ const Workshops = () => {
                 </p>
             </motion.div>
 
-            {/* Upcoming Workshop */}
-            <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass-card p-8 md:p-12 relative overflow-hidden text-center"
-            >
-                <div className="absolute top-0 right-0 p-32 bg-purple-600/10 blur-[80px] rounded-full" />
-                <div className="relative z-10 flex flex-col items-center gap-6">
-                    <div className="flex items-center justify-center bg-black/20 rounded-xl p-6">
-                        <Cpu size={60} className="text-purple-400" />
-                    </div>
-                    <div>
-                        <h2 className="text-3xl font-bold mb-4">Tech Workshop</h2>
-                        <p className="text-gray-300 mb-6 leading-relaxed text-xl">
-                            Workshop scheduled during <span className="text-white font-bold">February 2nd week</span>.
-                        </p>
-                        <div className="flex flex-col items-center gap-6">
-                            <div className="bg-white/5 inline-block px-6 py-3 rounded-xl border border-white/10">
-                                <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">Contact for Details</p>
-                                <p className="text-2xl font-bold text-white">Hari</p>
+            {/* Workshops Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
+                {/* Workshop 1: Gen AI */}
+                <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    className="glass-card p-8 md:p-10 relative overflow-hidden text-center group hover:border-cyan-500/30 transition-all duration-500 flex flex-col h-full"
+                >
+                    <div className="absolute top-0 right-0 p-32 bg-cyan-600/10 blur-[80px] rounded-full group-hover:bg-cyan-600/20 transition-all" />
+                    <div className="relative z-10 flex flex-col items-center gap-6 flex-grow">
+                        <div className="flex items-center justify-center bg-black/20 rounded-xl p-6 group-hover:scale-110 transition-transform duration-500">
+                            <Brain size={60} className="text-cyan-400" />
+                        </div>
+                        <div className="w-full flex flex-col items-center flex-grow">
+                            <h2 className="text-3xl font-bold mb-2 group-hover:text-cyan-300 transition-colors">Generative AI Workshop</h2>
+                            <p className="text-cyan-400 font-mono text-sm mb-4">Feb 10, 2026 • 10:00 AM - 01:00 PM</p>
+                            <p className="text-gray-300 mb-8 leading-relaxed">
+                                Explore the frontiers of Artificial Intelligence. Learn to build and fine-tune generative models in this hands-on session.
+                            </p>
+                            <div className="mt-auto w-full flex flex-col items-center gap-4">
+                                <div className="bg-white/5 inline-block px-6 py-2 rounded-xl border border-white/10">
+                                    <p className="text-gray-400 text-xs uppercase tracking-wider mb-1">Contact</p>
+                                    <p className="text-xl font-bold text-white">Hari</p>
+                                </div>
+                                <button
+                                    onClick={() => window.open(GOOGLE_FORM_URL, '_blank')}
+                                    className="w-full px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold rounded-xl hover:shadow-[0_0_20px_rgba(8,145,178,0.4)] transition-all transform hover:scale-[1.02] active:scale-95 text-lg"
+                                >
+                                    Register Now
+                                </button>
                             </div>
-                            <button
-                                onClick={() => window.open(GOOGLE_FORM_URL, '_blank')}
-                                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all transform hover:scale-105 active:scale-95"
-                            >
-                                Register Now
-                            </button>
                         </div>
                     </div>
-                </div>
-            </motion.div>
+                </motion.div>
+
+                {/* Workshop 2: Ethical Hacking */}
+                <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="glass-card p-8 md:p-10 relative overflow-hidden text-center group hover:border-emerald-500/30 transition-all duration-500 flex flex-col h-full"
+                >
+                    <div className="absolute top-0 right-0 p-32 bg-emerald-600/10 blur-[80px] rounded-full group-hover:bg-emerald-600/20 transition-all" />
+                    <div className="relative z-10 flex flex-col items-center gap-6 flex-grow">
+                        <div className="flex items-center justify-center bg-black/20 rounded-xl p-6 group-hover:scale-110 transition-transform duration-500">
+                            <Terminal size={60} className="text-emerald-400" />
+                        </div>
+                        <div className="w-full flex flex-col items-center flex-grow">
+                            <h2 className="text-3xl font-bold mb-2 group-hover:text-emerald-300 transition-colors">Ethical Hacking Bootcamp</h2>
+                            <p className="text-emerald-400 font-mono text-sm mb-4">Feb 12, 2026 • 02:00 PM - 05:00 PM</p>
+                            <p className="text-gray-300 mb-8 leading-relaxed">
+                                Master the art of cybersecurity. Learn penetration testing, vulnerability assessment, and network defense strategies.
+                            </p>
+                            <div className="mt-auto w-full flex flex-col items-center gap-4">
+                                <div className="bg-white/5 inline-block px-6 py-2 rounded-xl border border-white/10">
+                                    <p className="text-gray-400 text-xs uppercase tracking-wider mb-1">Contact</p>
+                                    <p className="text-xl font-bold text-white">Hari</p>
+                                </div>
+                                <button
+                                    onClick={() => window.open(GOOGLE_FORM_URL, '_blank')}
+                                    className="w-full px-8 py-4 bg-gradient-to-r from-emerald-600 to-green-600 text-white font-bold rounded-xl hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all transform hover:scale-[1.02] active:scale-95 text-lg"
+                                >
+                                    Register Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
         </div>
     );
 };

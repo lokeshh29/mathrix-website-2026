@@ -307,14 +307,6 @@ const Home = () => {
                                         <Calendar size={16} className="text-purple-400" />
                                         <span>{event.date}</span>
                                     </div>
-                                    <div className="flex items-center gap-2">
-                                        <Clock size={16} className="text-green-400" />
-                                        <span>{event.time}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <MapPin size={16} className="text-red-400" />
-                                        <span>{event.location}</span>
-                                    </div>
                                 </div>
 
                                 <Link to="/events" className="w-full mt-auto btn btn-outline group-hover:bg-white/10 group-hover:text-white block text-center border-white/10">
