@@ -15,15 +15,21 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="Chatbot API", version="1.0.0")
+app = FastAPI(title="Chatbot API", version="1.0.0", root_path="/default")
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://mathrix.co.in",
+        "https://www.mathrix.co.in",
+        "https://mathrix-website-2026.vercel.app"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post("/converse", response_model=ConverseResponse)
@@ -40,9 +46,6 @@ async def converse(request: ConverseRequest):
     try:
         # Core RAG Logic
         result = internal_handle(event)
-        
-        # --- Response Formatting ---
-        # handler.py returns: {"answers": [{"answer": "msg", "model_id": "..."}]}
         answers_list = result.get("answers", [])
         
         final_answer = ""
