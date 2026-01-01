@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma } from 'lucide-react';
+import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma, Lightbulb } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CountdownTimer from '../components/CountdownTimer';
 
@@ -269,6 +269,17 @@ const Home = () => {
                             category: 'Technical',
                             icon: Sigma,
                             color: 'text-indigo-400'
+                        },
+                        {
+                            id: 9,
+                            title: 'Mathkinator',
+                            description: 'Mathkinator – The Guessing Genius! An interactive and brain-teasing event inspired by Akinator.',
+                            date: 'February 20, 2026',
+                            time: 'TBA',
+                            location: 'Classroom Block',
+                            category: 'Technical',
+                            icon: Lightbulb,
+                            color: 'text-yellow-500'
                         }
                     ].map((event, index) => (
                         <motion.div

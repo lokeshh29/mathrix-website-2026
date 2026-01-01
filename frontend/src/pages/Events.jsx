@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma } from 'lucide-react';
+import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma, Lightbulb } from 'lucide-react';
 
 const Events = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -223,6 +223,34 @@ const Events = () => {
             category: 'Technical',
             icon: Sigma,
             color: 'text-indigo-400'
+        },
+        {
+            id: 9,
+            title: 'Mathkinator',
+            description: 'Mathkinator – The Guessing Genius! An interactive and brain-teasing event inspired by Akinator.',
+            details: {
+                description: 'Mathkinator is an interactive and brain-teasing event inspired by Akinator, where participants identify famous mathematicians or mathematical concepts using logical thinking and strategic questioning. The event encourages teamwork, reasoning, and problem-solving in a fun and competitive way.',
+                rounds: [
+                    { title: 'Round 1: Prelims (Concept Guessing - 20-25 mins)', desc: 'Yes/No/Maybe questioning. Identify 5 concepts (e.g., Infinity, Pi). Max 2 questions per item. Lowest scores eliminated.' },
+                    { title: 'Round 2: Finals (Personality Guessing - 20 mins)', desc: 'Yes/No/Maybe questioning. Identify 5 famous mathematicians (e.g., Gauss, Ramanujan). Max 2 questions per personality.' }
+                ],
+                rules: [
+                    'Format: Yes/No/Maybe questioning.',
+                    'Round 1: Identify 5 mathematical concepts.',
+                    'Round 2: Identify 5 famous mathematicians.',
+                    'Limit: Only 2 questions allowed per item/personality before guessing.'
+                ],
+                teamSize: '4-5 Members per Team',
+                judging: 'Accuracy, logic in questioning, teamwork, and time taken. Bonus for speed.',
+                prize: '1st, 2nd, 3rd Prizes.',
+                coordinator: 'Madhan.M (9047937541)'
+            },
+            date: 'February 20, 2026',
+            time: 'TBA',
+            location: 'Classroom Block',
+            category: 'Technical',
+            icon: Lightbulb,
+            color: 'text-yellow-500'
         }
     ];
 

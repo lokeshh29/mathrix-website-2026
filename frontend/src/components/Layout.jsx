@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
                 <div className="container mx-auto px-4 text-center text-gray-400">
                     <p>© 2026 Mathrix. All rights reserved.</p>
                     <div className="flex justify-center gap-6 mt-4">
-                        <a href="https://www.instagram.com/mathrix_ceg/" className="hover:text-purple-400 transition-colors">Instagram</a>
+                        <a href="https://www.instagram.com/mathrix_official/" className="hover:text-purple-400 transition-colors">Instagram</a>
                         <a href="https://www.linkedin.com/company/mathrix-2025/" className="hover:text-purple-400 transition-colors">LinkedIn</a>
                     </div>
 
