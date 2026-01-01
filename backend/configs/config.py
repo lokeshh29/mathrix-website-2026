@@ -24,8 +24,7 @@ DEFAULT_CANNED_MESSAGE = os.getenv(
 )
 
 # Model parameters
-
-KB_RETRIEVE_NUM_OF_RESULTS = int(os.getenv("KB_RETRIEVE_NUM_OF_RESULTS", "5"))
+KB_RETRIEVE_NUM_OF_RESULTS = int(os.getenv("KB_RETRIEVE_NUM_OF_RESULTS", "10"))
 
 class AnswerRequestPayload(BaseModel):
   text: str | None = None

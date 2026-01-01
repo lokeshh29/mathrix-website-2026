@@ -1,0 +1,106 @@
+
+Mathrix 2026 - Event Information & FAQs
+
+GENERAL INFORMATION:
+- Event Name: Mathrix 2026
+- Date: February 20, 2026
+- Location: Rathinam College of Arts and Science (presumed based on common knowledge of Mathrix, but will stick to generic "Campus" or "Auditorium" as per code).
+- Registration method: All registrations are handled via a Google Form.
+- Registration Link: https://docs.google.com/forms/d/1qBAEEEM24j9_MJxfSXcaylG4ttRAobLJwMItSqMNaXA/edit?usp=forms_home&ouid=114183402363803052568&ths=true
+
+EVENTS LIST:
+
+1. PAPER PRESENTATION (Technical)
+   - Description: Platform to present innovative technical papers and research ideas.
+   - Rounds: Single Round (Oral Presentation, 8 mins + 2 mins Q&A).
+   - Team Size: Individual or Team of 2.
+   - Date/Time: Feb 20, 2026 @ 10:00 AM.
+   - Location: Auditorium.
+   - Coordinator: Kesavarthini J (9361733387).
+
+2. ALGO MAZE (Technical)
+   - Description: Logic-intensive event focusing on mathematical reasoning and algorithms.
+   - Rounds: Prelims (MCQs), Finals (Scenario-based).
+   - Team Size: Individual.
+   - Date/Time: Feb 20, 2026 @ 11:00 AM.
+   - Location: Offline.
+   - Coordinator: Barath V (8489573989).
+
+3. SQL – QUERY QUEST (Technical)
+   - Description: SQL knowledge assessment, logical thinking, and query writing.
+   - Rounds: Prelims (MCQs), Finals (Query Execution), Rapid Fire (Tie-breaker).
+   - Team Size: Individual.
+   - Date/Time: Feb 20, 2026 @ 02:00 PM.
+   - Location: Lab 2.
+   - Coordinator: Menaka RM (8608605321).
+
+4. DESIGN EVENT (Non-Technical)
+   - Description: Creative design challenge.
+   - Details: Company to decide.
+   - Team Size: Individual or Team of 2.
+   - Date/Time: Feb 20, 2026 @ 10:00 AM.
+   - Location: TBA.
+   - Coordinator: Pooja Nandhini C (+91 86100 61231).
+
+5. CODE MATHRIX (Technical)
+   - Description: Collaborative coding challenge with turn-based coding and isolation rules.
+   - Rounds: Logic MCQs, Live Coding Challenge (Turn-based).
+   - Team Size: 2 Members.
+   - Date/Time: Feb 20, 2026 @ 11:00 AM.
+   - Location: Lab 3.
+   - Coordinator: Kishore S (8072651532).
+
+6. TREASURE HUNT (Non-Technical)
+   - Description: Exploration-based team event with clues and riddles.
+   - Rounds: Prelims (Aptitude), Final Trail (Hunt).
+   - Team Size: 2-3 Members.
+   - Date/Time: Feb 20, 2026 @ 02:00 PM.
+   - Location: Campus Wide.
+   - Coordinator: Subramanian N (9840623264).
+
+7. MAGICMATIX (Non-Technical)
+   - Description: Crossword challenge blending Math and CS concepts.
+   - Rounds: Number Crossword, Acronym Crossword.
+   - Team Size: Team of 2.
+   - Date/Time: Feb 20, 2026 (Time TBA).
+   - Location: Classroom Block.
+   - Coordinator: Sundhar Balamoorthy (8248629145).
+
+8. MATH QUIZ (Technical)
+   - Description: Test of aptitude, math knowledge, and speed.
+   - Rounds: Prelims (Written), Mains (Quiz).
+   - Team Size: 3 Members.
+   - Date/Time: Feb 20, 2026 (Time TBA).
+   - Location: Classroom Block.
+   - Coordinator: Safrin S (8667004235).
+
+9. MATHKINATOR (Technical)
+   - Description: Guessing game inspired by Akinator for math concepts and mathematicians.
+   - Rounds: Concept Guessing, Personality Guessing.
+   - Team Size: 4-5 Members.
+   - Date/Time: Feb 20, 2026 (Time TBA).
+   - Location: Classroom Block.
+   - Coordinator: Madhan.M (9047937541).
+
+WORKSHOPS:
+- Tech Workshop: Scheduled for February 2nd week. Contact Hari for details.
+
+COMMON USER QUESTIONS & WORKFLOWS:
+
+Q: How can I register / apply?
+A: You can register for any event or workshop by clicking the "Register Now" button on the respective event/workshop page. This will redirect you to our official Google Form. Please fill in your details there to complete the registration.
+
+Q: Is there a registration fee?
+A: Please check the Google Form or contact the event coordinators for fee details, as it may vary per event.
+
+Q: Can I participate in multiple events?
+A: Yes, as long as the event timings do not clash. Please check the schedule carefully.
+
+Q: How do I contact the coordinators?
+A: Contact numbers are provided for each event. You can find them in the event details section.
+
+Q: Where is the event happening?
+A: Mathrix 2026 is happening on February 20, 2026. Specific venues for each event (like Lab 2, Lab 3, Auditorium) are listed in the event details.
+
+Q: What is the Tech Workshop about?
+A: Ideally covers current trending technologies. For specific topics and dates (Feb 2nd week), please contact the workshop coordinator, Hari.

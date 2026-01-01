@@ -22,8 +22,11 @@ INSTRUCTIONS:
    - Example: If history mentions "Paper Presentation" and user asks "explain it", your tool query should be "Paper Presentation details".
 4. NO RESULTS: If the tool returns "NO_KB_RESULTS" or unrelated info, you MUST say: "NO_ANSWER_FOUND"
 5. Do NOT answer using your own outside knowledge.
-6. Keep your answer SHORT and CONCISE.
-7. FORMAT: STRICTLY OUTPUT THE ANSWER ONLY. DO NOT INCLUDE <thinking> TAGS OR ANY INTERNAL MONOLOGUE.
+6. FORMAT:
+   - STRICTLY OUTPUT THE ANSWER ONLY.
+   - DO NOT include <thinking> tags or any internal monologue.
+   - Use bullet points (-) for lists.
+7. Keep your answer SHORT and CONCISE.
 """
 
 def run_agent(prompt: str, kb_id: str, history: Optional[list[dict]] = None) -> Dict[str, str]:
@@ -53,10 +56,20 @@ def run_agent(prompt: str, kb_id: str, history: Optional[list[dict]] = None) -> 
             system_prompt=LLM_ANSWERING_PROMPT
         )
         
+        try:
+            import os
+            base_dir = os.path.dirname(os.path.abspath(__file__))
+            context_path = os.path.join(base_dir, "..", "data", "context.txt")
+            with open(context_path, "r", encoding="utf-8") as f:
+                website_context = f.read()
+        except Exception as e:
+            logger.warning(f"Could not load context.txt: {e}")
+            website_context = ""
+
         # --- Context Construction ---
         context_str = ""
         if history:
-            context_str = "PREVIOUS CONVERSATION HISTORY(just use this for referance and answer like a follow up (if suits)):\n"
+            context_str = "PREVIOUS CONVERSATION HISTORY (ref only):\n"
             for msg in history:
                 role = msg.get("role", "unknown")
                 content = msg.get("content", "")
@@ -64,7 +77,14 @@ def run_agent(prompt: str, kb_id: str, history: Optional[list[dict]] = None) -> 
             context_str += "--- END HISTORY ---\n\n"
 
         # Simple augmented prompt to encourage tool use + context
-        final_prompt = f"{context_str}Context KB ID: {kb_id}\nUser Query: {prompt}\n(If user asks to 'explain each' or similar, list and explain the items mentioned in the last HISTORY message.)"
+        final_prompt = (
+            f"WEBSITE/EVENT CONTEXT:\n{website_context}\n\n"
+            f"{context_str}"
+            f"Context KB ID: {kb_id}\n"
+            f"User Query: {prompt}\n"
+            f"(If user asks to 'explain each' or similar, list and explain the items mentioned in the last HISTORY message. "
+            f"Use the WEBSITE/EVENT CONTEXT above to answer questions directly if the info is present.)"
+        )
 
         response = agent(final_prompt)
         output_text = str(response).strip()
@@ -73,6 +93,7 @@ def run_agent(prompt: str, kb_id: str, history: Optional[list[dict]] = None) -> 
              return {"output": DEFAULT_CANNED_MESSAGE}
 
         return {"output": output_text}
+
 
     except Exception as e:
         logger.error(f"run_agent error: {e}", exc_info=True)
