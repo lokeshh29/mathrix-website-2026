@@ -32,7 +32,7 @@ const Members = () => {
                 { name: "Shesha N" },
                 { name: "Santhoshini R" },
                 // 3rd Years
-                { name: "Yogashri" },
+                { name: "Yogashri R" },
                 { name: "Varunessh S" },
                 { name: "Edwin Joyel J S" },
                 { name: "Irfana A" }
