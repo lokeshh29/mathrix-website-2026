@@ -5,6 +5,8 @@ import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle,
 const Events = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
 
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1qBAEEEM24j9_MJxfSXcaylG4ttRAobLJwMItSqMNaXA/edit?usp=forms_home&ouid=114183402363803052568&ths=true";
+
     const eventList = [
         {
             id: 1,
@@ -419,7 +421,10 @@ const Events = () => {
                                                     </div>
                                                 </div>
 
-                                                <button className="w-full py-4 btn btn-primary text-xl font-bold shadow-lg shadow-purple-500/20">
+                                                <button
+                                                    onClick={() => window.open(GOOGLE_FORM_URL, '_blank')}
+                                                    className="w-full py-4 btn btn-primary text-xl font-bold shadow-lg shadow-purple-500/20"
+                                                >
                                                     Register Now
                                                 </button>
                                             </div>

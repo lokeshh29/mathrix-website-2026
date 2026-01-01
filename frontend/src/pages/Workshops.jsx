@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Terminal, Cpu } from 'lucide-react';
 
 const Workshops = () => {
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1qBAEEEM24j9_MJxfSXcaylG4ttRAobLJwMItSqMNaXA/edit?usp=forms_home&ouid=114183402363803052568&ths=true";
+
     return (
         <div className="container mx-auto px-4 py-12">
             <motion.div
@@ -38,7 +40,10 @@ const Workshops = () => {
                                 <p className="text-gray-400 text-sm uppercase tracking-wider mb-1">Contact for Details</p>
                                 <p className="text-2xl font-bold text-white">Hari</p>
                             </div>
-                            <button className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all transform hover:scale-105 active:scale-95">
+                            <button
+                                onClick={() => window.open(GOOGLE_FORM_URL, '_blank')}
+                                className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-full hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all transform hover:scale-105 active:scale-95"
+                            >
                                 Register Now
                             </button>
                         </div>
