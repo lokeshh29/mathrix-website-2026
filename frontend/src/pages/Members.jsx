@@ -10,12 +10,12 @@ const Members = () => {
                 { name: "Sanjay S" }
             ]
         },
-        {
-            title: "VICE PRESIDENT",
-            members: [
-                { name: "Pradeeshwaran" }
-            ]
-        },
+        // {
+        //     title: "VICE PRESIDENT",
+        //     members: [
+        //         { name: "Pradeeshwaran M" }
+        //     ]
+        // },
         {
             title: "SECRETARIES",
             members: [
@@ -41,9 +41,9 @@ const Members = () => {
         {
             title: "Assistant Secretaries",
             members: [
-                { name: "Himasni" },
-                { name: "Kaviya" },
-                { name: "Udhaya Kesavan" },
+                { name: "Himasni A" },
+                { name: "Kaviya M" },
+                { name: "Udhayakesavan U" },
                 { name: "Dhwaraka S N" }
             ]
         },
@@ -57,14 +57,14 @@ const Members = () => {
                 { name: "Shesha N", role: "Workshop" },
                 { name: "Varunessh S", role: "Prize & Certificates" },
                 { name: "Kailash N", role: "Stage Arrangements" },
-                { name: "Kaviya", role: "Hospitality & Catering" },
+                { name: "Kaviya M", role: "Hospitality & Catering" },
                 { name: "Edwin Joyel J S", role: "Social Media" },
                 { name: "Gayathri M", role: "Designing" },
                 { name: "Yogasri R", role: "Invitation" },
                 { name: "Dhwaraka S N", role: "Reception" },
                 { name: "Santhoshini R", role: "Decoration" },
                 { name: "Nivetha", role: "Souvenir" },
-                { name: "Himasni", role: "Documentation" }
+                { name: "Himasni A", role: "Documentation" }
             ]
         }
     ];
