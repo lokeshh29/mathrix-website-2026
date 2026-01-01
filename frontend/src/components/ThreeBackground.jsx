@@ -90,12 +90,51 @@ const FloatingMath = ({ count = 30 }) => {
     );
 };
 
+const TorusAnimation = () => {
+    const meshRef = useRef();
+
+    useFrame((state, delta) => {
+        if (meshRef.current) {
+            meshRef.current.rotation.x += delta * 0.2;
+            meshRef.current.rotation.y += delta * 0.15;
+        }
+    });
+
+    return (
+        <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
+            <mesh ref={meshRef} position={[0, 0, -5]} scale={2.5}>
+                <torusKnotGeometry args={[1, 0.3, 128, 16]} />
+                <meshStandardMaterial
+                    color="#db2777"
+                    wireframe
+                    transparent
+                    opacity={0.15}
+                    roughness={0}
+                    metalness={0.5}
+                />
+            </mesh>
+            <mesh ref={meshRef} position={[0, 0, -5]} scale={2.52}>
+                <torusKnotGeometry args={[1, 0.3, 128, 16]} />
+                <meshBasicMaterial
+                    color="#8b5cf6"
+                    wireframe
+                    transparent
+                    opacity={0.05}
+                />
+            </mesh>
+        </Float>
+    );
+};
+
 const ThreeBackground = () => {
     return (
         <div className="fixed inset-0 z-[-1] bg-transparent pointer-events-none">
             <Canvas camera={{ position: [0, 0, 1] }}>
+                <ambientLight intensity={0.5} />
+                <pointLight position={[10, 10, 10]} intensity={1} color="#f472b6" />
                 <Stars />
                 <FloatingMath />
+                <TorusAnimation />
             </Canvas>
         </div>
     );
