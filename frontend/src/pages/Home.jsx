@@ -23,20 +23,20 @@ const Home = () => {
                     >
                         <h2 className="text-pink-300 font-semibold tracking-[0.2em] text-sm md:text-lg uppercase mb-6 flex items-center justify-center gap-4 font-tech">
                             <span className="h-px w-8 bg-pink-500/50"></span>
-                            Department of Mathematics Presents
+                            Department of Mathematics, CEG, Anna University
                             <span className="h-px w-8 bg-pink-500/50"></span>
                         </h2>
-                        <h1 className="text-6xl md:text-8xl font-extrabold mb-8 tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-b from-gray-100 to-gray-400 drop-shadow-[0_5px_15px_rgba(255,255,255,0.1)] leading-tight font-tech uppercase">
-                            MATHRIX
+                        <h1 className="text-6xl md:text-8xl font-extrabold mb-4 tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-b from-gray-100 to-gray-400 drop-shadow-[0_5px_15px_rgba(255,255,255,0.1)] leading-tight font-tech uppercase">
+                            MATHRIX 2026
                         </h1>
-                        <h2 className="text-3xl md:text-4xl font-bold text-pink-500 tracking-widest font-tech mb-8">
-                            2026
+                        <h2 className="text-2xl md:text-3xl font-bold text-pink-500 tracking-widest font-tech mb-8 uppercase">
+                            Technical Symposium
                         </h2>
 
                         <CountdownTimer />
 
-                        <p className="text-gray-300 text-lg md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed text-balance mt-8">
-                            Where Logic Meets Creativity. Join us for a Mathrix celebrating the beauty of mathematics through innovation and technology.
+                        <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed text-balance mt-8">
+                            Where Logic Meets Creativity. Join the ultimate technical fest in Chennai.
                         </p>
 
                         <div className="flex flex-col md:flex-row gap-6 justify-center items-center mt-12">
@@ -92,7 +92,7 @@ const Home = () => {
                             <h2 className="text-4xl font-bold mb-2">About Mathrix</h2>
                             <h3 className="text-xl font-medium text-pink-400 tracking-[0.3em] uppercase mb-6">Epsilon to Infinity</h3>
                             <p className="text-gray-300 mb-6 leading-relaxed">
-                                Mathrix is the annual intercollegiate Mathrix where mathematics meets technology! Hosted by the Department of Mathematics, College of Engineering Guindy, Anna University, Mathrix is a one-of-a-kind fest that brings together logic, innovation, and problem-solving under one roof. Organized by the brilliant minds of M.Sc. Computer Science (5 years), M.Sc. Information Technology (5 years), and M.Sc. Mathematics (2 years), Mathrix is more than just a Mathrix—it's a fusion of numbers, algorithms, and cutting-edge tech. With a perfect blend of mathematical and technical events, this fest is designed to challenge intellects, spark creativity, and push boundaries. From thrilling competitions that test your mathematical prowess to tech-driven challenges that fuel your coding skills, Mathrix is the ultimate arena for innovators, problem-solvers, and future disruptors.
+                                Mathrix 2026 is the annual intercollegiate technical symposium organised by the Department of Mathematics, College of Engineering Guindy (CEG), Anna University, Chennai. Mathrix is a one-of-a-kind fest that brings together logic, innovation, and problem-solving under one roof. Organized by the brilliant minds of M.Sc. Computer Science (5 years), M.Sc. Information Technology (5 years), and M.Sc. Mathematics (2 years), Mathrix is more than just a symposium—it's a fusion of numbers, algorithms, and cutting-edge tech.
                             </p>
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center mt-8">
                                 <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
