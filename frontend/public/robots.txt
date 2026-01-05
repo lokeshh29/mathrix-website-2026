@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://www.mathrix.co.in/sitemap.xml
