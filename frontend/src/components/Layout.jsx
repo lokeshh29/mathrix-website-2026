@@ -20,6 +20,7 @@ const Layout = ({ children }) => {
                         <a href="https://www.instagram.com/mathrix_official/" className="hover:text-purple-400 transition-colors">Instagram</a>
                         <a href="https://www.linkedin.com/company/mathrix-2025/" className="hover:text-purple-400 transition-colors">LinkedIn</a>
                     </div>
+                    <p className="mt-4 text-sm text-gray-500">Website developed by Lokesh</p>
 
                 </div>
             </footer>
