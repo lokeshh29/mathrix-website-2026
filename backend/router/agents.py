@@ -24,10 +24,44 @@ INSTRUCTIONS:
 5. Do NOT answer using your own outside knowledge.
 6. FORMAT:
    - STRICTLY OUTPUT THE ANSWER ONLY.
-   - DO NOT include <thinking> tags or any internal monologue.
+   - DO NOT include <thinking> tags, internal monologue, or any system thoughts.
+   - DO NOT make up information (hallucinations).
    - Use bullet points (-) for lists.
 7. Keep your answer SHORT and CONCISE.
 """
+
+# Global variable to hold the agent instance
+_agent_instance = None
+
+def get_agent():
+    """
+    Returns a singleton instance of the Agent.
+    """
+    global _agent_instance
+    if _agent_instance is None:
+        try:
+            # Create BedrockModel instance using hardcoded defaults
+            model = BedrockModel(
+                model_id=DEFAULT_MODEL_ID,
+                temperature=0.1,
+                top_p=1.0,
+                max_tokens=1024,
+                streaming=False,
+            )
+
+            tools = [retrieve_from_kb]
+
+            # Create the agent instance
+            _agent_instance = Agent(
+                model=model,
+                tools=tools,
+                system_prompt=LLM_ANSWERING_PROMPT
+            )
+            logger.info("Agent initialized successfully.")
+        except Exception as e:
+            logger.error(f"Failed to initialize Agent: {e}", exc_info=True)
+            raise e
+    return _agent_instance
 
 def run_agent(prompt: str, kb_id: str, history: Optional[list[dict]] = None) -> Dict[str, str]:
     """
@@ -38,23 +72,8 @@ def run_agent(prompt: str, kb_id: str, history: Optional[list[dict]] = None) -> 
         return {"output": "No prompt provided."}
 
     try:
-        # Create BedrockModel instance using hardcoded defaults
-        model = BedrockModel(
-            model_id=DEFAULT_MODEL_ID,
-            temperature=0.1,
-            top_p=1.0,
-            max_tokens=1024,
-            streaming=False,
-        )
-
-        tools = [retrieve_from_kb]
-
-        # Create a new agent instance for each request
-        agent = Agent(
-            model=model,
-            tools=tools,
-            system_prompt=LLM_ANSWERING_PROMPT
-        )
+        # Get the singleton agent
+        agent = get_agent()
         
         try:
             import os
@@ -83,7 +102,8 @@ def run_agent(prompt: str, kb_id: str, history: Optional[list[dict]] = None) -> 
             f"Context KB ID: {kb_id}\n"
             f"User Query: {prompt}\n"
             f"(If user asks to 'explain each' or similar, list and explain the items mentioned in the last HISTORY message. "
-            f"Use the WEBSITE/EVENT CONTEXT above to answer questions directly if the info is present.)"
+            f"Use the WEBSITE/EVENT CONTEXT above to answer questions directly if the info is present. "
+            f"REMINDER: Do not output system thinkings or hallucinations. Output ONLY the response.)"
         )
 
         response = agent(final_prompt)

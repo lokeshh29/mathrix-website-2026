@@ -35,7 +35,7 @@ aws ecr get-login-password --region $region | docker login --username AWS --pass
 # 3. Build Docker Image
 Write-Host "`n3️  Building Docker Image (this may take a while)..."
 # Force AMD64 and disable provenance (fixes "media type not supported" error in Lambda)
-docker build --platform linux/amd64 --provenance=false -t $repoName .
+docker build --no-cache --platform linux/amd64 --provenance=false -t $repoName .
 
 # 4. Tag Image
 Write-Host "`n4️  Tagging Image..."
