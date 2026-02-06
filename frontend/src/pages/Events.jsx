@@ -5,7 +5,7 @@ import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle,
 const Events = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
 
-    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/1qBAEEEM24j9_MJxfSXcaylG4ttRAobLJwMItSqMNaXA/edit?usp=forms_home&ouid=114183402363803052568&ths=true";
+    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfFWGiBte8C2_82HUeNClMEGVRhpaucNZqvm5UHv_o2aRxvMw/viewform?usp=publish-editor";
 
     const eventList = [
         {
