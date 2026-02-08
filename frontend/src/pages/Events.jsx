@@ -15,15 +15,14 @@ const Events = () => {
             details: {
                 description: 'SQL – Query Quest is a technical event designed to test participants understanding of Database Management Systems and Structured Query Language (SQL). The event evaluates conceptual knowledge, logical thinking, and practical query execution skills through competitive rounds.',
                 rounds: [
-                    { title: 'Round 1: MCQ (15 mins)', desc: 'MCQs on SQL basics - NULL checks, GROUP BY, Joins, Aggregates. Selection based on score/time.' },
-                    { title: 'Round 2: Execution (45 mins)', desc: 'Execute SQL queries on real datasets (e.g., Movie Streaming Platform Analytics). Evaluated on correctness and logic.' },
+                    { title: 'Round 1: MCQ (15 mins)', desc: 'MCQs on SQL basics.' },
+                    { title: 'Round 2: Execution (45 mins)', desc: 'Execute SQL queries on real datasets (e.g., Movie Streaming Platform Analytics).' },
                     { title: 'Tie-Breaker (5-10 mins)', desc: 'Quick-fire verbal prediction of query outputs.' }
                 ],
                 rules: [
                     'Accuracy of answers is critical.',
                     'Correctness of SQL queries and output.',
-                    'Logical approach and time efficiency.',
-                    'Overall performance determines winners.'
+                    'Logical approach and time efficiency.'
                 ],
                 teamSize: 'Individual',
                 judging: 'Accuracy, Correctness of SQL queries, Logical approach, Time efficiency.',
