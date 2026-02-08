@@ -100,23 +100,52 @@ const Events = () => {
         },
         {
             id: 4,
-            title: 'IPL Auction',
-            description: 'A high-pressure competitive simulation testing analytical speed, financial management, and strategic decision-making.',
+            title: 'Through the Lens',
+            description: 'An online photography event celebrating creativity, perspective, and visual storytelling.',
             details: {
-                description: 'A high-pressure two-stage competitive simulation designed to test analytical speed, financial management, and strategic decision-making. Participants act as franchise owners, navigating a preliminary qualification round followed by a live auction to build a balanced 11-member squad within 100cr budget.',
+                description: 'Through the Lens is an online photography event that celebrates creativity, perspective, and visual storytelling. Participants submit their best photographs based on given themes, showcasing their ability to capture moments that tell compelling stories through imagery.',
                 rounds: [
-                    { title: 'Round 1: Prelims (30 mins)', desc: 'MCQ-based assessment on Cricket Stats, Player Stats (2016-2020). Top 8 franchises advance.' },
-                    { title: 'Round 2: Main Auction (90 mins)', desc: 'Live open-outcry bidding across 4 sets: Wicket Keepers, Batsmen, All-Rounders, Bowlers.' }
+                    { title: 'Online Submission', desc: 'Submit photographs based on the announced theme before deadline (up to 1:00 PM).' }
                 ],
                 rules: [
-                    'Franchise must have exactly 4 members.',
-                    'Total Purse: 100cr (non-negotiable).',
-                    'Squad: Exactly 11 players - 4 Batsmen, 4 Bowlers, 2 All-rounders, 1 WK.',
-                    'Minimum 1 uncapped player, Maximum 4 overseas players.',
-                    'DQ for: Incomplete roster, Budget overflow, Wrong composition, Collusion.'
+                    'Photographs must be original work.',
+                    'Basic editing allowed, heavy manipulation prohibited.',
+                    'Submit high-resolution images.',
+                    'Theme will be announced before submission window.',
+                    'Each participant can submit up to 3 photographs.'
+                ],
+                teamSize: 'Individual',
+                judging: 'Creativity, Composition, Theme relevance, Technical quality.',
+                prize: '1st, 2nd, 3rd Prizes + Certificates.',
+                coordinator: 'Event Coordinator (TBA)'
+            },
+            date: 'February 20, 2026',
+            time: 'Online - Up to 1:00 PM',
+            location: 'Online',
+            category: 'Non Technical',
+            icon: Camera,
+            color: 'text-rose-400'
+        },
+        {
+            id: 5,
+            title: 'IPL Auction',
+            description: 'The Ultimate Bidding War - A high-pressure competitive simulation testing analytical speed, financial management, and strategic decision-making.',
+            details: {
+                description: 'IPL Auction: The Ultimate Bidding War! A high-pressure two-stage competitive simulation designed to test analytical speed, financial management, and strategic decision-making. Participants act as franchise owners, navigating a preliminary qualification round followed by a live auction to build a balanced 8-player squad within 85cr budget.',
+                rounds: [
+                    { title: 'Round 1: Prelims [The Qualifier]', desc: 'MCQ-based assessment testing cricket statistics and player data. Top franchises advance to Main Auction.' },
+                    { title: 'Round 2: The Main Auction', desc: 'Live open-outcry bidding simulation across 4 sets. Players without bids are immediately removed.' }
+                ],
+                rules: [
+                    'Franchise must have exactly 4 members (all must be present).',
+                    'Total Purse: 85cr (non-negotiable).',
+                    'Squad: Exactly 8 players - 3 Batsmen, 3 Bowlers, 1 All-Rounder, 1 WK.',
+                    'Minimum 1 uncapped player, Maximum 3 overseas players.',
+                    'DQ for: Budget overflow, Roster failure, Category overflow, Diversity breach, Team integrity issues.',
+                    'Players without bids are immediately removed from the event.'
                 ],
                 teamSize: '4 Members per Franchise',
-                judging: 'Highest Cumulative Player Credits. Tie-breaker: Higher remaining purse.',
+                judging: 'Highest Cumulative Player Credits wins. Tie-breaker: Higher remaining purse. Event In-charges decision is final.',
                 prize: '1st, 2nd, 3rd Prizes.',
                 coordinator: 'Siva Sudharsan S (6369882523), Sankara Shivani C A (8056112999)',
                 volunteers: 'Nandakishore (8248227885), Soorya V (9080798813), Kishore B (6379869605), Ashvan P (9361248774), Harish B (9585890339), Santhosh J (6385422344), Arul Prasanth (8015636015), Madhavan M (8610824066)'
@@ -129,7 +158,7 @@ const Events = () => {
             color: 'text-yellow-400'
         },
         {
-            id: 5,
+            id: 6,
             title: 'Paper Presentation',
             description: 'A platform for students to showcase their research and innovative ideas in technology and related fields.',
             details: {
@@ -157,7 +186,7 @@ const Events = () => {
             color: 'text-blue-400'
         },
         {
-            id: 6,
+            id: 7,
             title: 'GoofyChess',
             description: 'An exciting chess-based strategy event testing tactical thinking across different chess formats.',
             details: {
@@ -187,7 +216,7 @@ const Events = () => {
             color: 'text-orange-400'
         },
         {
-            id: 7,
+            id: 8,
             title: 'Math Quiz',
             description: 'Test your aptitude, mathematical knowledge, and speed in this competitive quiz event.',
             details: {
@@ -216,7 +245,7 @@ const Events = () => {
             color: 'text-indigo-400'
         },
         {
-            id: 8,
+            id: 9,
             title: 'Find The Fixed Points (Treasure Hunt)',
             description: 'An exploration-based team event blending logic, observation, teamwork, and quick decision-making.',
             details: {
@@ -246,7 +275,7 @@ const Events = () => {
             color: 'text-green-400'
         },
         {
-            id: 9,
+            id: 10,
             title: 'Mathkinator',
             description: 'An interactive brain-teasing event inspired by Akinator. Identify mathematicians and concepts using strategic questioning.',
             details: {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma, Lightbulb, Crown } from 'lucide-react';
+import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma, Lightbulb, Crown, Camera } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CountdownTimer from '../components/CountdownTimer';
 
@@ -217,8 +217,19 @@ const Home = () => {
                         },
                         {
                             id: 4,
+                            title: 'Through the Lens',
+                            description: 'Online photography event celebrating creativity and visual storytelling.',
+                            date: 'February 20, 2026',
+                            time: 'Online - Up to 1:00 PM',
+                            location: 'Online',
+                            category: 'Non Technical',
+                            icon: Camera,
+                            color: 'text-rose-400'
+                        },
+                        {
+                            id: 5,
                             title: 'IPL Auction',
-                            description: 'High-pressure simulation testing analytical speed and strategic decision-making.',
+                            description: 'The Ultimate Bidding War - strategic decision-making simulation.',
                             date: 'February 20, 2026',
                             time: '11:00 AM – 1:00 PM',
                             location: 'LH-5',
@@ -227,7 +238,7 @@ const Home = () => {
                             color: 'text-yellow-400'
                         },
                         {
-                            id: 5,
+                            id: 6,
                             title: 'Paper Presentation',
                             description: 'Platform to showcase research and innovative ideas in technology.',
                             date: 'February 20, 2026',
@@ -238,7 +249,7 @@ const Home = () => {
                             color: 'text-blue-400'
                         },
                         {
-                            id: 6,
+                            id: 7,
                             title: 'GoofyChess',
                             description: 'Chess strategy event across Racing Kings, Crazyhouse, and Standard formats.',
                             date: 'February 20, 2026',
@@ -249,7 +260,7 @@ const Home = () => {
                             color: 'text-orange-400'
                         },
                         {
-                            id: 7,
+                            id: 8,
                             title: 'Math Quiz',
                             description: 'Test aptitude, mathematical knowledge, and speed in competitive quiz rounds.',
                             date: 'February 20, 2026',
@@ -260,7 +271,7 @@ const Home = () => {
                             color: 'text-indigo-400'
                         },
                         {
-                            id: 8,
+                            id: 9,
                             title: 'Find The Fixed Points',
                             description: 'Exploration-based treasure hunt blending logic, observation, and teamwork.',
                             date: 'February 20, 2026',
@@ -271,7 +282,7 @@ const Home = () => {
                             color: 'text-green-400'
                         },
                         {
-                            id: 9,
+                            id: 10,
                             title: 'Mathkinator',
                             description: 'Akinator-inspired event to identify mathematicians and concepts using strategic questioning.',
                             date: 'February 20, 2026',
