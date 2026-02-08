@@ -10,249 +10,393 @@ const Events = () => {
     const eventList = [
         {
             id: 1,
-            title: 'PAPER PRESENTATION',
-            description: 'A platform to present your innovative technical papers and research ideas. Showcase your knowledge, communication, and problem-solving skills.',
+            title: 'Query Quest (Session 1)',
+            description: 'SQL / query based challenge (Session 1).',
             details: {
-                description: 'A platform to present your innovative technical papers and research ideas. Showcase your knowledge, communication, and problem-solving skills in front of experts and peers.',
+                description: 'Query Quest tests SQL knowledge across two rounds: a short MCQ round followed by an execution round using a sample dataset. Qualified participants will get a dataset and problem statements to execute SQL queries.',
                 rounds: [
-                    { title: 'Single Round', desc: 'Oral Presentation using PowerPoint (max 10 slides). Duration: 8 minutes presentation + 2 minutes Q&A.' }
+                    { title: 'Round 1 — MCQ (15 mins)', desc: 'Multiple choice questions covering SQL concepts, syntax and fundamentals.' },
+                    { title: 'Round 2 — Execution (45 mins)', desc: 'Hands-on SQL tasks using the provided dataset (grouping, joins, aggregation, subqueries).' }
                 ],
                 rules: [
-                    'Topic is chosen by the judging company (e.g., AI, IoT, Robotics, Cybersecurity).',
-                    'Presentation should be original and not copied from published work.',
-                    'Each team must bring a soft copy of the presentation (PPT/PDF).',
-                    'Plagiarism will lead to disqualification.',
-                    'Participants must report 30 minutes before the event starts.'
+                    'Individual participation',
+                    'No external internet resources during Round 2 (offline dataset)',
+                    'Use provided dataset.sql for execution round',
+                    'Time limits must be respected'
                 ],
-                teamSize: 'Individual or Team of 2',
-                judging: 'Originality & innovation, Relevance to domain, Presentation clarity & structure, Technical depth, Q&A handling.',
-                prize: '1st Prize, 2nd Prize, Certificates for all participants.',
-                coordinator: 'Kesavarthini J (9361733387)'
+                teamSize: 'Individual',
+                prize: 'Certificates & Prizes',
+                coordinator: 'RM Menaka (+91 8608605321)',
             },
+            materials: [
+                { label: 'Round 1 — MCQs', href: '/docs/Query_Quest/Round1_MCQs.md' },
+                { label: 'Round 2 — Tasks', href: '/docs/Query_Quest/Round2_Tasks.md' },
+                { label: 'Dataset (SQL)', href: '/docs/Query_Quest/dataset.sql' },
+                { label: 'Schedule & Logistics', href: '/docs/Query_Quest/schedule.md' },
+                { label: 'Organizer Contacts', href: '/docs/Query_Quest/organizer_contacts.md' }
+            ],
             date: 'February 20, 2026',
-            time: '10:00 AM',
-            location: 'Auditorium',
+            time: '10:30 AM – 11:00 AM',
+            location: 'LH-6',
             category: 'Technical',
-            icon: Projector,
-            color: 'text-blue-400'
+            icon: Terminal,
+            color: 'text-cyan-400'
         },
         {
             id: 2,
-            title: 'ALGO MAZE',
-            description: 'A logic-intensive competitive event focusing on mathematical reasoning, algorithmic thinking, and decision-making skills.',
+            title: 'MagicMatix (Session 1)',
+            description: 'MagicMatix crossword challenge (Session 1).',
             details: {
-                description: 'Algo Maze is a logic-intensive competitive event that challenges participants to think beyond formulas and code. It focuses on mathematical reasoning, algorithmic thinking, and decision-making skills through twisted logic problems and real-world algorithm scenarios. Speed alone does not guarantee success, clarity of thought and correctness determine the winners.',
+                description: 'MagicMatix blends math and CS wordplay. Round 1 is MCQ/crossword style; Round 2 is an advanced crossword combining numeric and dual-meaning clues.',
                 rounds: [
-                    { title: 'Round 1: Prelims (30 mins)', desc: 'MCQs covering twisted logic, mathematics, and algorithms.' },
-                    { title: 'Round 2: Finals (40 mins)', desc: 'Scenario-based questions and algorithm/math decision-making challenges.' }
+                    { title: 'Round 1 — MCQ / Grid (30 mins)', desc: 'Solve short crossword-style MCQs; top teams advance.' },
+                    { title: 'Round 2 — Final Grid (40 mins)', desc: 'Advanced puzzles; fastest top-scoring teams win.' }
                 ],
                 rules: [
-                    'Winner selected based on highest score with correct reasoning.',
-                    'Emphasis on optimal and logical decisions.'
+                    'Team of 2 participants',
+                    'Answer sheets must be submitted within the time limit',
+                    'Tie-breakers: least time, then rapid-fire if needed'
                 ],
-                teamSize: 'Individual Participation',
-                judging: 'Accuracy, Logical reasoning, Performance in decision-making.',
-                prize: '1st Prize, 2nd Prize + Certificates.',
-                coordinator: 'Barath V (8489573989)'
+                teamSize: 'Team of 2',
+                prize: 'Certificates & Prizes',
+                coordinator: 'Sundhar Balamoorthy (+91 8248629145)'
             },
+            materials: [
+                { label: 'Round 1 — MCQs', href: '/docs/MagicMatix/Round1_MCQs.md' },
+                { label: 'Round 2 — Tasks', href: '/docs/MagicMatix/Round2_Tasks.md' },
+                { label: 'Schedule & Logistics', href: '/docs/MagicMatix/schedule.md' },
+                { label: 'Organizers', href: '/docs/MagicMatix/organizer_contacts.md' }
+            ],
             date: 'February 20, 2026',
-            time: '11:00 AM',
-            location: 'Offline',
-            category: 'Technical',
-            icon: Brain,
-            color: 'text-yellow-400'
+            time: '10:30 AM – 11:15 AM',
+            location: 'LH-1',
+            category: 'General',
+            icon: Sparkles,
+            color: 'text-pink-400'
         },
         {
             id: 3,
-            title: 'SQL – Query Quest',
-            description: 'Assess you knowledge in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving.',
+            title: 'Find The Fixed Points (Session 1)',
+            description: 'Exploration-based treasure hunt (Prelims + Finals).',
             details: {
-                description: 'SQL – Query Quest is a technical event designed to assess participants’ knowledge and practical skills in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving.',
+                description: 'Find The Fixed Points is a teamwork treasure hunt combining riddles, observation and checkpoints. Preliminary MCQ shortlists teams for the final hunt.',
                 rounds: [
-                    { title: 'Round 1: Prelims (15-20 mins)', desc: '15 MCQs on SQL basics, DDL/DML, Aggregates, Joins. Selection based on score/time.' },
-                    { title: 'Round 2: Finals (30 mins)', desc: 'Execution of 8-10 SQL queries on a provided dataset. Evaluated on correctness and logic.' },
-                    { title: 'Tie-Breaker: Rapid Fire (5 mins)', desc: 'Verbal prediction of query outputs.' }
+                    { title: 'Round 1 — Prelims (MCQ)', desc: 'Aptitude & logical questions to shortlist top teams.' },
+                    { title: 'Round 2 — Treasure Hunt (Finals)', desc: 'Checkpoint-based riddles; least time with correct answers wins.' }
                 ],
                 rules: [
-                    'Individual participation only.',
-                    'College ID card is mandatory.',
-                    'Malpractice leads to disqualification.'
+                    'Teams of 2–3 members',
+                    'Follow checkpoint rules and verify answers with volunteers',
+                    'Top 6 teams from prelims advance to finals'
                 ],
-                teamSize: 'Individual',
-                judging: 'Correctness, Time Efficiency, Logic.',
-                prize: '1st, 2nd, 3rd Prizes + Certificates.',
-                coordinator: 'Menaka RM (8608605321)'
+                teamSize: '2-3 Members',
+                prize: 'Top 3 prizes & certificates',
+                coordinator: 'Saathvika (+91 9342271942)'
             },
+            materials: [
+                { label: 'Round 1 — MCQs', href: '/docs/Find_The_Fixed_Points/Round1_MCQs.md' },
+                { label: 'Round 2 — Tasks', href: '/docs/Find_The_Fixed_Points/Round2_Tasks.md' },
+                { label: 'Schedule & Logistics', href: '/docs/Find_The_Fixed_Points/schedule_and_logistics.md' },
+                { label: 'Organizer Contacts', href: '/docs/Find_The_Fixed_Points/organizer_contacts.md' }
+            ],
             date: 'February 20, 2026',
-            time: '02:00 PM',
-            location: 'Lab 2',
-            category: 'Technical',
-            icon: Database,
-            color: 'text-emerald-400'
+            time: '10:30 AM – 11:15 AM',
+            location: 'LH-48',
+            category: 'Math',
+            icon: Sigma,
+            color: 'text-indigo-400'
         },
         {
             id: 4,
-            title: 'DESIGN EVENT',
-            description: 'Unleash your creativity in this non-technical design challenge. Perfect for those with an eye for aesthetics.',
-            details: {
-                description: 'COMPANY YET TO DECIDE.',
-                rounds: [],
-                rules: [
-                    'COMPANY YET TO DECIDE.'
-                ],
-                teamSize: 'Individual or Team of 2',
-                judging: 'Decided by the Company.',
-                prize: '1st Prize, 2nd Prize, Certificates for all participants.',
-                coordinator: 'Pooja Nandhini C (+91 86100 61231)'
-            },
+            title: 'Through the Lens',
+            description: 'Photography / visual contest.',
+            details: { description: '', rounds: [], rules: [], teamSize: 'Individual', prize: '', coordinator: '' },
             date: 'February 20, 2026',
-            time: '10:00 AM',
-            location: 'TBA',
+            time: 'Up to 1:00 PM',
+            location: 'Online',
             category: 'Non Technical',
-            icon: Palette,
-            color: 'text-pink-400'
+            icon: Projector,
+            color: 'text-orange-400'
         },
         {
             id: 5,
             title: 'Code Mathrix',
-            description: 'Decode. Divide. Conquer. A collaborative coding challenge with strict turn-based coding and isolation rules.',
+            description: 'Collaborative coding challenge with turn-based coding and isolation rules.',
             details: {
-                description: 'Code Mathrix is a collaborative coding challenge that tests logical thinking, coordination, and problem-solving under pressure. Teams work on split problem statements with strict turn-based coding.',
+                description: 'Teams of 2 solve two interconnected coding problems in turn-based rounds. Isolation rules apply when one member codes.',
                 rounds: [
-                    { title: 'Round 1 (30 mins)', desc: 'Logic-based MCQs + dry-run coding questions.' },
-                    { title: 'Round 2 (40 mins)', desc: 'Live Coding Challenge with Turn-based rule (10 mins swap) and Isolation rule.' }
+                    { title: 'Round 1 — Prelims (30 mins)', desc: 'MCQs and dry-run problems.' },
+                    { title: 'Round 2 — Live (40 mins)', desc: 'Turn-based coding with strict isolation.' }
                 ],
                 rules: [
-                    'Teams of 2 members.',
-                    'Problem split into two parts.',
-                    'Turn-based: Player 1 codes 10 mins, then Player 2.',
-                    'Isolation: Non-coding player cannot view screen or assist.'
+                    'Teams of 2 only',
+                    'Turn-based: Player1 10m, Player2 10m, repeat',
+                    'No communication when one member codes (isolation rule)'
                 ],
-                teamSize: '2 Members per Team',
-                judging: 'Logic, Execution, Time, Continuity.',
-                prize: 'Certificates.',
-                coordinator: 'Kishore S (8072651532)'
+                teamSize: '2 Members',
+                prize: 'Certificates & Prizes',
+                coordinator: 'Kishore (+91 8072651532)'
             },
+            materials: [
+                { label: 'Event Brief', href: '/docs/Code_Mathrix/README.md' }
+            ],
             date: 'February 20, 2026',
-            time: '11:00 AM',
-            location: 'Lab 3',
+            time: '11:00 AM – 12:30 PM',
+            location: 'Mathematics Dept Lab',
             category: 'Technical',
             icon: Terminal,
             color: 'text-cyan-400'
         },
         {
             id: 6,
-            title: 'TREASURE HUNT',
-            description: 'An exploration-based team event blending logic, observation, and teamwork. Follow clues, solve riddles, and uncover the final treasure.',
+            title: 'IPL Auction',
+            description: 'High-pressure auction simulation — build a balanced squad within 100cr budget.',
             details: {
-                description: 'The Treasure Hunt is an exploration-based team event that blends logic, observation, teamwork, and quick decision-making. Participants follow clues, solve riddles, and navigate through checkpoints to uncover the final treasure.',
+                description: 'Teams act as franchise owners to bid for players across 4 sets (WK, BAT, AR, BOWL). Maintain squad composition and budget constraints.',
                 rounds: [
-                    { title: 'Round 1: Prelims (20 mins)', desc: 'Aptitude questions. Top 5 teams chosen.' },
-                    { title: 'Round 2: The Final Trail (1 hour)', desc: 'Logical puzzles and location-based challenges. Piece together clues to reach the final treasure.' }
+                    { title: 'Round 1 — Prelims (30 mins)', desc: 'MCQ qualifier for top 8 franchises.' },
+                    { title: 'Round 2 — Live Auction (90 mins)', desc: 'Open-outcry bidding across 4 sets.' }
                 ],
                 rules: [
-                    'Team Size: 2-3 members per team.',
-                    'Mobile phones strictly prohibited unless specified.',
-                    'Teams must stay within the designated hunt area.',
-                    'Clues must not be shared with other teams.',
-                    'Do not tamper with or remove clues from checkpoints.'
+                    'Franchise size: exactly 4 members',
+                    'Final squad must have 11 players with required composition',
+                    'Budget: 100cr total (hard limit)'
                 ],
-                teamSize: '2-3 Members per Team',
-                judging: 'Speed, Strategy, Accuracy, Coordination.',
-                prize: '1st, 2nd, 3rd Prizes.',
-                coordinator: 'Subramanian N (9840623264)'
+                teamSize: '4 Members (Franchise)',
+                prize: 'Prizes for winning franchises',
+                coordinator: 'Siva Sudharsan (+91 6369882523)'
             },
+            materials: [
+                { label: 'Event Brief', href: '/docs/IPL_Auction/README.md' }
+            ],
             date: 'February 20, 2026',
-            time: '02:00 PM',
-            location: 'Campus Wide',
+            time: '11:00 AM – 1:00 PM',
+            location: 'LH-5',
             category: 'Non Technical',
-            icon: Compass,
+            icon: Sparkles,
             color: 'text-orange-400'
         },
         {
             id: 7,
-            title: 'MagicMatix',
-            description: 'Where logic meets mathematics. A unique crossword challenge bridging numerical precision and Computer Science concepts.',
+            title: 'Paper Presentation',
+            description: 'Research paper presentations judged on content, delivery and Q&A.',
             details: {
-                description: 'MagicMatix is a dynamic event where logic meets mathematics in an exhilarating new way. It invites teams to showcase their reasoning and problem-solving skills through a series of unique crossword challenges. By bridging the gap between numerical precision and the dual-meanings of Computer Science, this event fosters collaboration and sharp thinking.',
+                description: 'Present research or project work; each team gets 7 minutes presentation + 3 minutes Q/A.',
                 rounds: [
-                    { title: 'Round 1: Number Crossword (30 mins)', desc: 'Solve a 25-question crossword using ONLY numbers. Clues are in English. Ignore decimals/symbols (e.g., Pi = 314).' },
-                    { title: 'Round 2: Acronym Crossword', desc: 'Fill with English text. Answers are acronyms blending Math and CS (e.g., PDF = Probability Density Function / Portable Document Format).' }
+                    { title: 'Presentation + Q/A', desc: '7 mins presentation, 3 mins Q/A.' }
                 ],
                 rules: [
-                    'Round 1: Fill with numbers only. Remove special characters.',
-                    'Round 2: Answers must be acronyms.',
-                    'Team Size: Strictly 2 members.',
-                    'Tie-Breaker: Least time taken, then Rapid Fire (5 questions).',
-                    'Malpractice leads to immediate disqualification.'
+                    'Total time per team: 10 minutes',
+                    'Follow presentation guidelines and time limits'
                 ],
-                teamSize: 'Team of 2',
-                judging: 'Score based (Top 10 for R2, Top 3 for Prizes). Tie-breaker by Time.',
-                prize: '1st, 2nd, 3rd Prizes + Certificates.',
-                coordinator: 'Sundhar Balamoorthy (8248629145)'
+                teamSize: 'Individual or Team',
+                prize: 'Certificates & Prizes',
+                coordinator: 'Kesavarthini J (+91 9361733387)'
             },
+            materials: [
+                { label: 'Event Brief', href: '/docs/Paper_Presentation/README.md' }
+            ],
             date: 'February 20, 2026',
-            time: 'TBA',
-            location: 'Classroom Block',
-            category: 'Non Technical',
-            icon: Sparkles,
-            color: 'text-purple-400'
+            time: '11:20 AM – 1:00 PM',
+            location: 'Ramanujan Hall',
+            category: 'General',
+            icon: Projector,
+            color: 'text-pink-400'
         },
         {
             id: 8,
-            title: 'Math Quiz',
-            description: 'Test your aptitude, mathematical knowledge, and speed. A competitive event featuring written prelims and a dynamic main quiz round.',
+            title: 'Find The Fixed Points (Session 2)',
+            description: 'Exploration-based treasure hunt (Prelims + Finals).',
             details: {
-                description: 'Math Quiz is a competitive and engaging technical event designed to test participants’ aptitude, mathematical knowledge, speed, and logical reasoning. The event consists of a preliminary written round followed by a main quiz round featuring various quiz formats.',
+                description: 'Find The Fixed Points is a teamwork treasure hunt combining riddles, observation and checkpoints. Preliminary MCQ shortlists teams for the final hunt.',
                 rounds: [
-                    { title: 'Round 1: Prelims (Written Test - 20 mins)', desc: 'Objective type (MCQ) covering Quantitative Aptitude, Core Mathematics, and General Math. Top teams qualify.' },
-                    { title: 'Round 2: Mains (Quiz Round)', desc: 'Various formats: Identify Mathematician, Find the Error in Theorem, Rapid Fire (10 questions in 60s), and Buzzer-based Competitive Exam questions.' }
+                    { title: 'Round 1 — Prelims (MCQ)', desc: 'Aptitude & logical questions to shortlist top teams.' },
+                    { title: 'Round 2 — Treasure Hunt (Finals)', desc: 'Checkpoint-based riddles; least time with correct answers wins.' }
                 ],
                 rules: [
-                    'Team Size: 3 members per team.',
-                    'Prelims: Written MCQ test.',
-                    'Mains: Includes visual rounds, rapid fire, and buzzer rounds.',
-                    'Malpractice leads to disqualification.'
+                    'Teams of 2–3 members',
+                    'Follow checkpoint rules and verify answers with volunteers',
+                    'Top 6 teams from prelims advance to finals'
                 ],
-                teamSize: '3 Members per Team',
-                judging: 'Accuracy, Speed, Logical Reasoning, Teamwork, Time Management.',
-                prize: '1st, 2nd, 3rd Prizes.',
-                coordinator: 'Safrin S (8667004235)'
+                teamSize: '2-3 Members',
+                prize: 'Top 3 prizes & certificates',
+                coordinator: 'Saathvika (+91 9342271942)'
             },
+            materials: [
+                { label: 'Round 1 — MCQs', href: '/docs/Find_The_Fixed_Points/Round1_MCQs.md' },
+                { label: 'Round 2 — Tasks', href: '/docs/Find_The_Fixed_Points/Round2_Tasks.md' },
+                { label: 'Schedule & Logistics', href: '/docs/Find_The_Fixed_Points/schedule_and_logistics.md' },
+                { label: 'Organizer Contacts', href: '/docs/Find_The_Fixed_Points/organizer_contacts.md' }
+            ],
             date: 'February 20, 2026',
-            time: 'TBA',
-            location: 'Classroom Block',
-            category: 'Technical',
+            time: '11:20 AM – 12:20 PM',
+            location: 'LH-48',
+            category: 'Math',
             icon: Sigma,
             color: 'text-indigo-400'
         },
         {
             id: 9,
             title: 'Mathkinator',
-            description: 'Mathkinator – The Guessing Genius! An interactive and brain-teasing event inspired by Akinator.',
+            description: 'Identify mathematicians or concepts using yes/no/maybe questioning.',
             details: {
-                description: 'Mathkinator is an interactive and brain-teasing event inspired by Akinator, where participants identify famous mathematicians or mathematical concepts using logical thinking and strategic questioning. The event encourages teamwork, reasoning, and problem-solving in a fun and competitive way.',
+                description: 'Teams frame strategic questions to guess mathematical concepts or personalities under a question limit.',
                 rounds: [
-                    { title: 'Round 1: Prelims (Concept Guessing - 20-25 mins)', desc: 'Yes/No/Maybe questioning. Identify 5 concepts (e.g., Infinity, Pi). Max 2 questions per item. Lowest scores eliminated.' },
-                    { title: 'Round 2: Finals (Personality Guessing - 20 mins)', desc: 'Yes/No/Maybe questioning. Identify 5 famous mathematicians (e.g., Gauss, Ramanujan). Max 2 questions per personality.' }
+                    { title: 'Round 1 — Concept Guessing', desc: 'Yes/No/Maybe format for concepts.' },
+                    { title: 'Round 2 — Personality Guessing', desc: 'Identify famous mathematicians.' }
                 ],
                 rules: [
-                    'Format: Yes/No/Maybe questioning.',
-                    'Round 1: Identify 5 mathematical concepts.',
-                    'Round 2: Identify 5 famous mathematicians.',
-                    'Limit: Only 2 questions allowed per item/personality before guessing.'
+                    'Team size: 4–5 members',
+                    'Limited questions per item (2 questions before final guess)'
                 ],
-                teamSize: '4-5 Members per Team',
-                judging: 'Accuracy, logic in questioning, teamwork, and time taken. Bonus for speed.',
-                prize: '1st, 2nd, 3rd Prizes.',
-                coordinator: 'Madhan.M (9047937541)'
+                teamSize: '4-5 Members',
+                prize: 'Certificates & Prizes',
+                coordinator: 'Madhan M (+91 9047937541)'
             },
+            materials: [
+                { label: 'Event Brief', href: '/docs/Mathkinator/README.md' }
+            ],
             date: 'February 20, 2026',
-            time: 'TBA',
-            location: 'Classroom Block',
-            category: 'Technical',
+            time: '11:30 AM – 1:00 PM',
+            location: 'LH-2',
+            category: 'Non Technical',
             icon: Lightbulb,
             color: 'text-yellow-500'
+        },
+        {
+            id: 10,
+            title: 'Math Quiz (Session 1)',
+            description: 'Competitive math quiz testing aptitude and speed. Teams of 3.',
+            details: {
+                description: 'Preliminary written round followed by main quiz formats; judged on accuracy and speed.',
+                rounds: [
+                    { title: 'Round 1 — Prelims (20 mins)', desc: 'Written prelims.' },
+                    { title: 'Round 2 — Main (1 hr 45 mins)', desc: 'Main quiz rounds and formats.' }
+                ],
+                rules: [
+                    'Team size: 3',
+                    'Follow quiz rules and time limits'
+                ],
+                teamSize: '3 Members',
+                prize: 'Certificates & Prizes',
+                coordinator: 'Safrin S (+91 8667004235)'
+            },
+            materials: [
+                { label: 'Event Brief', href: '/docs/Math_Quiz/README.md' }
+            ],
+            date: 'February 20, 2026',
+            time: '11:45 AM – 12:40 PM',
+            location: 'Drawing Hall',
+            category: 'Math',
+            icon: Sigma,
+            color: 'text-indigo-400'
+        },
+        {
+            id: 11,
+            title: 'GoofyChess',
+            description: 'Chess event combining online variants and a final offline classical round.',
+            details: {
+                description: 'Progresses from Racing Kings and Crazyhouse online variants to a final offline Standard Chess showdown for top players.',
+                rounds: [
+                    { title: 'Round 1 — Racing Kings (Online)', desc: '30 mins' },
+                    { title: 'Round 2 — Crazyhouse (Online)', desc: '30 mins' },
+                    { title: 'Final — Standard Chess (Offline)', desc: '1 hour' }
+                ],
+                rules: [
+                    'Follow variant-specific rules for online rounds',
+                    'Top players advance through each round'
+                ],
+                teamSize: 'Individual',
+                prize: 'Certificates & Prizes',
+                coordinator: 'Bathmasree R (+91 8608349376)'
+            },
+            materials: [
+                { label: 'Event Brief', href: '/docs/GoofyChess/README.md' }
+            ],
+            date: 'February 20, 2026',
+            time: '12:00 PM – 1:00 PM',
+            location: 'Online + Drawing Hall-13',
+            category: 'Non Technical',
+            icon: Users,
+            color: 'text-orange-400'
+        },
+        {
+            id: 12,
+            title: 'Query Quest (Session 2)',
+            description: 'SQL / query based challenge (Session 2).',
+            details: {
+                description: 'Query Quest tests SQL knowledge across two rounds: a short MCQ round followed by an execution round using a sample dataset. Qualified participants will get a dataset and problem statements to execute SQL queries.',
+                rounds: [
+                    { title: 'Round 1 — MCQ (15 mins)', desc: 'Multiple choice questions covering SQL concepts, syntax and fundamentals.' },
+                    { title: 'Round 2 — Execution (45 mins)', desc: 'Hands-on SQL tasks using the provided dataset (grouping, joins, aggregation, subqueries).' }
+                ],
+                rules: [
+                    'Individual participation',
+                    'No external internet resources during Round 2 (offline dataset)',
+                    'Use provided dataset.sql for execution round',
+                    'Time limits must be respected'
+                ],
+                teamSize: 'Individual',
+                prize: 'Certificates & Prizes',
+                coordinator: 'RM Menaka (+91 8608605321)',
+            },
+            materials: [
+                { label: 'Round 1 — MCQs', href: '/docs/Query_Quest/Round1_MCQs.md' },
+                { label: 'Round 2 — Tasks', href: '/docs/Query_Quest/Round2_Tasks.md' },
+                { label: 'Dataset (SQL)', href: '/docs/Query_Quest/dataset.sql' },
+                { label: 'Schedule & Logistics', href: '/docs/Query_Quest/schedule.md' },
+                { label: 'Organizer Contacts', href: '/docs/Query_Quest/organizer_contacts.md' }
+            ],
+            date: 'February 20, 2026',
+            time: '12:00 PM – 1:00 PM',
+            location: 'RCC Lab',
+            category: 'Technical',
+            icon: Terminal,
+            color: 'text-cyan-400'
+        },
+        {
+            id: 13,
+            title: 'MagicMatix (Session 2)',
+            description: 'MagicMatix crossword challenge (Session 2).',
+            details: {
+                description: 'MagicMatix blends math and CS wordplay. Round 1 is MCQ/crossword style; Round 2 is an advanced crossword combining numeric and dual-meaning clues.',
+                rounds: [
+                    { title: 'Round 1 — MCQ / Grid (30 mins)', desc: 'Solve short crossword-style MCQs; top teams advance.' },
+                    { title: 'Round 2 — Final Grid (40 mins)', desc: 'Advanced puzzles; fastest top-scoring teams win.' }
+                ],
+                rules: [
+                    'Team of 2 participants',
+                    'Answer sheets must be submitted within the time limit',
+                    'Tie-breakers: least time, then rapid-fire if needed'
+                ],
+                teamSize: 'Team of 2',
+                prize: 'Certificates & Prizes',
+                coordinator: 'Sundhar Balamoorthy (+91 8248629145)'
+            },
+            materials: [
+                { label: 'Round 1 — MCQs', href: '/docs/MagicMatix/Round1_MCQs.md' },
+                { label: 'Round 2 — Tasks', href: '/docs/MagicMatix/Round2_Tasks.md' },
+                { label: 'Schedule & Logistics', href: '/docs/MagicMatix/schedule.md' },
+                { label: 'Organizers', href: '/docs/MagicMatix/organizer_contacts.md' }
+            ],
+            date: 'February 20, 2026',
+            time: '12:00 PM – 1:00 PM',
+            location: 'LH-1',
+            category: 'General',
+            icon: Sparkles,
+            color: 'text-pink-400'
+        },
+        {
+            id: 14,
+            title: 'Math Quiz (Session 2)',
+            description: 'Math Quiz Session 2.',
+            details: { description: '', rounds: [], rules: [], teamSize: '3 Members', prize: '', coordinator: '' },
+            date: 'February 20, 2026',
+            time: '2:30 PM – 3:00 PM',
+            location: 'Vivek Audi',
+            category: 'Math',
+            icon: Sigma,
+            color: 'text-indigo-400'
         }
     ];
 
@@ -391,6 +535,25 @@ const Events = () => {
                                                                 <li key={idx} className="marker:text-purple-500">{rule}</li>
                                                             ))}
                                                         </ul>
+                                                    </section>
+                                                )}
+
+                                                {selectedEvent.materials && selectedEvent.materials.length > 0 && (
+                                                    <section>
+                                                        <h3 className="text-xl font-bold text-purple-400 mb-3 flex items-center gap-2">
+                                                            <FileText size={20} /> Materials
+                                                        </h3>
+                                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                                            {selectedEvent.materials.map((m, i) => (
+                                                                <button
+                                                                    key={i}
+                                                                    onClick={() => window.open(m.href, '_blank')}
+                                                                    className="text-left bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-3 text-sm font-medium"
+                                                                >
+                                                                    {m.label}
+                                                                </button>
+                                                            ))}
+                                                        </div>
                                                     </section>
                                                 )}
                                             </div>
