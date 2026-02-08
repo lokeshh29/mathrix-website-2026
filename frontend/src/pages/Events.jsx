@@ -141,7 +141,7 @@ const Events = () => {
                     'Total Purse: 85cr (non-negotiable).',
                     'Squad: Exactly 8 players - 3 Batsmen, 3 Bowlers, 1 All-Rounder, 1 WK.',
                     'Minimum 1 uncapped player, Maximum 3 overseas players.',
-                    'Players without bids are immediately removed from the event.'
+                    'Players without bids are immediately removed from the auction.'
                 ],
                 disqualification: [
                     'Budget Overflow: Exceeding the 85cr purse limit at any point.',
