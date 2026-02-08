@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma, Lightbulb } from 'lucide-react';
+import { ArrowRight, Calendar, Users, Zap, Award, MapPin, Clock, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma, Lightbulb, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CountdownTimer from '../components/CountdownTimer';
 
@@ -184,100 +184,100 @@ const Home = () => {
                     {[
                         {
                             id: 1,
-                            title: 'PAPER PRESENTATION',
-                            description: 'A platform to present your innovative technical papers and research ideas. Showcase your knowledge, communication, and problem-solving skills.',
-                            date: 'February 20, 2026',
-                            time: '10:00 AM',
-                            location: 'Auditorium',
-                            category: 'Technical',
-                            icon: Projector,
-                            color: 'text-blue-400'
-                        },
-                        {
-                            id: 2,
-                            title: 'ALGO MAZE',
-                            description: 'A logic-intensive competitive event focusing on mathematical reasoning, algorithmic thinking, and decision-making skills.',
-                            date: 'February 20, 2026',
-                            time: '11:00 AM',
-                            location: 'Offline',
-                            category: 'Technical',
-                            icon: Brain,
-                            color: 'text-yellow-400'
-                        },
-                        {
-                            id: 3,
                             title: 'SQL – Query Quest',
-                            description: 'Assess you knowledge in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving.',
+                            description: 'A technical event testing DBMS and SQL knowledge through MCQs and live query execution.',
                             date: 'February 20, 2026',
-                            time: '02:00 PM',
-                            location: 'Lab 2',
+                            time: '10:30 AM & 12:00 PM',
+                            location: 'LH-6 / RCC Lab',
                             category: 'Technical',
                             icon: Database,
                             color: 'text-emerald-400'
                         },
                         {
-                            id: 4,
-                            title: 'DESIGN EVENT',
-                            description: 'Unleash your creativity in this non-technical design challenge. Perfect for those with an eye for aesthetics.',
+                            id: 2,
+                            title: 'MagicMatix',
+                            description: 'Where logic meets mathematics in unique crossword challenges bridging Math and CS.',
                             date: 'February 20, 2026',
-                            time: '10:00 AM',
-                            location: 'TBA',
-                            category: 'Non Technical',
-                            icon: Palette,
-                            color: 'text-pink-400'
+                            time: '10:30 AM & 12:00 PM',
+                            location: 'LH-1',
+                            category: 'General',
+                            icon: Sparkles,
+                            color: 'text-purple-400'
                         },
                         {
-                            id: 5,
+                            id: 3,
                             title: 'Code Mathrix',
-                            description: 'Decode. Divide. Conquer. A collaborative coding challenge with strict turn-based coding and isolation rules.',
+                            description: 'Decode. Divide. Conquer. Turn-based collaborative coding challenge.',
                             date: 'February 20, 2026',
-                            time: '11:00 AM',
-                            location: 'Lab 3',
+                            time: '11:00 AM – 12:30 PM',
+                            location: 'Mathematics Dept Lab',
                             category: 'Technical',
                             icon: Terminal,
                             color: 'text-cyan-400'
                         },
                         {
-                            id: 6,
-                            title: 'TREASURE HUNT',
-                            description: 'An exploration-based team event blending logic, observation, and teamwork. Follow clues, solve riddles, and uncover the final treasure.',
+                            id: 4,
+                            title: 'IPL Auction',
+                            description: 'High-pressure simulation testing analytical speed and strategic decision-making.',
                             date: 'February 20, 2026',
-                            time: '02:00 PM',
-                            location: 'Campus Wide',
+                            time: '11:00 AM – 1:00 PM',
+                            location: 'LH-5',
                             category: 'Non Technical',
-                            icon: Compass,
+                            icon: Crown,
+                            color: 'text-yellow-400'
+                        },
+                        {
+                            id: 5,
+                            title: 'Paper Presentation',
+                            description: 'Platform to showcase research and innovative ideas in technology.',
+                            date: 'February 20, 2026',
+                            time: '11:20 AM – 1:00 PM',
+                            location: 'Ramanujan Hall',
+                            category: 'General',
+                            icon: Projector,
+                            color: 'text-blue-400'
+                        },
+                        {
+                            id: 6,
+                            title: 'GoofyChess',
+                            description: 'Chess strategy event across Racing Kings, Crazyhouse, and Standard formats.',
+                            date: 'February 20, 2026',
+                            time: '12:00 PM – 1:00 PM',
+                            location: 'Online + Drawing Hall-13',
+                            category: 'Non Technical',
+                            icon: Brain,
                             color: 'text-orange-400'
                         },
                         {
                             id: 7,
-                            title: 'MagicMatix',
-                            description: 'Where logic meets mathematics. A unique crossword challenge bridging numerical precision and Computer Science concepts.',
-                            date: 'February 20, 2026',
-                            time: 'TBA',
-                            location: 'Classroom Block',
-                            category: 'Non Technical',
-                            icon: Sparkles,
-                            color: 'text-purple-400'
-                        },
-                        {
-                            id: 8,
                             title: 'Math Quiz',
-                            description: 'Test your aptitude, mathematical knowledge, and speed. A competitive event featuring written prelims and a dynamic main quiz round.',
+                            description: 'Test aptitude, mathematical knowledge, and speed in competitive quiz rounds.',
                             date: 'February 20, 2026',
-                            time: 'TBA',
-                            location: 'Classroom Block',
-                            category: 'Technical',
+                            time: '11:45 AM & 2:30 PM',
+                            location: 'Drawing Hall / Vivek Audi',
+                            category: 'Math',
                             icon: Sigma,
                             color: 'text-indigo-400'
                         },
                         {
+                            id: 8,
+                            title: 'Find The Fixed Points',
+                            description: 'Exploration-based treasure hunt blending logic, observation, and teamwork.',
+                            date: 'February 20, 2026',
+                            time: '10:30 AM & 11:20 AM',
+                            location: 'LH-48',
+                            category: 'Math',
+                            icon: Compass,
+                            color: 'text-green-400'
+                        },
+                        {
                             id: 9,
                             title: 'Mathkinator',
-                            description: 'Mathkinator – The Guessing Genius! An interactive and brain-teasing event inspired by Akinator.',
+                            description: 'Akinator-inspired event to identify mathematicians and concepts using strategic questioning.',
                             date: 'February 20, 2026',
-                            time: 'TBA',
-                            location: 'Classroom Block',
-                            category: 'Technical',
+                            time: '11:30 AM – 1:00 PM',
+                            location: 'LH-2',
+                            category: 'Non Technical',
                             icon: Lightbulb,
                             color: 'text-yellow-500'
                         }

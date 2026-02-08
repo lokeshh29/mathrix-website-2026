@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma, Lightbulb } from 'lucide-react';
+import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma, Lightbulb, Crown, Camera } from 'lucide-react';
 
 const Events = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
@@ -10,247 +10,267 @@ const Events = () => {
     const eventList = [
         {
             id: 1,
-            title: 'PAPER PRESENTATION',
-            description: 'A platform to present your innovative technical papers and research ideas. Showcase your knowledge, communication, and problem-solving skills.',
-            details: {
-                description: 'A platform to present your innovative technical papers and research ideas. Showcase your knowledge, communication, and problem-solving skills in front of experts and peers.',
-                rounds: [
-                    { title: 'Single Round', desc: 'Oral Presentation using PowerPoint (max 10 slides). Duration: 8 minutes presentation + 2 minutes Q&A.' }
-                ],
-                rules: [
-                    'Topic is chosen by the judging company (e.g., AI, IoT, Robotics, Cybersecurity).',
-                    'Presentation should be original and not copied from published work.',
-                    'Each team must bring a soft copy of the presentation (PPT/PDF).',
-                    'Plagiarism will lead to disqualification.',
-                    'Participants must report 30 minutes before the event starts.'
-                ],
-                teamSize: 'Individual or Team of 2',
-                judging: 'Originality & innovation, Relevance to domain, Presentation clarity & structure, Technical depth, Q&A handling.',
-                prize: '1st Prize, 2nd Prize, Certificates for all participants.',
-                coordinator: 'Kesavarthini J (9361733387)'
-            },
-            date: 'February 20, 2026',
-            time: '10:00 AM',
-            location: 'Auditorium',
-            category: 'Technical',
-            icon: Projector,
-            color: 'text-blue-400'
-        },
-        {
-            id: 2,
-            title: 'ALGO MAZE',
-            description: 'A logic-intensive competitive event focusing on mathematical reasoning, algorithmic thinking, and decision-making skills.',
-            details: {
-                description: 'Algo Maze is a logic-intensive competitive event that challenges participants to think beyond formulas and code. It focuses on mathematical reasoning, algorithmic thinking, and decision-making skills through twisted logic problems and real-world algorithm scenarios. Speed alone does not guarantee success, clarity of thought and correctness determine the winners.',
-                rounds: [
-                    { title: 'Round 1: Prelims (30 mins)', desc: 'MCQs covering twisted logic, mathematics, and algorithms.' },
-                    { title: 'Round 2: Finals (40 mins)', desc: 'Scenario-based questions and algorithm/math decision-making challenges.' }
-                ],
-                rules: [
-                    'Winner selected based on highest score with correct reasoning.',
-                    'Emphasis on optimal and logical decisions.'
-                ],
-                teamSize: 'Individual Participation',
-                judging: 'Accuracy, Logical reasoning, Performance in decision-making.',
-                prize: '1st Prize, 2nd Prize + Certificates.',
-                coordinator: 'Barath V (8489573989)'
-            },
-            date: 'February 20, 2026',
-            time: '11:00 AM',
-            location: 'Offline',
-            category: 'Technical',
-            icon: Brain,
-            color: 'text-yellow-400'
-        },
-        {
-            id: 3,
             title: 'SQL – Query Quest',
-            description: 'Assess you knowledge in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving.',
+            description: 'A technical event designed to test participants understanding of DBMS and SQL through competitive rounds.',
             details: {
-                description: 'SQL – Query Quest is a technical event designed to assess participants’ knowledge and practical skills in Structured Query Language (SQL), focusing on logical thinking and real-time problem-solving.',
+                description: 'SQL – Query Quest is a technical event designed to test participants understanding of Database Management Systems and Structured Query Language (SQL). The event evaluates conceptual knowledge, logical thinking, and practical query execution skills through competitive rounds.',
                 rounds: [
-                    { title: 'Round 1: Prelims (15-20 mins)', desc: '15 MCQs on SQL basics, DDL/DML, Aggregates, Joins. Selection based on score/time.' },
-                    { title: 'Round 2: Finals (30 mins)', desc: 'Execution of 8-10 SQL queries on a provided dataset. Evaluated on correctness and logic.' },
-                    { title: 'Tie-Breaker: Rapid Fire (5 mins)', desc: 'Verbal prediction of query outputs.' }
+                    { title: 'Round 1: MCQ (15 mins)', desc: 'MCQs on SQL basics - NULL checks, GROUP BY, Joins, Aggregates. Selection based on score/time.' },
+                    { title: 'Round 2: Execution (45 mins)', desc: 'Execute SQL queries on real datasets (e.g., Movie Streaming Platform Analytics). Evaluated on correctness and logic.' },
+                    { title: 'Tie-Breaker (5-10 mins)', desc: 'Quick-fire verbal prediction of query outputs.' }
                 ],
                 rules: [
-                    'Individual participation only.',
-                    'College ID card is mandatory.',
-                    'Malpractice leads to disqualification.'
+                    'Accuracy of answers is critical.',
+                    'Correctness of SQL queries and output.',
+                    'Logical approach and time efficiency.',
+                    'Overall performance determines winners.'
                 ],
                 teamSize: 'Individual',
-                judging: 'Correctness, Time Efficiency, Logic.',
+                judging: 'Accuracy, Correctness of SQL queries, Logical approach, Time efficiency.',
                 prize: '1st, 2nd, 3rd Prizes + Certificates.',
-                coordinator: 'Menaka RM (8608605321)'
+                coordinator: 'RM Menaka (8608605321), Madhumitha V (9597925317), Janakiram (9042279123)',
+                volunteers: 'Divya (9159676133), Bhavana (8056679807), Uma Maheswari (9159935736), Roshini (7904199432)'
             },
             date: 'February 20, 2026',
-            time: '02:00 PM',
-            location: 'Lab 2',
+            time: '10:30 AM & 12:00 PM',
+            location: 'LH-6 / RCC Lab',
             category: 'Technical',
             icon: Database,
             color: 'text-emerald-400'
         },
         {
-            id: 4,
-            title: 'DESIGN EVENT',
-            description: 'Unleash your creativity in this non-technical design challenge. Perfect for those with an eye for aesthetics.',
+            id: 2,
+            title: 'MagicMatix',
+            description: 'Where logic meets mathematics in unique crossword challenges bridging Math and Computer Science.',
             details: {
-                description: 'COMPANY YET TO DECIDE.',
-                rounds: [],
-                rules: [
-                    'COMPANY YET TO DECIDE.'
+                description: 'MagicMatix is a dynamic event where logic meets mathematics in an exhilarating new way. It invites teams to showcase their reasoning and problem-solving skills through a series of unique crossword challenges. By bridging the gap between numerical precision and the dual-meanings of Computer Science, this event fosters collaboration and sharp thinking in a truly stunning manner.',
+                rounds: [
+                    { title: 'Round 1: Number Crossword (30 mins)', desc: 'Solve crossword using ONLY numbers. Example: "Number vital in circles?" = 314 (Pi). Top 10 teams advance.' },
+                    { title: 'Round 2: Acronym Crossword (40 mins)', desc: 'Fill with acronyms blending Math & CS. Example: PDF = Probability Density Function / Portable Document Format. Top 3 win.' }
                 ],
-                teamSize: 'Individual or Team of 2',
-                judging: 'Decided by the Company.',
-                prize: '1st Prize, 2nd Prize, Certificates for all participants.',
-                coordinator: 'Pooja Nandhini C (+91 86100 61231)'
+                rules: [
+                    'Round 1: Fill with numbers only. Ignore decimals, powers, special symbols.',
+                    'Round 2: Answers must be acronyms with dual meanings.',
+                    'Team Size: Strictly 2 members.',
+                    'Tie-Breaker: Least time taken, then 5-question rapid fire.',
+                    'Malpractice leads to immediate disqualification.'
+                ],
+                teamSize: 'Team of 2',
+                judging: 'Score based. Top 10 for R2, Top 3 for Prizes. Tie-breaker by time.',
+                prize: '1st, 2nd, 3rd Prizes + Certificates.',
+                coordinator: 'Sundhar Balamoorthy (82486 29145), Adithya B (63817 86659), Kiruthiga (73051 57283)',
+                volunteers: 'Boobeswaran (99622 16367)'
             },
             date: 'February 20, 2026',
-            time: '10:00 AM',
-            location: 'TBA',
-            category: 'Non Technical',
-            icon: Palette,
-            color: 'text-pink-400'
+            time: '10:30 AM & 12:00 PM',
+            location: 'LH-1',
+            category: 'General',
+            icon: Sparkles,
+            color: 'text-purple-400'
         },
         {
-            id: 5,
+            id: 3,
             title: 'Code Mathrix',
-            description: 'Decode. Divide. Conquer. A collaborative coding challenge with strict turn-based coding and isolation rules.',
+            description: 'Decode. Divide. Conquer. A collaborative coding challenge testing logic, coordination, and problem-solving.',
             details: {
-                description: 'Code Mathrix is a collaborative coding challenge that tests logical thinking, coordination, and problem-solving under pressure. Teams work on split problem statements with strict turn-based coding.',
+                description: 'Code Mathrix is a collaborative coding challenge that tests logic, coordination, and problem-solving. Teams solve two interconnected problems by completing partial code in turns under strict isolation rules. Success depends on clear thinking, teamwork, and seamless code continuity under time pressure.',
                 rounds: [
-                    { title: 'Round 1 (30 mins)', desc: 'Logic-based MCQs + dry-run coding questions.' },
-                    { title: 'Round 2 (40 mins)', desc: 'Live Coding Challenge with Turn-based rule (10 mins swap) and Isolation rule.' }
+                    { title: 'Round 1: Prelims (30 mins)', desc: 'Logic-based MCQs and dry-run coding problems. Scored on accuracy and completion time.' },
+                    { title: 'Round 2: Live Coding (40 mins)', desc: '2 DSA problems with turn-based coding (10 min swaps). Evaluated on logic, execution, and submission time.' }
                 ],
                 rules: [
-                    'Teams of 2 members.',
-                    'Problem split into two parts.',
-                    'Turn-based: Player 1 codes 10 mins, then Player 2.',
-                    'Isolation: Non-coding player cannot view screen or assist.'
+                    'Teams must consist of 2 members only.',
+                    'Problem statement split into two parts - each member gets different part.',
+                    'Turn-Based: Player 1 codes 10 mins, then Player 2. Cycle repeats.',
+                    'Isolation Rule: When one codes, other must stay away - no viewing, no communication.',
+                    'Higher accuracy wins. If tied, least completion time wins.'
                 ],
                 teamSize: '2 Members per Team',
-                judging: 'Logic, Execution, Time, Continuity.',
-                prize: 'Certificates.',
-                coordinator: 'Kishore S (8072651532)'
+                judging: 'Logic, Execution, Time, Code Continuity.',
+                prize: 'Certificates + Prizes for Top 3.',
+                coordinator: 'Kishore (8072651532)',
+                volunteers: '5 Volunteers'
             },
             date: 'February 20, 2026',
-            time: '11:00 AM',
-            location: 'Lab 3',
+            time: '11:00 AM – 12:30 PM',
+            location: 'Mathematics Dept Lab',
             category: 'Technical',
             icon: Terminal,
             color: 'text-cyan-400'
         },
         {
-            id: 6,
-            title: 'TREASURE HUNT',
-            description: 'An exploration-based team event blending logic, observation, and teamwork. Follow clues, solve riddles, and uncover the final treasure.',
+            id: 4,
+            title: 'IPL Auction',
+            description: 'A high-pressure competitive simulation testing analytical speed, financial management, and strategic decision-making.',
             details: {
-                description: 'The Treasure Hunt is an exploration-based team event that blends logic, observation, teamwork, and quick decision-making. Participants follow clues, solve riddles, and navigate through checkpoints to uncover the final treasure.',
+                description: 'A high-pressure two-stage competitive simulation designed to test analytical speed, financial management, and strategic decision-making. Participants act as franchise owners, navigating a preliminary qualification round followed by a live auction to build a balanced 11-member squad within 100cr budget.',
                 rounds: [
-                    { title: 'Round 1: Prelims (20 mins)', desc: 'Aptitude questions. Top 5 teams chosen.' },
-                    { title: 'Round 2: The Final Trail (1 hour)', desc: 'Logical puzzles and location-based challenges. Piece together clues to reach the final treasure.' }
+                    { title: 'Round 1: Prelims (30 mins)', desc: 'MCQ-based assessment on Cricket Stats, Player Stats (2016-2020). Top 8 franchises advance.' },
+                    { title: 'Round 2: Main Auction (90 mins)', desc: 'Live open-outcry bidding across 4 sets: Wicket Keepers, Batsmen, All-Rounders, Bowlers.' }
                 ],
                 rules: [
-                    'Team Size: 2-3 members per team.',
-                    'Mobile phones strictly prohibited unless specified.',
-                    'Teams must stay within the designated hunt area.',
-                    'Clues must not be shared with other teams.',
-                    'Do not tamper with or remove clues from checkpoints.'
+                    'Franchise must have exactly 4 members.',
+                    'Total Purse: 100cr (non-negotiable).',
+                    'Squad: Exactly 11 players - 4 Batsmen, 4 Bowlers, 2 All-rounders, 1 WK.',
+                    'Minimum 1 uncapped player, Maximum 4 overseas players.',
+                    'DQ for: Incomplete roster, Budget overflow, Wrong composition, Collusion.'
                 ],
-                teamSize: '2-3 Members per Team',
-                judging: 'Speed, Strategy, Accuracy, Coordination.',
+                teamSize: '4 Members per Franchise',
+                judging: 'Highest Cumulative Player Credits. Tie-breaker: Higher remaining purse.',
                 prize: '1st, 2nd, 3rd Prizes.',
-                coordinator: 'Subramanian N (9840623264)'
+                coordinator: 'Siva Sudharsan S (6369882523), Sankara Shivani C A (8056112999)',
+                volunteers: 'Nandakishore (8248227885), Soorya V (9080798813), Kishore B (6379869605), Ashvan P (9361248774), Harish B (9585890339), Santhosh J (6385422344), Arul Prasanth (8015636015), Madhavan M (8610824066)'
             },
             date: 'February 20, 2026',
-            time: '02:00 PM',
-            location: 'Campus Wide',
+            time: '11:00 AM – 1:00 PM',
+            location: 'LH-5',
             category: 'Non Technical',
-            icon: Compass,
+            icon: Crown,
+            color: 'text-yellow-400'
+        },
+        {
+            id: 5,
+            title: 'Paper Presentation',
+            description: 'A platform for students to showcase their research and innovative ideas in technology and related fields.',
+            details: {
+                description: 'Paper presentation is a platform for students to showcase their research and innovative ideas in technology and related fields. Participants will present their papers on given themes, promoting knowledge sharing and discussion.',
+                rounds: [
+                    { title: 'Single Round (10 mins per team)', desc: '7 minutes for paper presenting + 3 minutes for Q&A.' }
+                ],
+                rules: [
+                    'Topic selected from given themes.',
+                    'Presentation should be original.',
+                    'Bring soft copy of presentation (PPT/PDF).',
+                    'Plagiarism leads to disqualification.',
+                    'Report 30 minutes before event starts.'
+                ],
+                teamSize: 'Individual or Team of 2',
+                judging: 'Content (40%): Originality, technical depth, relevance. Presentation (30%): Clarity, organization. Q&A (30%): Understanding, response quality.',
+                prize: '1st, 2nd, 3rd Prizes + Certificates.',
+                coordinator: 'Kesavarthini J (9361733387), Jeysri G S (8438153565), Sri Aishwarya M (8825775704)'
+            },
+            date: 'February 20, 2026',
+            time: '11:20 AM – 1:00 PM',
+            location: 'Ramanujan Hall',
+            category: 'General',
+            icon: Projector,
+            color: 'text-blue-400'
+        },
+        {
+            id: 6,
+            title: 'GoofyChess',
+            description: 'An exciting chess-based strategy event testing tactical thinking across different chess formats.',
+            details: {
+                description: 'GoofyChess is an exciting chess-based strategy event designed to test players tactical thinking, adaptability, and decision-making under different chess formats. The event progresses from fast-paced online variants like Racing Kings and Crazyhouse to a classic offline Standard Chess showdown.',
+                rounds: [
+                    { title: 'Round 1: Racing Kings (Online, 30 mins)', desc: '32 players participate. Winners advance based on match results. Top 16 qualify.' },
+                    { title: 'Round 2: Crazyhouse (Online, 30 mins)', desc: 'Top 16 players compete. Top 4 advance to finals.' },
+                    { title: 'Final: Standard Chess (Offline, 1 hour)', desc: 'Top 4 compete in classical chess. Top 2 awarded prizes.' }
+                ],
+                rules: [
+                    'Faster completion time given priority in ties.',
+                    'Blitz tie-break match if time is equal.',
+                    'Standard chess rules apply in finals.',
+                    'No external assistance allowed.'
+                ],
+                teamSize: 'Individual',
+                judging: 'Match results, completion time, standard chess scoring.',
+                prize: '1st, 2nd Prizes.',
+                coordinator: 'Bathmasree R (8608349376), Nandha kishore R R (8248227885), Ezhil Jeevana S (6369642347), Jeevika (9789384379)',
+                volunteers: 'Sundhar Balamoorthy (82486 29145), Ecilaise S (7200229041), Sahana Ramanathan (9962911497), Mohammad Nihal (6383366723)'
+            },
+            date: 'February 20, 2026',
+            time: '12:00 PM – 1:00 PM',
+            location: 'Online + Drawing Hall-13',
+            category: 'Non Technical',
+            icon: Brain,
             color: 'text-orange-400'
         },
         {
             id: 7,
-            title: 'MagicMatix',
-            description: 'Where logic meets mathematics. A unique crossword challenge bridging numerical precision and Computer Science concepts.',
-            details: {
-                description: 'MagicMatix is a dynamic event where logic meets mathematics in an exhilarating new way. It invites teams to showcase their reasoning and problem-solving skills through a series of unique crossword challenges. By bridging the gap between numerical precision and the dual-meanings of Computer Science, this event fosters collaboration and sharp thinking.',
-                rounds: [
-                    { title: 'Round 1: Number Crossword (30 mins)', desc: 'Solve a 25-question crossword using ONLY numbers. Clues are in English. Ignore decimals/symbols (e.g., Pi = 314).' },
-                    { title: 'Round 2: Acronym Crossword', desc: 'Fill with English text. Answers are acronyms blending Math and CS (e.g., PDF = Probability Density Function / Portable Document Format).' }
-                ],
-                rules: [
-                    'Round 1: Fill with numbers only. Remove special characters.',
-                    'Round 2: Answers must be acronyms.',
-                    'Team Size: Strictly 2 members.',
-                    'Tie-Breaker: Least time taken, then Rapid Fire (5 questions).',
-                    'Malpractice leads to immediate disqualification.'
-                ],
-                teamSize: 'Team of 2',
-                judging: 'Score based (Top 10 for R2, Top 3 for Prizes). Tie-breaker by Time.',
-                prize: '1st, 2nd, 3rd Prizes + Certificates.',
-                coordinator: 'Sundhar Balamoorthy (8248629145)'
-            },
-            date: 'February 20, 2026',
-            time: 'TBA',
-            location: 'Classroom Block',
-            category: 'Non Technical',
-            icon: Sparkles,
-            color: 'text-purple-400'
-        },
-        {
-            id: 8,
             title: 'Math Quiz',
-            description: 'Test your aptitude, mathematical knowledge, and speed. A competitive event featuring written prelims and a dynamic main quiz round.',
+            description: 'Test your aptitude, mathematical knowledge, and speed in this competitive quiz event.',
             details: {
-                description: 'Math Quiz is a competitive and engaging technical event designed to test participants’ aptitude, mathematical knowledge, speed, and logical reasoning. The event consists of a preliminary written round followed by a main quiz round featuring various quiz formats.',
+                description: 'Math Quiz is a competitive and engaging technical event designed to test participants aptitude, mathematical knowledge, speed, and logical reasoning. The event consists of a preliminary written round followed by a main quiz round featuring various quiz formats.',
                 rounds: [
-                    { title: 'Round 1: Prelims (Written Test - 20 mins)', desc: 'Objective type (MCQ) covering Quantitative Aptitude, Core Mathematics, and General Math. Top teams qualify.' },
-                    { title: 'Round 2: Mains (Quiz Round)', desc: 'Various formats: Identify Mathematician, Find the Error in Theorem, Rapid Fire (10 questions in 60s), and Buzzer-based Competitive Exam questions.' }
+                    { title: 'Round 1: Prelims (20 mins)', desc: 'Written MCQ test covering Quantitative Aptitude, Core Mathematics, General Math.' },
+                    { title: 'Round 2: Mains (1hr 45mins)', desc: 'Various formats: Identify Mathematician, Find Error in Theorem, Rapid Fire (10 Qs in 60s), Buzzer rounds.' }
                 ],
                 rules: [
                     'Team Size: 3 members per team.',
                     'Prelims: Written MCQ test.',
-                    'Mains: Includes visual rounds, rapid fire, and buzzer rounds.',
+                    'Mains: Visual rounds, rapid fire, buzzer rounds.',
                     'Malpractice leads to disqualification.'
                 ],
                 teamSize: '3 Members per Team',
                 judging: 'Accuracy, Speed, Logical Reasoning, Teamwork, Time Management.',
                 prize: '1st, 2nd, 3rd Prizes.',
-                coordinator: 'Safrin S (8667004235)'
+                coordinator: 'Safrin S (8667004235)',
+                volunteers: '5 Volunteers'
             },
             date: 'February 20, 2026',
-            time: 'TBA',
-            location: 'Classroom Block',
-            category: 'Technical',
+            time: '11:45 AM & 2:30 PM',
+            location: 'Drawing Hall / Vivek Audi',
+            category: 'Math',
             icon: Sigma,
             color: 'text-indigo-400'
         },
         {
+            id: 8,
+            title: 'Find The Fixed Points (Treasure Hunt)',
+            description: 'An exploration-based team event blending logic, observation, teamwork, and quick decision-making.',
+            details: {
+                description: 'The Find The Fixed Points is an exploration-based team event that blends logic, observation, teamwork, and quick decision-making. Participants follow clues, solve riddles, and navigate through checkpoints to uncover the final treasure. Speed matters—but strategy, accuracy, and coordination decide the champions.',
+                rounds: [
+                    { title: 'Round 1: Prelims', desc: 'MCQ Aptitude Questions. 6 teams with maximum marks selected for next round.' },
+                    { title: 'Round 2: Final Trail', desc: 'Follow clues, solve riddles at checkpoints. First team to reach final treasure with all clues solved wins.' }
+                ],
+                rules: [
+                    'Team Size: 2-3 members per team.',
+                    'Mobile phones prohibited unless specified.',
+                    'Stay within designated hunt area.',
+                    'Do not share clues with other teams.',
+                    'Do not tamper with or remove clues from checkpoints.'
+                ],
+                teamSize: '2-3 Members per Team',
+                judging: 'Speed, Strategy, Accuracy, Coordination. Top 3 places awarded.',
+                prize: '1st, 2nd, 3rd Prizes.',
+                coordinator: 'Saathvika (93422 71942)',
+                volunteers: '8 Volunteers'
+            },
+            date: 'February 20, 2026',
+            time: '10:30 AM & 11:20 AM',
+            location: 'LH-48',
+            category: 'Math',
+            icon: Compass,
+            color: 'text-green-400'
+        },
+        {
             id: 9,
             title: 'Mathkinator',
-            description: 'Mathkinator – The Guessing Genius! An interactive and brain-teasing event inspired by Akinator.',
+            description: 'An interactive brain-teasing event inspired by Akinator. Identify mathematicians and concepts using strategic questioning.',
             details: {
                 description: 'Mathkinator is an interactive and brain-teasing event inspired by Akinator, where participants identify famous mathematicians or mathematical concepts using logical thinking and strategic questioning. The event encourages teamwork, reasoning, and problem-solving in a fun and competitive way.',
                 rounds: [
-                    { title: 'Round 1: Prelims (Concept Guessing - 20-25 mins)', desc: 'Yes/No/Maybe questioning. Identify 5 concepts (e.g., Infinity, Pi). Max 2 questions per item. Lowest scores eliminated.' },
-                    { title: 'Round 2: Finals (Personality Guessing - 20 mins)', desc: 'Yes/No/Maybe questioning. Identify 5 famous mathematicians (e.g., Gauss, Ramanujan). Max 2 questions per personality.' }
+                    { title: 'Round 1: Prelims - Concept Guessing (20-25 mins)', desc: 'Yes/No/Maybe questioning. Identify 5 concepts (Infinity, Prime Numbers, Pi, Calculus, etc.). Only 2 questions per item.' },
+                    { title: 'Round 2: Finals - Personality Guessing (20 mins)', desc: 'Identify 5 famous mathematicians (Euclid, Gauss, Newton, Ramanujan, Ada Lovelace). Only 2 questions per personality.' }
                 ],
                 rules: [
-                    'Format: Yes/No/Maybe questioning.',
-                    'Round 1: Identify 5 mathematical concepts.',
-                    'Round 2: Identify 5 famous mathematicians.',
-                    'Limit: Only 2 questions allowed per item/personality before guessing.'
+                    'Format: Yes/No/Maybe questioning only.',
+                    'Only 2 questions allowed per item before final guess.',
+                    'Lowest scores eliminated after Round 1.',
+                    'Bonus points for faster correct responses.'
                 ],
                 teamSize: '4-5 Members per Team',
-                judging: 'Accuracy, logic in questioning, teamwork, and time taken. Bonus for speed.',
+                judging: 'Accuracy, logic in questioning, teamwork, time taken.',
                 prize: '1st, 2nd, 3rd Prizes.',
-                coordinator: 'Madhan.M (9047937541)'
+                coordinator: 'Madhan M (9047937541)',
+                volunteers: '5 Volunteers'
             },
             date: 'February 20, 2026',
-            time: 'TBA',
-            location: 'Classroom Block',
-            category: 'Technical',
+            time: '11:30 AM – 1:00 PM',
+            location: 'LH-2',
+            category: 'Non Technical',
             icon: Lightbulb,
             color: 'text-yellow-500'
         }
