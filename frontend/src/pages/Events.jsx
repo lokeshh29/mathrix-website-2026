@@ -141,13 +141,19 @@ const Events = () => {
                     'Total Purse: 85cr (non-negotiable).',
                     'Squad: Exactly 8 players - 3 Batsmen, 3 Bowlers, 1 All-Rounder, 1 WK.',
                     'Minimum 1 uncapped player, Maximum 3 overseas players.',
-                    'DQ for: Budget overflow, Roster failure, Category overflow, Diversity breach, Team integrity issues.',
                     'Players without bids are immediately removed from the event.'
+                ],
+                disqualification: [
+                    'Budget Overflow: Exceeding the 85cr purse limit at any point.',
+                    'Roster Failure: Failing to reach exactly 8 players by the end of Set 4.',
+                    'Category Overflow: Attempting to buy more players than allowed in a specific category.',
+                    'Diversity Breach: Exceeding 3 overseas players or failing to secure an uncapped player.',
+                    'Team Integrity: Having fewer or more than 4 members in the management team.'
                 ],
                 teamSize: '4 Members per Franchise',
                 judging: 'Highest Cumulative Player Credits wins. Tie-breaker: Higher remaining purse. Event In-charges decision is final.',
                 prize: '1st, 2nd, 3rd Prizes.',
-                coordinator: 'Siva Sudharsan S (6369882523), Sankara Shivani C A (8056112999)',
+                coordinators: ['Siva Sudharsan S (6369882523)', 'Sankara Shivani C A (8056112999)'],
                 volunteers: 'Nandakishore (8248227885), Soorya V (9080798813), Kishore B (6379869605), Ashvan P (9361248774), Harish B (9585890339), Santhosh J (6385422344), Arul Prasanth (8015636015), Madhavan M (8610824066)'
             },
             date: 'February 20, 2026',
@@ -442,6 +448,19 @@ const Events = () => {
                                                         </ul>
                                                     </section>
                                                 )}
+
+                                                {selectedEvent.details.disqualification && selectedEvent.details.disqualification.length > 0 && (
+                                                    <section>
+                                                        <h3 className="text-xl font-bold text-red-400 mb-3 flex items-center gap-2">
+                                                            <X size={20} /> Disqualification Clauses
+                                                        </h3>
+                                                        <ul className="list-disc list-inside space-y-2 text-gray-300">
+                                                            {selectedEvent.details.disqualification.map((item, idx) => (
+                                                                <li key={idx} className="marker:text-red-500">{item}</li>
+                                                            ))}
+                                                        </ul>
+                                                    </section>
+                                                )}
                                             </div>
 
                                             {/* Sidebar Info */}
@@ -465,7 +484,15 @@ const Events = () => {
                                                         <Users className="text-green-400 mt-1" size={20} />
                                                         <div>
                                                             <h4 className="text-sm font-bold text-gray-400 uppercase tracking-wider">Coordinator</h4>
-                                                            <p className="text-white font-medium">{selectedEvent.details.coordinator}</p>
+                                                            {selectedEvent.details.coordinators ? (
+                                                                <ul className="text-white font-medium list-disc list-inside">
+                                                                    {selectedEvent.details.coordinators.map((coord, idx) => (
+                                                                        <li key={idx}>{coord}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            ) : (
+                                                                <p className="text-white font-medium">{selectedEvent.details.coordinator}</p>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
