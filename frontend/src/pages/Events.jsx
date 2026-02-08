@@ -353,7 +353,10 @@ const Events = () => {
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Clock size={16} className="text-green-400" />
-                                        <span>{event.details.coordinator.split('(')[0].trim()}</span>
+                                        <span>
+                                            {(event.details.coordinators ? event.details.coordinators[0] : event.details.coordinator).split('(')[0].trim()}
+                                            {event.details.coordinators && event.details.coordinators.length > 1 && ' +'}
+                                        </span>
                                     </div>
                                 </div>
 
