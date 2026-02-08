@@ -198,15 +198,14 @@ const Events = () => {
             details: {
                 description: 'GoofyChess is an exciting chess-based strategy event designed to test players tactical thinking, adaptability, and decision-making under different chess formats. The event progresses from fast-paced online variants like Racing Kings and Crazyhouse to a classic offline Standard Chess showdown.',
                 rounds: [
-                    { title: 'Round 1: Racing Kings (Online, 30 mins)', desc: '32 players participate. Winners advance based on match results. Top 16 qualify.' },
-                    { title: 'Round 2: Crazyhouse (Online, 30 mins)', desc: 'Top 16 players compete. Top 4 advance to finals.' },
-                    { title: 'Final: Standard Chess (Offline, 1 hour)', desc: 'Top 4 compete in classical chess. Top 2 awarded prizes.' }
+                    { title: 'Round 1: Racing Kings (Online, 1 hr)', desc: 'Racing Kings is a fast-paced chess variant where both players race to bring their king to the opponent’s back rank. There are no checks or checkmates, making it a pure test of speed, planning, and positioning. First to reach target rank wins.' },
+                    { title: 'Round 2: Crazyhouse (Online, 1 hr)', desc: 'Crazyhouse is a dynamic chess variant where captured pieces can be dropped back onto the board and reused. This format encourages aggressive play, creativity, and quick tactical thinking, making every game unpredictable and exciting.' },
+                    { title: 'Final: Standard Chess (Offline, 1 hour)', desc: 'The final round will be conducted in classical standard chess format, following official chess rules. Top players will compete with longer time control, emphasizing deep strategy and endgame skills.' }
                 ],
                 rules: [
-                    'Faster completion time given priority in ties.',
-                    'Blitz tie-break match if time is equal.',
-                    'Standard chess rules apply in finals.',
-                    'No external assistance allowed.'
+                    'Any use of bots or external assistance will result in immediate disqualification.',
+                    'All decisions taken by the organizers are final and binding.',
+                    'Participants may approach the organizers for clarification in case of any doubts.'
                 ],
                 teamSize: 'Individual',
                 judging: 'Match results, completion time, standard chess scoring.',
