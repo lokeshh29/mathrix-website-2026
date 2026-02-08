@@ -16,7 +16,7 @@ const Events = () => {
                 description: 'SQL – Query Quest is a technical event designed to test participants understanding of Database Management Systems and Structured Query Language (SQL). The event evaluates conceptual knowledge, logical thinking, and practical query execution skills through competitive rounds.',
                 rounds: [
                     { title: 'Round 1: MCQ (15 mins)', desc: 'MCQs on SQL basics.' },
-                    { title: 'Round 2: Execution (45 mins)', desc: 'Execute SQL queries on real datasets (e.g., Movie Streaming Platform Analytics).' },
+                    { title: 'Round 2: Execution (45 mins)', desc: 'Execute SQL queries on real datasets.' },
                     { title: 'Tie-Breaker (5-10 mins)', desc: 'Quick-fire verbal prediction of query outputs.' }
                 ],
                 rules: [
@@ -44,8 +44,8 @@ const Events = () => {
             details: {
                 description: 'MagicMatix is a dynamic event where logic meets mathematics in an exhilarating new way. It invites teams to showcase their reasoning and problem-solving skills through a series of unique crossword challenges. By bridging the gap between numerical precision and the dual-meanings of Computer Science, this event fosters collaboration and sharp thinking in a truly stunning manner.',
                 rounds: [
-                    { title: 'Round 1: Number Crossword (30 mins)', desc: 'Solve crossword using ONLY numbers. Example: "Number vital in circles?" = 314 (Pi). Top 10 teams advance.' },
-                    { title: 'Round 2: Acronym Crossword (40 mins)', desc: 'Fill with acronyms blending Math & CS. Example: PDF = Probability Density Function / Portable Document Format. Top 3 win.' }
+                    { title: 'Round 1: Number Crossword (30 mins)', desc: 'Solve crossword using ONLY numbers. Top 10 teams advance.' },
+                    { title: 'Round 2: Acronym Crossword (40 mins)', desc: 'Fill with acronyms blending Math & CS. Top 3 win.' }
                 ],
                 rules: [
                     'Round 1: Fill with numbers only. Ignore decimals, powers, special symbols.',
