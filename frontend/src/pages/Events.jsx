@@ -287,12 +287,12 @@ const Events = () => {
             details: {
                 description: 'Mathkinator is an interactive and brain-teasing event inspired by Akinator, where participants identify famous mathematicians or mathematical concepts using logical thinking and strategic questioning. The event encourages teamwork, reasoning, and problem-solving in a fun and competitive way.',
                 rounds: [
-                    { title: 'Round 1: Prelims - Concept Guessing (20-25 mins)', desc: 'Yes/No/Maybe questioning. Identify 5 concepts (Infinity, Prime Numbers, Pi, Calculus, etc.). Only 2 questions per item.' },
-                    { title: 'Round 2: Finals - Personality Guessing (20 mins)', desc: 'Identify 5 famous mathematicians (Euclid, Gauss, Newton, Ramanujan, Ada Lovelace). Only 2 questions per personality.' }
+                    { title: 'Round 1: Prelims - Concept Guessing (20-25 mins)', desc: 'Yes/No/Maybe questioning. Identify 5 concepts (Infinity, Prime Numbers, Pi, Calculus, etc.). Only 5 questions per item.' },
+                    { title: 'Round 2: Finals - Personality Guessing (20 mins)', desc: 'Identify 5 famous mathematicians (Euclid, Gauss, Newton, Ramanujan, Ada Lovelace). Only 5 questions per personality.' }
                 ],
                 rules: [
                     'Format: Yes/No/Maybe questioning only.',
-                    'Only 2 questions allowed per item before final guess.',
+                    'Only 5 questions allowed per item before final guess.',
                     'Lowest scores eliminated after Round 1.',
                     'Bonus points for faster correct responses.'
                 ],
