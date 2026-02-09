@@ -5,17 +5,41 @@ import { Mail, Github, Linkedin, Send } from 'lucide-react';
 const Members = () => {
     const team = [
         {
+            title: "PATRON",
+            members: [
+                { name: "Dr. P. Loganathan", role: "Professor and Head, Dept. of Mathematics" }
+            ]
+        },
+        {
             title: "PRESIDENT",
+            members: [
+                { name: "Dr. M. Chinnadurai", role: "Assistant Professor" }
+            ]
+        },
+        {
+            title: "STAFF ADVISOR",
+            members: [
+                { name: "Mr. V. Kanakasabapathi", role: "Teaching Fellow" }
+            ]
+        },
+        {
+            title: "TREASURER",
+            members: [
+                { name: "Dr. A. Akilandeeswari", role: "Assistant Professor" }
+            ]
+        },
+        {
+            title: "CHAIRPERSON",
             members: [
                 { name: "Sanjay S" }
             ]
         },
-        // {
-        //     title: "VICE PRESIDENT",
-        //     members: [
-        //         { name: "Pradeeshwaran M" }
-        //     ]
-        // },
+        {
+            title: "VICE CHAIRPERSON",
+            members: [
+                { name: "Pradeeshwaran M" }
+            ]
+        },
         {
             title: "SECRETARIES",
             members: [
@@ -24,7 +48,7 @@ const Members = () => {
             ]
         },
         {
-            title: "Joint Secretaries",
+            title: "JOINT SECRETARIES",
             members: [
                 // 2nd Years
                 { name: "Kailash N" },
@@ -39,7 +63,7 @@ const Members = () => {
             ]
         },
         {
-            title: "Assistant Secretaries",
+            title: "ASSISTANT SECRETARIES",
             members: [
                 { name: "Himasni A" },
                 { name: "Kaviya M" },
@@ -48,7 +72,7 @@ const Members = () => {
             ]
         },
         {
-            title: "Student Incharges",
+            title: "STUDENT INCHARGES",
             members: [
                 { name: "Lokesh Kumar R", role: "Sponsorship" },
                 { name: "Irfana A", role: "Registration" },

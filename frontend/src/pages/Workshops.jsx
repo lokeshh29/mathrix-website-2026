@@ -18,71 +18,41 @@ const Workshops = () => {
                 </p>
             </motion.div>
 
-            {/* Workshops Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
-                {/* Workshop 1: Gen AI */}
+            {/* Workshop - Quantum Computing */}
+            <div className="flex justify-center max-w-3xl mx-auto">
                 <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="glass-card p-8 md:p-10 relative overflow-hidden text-center group hover:border-cyan-500/30 transition-all duration-500 flex flex-col h-full"
+                    className="glass-card p-8 md:p-12 relative overflow-hidden text-center group hover:border-violet-500/30 transition-all duration-500 flex flex-col w-full"
                 >
-                    <div className="absolute top-0 right-0 p-32 bg-cyan-600/10 blur-[80px] rounded-full group-hover:bg-cyan-600/20 transition-all" />
-                    <div className="relative z-10 flex flex-col items-center gap-6 flex-grow">
-                        <div className="flex items-center justify-center bg-black/20 rounded-xl p-6 group-hover:scale-110 transition-transform duration-500">
-                            <Brain size={60} className="text-cyan-400" />
+                    <div className="absolute top-0 right-0 p-40 bg-violet-600/10 blur-[100px] rounded-full group-hover:bg-violet-600/25 transition-all" />
+                    <div className="absolute bottom-0 left-0 p-32 bg-purple-600/10 blur-[80px] rounded-full group-hover:bg-purple-600/20 transition-all" />
+                    <div className="relative z-10 flex flex-col items-center gap-8">
+                        <div className="flex items-center justify-center bg-gradient-to-br from-violet-900/40 to-purple-900/40 rounded-2xl p-8 group-hover:scale-110 transition-transform duration-500 border border-violet-500/20">
+                            <Cpu size={70} className="text-violet-400" />
                         </div>
-                        <div className="w-full flex flex-col items-center flex-grow">
-                            <h2 className="text-3xl font-bold mb-2 group-hover:text-cyan-300 transition-colors">Generative AI Workshop</h2>
-                            <p className="text-cyan-400 font-mono text-sm mb-4">Feb 10, 2026 • 10:00 AM - 01:00 PM</p>
-                            <p className="text-gray-300 mb-8 leading-relaxed">
-                                Explore the frontiers of Artificial Intelligence. Learn to build and fine-tune generative models in this hands-on session.
+                        <div className="w-full flex flex-col items-center">
+                            <h2 className="text-4xl font-bold mb-3 group-hover:text-violet-300 transition-colors bg-gradient-to-r from-violet-300 to-purple-300 bg-clip-text text-transparent">
+                                Quantum Computing
+                            </h2>
+                            <p className="text-violet-400 font-mono text-sm mb-6">Happening on Feb 14 2026</p>
+                            <p className="text-gray-300 mb-6 leading-relaxed text-lg max-w-xl">
+                                Step into the revolutionary world of <span className="text-violet-300 font-semibold">Quantum Computing</span> — where the laws of quantum mechanics meet cutting-edge technology!
                             </p>
-                            <div className="mt-auto w-full flex flex-col items-center gap-4">
-                                <div className="bg-white/5 inline-block px-6 py-2 rounded-xl border border-white/10">
+                            <p className="text-gray-400 mb-8 leading-relaxed max-w-xl">
+                                Discover the mind-bending concepts of <span className="text-purple-300">qubits</span>, <span className="text-purple-300">superposition</span>, and <span className="text-purple-300">quantum entanglement</span>. Learn how quantum algorithms are poised to solve problems that would take classical computers millions of years. From cryptography to drug discovery, quantum computing is reshaping the future — and this workshop is your gateway to understanding it all!
+                            </p>
+                            <div className="mt-auto w-full flex flex-col items-center gap-5">
+                                <div className="bg-white/5 inline-block px-8 py-3 rounded-xl border border-violet-500/20">
                                     <p className="text-gray-400 text-xs uppercase tracking-wider mb-1">Contact</p>
-                                    <p className="text-xl font-bold text-white">Hari</p>
+                                    <p className="text-xl font-bold text-white">mathrix.ceg@gmail.com</p>
                                 </div>
                                 <button
                                     onClick={() => window.open(GOOGLE_FORM_URL, '_blank')}
-                                    className="w-full px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold rounded-xl hover:shadow-[0_0_20px_rgba(8,145,178,0.4)] transition-all transform hover:scale-[1.02] active:scale-95 text-lg"
+                                    className="w-full max-w-md px-10 py-5 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 text-white font-bold rounded-xl hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] transition-all transform hover:scale-[1.02] active:scale-95 text-lg"
                                 >
-                                    Register Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Workshop 2: Ethical Hacking */}
-                <motion.div
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 }}
-                    className="glass-card p-8 md:p-10 relative overflow-hidden text-center group hover:border-emerald-500/30 transition-all duration-500 flex flex-col h-full"
-                >
-                    <div className="absolute top-0 right-0 p-32 bg-emerald-600/10 blur-[80px] rounded-full group-hover:bg-emerald-600/20 transition-all" />
-                    <div className="relative z-10 flex flex-col items-center gap-6 flex-grow">
-                        <div className="flex items-center justify-center bg-black/20 rounded-xl p-6 group-hover:scale-110 transition-transform duration-500">
-                            <Terminal size={60} className="text-emerald-400" />
-                        </div>
-                        <div className="w-full flex flex-col items-center flex-grow">
-                            <h2 className="text-3xl font-bold mb-2 group-hover:text-emerald-300 transition-colors">Ethical Hacking Bootcamp</h2>
-                            <p className="text-emerald-400 font-mono text-sm mb-4">Feb 12, 2026 • 02:00 PM - 05:00 PM</p>
-                            <p className="text-gray-300 mb-8 leading-relaxed">
-                                Master the art of cybersecurity. Learn penetration testing, vulnerability assessment, and network defense strategies.
-                            </p>
-                            <div className="mt-auto w-full flex flex-col items-center gap-4">
-                                <div className="bg-white/5 inline-block px-6 py-2 rounded-xl border border-white/10">
-                                    <p className="text-gray-400 text-xs uppercase tracking-wider mb-1">Contact</p>
-                                    <p className="text-xl font-bold text-white">Hari</p>
-                                </div>
-                                <button
-                                    onClick={() => window.open(GOOGLE_FORM_URL, '_blank')}
-                                    className="w-full px-8 py-4 bg-gradient-to-r from-emerald-600 to-green-600 text-white font-bold rounded-xl hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all transform hover:scale-[1.02] active:scale-95 text-lg"
-                                >
-                                    Register Now
+                                    🚀 Register Now
                                 </button>
                             </div>
                         </div>
