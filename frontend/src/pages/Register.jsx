@@ -16,6 +16,11 @@ const Register = () => {
         screenshotUrl: ''
     });
 
+    // New States for Flow
+    const [collegeType, setCollegeType] = useState('other'); // 'ceg' or 'other'
+    const [regType, setRegType] = useState('individual'); // 'individual' or 'combo'
+    const [selectedCombo, setSelectedCombo] = useState('');
+
     const [file, setFile] = useState(null);
     const [status, setStatus] = useState('idle'); // idle, uploading, submitting, success, error
     const [message, setMessage] = useState('');
@@ -23,8 +28,16 @@ const Register = () => {
     const eventOptions = [
         "SQL – Query Quest", "MagicMatix", "Code Mathrix", "Through the Lens",
         "IPL Auction", "Paper Presentation", "GoofyChess", "Math Quiz",
-        "Find The Fixed Points", "Mathkinator"
+        "Find The Fixed Points", "Mathkinator", "Treasure Hunt"
     ];
+
+    const comboPackages = {
+        "Combo 1": ["SQL – Query Quest", "Code Mathrix", "Mathkinator"],
+        "Combo 2": ["Treasure Hunt", "Math Quiz", "GoofyChess"],
+        "Combo 3 (Non-Tech)": ["Through the Lens", "IPL Auction", "Mathkinator"]
+    };
+
+    const currentFee = collegeType === 'ceg' ? 60 : 120;
 
     const workshopOptions = []; // No workshops currently
 
@@ -154,16 +167,94 @@ const Register = () => {
                             </div>
                         </div>
 
-                        <div className="space-y-4">
-                            <label className="text-gray-300 text-sm font-medium ml-1">Select Events</label>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
-                                {eventOptions.map(event => (
-                                    <label key={event} className="flex items-center space-x-3 cursor-pointer p-2 hover:bg-white/5 rounded-lg transition-colors">
-                                        <input type="checkbox" value={event} checked={formData.events.includes(event)} onChange={(e) => handleCheckboxChange(e, 'events')} className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0" />
-                                        <span className="text-gray-300">{event}</span>
+                        <div className="space-y-6 bg-white/5 p-6 rounded-xl border border-white/10">
+                            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <span className="w-1 h-6 bg-purple-500 rounded-full"></span>
+                                Registration Details
+                            </h3>
+
+                            {/* 1. College Type */}
+                            <div className="space-y-3">
+                                <label className="text-gray-300 text-sm font-medium">Are you studying in CEG?</label>
+                                <div className="flex gap-4">
+                                    <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'ceg' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                        <input type="radio" name="collegeType" value="ceg" checked={collegeType === 'ceg'} onChange={() => setCollegeType('ceg')} className="hidden" />
+                                        <div className="text-center font-bold">Yes, CEG Student</div>
+                                        <div className="text-center text-xs opacity-70 mt-1">Fee: ₹60</div>
                                     </label>
-                                ))}
+                                    <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'other' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                        <input type="radio" name="collegeType" value="other" checked={collegeType === 'other'} onChange={() => setCollegeType('other')} className="hidden" />
+                                        <div className="text-center font-bold">Other College</div>
+                                        <div className="text-center text-xs opacity-70 mt-1">Fee: ₹120</div>
+                                    </label>
+                                </div>
                             </div>
+
+                            {/* 2. Registration Type */}
+                            <div className="space-y-3">
+                                <label className="text-gray-300 text-sm font-medium">Registration Type</label>
+                                <div className="flex gap-4">
+                                    <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all ${regType === 'combo' ? 'bg-purple-500/20 border-purple-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                        <input type="radio" name="regType" value="combo" checked={regType === 'combo'} onChange={() => { setRegType('combo'); setFormData(p => ({ ...p, events: [] })); setSelectedCombo(''); }} className="hidden" />
+                                        <div className="text-center font-bold">Combo Package</div>
+                                        <div className="text-center text-xs opacity-70 mt-1">Best Value</div>
+                                    </label>
+                                    <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all ${regType === 'individual' ? 'bg-purple-500/20 border-purple-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                        <input type="radio" name="regType" value="individual" checked={regType === 'individual'} onChange={() => { setRegType('individual'); setFormData(p => ({ ...p, events: [] })); setSelectedCombo(''); }} className="hidden" />
+                                        <div className="text-center font-bold">Individual Events</div>
+                                        <div className="text-center text-xs opacity-70 mt-1">Select Custom</div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            {/* 3. Event Selection */}
+                            {regType === 'combo' ? (
+                                <div className="space-y-3">
+                                    <label className="text-gray-300 text-sm font-medium">Select Combo Package</label>
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        {Object.entries(comboPackages).map(([name, events]) => (
+                                            <label key={name} className={`relative p-4 rounded-xl border cursor-pointer transition-all h-full ${selectedCombo === name ? 'bg-pink-500/20 border-pink-500' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                                                <input
+                                                    type="radio"
+                                                    name="combo"
+                                                    value={name}
+                                                    checked={selectedCombo === name}
+                                                    onChange={() => {
+                                                        setSelectedCombo(name);
+                                                        setFormData(prev => ({ ...prev, events: events }));
+                                                    }}
+                                                    className="hidden"
+                                                />
+                                                <div className="font-bold text-white mb-2">{name}</div>
+                                                <ul className="text-xs text-gray-400 space-y-1 list-disc list-inside">
+                                                    {events.map((ev, i) => <li key={i}>{ev}</li>)}
+                                                </ul>
+                                                {selectedCombo === name && (
+                                                    <div className="absolute top-2 right-2 text-pink-500"><CheckCircle size={16} /></div>
+                                                )}
+                                            </label>
+                                        ))}
+                                    </div>
+                                    <div className="text-right text-sm text-pink-400 font-bold mt-2">
+                                        Selected Fee: ₹{currentFee}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="space-y-4">
+                                    <label className="text-gray-300 text-sm font-medium ml-1">Select Events</label>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
+                                        {eventOptions.map(event => (
+                                            <label key={event} className="flex items-center space-x-3 cursor-pointer p-2 hover:bg-white/5 rounded-lg transition-colors">
+                                                <input type="checkbox" value={event} checked={formData.events.includes(event)} onChange={(e) => handleCheckboxChange(e, 'events')} className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0" />
+                                                <span className="text-gray-300">{event}</span>
+                                            </label>
+                                        ))}
+                                    </div>
+                                    <div className="text-right text-sm text-pink-400 font-bold mt-2">
+                                        Registration Fee: ₹{currentFee}
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                         <div className="bg-white/5 p-6 rounded-xl border border-white/10 space-y-6">
