@@ -100,6 +100,7 @@ async def register_user(
         data['mathrixId'] = str(random.randint(100000, 999999))
 
         if db.save_registration(data):
+            print(f"DEBUG: Registration Saved. ID: {data['mathrixId']}")
             return {
                 "status": "success", 
                 "message": "Registration successful",
