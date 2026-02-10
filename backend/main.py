@@ -35,7 +35,7 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 # Services
-from utils.db_service import SQLiteService
+from utils.db_service import MongoDBService
 
 @app.get("/")
 def read_root():
@@ -89,7 +89,7 @@ async def register_user(
         import datetime
         data['timestamp'] = datetime.datetime.now().isoformat()
 
-        db = SQLiteService()
+        db = MongoDBService()
         if db.save_registration(data):
             return {"status": "success", "message": "Registration successful"}
         else:
@@ -105,13 +105,39 @@ async def get_all_registrations(secret: str = ""):
     if secret != admin_secret:
         raise HTTPException(status_code=401, detail="Unauthorized")
     
-    db = SQLiteService()
+    db = MongoDBService()
     registrations = db.get_all_registrations()
     
     # Sort by timestamp descending
     registrations.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
     
     return {"registrations": registrations}
+
+from utils.pdf_service import generate_ticket
+from fastapi.responses import StreamingResponse
+
+@app.get("/ticket/{transactionId}")
+async def get_ticket(transactionId: str):
+    db = MongoDBService()
+    registrations = db.get_all_registrations()
+    
+    # Find registration by transactionId
+    user_data = next((r for r in registrations if r['transactionId'] == transactionId), None)
+    
+    if not user_data:
+        raise HTTPException(status_code=404, detail="Registration not found")
+        
+    pdf_buffer = generate_ticket(user_data)
+    
+    headers = {
+        'Content-Disposition': f'attachment; filename="Mathrix_Ticket_{transactionId}.pdf"'
+    }
+    
+    return StreamingResponse(
+        pdf_buffer, 
+        media_type="application/pdf", 
+        headers=headers
+    )
 
 if __name__ == "__main__":
     import uvicorn
