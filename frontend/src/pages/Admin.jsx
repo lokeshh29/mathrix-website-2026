@@ -9,6 +9,10 @@ const Admin = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [selectedEvent, setSelectedEvent] = useState('All');
+
+    // Extract unique events for the filter dropdown
+    const allEvents = ['All', ...new Set(registrations.flatMap(reg => reg.events || []))];
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -43,12 +47,17 @@ const Admin = () => {
         }
     };
 
-    const filteredRegistrations = registrations.filter(reg =>
-        reg.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        reg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        reg.phone.includes(searchTerm) ||
-        reg.transactionId.includes(searchTerm)
-    );
+    const filteredRegistrations = registrations.filter(reg => {
+        const matchesSearch =
+            reg.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            reg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            reg.phone.includes(searchTerm) ||
+            reg.transactionId.includes(searchTerm);
+
+        const matchesEvent = selectedEvent === 'All' || (reg.events || []).includes(selectedEvent);
+
+        return matchesSearch && matchesEvent;
+    });
 
     const downloadCSV = () => {
         const headers = ["Full Name", "Email", "Phone", "College", "Dept", "Year", "Events", "Transaction ID", "Screenshot URL", "Timestamp"];
@@ -120,8 +129,8 @@ const Admin = () => {
                 </div>
             </div>
 
-            <div className="glass-card p-6 mb-8">
-                <div className="relative">
+            <div className="glass-card p-6 mb-8 flex flex-col md:flex-row gap-4">
+                <div className="relative flex-1">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                     <input
                         type="text"
@@ -130,6 +139,20 @@ const Admin = () => {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
+                </div>
+                <div className="relative w-full md:w-64">
+                    <Filter className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                    <select
+                        className="w-full bg-black/20 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white focus:outline-none focus:border-pink-500/50 appearance-none cursor-pointer"
+                        value={selectedEvent}
+                        onChange={(e) => setSelectedEvent(e.target.value)}
+                    >
+                        {allEvents.map((event, index) => (
+                            <option key={index} value={event} className="bg-gray-900 text-white">
+                                {event}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
 
