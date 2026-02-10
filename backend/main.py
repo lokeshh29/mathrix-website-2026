@@ -1,11 +1,7 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Depends, Request
-# ... imports ...
-
-# ... app definition ...
-
-
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import StreamingResponse
 import logging
 import os
 import shutil
@@ -109,16 +105,20 @@ async def register_user(
 
 @app.get("/uploads/{filename}")
 async def get_image(filename: str):
-    db = MongoDBService()
-    grid_out = db.get_file(filename)
-    
-    if not grid_out:
-        raise HTTPException(status_code=404, detail="Image not found")
+    try:
+        db = MongoDBService()
+        grid_out = db.get_file(filename)
         
-    return StreamingResponse(
-        grid_out, 
-        media_type=grid_out.content_type
-    )
+        if not grid_out:
+            raise HTTPException(status_code=404, detail="Image not found")
+            
+        return StreamingResponse(
+            grid_out, 
+            media_type=grid_out.content_type
+        )
+    except Exception as e:
+        logger.error(f"Error retrieving image {filename}: {e}")
+        raise HTTPException(status_code=500, detail="Could not retrieve image")
 
 @app.get("/registrations")
 async def get_all_registrations(secret: str = ""):
