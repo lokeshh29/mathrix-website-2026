@@ -87,8 +87,8 @@ def generate_ticket(data):
         box_size=10,
         border=4,
     )
-    # Data to encode in QR (Use Transaction ID or a verification URL)
-    qr_data = f"MATHRIX2026:{data.get('transactionId', 'UNKNOWN')}"
+    # Data to encode in QR (Use Transaction ID and Mathrix ID)
+    qr_data = f"MATHRIX2026:{data.get('mathrixId', 'UNKNOWN')}:{data.get('transactionId', 'UNKNOWN')}"
     qr.add_data(qr_data)
     qr.make(fit=True)
 
@@ -109,7 +109,7 @@ def generate_ticket(data):
     # --- Footer ---
     c.setFont("Helvetica-Oblique", 10)
     c.setFillColor(colors.gray)
-    c.context.setLineWidth(1)
+    c.setLineWidth(1)
     c.line(1 * inch, 1 * inch, 7.5 * inch, 1 * inch)
     c.drawString(1 * inch, 0.8 * inch, "Please present this ticket at the registration desk.")
     c.drawCentredString(width / 2, 0.5 * inch, "Mathrix 2026 | mathrix.co.in")
