@@ -213,13 +213,13 @@ const Register = () => {
                             {/* 1. College Type */}
                             <div className="space-y-3">
                                 <label className="text-gray-300 text-sm font-medium">Are you studying in CEG?</label>
-                                <div className="flex gap-4">
-                                    <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'ceg' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'ceg' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                         <input type="radio" name="collegeType" value="ceg" checked={collegeType === 'ceg'} onChange={() => setCollegeType('ceg')} className="hidden" />
                                         <div className="text-center font-bold">Yes, CEG Student</div>
                                         <div className="text-center text-xs opacity-70 mt-1">Fee: ₹60</div>
                                     </label>
-                                    <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'other' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                    <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'other' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                         <input type="radio" name="collegeType" value="other" checked={collegeType === 'other'} onChange={() => setCollegeType('other')} className="hidden" />
                                         <div className="text-center font-bold">Other College</div>
                                         <div className="text-center text-xs opacity-70 mt-1">Fee: ₹120</div>
@@ -230,13 +230,13 @@ const Register = () => {
                             {/* 2. Registration Type */}
                             <div className="space-y-3">
                                 <label className="text-gray-300 text-sm font-medium">Registration Type</label>
-                                <div className="flex gap-4">
-                                    <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all ${regType === 'combo' ? 'bg-purple-500/20 border-purple-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <label className={`p-4 rounded-xl border cursor-pointer transition-all ${regType === 'combo' ? 'bg-purple-500/20 border-purple-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                         <input type="radio" name="regType" value="combo" checked={regType === 'combo'} onChange={() => { setRegType('combo'); setFormData(p => ({ ...p, events: [] })); setSelectedCombo(''); }} className="hidden" />
                                         <div className="text-center font-bold">Combo Package</div>
                                         <div className="text-center text-xs opacity-70 mt-1">Best Value</div>
                                     </label>
-                                    <label className={`flex-1 p-4 rounded-xl border cursor-pointer transition-all ${regType === 'individual' ? 'bg-purple-500/20 border-purple-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                    <label className={`p-4 rounded-xl border cursor-pointer transition-all ${regType === 'individual' ? 'bg-purple-500/20 border-purple-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                         <input type="radio" name="regType" value="individual" checked={regType === 'individual'} onChange={() => { setRegType('individual'); setFormData(p => ({ ...p, events: [] })); setSelectedCombo(''); }} className="hidden" />
                                         <div className="text-center font-bold">Individual Events</div>
                                         <div className="text-center text-xs opacity-70 mt-1">Select Custom</div>

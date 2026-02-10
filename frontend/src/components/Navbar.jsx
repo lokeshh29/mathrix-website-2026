@@ -19,7 +19,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b border-white/5 bg-[#0f0518]/70 h-24">
+    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md border-b border-white/5 bg-[#0f0518]/70 h-20 md:h-24">
       <div className="container h-full mx-auto flex items-center justify-between px-6">
         {/* Logo & Brand */}
         <div className="flex items-center gap-3">
@@ -100,6 +100,13 @@ const Navbar = () => {
                   </div>
                 </NavLink>
               ))}
+              <NavLink
+                to="/register"
+                onClick={() => setIsOpen(false)}
+                className="block px-4 py-3 rounded-lg transition-all text-sm font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30 mt-2 text-center hover:bg-pink-500/30"
+              >
+                Register Now
+              </NavLink>
             </div>
           </motion.div>
         )}

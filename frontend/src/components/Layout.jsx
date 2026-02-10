@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
         <div className="min-h-screen flex flex-col relative">
             <ThreeBackground />
             <Navbar />
-            <main className="flex-grow pt-28 relative z-10">
+            <main className="flex-grow pt-24 md:pt-28 relative z-10">
                 {children}
             </main>
             {/* <ChatBot /> */}
