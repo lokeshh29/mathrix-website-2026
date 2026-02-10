@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
             <main className="flex-grow pt-28 relative z-10">
                 {children}
             </main>
-            <ChatBot />
+            {/* <ChatBot /> */}
             <footer className="glass border-t border-white/10 py-8 mt-20">
                 <div className="container mx-auto px-4 text-center text-gray-400">
                     <p>© 2026 Mathrix. All rights reserved.</p>
