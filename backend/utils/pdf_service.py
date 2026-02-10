@@ -10,112 +10,167 @@ def generate_ticket(data):
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
     width, height = letter
+    
+    # --- Colors ---
+    PURPLE = colors.HexColor("#A855F7")
+    DARK_PURPLE = colors.HexColor("#6B21A8")
+    LIGHT_GRAY = colors.HexColor("#F3F4F6")
+    TEXT_BLACK = colors.HexColor("#1F2937")
+    TEXT_GRAY = colors.HexColor("#4B5563")
+
+    # --- Modern Layout Constants ---
+    MARGIN = 0.75 * inch
+    CONTENT_WIDTH = width - (2 * MARGIN)
+    
+    # --- Background ---
+    # Minimalist purple top edge
+    c.setFillColor(PURPLE)
+    c.rect(0, height - 0.5 * inch, width, 0.5 * inch, fill=1, stroke=0)
 
     # --- Header ---
-    c.setFont("Helvetica-Bold", 24)
-    c.setFillColor(colors.purple)
-    c.drawString(1 * inch, height - 1 * inch, "Mathrix 2026 Ticket")
+    # Logo
+    logo_path = os.path.join(os.path.dirname(__file__), '../../frontend/src/assets/logo.png')
+    if os.path.exists(logo_path):
+        c.drawImage(logo_path, MARGIN, height - 1.8 * inch, width=1 * inch, height=1 * inch, mask='auto')
+
+    # Event Title
+    c.setFont("Helvetica-Bold", 32)
+    c.setFillColor(DARK_PURPLE)
+    c.drawString(MARGIN + 1.2 * inch, height - 1.4 * inch, "MATHRIX 2026")
     
-    # --- Mathrix ID ---
+    c.setFont("Helvetica", 12)
+    c.setFillColor(TEXT_GRAY)
+    c.drawString(MARGIN + 1.25 * inch, height - 1.65 * inch, "Department of Mathematics, Anna University")
+
+    # ID Badge (Floating Card Style)
     mathrix_id = data.get('mathrixId', 'PENDING')
-    c.setFillColor(colors.black)
-    c.setFont("Helvetica-Bold", 16)
-    c.drawRightString(7.5 * inch, height - 1 * inch, f"ID: {mathrix_id}")
+    # Shadow effect simulated by drawing offset rect if needed, but skipping for simplicity
     
-    c.setFont("Helvetica", 12)
-    c.drawString(1 * inch, height - 1.3 * inch, "Department of Mathematics, Anna University")
+    # ID Box
+    id_box_width = 2.2 * inch
+    id_box_height = 0.9 * inch
+    id_x = width - MARGIN - id_box_width
+    id_y = height - 1.8 * inch
     
-    # --- Check for Timestamp ---
-    timestamp = data.get('timestamp', 'N/A')
-    c.drawString(1 * inch, height - 1.5 * inch, f"Registered on: {timestamp}")
+    c.setFillColor(PURPLE)
+    c.roundRect(id_x, id_y, id_box_width, id_box_height, 6, fill=1, stroke=0)
+    
+    c.setFillColor(colors.white)
+    c.setFont("Helvetica-Bold", 10)
+    c.drawCentredString(id_x + id_box_width/2, id_y + 0.6 * inch, "ADMIT CARD ID")
+    c.setFont("Helvetica-Bold", 24)
+    c.drawCentredString(id_x + id_box_width/2, id_y + 0.25 * inch, f"{mathrix_id}")
+    
+    # Reset Fill
+    c.setFillColor(TEXT_BLACK)
 
-    c.line(1 * inch, height - 1.7 * inch, 7.5 * inch, height - 1.7 * inch)
+    # --- Divider ---
+    y = height - 2.2 * inch
+    c.setStrokeColor(LIGHT_GRAY)
+    c.setLineWidth(1)
+    c.line(MARGIN, y, width - MARGIN, y)
+    
+    # --- Timestamp (Subtle) ---
+    timestamp = data.get('timestamp', 'N/A').split('T')[0]
+    c.setFont("Helvetica", 9)
+    c.setFillColor(TEXT_GRAY)
+    c.drawRightString(width - MARGIN, y - 0.2 * inch, f"Issued Date: {timestamp}")
 
-    # --- Student Details ---
-    y = height - 2.5 * inch
+    # --- Attendee Profile ---
+    y -= 0.6 * inch
     c.setFont("Helvetica-Bold", 14)
-    c.drawString(1 * inch, y, "Attendee Details")
+    c.setFillColor(PURPLE)
+    c.drawString(MARGIN, y, "ATTENDEE PROFILE")
     y -= 0.3 * inch
-    
-    c.setFont("Helvetica", 12)
+
+    # Grid Layout for Details
     details = [
-        f"Name: {data.get('fullName', 'N/A')}",
-        f"Email: {data.get('email', 'N/A')}",
-        f"Phone: {data.get('phone', 'N/A')}",
-        f"College: {data.get('college', 'N/A')}",
-        f"Department: {data.get('dept', 'N/A')} (Year {data.get('year', 'N/A')})",
-        f"Transaction ID: {data.get('transactionId', 'N/A')}"
+        ("FULL NAME", data.get('fullName', 'N/A')),
+        ("EMAIL", data.get('email', 'N/A')),
+        ("PHONE", data.get('phone', 'N/A')),
+        ("COLLEGE", data.get('college', 'N/A')),
+        ("DEPARTMENT", f"{data.get('dept', 'N/A')} (Year {data.get('year', 'N/A')})"),
+        ("TRANSACTION ID", data.get('transactionId', 'N/A'))
     ]
 
-    for detail in details:
-        c.drawString(1.2 * inch, y, detail)
-        y -= 0.25 * inch
+    # Two columns
+    col1_x = MARGIN
+    col2_x = width / 2 + 0.2 * inch
+    
+    for i, (label, value) in enumerate(details):
+        is_col2 = i % 2 != 0
+        curr_x = col2_x if is_col2 else col1_x
+        curr_y = y
+        
+        # Label (Modern uppercase gray)
+        c.setFont("Helvetica-Bold", 8)
+        c.setFillColor(colors.HexColor("#9CA3AF")) # Lighter Gray
+        c.drawString(curr_x, curr_y, label)
+        
+        # Value (Bold Dark)
+        c.setFont("Helvetica-Bold", 11)
+        c.setFillColor(TEXT_BLACK)
+        c.drawString(curr_x, curr_y - 0.2 * inch, str(value))
+        
+        # Shift Y down every 2 items
+        if is_col2:
+            y -= 0.6 * inch
 
-    y -= 0.5 * inch
-
-    # --- Events ---
+    y -= 0.2 * inch
+    
+    # --- Events Section ---
+    c.setStrokeColor(LIGHT_GRAY)
+    c.line(MARGIN, y, width - MARGIN, y)
+    y -= 0.4 * inch
+    
     c.setFont("Helvetica-Bold", 14)
-    c.drawString(1 * inch, y, "Registered Events")
+    c.setFillColor(PURPLE)
+    c.drawString(MARGIN, y, "REGISTERED EVENTS")
     y -= 0.3 * inch
     
-    c.setFont("Helvetica", 12)
     events = data.get('events', [])
-    if events:
-        for event in events:
-            c.drawString(1.2 * inch, y, f"- {event}")
-            y -= 0.25 * inch
+    workshops = data.get('workshops', [])
+    
+    # Event Bubbles (Modern Tags)
+    c.setFont("Helvetica", 11)
+    
+    curr_x = MARGIN
+    row_height = 0.4 * inch
+    
+    all_items = events + workshops
+    if not all_items:
+        c.setFillColor(TEXT_GRAY)
+        c.drawString(MARGIN, y, "No events selected")
     else:
-        c.drawString(1.2 * inch, y, "No events selected")
-        y -= 0.25 * inch
+        for item in all_items:
+            # Draw bullet
+            c.setFillColor(PURPLE)
+            c.circle(curr_x + 0.05*inch, y + 0.05*inch, 3, fill=1, stroke=0)
+            
+            c.setFillColor(TEXT_BLACK)
+            c.drawString(curr_x + 0.2*inch, y, item)
+            y -= 0.35 * inch
 
-    # --- Workshops ---
-    if data.get('workshops'):
-        y -= 0.3 * inch
-        c.setFont("Helvetica-Bold", 14)
-        c.drawString(1 * inch, y, "Registered Workshops")
-        y -= 0.3 * inch
-        c.setFont("Helvetica", 12)
-        for workshop in data.get('workshops', []):
-            c.drawString(1.2 * inch, y, f"- {workshop}")
-            y -= 0.25 * inch
-
-    # --- QR Code ---
-    # Create QR code instance
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,
-    )
-    # Data to encode in QR (Use Transaction ID and Mathrix ID)
-    qr_data = f"MATHRIX2026:{data.get('mathrixId', 'UNKNOWN')}:{data.get('transactionId', 'UNKNOWN')}"
-    qr.add_data(qr_data)
-    qr.make(fit=True)
-
-    img = qr.make_image(fill_color="black", back_color="white")
-    
-    # Save QR code to a temporary file
-    temp_qr_path = f"temp_qr_{data.get('transactionId')}.png"
-    img.save(temp_qr_path)
-
-    # Draw QR code on PDF
-    # Position it at bottom right
-    c.drawImage(temp_qr_path, 5.5 * inch, height - 4 * inch, width=2 * inch, height=2 * inch)
-    
-    # Clean up temp file
-    if os.path.exists(temp_qr_path):
-        os.remove(temp_qr_path)
-        
-    # --- Footer ---
-    c.setFont("Helvetica-Oblique", 10)
-    c.setFillColor(colors.gray)
+    # --- Security Footer (Clean) ---
+    footer_y = 1.2 * inch
+    c.setStrokeColor(colors.HexColor("#EF4444")) # Red
     c.setLineWidth(1)
-    c.line(1 * inch, 1 * inch, 7.5 * inch, 1 * inch)
-    c.drawString(1 * inch, 0.8 * inch, "Please present this ticket at the registration desk.")
-    c.drawCentredString(width / 2, 0.5 * inch, "Mathrix 2026 | mathrix.co.in")
+    c.line(MARGIN, footer_y + 0.5 * inch, width - MARGIN, footer_y + 0.5 * inch)
+    
+    c.setFont("Helvetica-Bold", 11)
+    c.setFillColor(colors.HexColor("#B91C1C")) # Dark Red
+    c.drawCentredString(width/2, footer_y + 0.25 * inch, "OFFICIAL ENTRY PASS • SECURITY CHECK REQUIRED")
+    
+    c.setFont("Helvetica", 9)
+    c.setFillColor(TEXT_GRAY)
+    c.drawCentredString(width/2, footer_y, "Please present this pass along with your valid College ID Card.")
+
+    c.setFont("Helvetica", 9)
+    c.setFillColor(TEXT_GRAY)
+    c.drawCentredString(width/2, footer_y, "Please present this pass along with your valid College ID Card.")
 
     c.showPage()
     c.save()
-
+    
     buffer.seek(0)
     return buffer

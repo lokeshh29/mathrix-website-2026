@@ -90,7 +90,7 @@ const Home = () => {
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
                         <div className="md:w-1/2">
                             <h2 className="text-4xl font-bold mb-2">About Mathrix</h2>
-                            <h3 className="text-xl font-medium text-pink-400 tracking-[0.3em] uppercase mb-6">Epsilon to Infinity</h3>
+                            <h3 className="text-xl font-medium text-pink-400 tracking-[0.3em] uppercase mb-6">Beyond the limits</h3>
                             <p className="text-gray-300 mb-6 leading-relaxed">
                                 Mathrix 2026 is the annual intercollegiate technical symposium organised by the Department of Mathematics, College of Engineering Guindy (CEG), Anna University, Chennai. Mathrix is a one-of-a-kind fest that brings together logic, innovation, and problem-solving under one roof. Organized by the brilliant minds of M.Sc. Computer Science (5 years), M.Sc. Information Technology (5 years), and M.Sc. Mathematics (2 years), Mathrix is more than just a symposium—it's a fusion of numbers, algorithms, and cutting-edge tech.
                             </p>
