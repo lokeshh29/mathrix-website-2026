@@ -96,7 +96,6 @@ const Navbar = () => {
                 >
                   <div className="flex items-center justify-between">
                     {item.name}
-                    {item.name === 'Contact' && <span className="text-xs bg-pink-500/20 text-pink-300 px-2 py-0.5 rounded-full">Register</span>}
                   </div>
                 </NavLink>
               ))}
