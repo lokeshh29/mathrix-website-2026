@@ -1,4 +1,9 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Depends
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Depends, Request
+# ... imports ...
+
+# ... app definition ...
+
+
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import logging
@@ -43,6 +48,7 @@ def read_root():
 
 @app.post("/register")
 async def register_user(
+    request: Request,
     fullName: str = Form(...),
     email: str = Form(...),
     phone: str = Form(...),
@@ -63,9 +69,9 @@ async def register_user(
         with open(file_path, "wb") as buffer:
             shutil.copyfileobj(screenshot.file, buffer)
             
-        # Construct URL (assuming server runs on localhost:8000)
-        # In production/deployment, this valid URL logic might need adjustment
-        screenshot_url = f"http://localhost:8000/uploads/{filename}"
+        # Construct URL dynamically
+        base_url = str(request.base_url).rstrip("/")
+        screenshot_url = f"{base_url}/uploads/{filename}"
 
         # Parse JSON fields
         events_list = json.loads(events)
