@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Upload, CheckCircle, AlertCircle, Loader, Download } from 'lucide-react';
 import qrCode from '../assets/qr_code.jpeg';
@@ -22,6 +22,14 @@ const Register = () => {
     const [collegeType, setCollegeType] = useState('other'); // 'ceg' or 'other'
     const [regType, setRegType] = useState('individual'); // 'individual' or 'combo'
     const [selectedCombo, setSelectedCombo] = useState('');
+
+    useEffect(() => {
+        if (collegeType === 'ceg') {
+            setFormData(prev => ({ ...prev, college: 'CEG, Anna University' }));
+        } else {
+            setFormData(prev => ({ ...prev, college: '' }));
+        }
+    }, [collegeType]);
 
     const [file, setFile] = useState(null);
     const [status, setStatus] = useState('idle'); // idle, uploading, submitting, success, error
@@ -136,7 +144,7 @@ const Register = () => {
                 animate={{ opacity: 1, y: 0 }}
                 className="max-w-3xl mx-auto glass-card p-8 md:p-12"
             >
-                <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Event Registration</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Event Registration</h1>
 
                 {status === 'success' ? (
                     <div className="text-center py-12">
@@ -198,10 +206,12 @@ const Register = () => {
                                 <label className="text-gray-300 text-sm font-medium ml-1">Specialization / Branch</label>
                                 <input required type="text" name="specialization" value={formData.specialization} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="CSE / IT / EEE" />
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-gray-300 text-sm font-medium ml-1">College Name</label>
-                                <input required type="text" name="college" value={formData.college} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="Anna University" />
-                            </div>
+                            {collegeType === 'other' && (
+                                <div className="space-y-2">
+                                    <label className="text-gray-300 text-sm font-medium ml-1">College Name</label>
+                                    <input required={collegeType === 'other'} type="text" name="college" value={formData.college} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="Anna University" />
+                                </div>
+                            )}
                         </div>
 
                         <div className="space-y-6 bg-white/5 p-6 rounded-xl border border-white/10">
