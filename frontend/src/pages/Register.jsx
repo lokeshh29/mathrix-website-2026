@@ -142,9 +142,9 @@ const Register = () => {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="max-w-3xl mx-auto glass-card p-8 md:p-12"
+                className="max-w-3xl mx-auto glass-card p-6 md:p-12"
             >
-                <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Event Registration</h1>
+                <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent break-words">Event Registration</h1>
 
                 {status === 'success' ? (
                     <div className="text-center py-12">
