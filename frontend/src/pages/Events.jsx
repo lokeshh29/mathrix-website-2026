@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, MapPin, Clock, X, Info, Users, Trophy, FileText, CheckCircle, Terminal, Brain, Database, Palette, Compass, Projector, Sparkles, Sigma, Lightbulb, Crown, Camera } from 'lucide-react';
 
 const Events = () => {
     const [selectedEvent, setSelectedEvent] = useState(null);
-
-    const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfFWGiBte8C2_82HUeNClMEGVRhpaucNZqvm5UHv_o2aRxvMw/viewform?usp=publish-editor";
+    const navigate = useNavigate();
 
     const eventList = [
         {
@@ -499,7 +499,7 @@ const Events = () => {
                                                 </div>
 
                                                 <button
-                                                    onClick={() => window.open(GOOGLE_FORM_URL, '_blank')}
+                                                    onClick={() => navigate('/register')}
                                                     className="w-full py-4 btn btn-primary text-xl font-bold shadow-lg shadow-purple-500/20"
                                                 >
                                                     Register Now

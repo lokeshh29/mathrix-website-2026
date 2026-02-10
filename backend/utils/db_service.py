@@ -26,3 +26,15 @@ class DynamoDBService:
         except ClientError as e:
             logger.error(f"Error getting registration: {e}")
             return None
+
+    def get_all_registrations(self):
+        try:
+            response = self.table.scan()
+            data = response.get('Items', [])
+            while 'LastEvaluatedKey' in response:
+                response = self.table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
+                data.extend(response.get('Items', []))
+            return data
+        except ClientError as e:
+            logger.error(f"Error getting all registrations: {e}")
+            return []

@@ -117,6 +117,20 @@ async def get_upload_url(filename: str, filetype: str):
     else:
         raise HTTPException(status_code=500, detail="Failed to generate upload URL")
 
+@app.get("/registrations")
+async def get_all_registrations(secret: str = ""):
+    # Simple hardcoded secret for now
+    if secret != "mathrix-admin-2026":
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    
+    db_service = DynamoDBService()
+    registrations = db_service.get_all_registrations()
+    
+    # Sort by timestamp descending
+    registrations.sort(key=lambda x: x.get('timestamp', ''), reverse=True)
+    
+    return {"registrations": registrations}
+
 lambda_handler = Mangum(app)
 
 if __name__ == "__main__":
