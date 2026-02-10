@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Upload, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import qrCode from '../assets/qr_code.jpeg';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -281,8 +282,8 @@ const Register = () => {
                             </h3>
                             <div className="space-y-2">
                                 <p className="text-gray-400 text-sm">UPI ID: <span className="text-white font-mono font-bold">mathrix.ceg@okaxis</span></p>
-                                <div className="p-4 bg-white rounded-xl w-32 h-32 flex items-center justify-center mx-auto my-4">
-                                    <span className="text-black font-bold">QR CODE</span>
+                                <div className="p-2 bg-white rounded-xl w-48 h-48 flex items-center justify-center mx-auto my-4 overflow-hidden">
+                                    <img src={qrCode} alt="Payment QR Code" className="w-full h-full object-contain" />
                                 </div>
                             </div>
 
