@@ -27,7 +27,7 @@ const Home = () => {
                             <br /> CEG, Anna University
                             <span className="h-px w-8 bg-pink-500/50"></span>
                         </h2>
-                        <h1 className="text-5xl md:text-8xl font-extrabold mb-4 tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-b from-gray-100 to-gray-400 drop-shadow-[0_5px_15px_rgba(255,255,255,0.1)] leading-tight font-tech uppercase">
+                        <h1 className="text-4xl md:text-8xl font-extrabold mb-4 tracking-[0.05em] md:tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-b from-gray-100 to-gray-400 drop-shadow-[0_5px_15px_rgba(255,255,255,0.1)] leading-tight font-tech uppercase">
                             MATHRIX 2026
                         </h1>
                         <h2 className="text-xl md:text-3xl font-bold text-pink-500 tracking-widest font-tech mb-8 uppercase">
