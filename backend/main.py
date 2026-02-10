@@ -92,10 +92,19 @@ async def register_user(
         
         # Add timestamp
         import datetime
+        import random
         data['timestamp'] = datetime.datetime.now().isoformat()
+        
+        # Generate Mathrix ID (Simple 6-digit random)
+        # In production, check for collision, but for now 6 digits is enough space
+        data['mathrixId'] = str(random.randint(100000, 999999))
 
         if db.save_registration(data):
-            return {"status": "success", "message": "Registration successful"}
+            return {
+                "status": "success", 
+                "message": "Registration successful",
+                "mathrixId": data['mathrixId']
+            }
         else:
             raise HTTPException(status_code=500, detail="Failed to save registration")
             

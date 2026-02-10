@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Upload, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import { Upload, CheckCircle, AlertCircle, Loader, Download } from 'lucide-react';
 import qrCode from '../assets/qr_code.jpeg';
 
 const Register = () => {
@@ -95,24 +95,30 @@ const Register = () => {
                 body: submissionData
             });
 
+            const jsonResponse = await response.json();
+
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || "Registration failed");
+                throw new Error(jsonResponse.detail || "Registration failed");
             }
 
             setStatus('success');
-            setMessage('Registration successful! Check your email for confirmation.');
+            setMessage(`Registration successful! ID: ${jsonResponse.mathrixId}`);
+
+            // Auto-open PDF ticket
+            const ticketUrl = `${import.meta.env.VITE_API_URL}/ticket/${formData.transactionId}`;
+            window.open(ticketUrl, '_blank');
 
             // Optional: Reset form or redirect
-            setTimeout(() => {
-                // navigate('/'); 
-                setStatus('idle');
-                setFormData({
-                    fullName: '', email: '', phone: '', college: '', dept: '', year: '',
-                    events: [], workshops: [], transactionId: '', screenshotUrl: ''
-                });
-                setFile(null);
-            }, 3000);
+            // setTimeout(() => { ... }, 3000); // Removed timeout to let them see the ticket
+            // setTimeout(() => {
+            //     // navigate('/'); 
+            //     setStatus('idle');
+            //     setFormData({
+            //         fullName: '', email: '', phone: '', college: '', dept: '', year: '',
+            //         events: [], workshops: [], transactionId: '', screenshotUrl: ''
+            //     });
+            //     setFile(null);
+            // }, 3000);
 
         } catch (error) {
             console.error("Error submitting form:", error);
@@ -131,11 +137,30 @@ const Register = () => {
                 <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Event Registration</h1>
 
                 {status === 'success' ? (
-                    <div className="text-center py-20">
+                    <div className="text-center py-12">
                         <CheckCircle size={64} className="text-green-400 mx-auto mb-6" />
-                        <h2 className="text-3xl font-bold text-white mb-4">Registration Successful!</h2>
-                        <p className="text-gray-300">Thank you for registering. We look forward to seeing you at Mathrix 2026.</p>
-                        <button onClick={() => setStatus('idle')} className="mt-8 btn btn-primary">Register Another</button>
+                        <h2 className="text-3xl font-bold text-white mb-2">Registration Successful!</h2>
+                        <div className="bg-white/10 p-4 rounded-xl inline-block mb-6 border border-white/20">
+                            <p className="text-gray-300 text-sm uppercase tracking-wider mb-1">Your Mathrix ID</p>
+                            <p className="text-4xl font-mono font-bold text-pink-500 tracking-widest">{message.split("ID: ")[1] || "PENDING"}</p>
+                        </div>
+                        <p className="text-gray-300 max-w-md mx-auto mb-8">
+                            Thank you for registering. Please download your ticket below and present it at the registration desk.
+                        </p>
+
+                        <div className="flex justify-center gap-4">
+                            <a
+                                href={`${import.meta.env.VITE_API_URL}/ticket/${formData.transactionId}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn bg-purple-500 hover:bg-purple-600 text-white flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all"
+                            >
+                                <Download size={20} /> Download Ticket
+                            </a>
+                            <button onClick={() => setStatus('idle')} className="btn bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl transition-all">
+                                Register Another
+                            </button>
+                        </div>
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">

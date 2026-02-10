@@ -16,12 +16,16 @@ def generate_ticket(data):
     c.setFillColor(colors.purple)
     c.drawString(1 * inch, height - 1 * inch, "Mathrix 2026 Ticket")
     
+    # --- Mathrix ID ---
+    mathrix_id = data.get('mathrixId', 'PENDING')
     c.setFillColor(colors.black)
+    c.setFont("Helvetica-Bold", 16)
+    c.drawRightString(7.5 * inch, height - 1 * inch, f"ID: {mathrix_id}")
+    
     c.setFont("Helvetica", 12)
     c.drawString(1 * inch, height - 1.3 * inch, "Department of Mathematics, Anna University")
     
     # --- Check for Timestamp ---
-    # In case data['timestamp'] doesn't exist or is None
     timestamp = data.get('timestamp', 'N/A')
     c.drawString(1 * inch, height - 1.5 * inch, f"Registered on: {timestamp}")
 
