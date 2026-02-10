@@ -48,6 +48,11 @@ const Register = () => {
 
     const handleCheckboxChange = (e, type) => {
         const { value, checked } = e.target;
+        if (checked && type === 'events' && regType === 'individual' && formData.events.length >= 3) {
+            alert("You can select a maximum of 3 events for Individual Registration.");
+            return;
+        }
+
         setFormData(prev => {
             const list = prev[type];
             if (checked) {
@@ -243,12 +248,24 @@ const Register = () => {
                                 <div className="space-y-4">
                                     <label className="text-gray-300 text-sm font-medium ml-1">Select Events</label>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
-                                        {eventOptions.map(event => (
-                                            <label key={event} className="flex items-center space-x-3 cursor-pointer p-2 hover:bg-white/5 rounded-lg transition-colors">
-                                                <input type="checkbox" value={event} checked={formData.events.includes(event)} onChange={(e) => handleCheckboxChange(e, 'events')} className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0" />
-                                                <span className="text-gray-300">{event}</span>
-                                            </label>
-                                        ))}
+                                        {eventOptions.map(event => {
+                                            const isMaxSelected = regType === 'individual' && formData.events.length >= 3;
+                                            const isDisabled = isMaxSelected && !formData.events.includes(event);
+
+                                            return (
+                                                <label key={event} className={`flex items-center space-x-3 p-2 rounded-lg transition-colors ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5 cursor-pointer'}`}>
+                                                    <input
+                                                        type="checkbox"
+                                                        value={event}
+                                                        checked={formData.events.includes(event)}
+                                                        onChange={(e) => handleCheckboxChange(e, 'events')}
+                                                        disabled={isDisabled}
+                                                        className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0 disabled:opacity-50"
+                                                    />
+                                                    <span className="text-gray-300">{event}</span>
+                                                </label>
+                                            );
+                                        })}
                                     </div>
                                     <div className="text-right text-sm text-pink-400 font-bold mt-2">
                                         Registration Fee: ₹{currentFee}
