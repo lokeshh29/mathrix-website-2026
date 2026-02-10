@@ -24,7 +24,12 @@ app = FastAPI(title="Mathrix API", version="1.0.0")
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Allow all for local dev ease
+    allow_origins=[
+        "http://localhost:5173", 
+        "https://mathrix-website-2026.onrender.com",
+        "https://www.mathrix.co.in",
+        "https://mathrix.co.in"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
