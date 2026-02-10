@@ -104,7 +104,7 @@ const Events = () => {
             details: {
                 description: 'Through the Lens is an online photography event that celebrates creativity, perspective, and visual storytelling. Participants submit their best photographs based on given themes, showcasing their ability to capture moments that tell compelling stories through imagery.',
                 rounds: [
-                    { title: 'Online Submission', desc: 'Submit photographs based on the announced theme before deadline (up to 1:00 PM).' }
+                    { title: 'Online Submission', desc: 'Submit photographs based on the announced theme before deadline (19th Feb 6:00 PM).' }
                 ],
                 rules: [
                     'Photographs must be original work.',
@@ -119,7 +119,7 @@ const Events = () => {
                 coordinator: 'Event Coordinator (TBA)'
             },
             date: 'February 20, 2026',
-            time: 'Online - Up to 1:00 PM',
+            time: 'Online - Deadline: 19th Feb 6:00 PM',
             location: 'Online',
             category: 'Non Technical',
             icon: Camera,

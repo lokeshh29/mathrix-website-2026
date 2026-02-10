@@ -217,7 +217,7 @@ const Home = () => {
                             title: 'Through the Lens',
                             description: 'Online photography event celebrating creativity and visual storytelling.',
                             date: 'February 20, 2026',
-                            time: 'Online - Up to 1:00 PM',
+                            time: 'Online - Deadline: 19th Feb 6:00 PM',
                             location: 'Online',
                             category: 'Non Technical',
                             icon: Camera,

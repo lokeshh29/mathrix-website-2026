@@ -57,7 +57,7 @@ const Schedule = () => {
             coordinator: "Saathvika"
         },
         {
-            time: "Up to 1:00 PM",
+            time: "Deadline: 19th Feb 6:00 PM",
             title: "Through the Lens",
             category: "Non Technical",
             location: "Online",
