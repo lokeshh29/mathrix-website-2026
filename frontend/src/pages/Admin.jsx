@@ -10,25 +10,34 @@ const Admin = () => {
     const [error, setError] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (password === 'mathrix-admin-2026') {
+        setLoading(true);
+        setError('');
+
+        try {
+            // Verify password by attempting to fetch data
+            await fetchRegistrations(password);
             setIsAuthenticated(true);
-            fetchRegistrations();
-        } else {
-            setError('Invalid Password');
+        } catch (err) {
+            setError('Invalid Password or Server Error');
+            setIsAuthenticated(false);
+        } finally {
+            setLoading(false);
         }
     };
 
-    const fetchRegistrations = async () => {
+    const fetchRegistrations = async (secret = password) => {
         setLoading(true);
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/registrations?secret=mathrix-admin-2026`);
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/registrations?secret=${secret}`);
+            if (res.status === 401) throw new Error('Invalid Password');
             if (!res.ok) throw new Error('Failed to fetch data');
             const data = await res.json();
             setRegistrations(data.registrations);
         } catch (err) {
             setError(err.message);
+            throw err; // Propagate error to handleLogin
         } finally {
             setLoading(false);
         }
