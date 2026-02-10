@@ -7,6 +7,7 @@ import Schedule from './pages/Schedule';
 import Workshops from './pages/Workshops';
 import Sponsors from './pages/Sponsors';
 import Members from './pages/Members';
+import Register from './pages/Register';
 import Contact from './pages/Contact';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/workshops" element={<Workshops />} />
           <Route path="/sponsors" element={<Sponsors />} />
           <Route path="/members" element={<Members />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Layout>

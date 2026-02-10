@@ -58,9 +58,9 @@ const Navbar = () => {
               )}
             </NavLink>
           ))}
-          <a href="/events" className="ml-6 px-7 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-base font-bold transition-all hover:scale-105 active:scale-95 text-pink-300 hover:text-pink-200 hover:border-pink-500/30 shadow-lg shadow-pink-500/10">
+          <NavLink to="/register" className="ml-6 px-7 py-3 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-base font-bold transition-all hover:scale-105 active:scale-95 text-pink-300 hover:text-pink-200 hover:border-pink-500/30 shadow-lg shadow-pink-500/10">
             Register Now
-          </a>
+          </NavLink>
         </div>
 
         {/* Mobile Menu Button */}

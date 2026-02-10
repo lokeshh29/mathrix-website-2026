@@ -77,6 +77,46 @@ async def send_email(request: EmailRequest):
         raise HTTPException(status_code=500, detail="Failed to send email.")
     return {"status": "success", "message": "Email sent successfully."}
 
+# --- Registration Routes ---
+from utils.db_service import DynamoDBService
+from utils.s3_service import S3Service
+from pydantic import BaseModel
+from typing import List
+
+class RegistrationRequest(BaseModel):
+    fullName: str
+    email: str
+    phone: str
+    college: str
+    dept: str
+    year: str
+    events: List[str]
+    workshops: List[str]
+    transactionId: str
+    screenshotUrl: str
+
+@app.post("/register")
+async def register_user(request: RegistrationRequest):
+    db_service = DynamoDBService()
+    import datetime
+    
+    data = request.model_dump()
+    data['timestamp'] = datetime.datetime.now().isoformat()
+    
+    if db_service.save_registration(data):
+         return {"status": "success", "message": "Registration successful"}
+    else:
+         raise HTTPException(status_code=500, detail="Failed to save registration")
+
+@app.get("/upload-url")
+async def get_upload_url(filename: str, filetype: str):
+    s3_service = S3Service()
+    url = s3_service.generate_presigned_url(filename)
+    if url:
+        return {"uploadUrl": url, "filename": filename}
+    else:
+        raise HTTPException(status_code=500, detail="Failed to generate upload URL")
+
 lambda_handler = Mangum(app)
 
 if __name__ == "__main__":
