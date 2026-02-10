@@ -142,7 +142,7 @@ const Admin = () => {
                                 <th className="p-4">Contact</th>
                                 <th className="p-4">College/Dept</th>
                                 <th className="p-4">Events</th>
-                                <th className="p-4">Payment</th>
+                                <th className="p-4">Transaction ID</th>
                                 <th className="p-4">Actions</th>
                             </tr>
                         </thead>
@@ -151,7 +151,6 @@ const Admin = () => {
                                 <tr key={index} className="hover:bg-white/5 transition-colors">
                                     <td className="p-4">
                                         <div className="font-bold text-white">{reg.fullName}</div>
-                                        <div className="text-xs text-gray-500">{new Date(reg.timestamp).toLocaleString()}</div>
                                     </td>
                                     <td className="p-4">
                                         <div>{reg.email}</div>
