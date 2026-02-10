@@ -3,6 +3,7 @@ import logging
 from typing import List, Dict, Optional
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
+import gridfs
 import datetime
 
 logger = logging.getLogger(__name__)
@@ -17,9 +18,30 @@ class MongoDBService:
             self.client = MongoClient(MONGO_URI)
             self.db = self.client[DB_NAME]
             self.collection = self.db.registrations
+            self.fs = gridfs.GridFS(self.db)
         except Exception as e:
             logger.error(f"Failed to connect to MongoDB: {e}")
             raise e
+
+    def save_file(self, file_content, filename, content_type):
+        try:
+            # Delete if exists to avoid duplicates with same name (optional strategy)
+            existing = self.fs.find_one({"filename": filename})
+            if existing:
+                self.fs.delete(existing._id)
+            
+            self.fs.put(file_content, filename=filename, content_type=content_type)
+            return True
+        except Exception as e:
+            logger.error(f"Error saving file to GridFS: {e}")
+            return False
+
+    def get_file(self, filename):
+        try:
+            return self.fs.find_one({"filename": filename})
+        except Exception as e:
+            logger.error(f"Error retrieving file from GridFS: {e}")
+            return None
 
     def save_registration(self, data: Dict) -> bool:
         try:

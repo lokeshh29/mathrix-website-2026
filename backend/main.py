@@ -34,10 +34,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Static Files for Uploads
-UPLOAD_DIR = "uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
-app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+# Static Files for Uploads - No longer needed with GridFS
+# UPLOAD_DIR = "uploads"
+# os.makedirs(UPLOAD_DIR, exist_ok=True)
+# app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 # Services
 from utils.db_service import MongoDBService
@@ -61,15 +61,18 @@ async def register_user(
     screenshot: UploadFile = File(...)
 ):
     try:
-        # Save file locally
+        # Save file to GridFS
+        db = MongoDBService()
         file_extension = screenshot.filename.split(".")[-1]
         filename = f"{transactionId}_{email}.{file_extension}"
-        file_path = os.path.join(UPLOAD_DIR, filename)
         
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(screenshot.file, buffer)
-            
-        # Construct URL dynamically
+        # Read file content
+        file_content = await screenshot.read()
+        
+        if not db.save_file(file_content, filename, screenshot.content_type):
+             raise HTTPException(status_code=500, detail="Failed to save screenshot")
+
+        # Construct URL dynamically pointing to our new endpoint
         base_url = str(request.base_url).rstrip("/")
         screenshot_url = f"{base_url}/uploads/{filename}"
 
@@ -88,14 +91,13 @@ async def register_user(
             "events": events_list,
             "workshops": workshops_list,
             "screenshotUrl": screenshot_url,
-            "timestamp": None # Will be set by DB or use datetime here
+            "timestamp": None 
         }
         
         # Add timestamp
         import datetime
         data['timestamp'] = datetime.datetime.now().isoformat()
 
-        db = MongoDBService()
         if db.save_registration(data):
             return {"status": "success", "message": "Registration successful"}
         else:
@@ -104,6 +106,19 @@ async def register_user(
     except Exception as e:
         logger.error(f"Registration error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/uploads/{filename}")
+async def get_image(filename: str):
+    db = MongoDBService()
+    grid_out = db.get_file(filename)
+    
+    if not grid_out:
+        raise HTTPException(status_code=404, detail="Image not found")
+        
+    return StreamingResponse(
+        grid_out, 
+        media_type=grid_out.content_type
+    )
 
 @app.get("/registrations")
 async def get_all_registrations(secret: str = ""):
@@ -120,7 +135,8 @@ async def get_all_registrations(secret: str = ""):
     return {"registrations": registrations}
 
 from utils.pdf_service import generate_ticket
-from fastapi.responses import StreamingResponse
+# StreamingResponse is already imported above if strict organization, 
+# but ensuring it's available for both endpoints.
 
 @app.get("/ticket/{transactionId}")
 async def get_ticket(transactionId: str):
