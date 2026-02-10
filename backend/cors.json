@@ -1,0 +1,22 @@
+{
+    "CORSRules": [
+        {
+            "AllowedHeaders": [
+                "*"
+            ],
+            "AllowedMethods": [
+                "PUT",
+                "POST",
+                "GET"
+            ],
+            "AllowedOrigins": [
+                "http://localhost:5173",
+                "https://mathrix.co.in",
+                "https://www.mathrix.co.in"
+            ],
+            "ExposeHeaders": [
+                "ETag"
+            ]
+        }
+    ]
+}

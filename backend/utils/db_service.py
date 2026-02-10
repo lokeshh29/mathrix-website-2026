@@ -1,40 +1,84 @@
-import boto3
-import os
+import sqlite3
+import json
 import logging
-from botocore.exceptions import ClientError
+import os
+from typing import List, Dict, Optional
 
 logger = logging.getLogger(__name__)
 
-class DynamoDBService:
-    def __init__(self):
-        self.dynamodb = boto3.resource('dynamodb', region_name=os.getenv('AWS_REGION', 'us-east-1'))
-        self.table_name = os.getenv('DYNAMODB_TABLE', 'MathrixRegistrations')
-        self.table = self.dynamodb.Table(self.table_name)
+DB_PATH = "registrations.db"
 
-    def save_registration(self, data: dict):
+class SQLiteService:
+    def __init__(self):
+        self._init_db()
+
+    def _init_db(self):
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS registrations (
+                email TEXT PRIMARY KEY,
+                fullName TEXT,
+                phone TEXT,
+                college TEXT,
+                dept TEXT,
+                year TEXT,
+                events TEXT, -- JSON string
+                workshops TEXT, -- JSON string
+                transactionId TEXT,
+                screenshotUrl TEXT,
+                timestamp TEXT
+            )
+        ''')
+        conn.commit()
+        conn.close()
+
+    def save_registration(self, data: Dict) -> bool:
         try:
-            self.table.put_item(Item=data)
+            conn = sqlite3.connect(DB_PATH)
+            cursor = conn.cursor()
+            
+            # Convert lists to JSON strings
+            events_json = json.dumps(data.get('events', []))
+            workshops_json = json.dumps(data.get('workshops', []))
+            
+            cursor.execute('''
+                INSERT OR REPLACE INTO registrations (
+                    email, fullName, phone, college, dept, year, 
+                    events, workshops, transactionId, screenshotUrl, timestamp
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ''', (
+                data['email'], data['fullName'], data['phone'], data['college'], 
+                data['dept'], data['year'], events_json, workshops_json, 
+                data['transactionId'], data['screenshotUrl'], data['timestamp']
+            ))
+            
+            conn.commit()
+            conn.close()
             return True
-        except ClientError as e:
+        except Exception as e:
             logger.error(f"Error saving registration: {e}")
             return False
 
-    def get_registration(self, email: str):
+    def get_all_registrations(self) -> List[Dict]:
         try:
-            response = self.table.get_item(Key={'email': email})
-            return response.get('Item')
-        except ClientError as e:
-            logger.error(f"Error getting registration: {e}")
-            return None
-
-    def get_all_registrations(self):
-        try:
-            response = self.table.scan()
-            data = response.get('Items', [])
-            while 'LastEvaluatedKey' in response:
-                response = self.table.scan(ExclusiveStartKey=response['LastEvaluatedKey'])
-                data.extend(response.get('Items', []))
+            conn = sqlite3.connect(DB_PATH)
+            conn.row_factory = sqlite3.Row  # To access columns by name
+            cursor = conn.cursor()
+            
+            cursor.execute('SELECT * FROM registrations')
+            rows = cursor.fetchall()
+            
+            data = []
+            for row in rows:
+                item = dict(row)
+                # Parse JSON strings back to lists
+                item['events'] = json.loads(item['events']) if item['events'] else []
+                item['workshops'] = json.loads(item['workshops']) if item['workshops'] else []
+                data.append(item)
+                
+            conn.close()
             return data
-        except ClientError as e:
+        except Exception as e:
             logger.error(f"Error getting all registrations: {e}")
             return []

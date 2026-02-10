@@ -57,47 +57,48 @@ const Register = () => {
         setMessage('');
 
         try {
-            let screenshotUrl = '';
+            if (!file) throw new Error("Please upload a payment screenshot");
 
-            // 1. Upload File to S3
-            if (file) {
-                const uploadRes = await fetch(`${import.meta.env.VITE_API_URL}/upload-url?filename=${file.name}&filetype=${file.type}`);
-                if (!uploadRes.ok) throw new Error("Failed to get upload URL");
-                const { uploadUrl } = await uploadRes.json();
+            const submissionData = new FormData();
+            submissionData.append('fullName', formData.fullName);
+            submissionData.append('email', formData.email);
+            submissionData.append('phone', formData.phone);
+            submissionData.append('college', formData.college);
+            submissionData.append('dept', formData.dept);
+            submissionData.append('year', formData.year);
+            submissionData.append('transactionId', formData.transactionId);
+            submissionData.append('events', JSON.stringify(formData.events));
+            submissionData.append('workshops', JSON.stringify(formData.workshops));
+            submissionData.append('screenshot', file);
 
-                await fetch(uploadUrl, {
-                    method: 'PUT',
-                    body: file,
-                    headers: { 'Content-Type': file.type }
-                });
-
-                screenshotUrl = uploadUrl.split('?')[0];
-            }
-
-            // 2. Submit Registration Data
-            setStatus('submitting');
-            const dataToSubmit = { ...formData, screenshotUrl };
-
-            const registerRes = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(dataToSubmit)
+                body: submissionData
             });
 
-            if (!registerRes.ok) throw new Error("Registration failed");
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.detail || "Registration failed");
+            }
 
             setStatus('success');
             setMessage('Registration successful! Check your email for confirmation.');
-            setFormData({
-                fullName: '', email: '', phone: '', college: '', dept: '', year: '',
-                events: [], workshops: [], transactionId: '', screenshotUrl: ''
-            });
-            setFile(null);
+
+            // Optional: Reset form or redirect
+            setTimeout(() => {
+                // navigate('/'); 
+                setStatus('idle');
+                setFormData({
+                    fullName: '', email: '', phone: '', college: '', dept: '', year: '',
+                    events: [], workshops: [], transactionId: '', screenshotUrl: ''
+                });
+                setFile(null);
+            }, 3000);
 
         } catch (error) {
-            console.error(error);
+            console.error("Error submitting form:", error);
             setStatus('error');
-            setMessage(error.message || 'Something went wrong. Please try again.');
+            setMessage(error.message || "An error occurred. Please try again.");
         }
     };
 
@@ -185,10 +186,10 @@ const Register = () => {
                                 <div className="space-y-2">
                                     <label className="text-gray-300 text-sm font-medium ml-1">Payment Screenshot</label>
                                     <div className="relative">
-                                        <input required type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="file-upload" />
-                                        <label htmlFor="file-upload" className="w-full flex items-center justify-center gap-2 bg-white/5 border border-dashed border-white/20 rounded-xl px-4 py-3 text-gray-400 cursor-pointer hover:bg-white/10 transition-all">
+                                        <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="file-upload" />
+                                        <label htmlFor="file-upload" className={`w-full flex items-center justify-center gap-2 bg-white/5 border border-dashed ${file ? 'border-green-500 text-green-400' : 'border-white/20 text-gray-400'} rounded-xl px-4 py-3 cursor-pointer hover:bg-white/10 transition-all`}>
                                             <Upload size={20} />
-                                            {file ? file.name : "Upload Screenshot"}
+                                            {file ? file.name : "Upload Screenshot (Required)"}
                                         </label>
                                     </div>
                                 </div>
@@ -203,11 +204,7 @@ const Register = () => {
                         )}
 
                         <button disabled={status === 'uploading' || status === 'submitting'} type="submit" className="w-full btn btn-primary py-4 text-lg font-bold shadow-lg shadow-pink-500/20 disabled:opacity-50 disabled:cursor-not-allowed">
-                            {status === 'uploading' ? (
-                                <span className="flex items-center justify-center gap-2">
-                                    <Loader className="animate-spin" /> Uploading Proof...
-                                </span>
-                            ) : status === 'submitting' ? (
+                            {status === 'uploading' || status === 'submitting' ? (
                                 <span className="flex items-center justify-center gap-2">
                                     <Loader className="animate-spin" /> Registering...
                                 </span>

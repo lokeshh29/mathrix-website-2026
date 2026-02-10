@@ -1,18 +1,16 @@
-backend/__pycache__/agent.cpython-311.pyc
-backend/configs/__pycache__/config.cpython-311.pyc
-backend/handler/__pycache__/handler.cpython-311.pyc
-backend/tools/__pycache__/kb_tool.cpython-311.pyc
-backend/utils/__pycache__/Utils.cpython-311.pyc
-backend/.env
-backend/router/__pycache__/agents.cpython-311.pyc
-frontend/.env
-backend/__pycache__/main.cpython-311.pyc
-backend/handler/__pycache__/__init__.cpython-311.pyc
-backend/router/__pycache__/__init__.cpython-311.pyc
-backend/router/__pycache__/agents.cpython-311.pyc
-backend/router/__pycache__/agents.cpython-311.pyc
-backend/router/__pycache__/agents.cpython-311.pyc
-backend/schemas/__pycache__/__init__.cpython-311.pyc
-backend/utils/__pycache__/__init__.cpython-311.pyc
-backend/utils/__pycache__/email_service.cpython-311.pyc
-backend/schemas/__pycache__/chat.cpython-311.pyc
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Javascript/Node
+node_modules/
+dist/
+.DS_Store
+
+# Local Stack
+backend/uploads/*
+!backend/uploads/.keep
+backend/registrations.db
