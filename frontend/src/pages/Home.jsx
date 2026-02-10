@@ -23,7 +23,8 @@ const Home = () => {
                     >
                         <h2 className="text-pink-300 font-semibold tracking-[0.2em] text-sm md:text-lg uppercase mb-6 flex items-center justify-center gap-4 font-tech">
                             <span className="h-px w-8 bg-pink-500/50"></span>
-                            Department of Mathematics, CEG, Anna University
+                            Department of Mathematics
+                            <br /> CEG, Anna University
                             <span className="h-px w-8 bg-pink-500/50"></span>
                         </h2>
                         <h1 className="text-6xl md:text-8xl font-extrabold mb-4 tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-b from-gray-100 to-gray-400 drop-shadow-[0_5px_15px_rgba(255,255,255,0.1)] leading-tight font-tech uppercase">
@@ -57,7 +58,6 @@ const Home = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
                     {[
                         { icon: <Zap size={32} className="text-yellow-400" />, title: 'Tech Events', desc: 'Coding, hacking, and soldering logic circuits.', link: '/events' },
-                        { icon: <Users size={32} className="text-pink-400" />, title: 'Workshops', desc: 'Hands-on sessions with industry experts.', link: '/workshops' },
                         { icon: <Award size={32} className="text-rose-400" />, title: 'Non-Tech Events', desc: 'Showcase your skills and win exciting prizes.', link: '/events' },
                     ].map((item, index) => (
                         <Link to={item.link} key={index} className="contents">
@@ -103,10 +103,7 @@ const Home = () => {
                                     <div className="text-3xl font-bold text-pink-400 mb-1">4+</div>
                                     <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Non-Tech Events</div>
                                 </div>
-                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
-                                    <div className="text-3xl font-bold text-purple-400 mb-1">2+</div>
-                                    <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Workshops</div>
-                                </div>
+
                                 <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
                                     <div className="text-3xl font-bold text-indigo-400 mb-1">500+</div>
                                     <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Participants</div>
