@@ -7,6 +7,10 @@ import shutil
 from typing import List, Optional
 import json
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
@@ -97,7 +101,8 @@ async def register_user(
 
 @app.get("/registrations")
 async def get_all_registrations(secret: str = ""):
-    if secret != "mathrix-admin-2026":
+    admin_secret = os.getenv("ADMIN_SECRET", "mathrix-admin-2026")
+    if secret != admin_secret:
         raise HTTPException(status_code=401, detail="Unauthorized")
     
     db = SQLiteService()
