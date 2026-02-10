@@ -102,7 +102,9 @@ def generate_ticket(data):
             ("EMAIL", data.get('email', 'N/A')),
             ("PHONE", data.get('phone', 'N/A')),
             ("COLLEGE", data.get('college', 'N/A')),
-            ("DEPARTMENT", f"{data.get('dept', 'N/A')} (Year {data.get('year', 'N/A')})"),
+            ("COURSE", data.get('course', 'N/A')),
+            ("SPECIALIZATION", data.get('specialization', 'N/A')),
+            ("YEAR", f"Year {data.get('year', 'N/A')}"),
             ("TRANSACTION ID", data.get('transactionId', 'N/A'))
         ]
 

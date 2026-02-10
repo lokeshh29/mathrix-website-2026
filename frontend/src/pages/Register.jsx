@@ -9,7 +9,8 @@ const Register = () => {
         email: '',
         phone: '',
         college: '',
-        dept: '',
+        course: '',
+        specialization: '',
         year: '',
         events: [],
         workshops: [],
@@ -83,7 +84,8 @@ const Register = () => {
             submissionData.append('email', formData.email);
             submissionData.append('phone', formData.phone);
             submissionData.append('college', formData.college);
-            submissionData.append('dept', formData.dept);
+            submissionData.append('course', formData.course);
+            submissionData.append('specialization', formData.specialization);
             submissionData.append('year', formData.year);
             submissionData.append('transactionId', formData.transactionId);
             submissionData.append('events', JSON.stringify(formData.events));
@@ -189,8 +191,12 @@ const Register = () => {
                                 </select>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-gray-300 text-sm font-medium ml-1">Department</label>
-                                <input required type="text" name="dept" value={formData.dept} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="Computer Science" />
+                                <label className="text-gray-300 text-sm font-medium ml-1">Course / Degree</label>
+                                <input required type="text" name="course" value={formData.course} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="B.E. / B.Tech" />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-gray-300 text-sm font-medium ml-1">Specialization / Branch</label>
+                                <input required type="text" name="specialization" value={formData.specialization} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="CSE / IT / EEE" />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-gray-300 text-sm font-medium ml-1">College Name</label>
