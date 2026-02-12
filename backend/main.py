@@ -242,7 +242,14 @@ async def search_tickets(q: str = ""):
     db = MongoDBService()
     registrations = db.get_all_registrations()
     
-    # Search by mathrixId or phone
+    # Search by mathrixId or phone (with or without +91 prefix)
+    phone_variants = [q]
+    if q.isdigit() and len(q) == 10:
+        phone_variants.append(f"+91{q}")
+        phone_variants.append(f"+91 {q}")
+    elif q.startswith("+91"):
+        phone_variants.append(q.replace("+91", "").strip())
+    
     matches = [
         {
             "fullName": r.get("fullName"),
@@ -252,7 +259,7 @@ async def search_tickets(q: str = ""):
             "college": r.get("college"),
         }
         for r in registrations
-        if r.get("mathrixId") == q or r.get("phone") == q
+        if r.get("mathrixId") == q or r.get("phone") in phone_variants
     ]
     
     return {"results": matches}
