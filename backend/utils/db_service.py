@@ -70,3 +70,11 @@ class MongoDBService:
             logger.error(f"Error getting registrations from MongoDB: {e}")
             return []
 
+    def delete_registration(self, transactionId: str) -> bool:
+        try:
+            result = self.collection.delete_one({'transactionId': transactionId})
+            return result.deleted_count > 0
+        except PyMongoError as e:
+            logger.error(f"Error deleting registration from MongoDB: {e}")
+            return False
+
