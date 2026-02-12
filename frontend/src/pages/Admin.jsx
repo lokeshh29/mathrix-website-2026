@@ -93,11 +93,19 @@ const Admin = () => {
         }
 
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/registrations/${transactionId}?secret=${password}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/registrations/${encodeURIComponent(transactionId)}?secret=${password}`, {
                 method: 'DELETE'
             });
 
-            if (!res.ok) throw new Error('Failed to delete');
+            if (!res.ok) {
+                const errorText = await res.text();
+                try {
+                    const errorJson = JSON.parse(errorText);
+                    throw new Error(errorJson.detail || 'Failed to delete');
+                } catch (e) {
+                    throw new Error(errorText || `Failed to delete (Status: ${res.status})`);
+                }
+            }
 
             // Refresh list
             fetchRegistrations(password);
