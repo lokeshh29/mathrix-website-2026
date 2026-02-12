@@ -31,7 +31,7 @@ const Schedule = () => {
     const eventSchedule = [
         {
             time: "10:30 AM – 11:00 AM",
-            title: "Query Quest (Session 1)",
+            title: "Query Quest [R1]",
             category: "Technical",
             location: "LH-6",
             icon: Database,
@@ -39,8 +39,8 @@ const Schedule = () => {
             coordinator: "RM Menaka, Madhumitha V"
         },
         {
-            time: "10:30 AM – 11:15 AM",
-            title: "MagicMatix (Session 1)",
+            time: "11:30 AM – 12:15 PM",
+            title: "Magic Matix [R1]",
             category: "General",
             location: "LH-1",
             icon: Sparkles,
@@ -48,16 +48,16 @@ const Schedule = () => {
             coordinator: "Sundhar Balamoorthy, Adithya B"
         },
         {
-            time: "10:40 AM – 12:15 PM",
-            title: "Treasure Hunt",
+            time: "10:30 AM – 11:45 AM",
+            title: "Math Wizz [R1]",
             category: "Math",
-            location: "LH-48",
-            icon: MapPin,
-            description: "Find The Fixed Points - Exploration based event.",
-            coordinator: "Saathvika"
+            location: "DH 13",
+            icon: Brain,
+            description: "Prelims: Written MCQ test.",
+            coordinator: "Safrin S"
         },
         {
-            time: "Deadline: 19th Feb 6:00 PM",
+            time: "Online",
             title: "Through the Lens",
             category: "Non Technical",
             location: "Online",
@@ -67,20 +67,20 @@ const Schedule = () => {
         },
         {
             time: "11:00 AM – 12:30 PM",
-            title: "Code Mathrix",
+            title: "Code Matrix [R1 & R2]",
             category: "Technical",
-            location: "Mathematics Dept Lab",
+            location: "Dept of Maths Lab",
             icon: Terminal,
-            description: "Collaborative coding marathon.",
+            description: "Collaborative coding marathon. (11:00-11:30, 11:35-12:30)",
             coordinator: "Kishore"
         },
         {
-            time: "11:00 AM – 1:00 PM",
+            time: "10:30 AM – 1:00 PM",
             title: "IPL Auction",
             category: "Non Technical",
             location: "LH-5",
             icon: Trophy,
-            description: "The Ultimate Bidding War.",
+            description: "The Ultimate Bidding War. (10:30-11:00, 11:15-1:00)",
             coordinator: "Siva Sudharsan S, Sankara Shivani C A"
         },
         {
@@ -102,35 +102,35 @@ const Schedule = () => {
             coordinator: "Madhan M"
         },
         {
-            time: "11:45 AM – 12:40 PM",
-            title: "Math Quiz (Session 1)",
-            category: "Math (MCQ)",
-            location: "Drawing Hall",
-            icon: Brain,
-            description: "Prelims: Written MCQ test.",
-            coordinator: "Safrin S"
+            time: "12:00 PM – 1:20 PM",
+            title: "Treasure Hunt (R1, R2)",
+            category: "Math",
+            location: "LH-48",
+            icon: MapPin,
+            description: "Find The Fixed Points - Exploration based event.",
+            coordinator: "Saathvika"
         },
         {
             time: "12:00 PM – 1:00 PM",
-            title: "Chess",
+            title: "Goofy Chess",
             category: "Non Technical",
-            location: "Online + Drawing Hall-13",
+            location: "LH-48",
             icon: Star,
-            description: "GoofyChess: Racing Kings & Crazyhouse.",
+            description: "Online + On Day (12:00PM-1:00PM). Racing Kings & Crazyhouse.",
             coordinator: "Bathmasree R, Nandha kishore R R"
         },
         {
-            time: "12:00 PM – 1:00 PM",
-            title: "Query Quest (Session 2)",
+            time: "12:15 PM – 1:00 PM",
+            title: "Query Quest [R2]",
             category: "Technical",
-            location: "RCC Lab",
+            location: "DOM-EXT",
             icon: Database,
             description: "Round 2: SQL Execution on real datasets.",
             coordinator: "RM Menaka, Madhumitha V"
         },
         {
-            time: "12:00 PM – 1:00 PM",
-            title: "MagicMatix (Session 2)",
+            time: "12:30 PM – 1:15 PM",
+            title: "Magic Matix [R2]",
             category: "General",
             location: "LH-1",
             icon: Sparkles,
@@ -138,8 +138,8 @@ const Schedule = () => {
             coordinator: "Sundhar Balamoorthy, Adithya B"
         },
         {
-            time: "2:00 PM – 3:00 PM",
-            title: "Math Quiz (Session 2)",
+            time: "2:00 PM – 3:25 PM",
+            title: "Math Wizz [R2]",
             category: "Math",
             location: "Vivek Audi",
             icon: Brain,
