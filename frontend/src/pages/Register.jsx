@@ -35,6 +35,37 @@ const Register = () => {
         "Find The Fixed Points", "Mathkinator", "Treasure Hunt"
     ];
 
+    const deadlines = {
+        // Start 10:30 -> Close 10:00 AM
+        "Code Mathrix": "2026-02-20T10:00:00+05:30",
+        "IPL Auction": "2026-02-20T10:00:00+05:30",
+        "Math Quiz": "2026-02-20T10:00:00+05:30",
+
+        // Start 11:00 -> Close 10:45
+        "SQL – Query Quest": "2026-02-20T10:45:00+05:30",
+        "Paper Presentation": "2026-02-20T10:45:00+05:30",
+
+        // Start 11:30 -> Close 11:15
+        "MagicMatix": "2026-02-20T11:15:00+05:30",
+
+        // Start 11:40 -> Close 11:25
+        "Treasure Hunt": "2026-02-20T11:25:00+05:30",
+        "Find The Fixed Points": "2026-02-20T11:25:00+05:30",
+
+        // Start 12:00 -> Close 11:45
+        "Mathkinator": "2026-02-20T11:45:00+05:30",
+        "GoofyChess": "2026-02-20T11:45:00+05:30",
+
+        // Special
+        "Through the Lens": "2026-02-19T10:00:00+05:30"
+    };
+
+    const isEventOpen = (eventName) => {
+        const deadline = deadlines[eventName];
+        if (!deadline) return true; // Open if no deadline defined
+        return new Date() < new Date(deadline);
+    };
+
     // Effect to update college for all attendees when type changes
     useEffect(() => {
         setAttendees(prev => prev.map(a => ({
@@ -80,6 +111,10 @@ const Register = () => {
 
             const currentEvents = a.events;
             if (checked) {
+                if (!isEventOpen(event)) {
+                    alert("Registration for this event is closed.");
+                    return a;
+                }
                 if (currentEvents.length >= 3) {
                     alert("Maximum 3 events per person allowed.");
                     return a;
@@ -212,9 +247,9 @@ const Register = () => {
                                 <AlertCircle size={20} /> Important Instructions
                             </h4>
                             <ul className="list-disc list-inside text-sm text-gray-300 space-y-2 pl-1 leading-relaxed">
-                                <li>You can select a maximum of <strong className="text-white">3 events per person</strong>.</li>
-                                <li>If you qualify for the next rounds of an event and miss another registered event due to time constraints, <strong className="text-white">we are not responsible for the conflict</strong>.</li>
-                                <li>Please check the schedule carefully before registering.</li>
+                                <li>Participants are permitted to register for a maximum of three events.</li>
+                                <li>It is the responsibility of the participants to verify that the scheduled events do not overlap in schedule.</li>
+                                <li>Kindly refer the schedule before submission.</li>
                                 <li>Registration fee is non-refundable.</li>
                             </ul>
                             <label className="flex items-center gap-3 p-4 bg-black/20 rounded-xl cursor-pointer hover:bg-black/30 transition-colors border border-white/5 select-none text-white group">
@@ -313,11 +348,12 @@ const Register = () => {
                                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                                                 {eventOptions.map(event => {
                                                     const isSelected = attendee.events.includes(event);
+                                                    const isEventClosed = !isEventOpen(event);
                                                     const isMaxReached = attendee.events.length >= 3;
-                                                    const isDisabled = isMaxReached && !isSelected;
+                                                    const isDisabled = (isMaxReached && !isSelected) || isEventClosed;
 
                                                     return (
-                                                        <label key={event} className={`flex items-center space-x-2 p-2 rounded-lg border text-sm cursor-pointer transition-all ${isSelected ? 'bg-pink-500/20 border-pink-500/50 text-white' : 'border-white/5 text-gray-400 hover:bg-white/5'} ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                                                        <label key={event} className={`flex items-center space-x-2 p-2 rounded-lg border text-sm cursor-pointer transition-all ${isSelected ? 'bg-pink-500/20 border-pink-500/50 text-white' : 'border-white/5 text-gray-400 hover:bg-white/5'} ${isDisabled ? 'opacity-50 cursor-not-allowed bg-black/20' : ''}`}>
                                                             <input
                                                                 type="checkbox"
                                                                 value={event}
@@ -326,10 +362,10 @@ const Register = () => {
                                                                 disabled={isDisabled}
                                                                 className="hidden"
                                                             />
-                                                            <div className={`w-4 h-4 rounded border flex items-center justify-center ${isSelected ? 'bg-pink-500 border-pink-500' : 'border-gray-500'}`}>
+                                                            <div className={`w-4 h-4 rounded border flex items-center justify-center ${isSelected ? 'bg-pink-500 border-pink-500' : 'border-gray-500'} ${isEventClosed ? 'border-gray-700 bg-gray-800' : ''}`}>
                                                                 {isSelected && <CheckCircle size={12} className="text-white" />}
                                                             </div>
-                                                            <span>{event}</span>
+                                                            <span className={isEventClosed ? "line-through text-gray-600" : ""}>{event} {isEventClosed && <span className="text-red-500/80 text-xs ml-1 no-underline decoration-0 font-bold">(Closed)</span>}</span>
                                                         </label>
                                                     );
                                                 })}
