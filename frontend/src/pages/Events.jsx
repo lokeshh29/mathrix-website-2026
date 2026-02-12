@@ -194,6 +194,7 @@ const Events = () => {
                         ]
                     }
                 ],
+                note: "Send your PPT/PDF to mathrix.paperpresentation@gmail.com on or before 19th February.",
                 teamSize: 'Individual or Team of 2',
                 judging: 'Content (40%): Originality, technical depth, relevance. Presentation (30%): Clarity, organization. Q&A (30%): Understanding, response quality.',
                 prize: '1st, 2nd, 3rd Prizes + Certificates.',
@@ -483,6 +484,17 @@ const Events = () => {
                                                                 </div>
                                                             ))}
                                                         </div>
+                                                    </section>
+                                                )}
+
+                                                {selectedEvent.details.note && (
+                                                    <section className="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-xl">
+                                                        <h3 className="text-lg font-bold text-yellow-400 mb-2 flex items-center gap-2">
+                                                            <Info size={18} /> Note
+                                                        </h3>
+                                                        <p className="text-gray-300 text-sm">
+                                                            {selectedEvent.details.note}
+                                                        </p>
                                                     </section>
                                                 )}
 
