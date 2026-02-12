@@ -239,8 +239,8 @@ async def get_ticket(transactionId: str):
     db = MongoDBService()
     registrations = db.get_all_registrations()
     
-    # Find registration by transactionId
-    user_data = next((r for r in registrations if r['transactionId'] == transactionId), None)
+    # Find registration by mathrixId (preferred) or transactionId
+    user_data = next((r for r in registrations if r.get('mathrixId') == transactionId or r.get('transactionId') == transactionId), None)
     
     if not user_data:
         raise HTTPException(status_code=404, detail="Registration not found")
