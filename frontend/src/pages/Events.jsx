@@ -178,6 +178,22 @@ const Events = () => {
                     'Plagiarism leads to disqualification.',
                     'Report 30 minutes before event starts.'
                 ],
+                topics: [
+                    {
+                        category: "General / Technical",
+                        themes: [
+                            "1. AI Transforming the IT Sector: Innovation and Implementation Challenges.",
+                            "2. Smart Security: How AI Detects and Prevents Cyber Threats."
+                        ]
+                    },
+                    {
+                        category: "Mathematics",
+                        themes: [
+                            "1. The influence of Mathematics in building smart and sustainable systems",
+                            "2. The impact of Mathematics on digital innovation and transformation"
+                        ]
+                    }
+                ],
                 teamSize: 'Individual or Team of 2',
                 judging: 'Content (40%): Originality, technical depth, relevance. Presentation (30%): Clarity, organization. Q&A (30%): Understanding, response quality.',
                 prize: '1st, 2nd, 3rd Prizes + Certificates.',
@@ -447,6 +463,26 @@ const Events = () => {
                                                                 <li key={idx} className="marker:text-purple-500">{rule}</li>
                                                             ))}
                                                         </ul>
+                                                    </section>
+                                                )}
+
+                                                {selectedEvent.details.topics && selectedEvent.details.topics.length > 0 && (
+                                                    <section>
+                                                        <h3 className="text-xl font-bold text-blue-400 mb-3 flex items-center gap-2">
+                                                            <Lightbulb size={20} /> Presentation Themes
+                                                        </h3>
+                                                        <div className="space-y-4">
+                                                            {selectedEvent.details.topics.map((topicGroup, idx) => (
+                                                                <div key={idx} className="bg-white/5 p-4 rounded-xl border border-white/10">
+                                                                    <h4 className="font-bold text-white mb-2 underline decoration-blue-500/50 underline-offset-4">{topicGroup.category}</h4>
+                                                                    <ul className="list-none space-y-2 text-gray-300">
+                                                                        {topicGroup.themes.map((theme, tIdx) => (
+                                                                            <li key={tIdx} className="text-sm pl-2 border-l-2 border-gray-700">{theme}</li>
+                                                                        ))}
+                                                                    </ul>
+                                                                </div>
+                                                            ))}
+                                                        </div>
                                                     </section>
                                                 )}
 
