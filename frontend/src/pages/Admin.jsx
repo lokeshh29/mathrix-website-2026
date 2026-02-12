@@ -10,6 +10,7 @@ const Admin = () => {
     const [error, setError] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedEvent, setSelectedEvent] = useState('All');
+    const [sortOrder, setSortOrder] = useState('desc');
 
     // Extract unique events for the filter dropdown
     const allEvents = ['All', ...new Set(registrations.flatMap(reg => reg.events || []))];
@@ -57,6 +58,10 @@ const Admin = () => {
         const matchesEvent = selectedEvent === 'All' || (reg.events || []).includes(selectedEvent);
 
         return matchesSearch && matchesEvent;
+    }).sort((a, b) => {
+        const dateA = new Date(a.timestamp || 0);
+        const dateB = new Date(b.timestamp || 0);
+        return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
     });
 
     const downloadCSV = () => {
@@ -157,6 +162,8 @@ const Admin = () => {
                 </div>
             </div>
 
+
+
             <div className="glass-card p-6 mb-8 flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
@@ -167,6 +174,17 @@ const Admin = () => {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
+                </div>
+                <div className="relative w-full md:w-48">
+                    <Filter className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                    <select
+                        className="w-full bg-black/20 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white focus:outline-none focus:border-pink-500/50 appearance-none cursor-pointer"
+                        value={sortOrder}
+                        onChange={(e) => setSortOrder(e.target.value)}
+                    >
+                        <option value="desc" className="bg-gray-900 text-white">Newest First</option>
+                        <option value="asc" className="bg-gray-900 text-white">Oldest First</option>
+                    </select>
                 </div>
                 <div className="relative w-full md:w-64">
                     <Filter className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
@@ -199,7 +217,7 @@ const Admin = () => {
                         </thead>
                         <tbody className="divide-y divide-white/10 text-gray-300">
                             {filteredRegistrations.map((reg, index) => (
-                                <tr key={index} className="hover:bg-white/5 transition-colors">
+                                <tr key={index}>
                                     <td className="p-4">
                                         <div className="font-bold text-white">{reg.fullName}</div>
                                     </td>
@@ -250,7 +268,7 @@ const Admin = () => {
                     </table>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 
