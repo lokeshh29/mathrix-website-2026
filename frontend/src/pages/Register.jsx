@@ -127,11 +127,10 @@ const Register = () => {
     };
 
     // Calculate total fee
-    // Rate: 60 for CEG, 120 for Other
+    // Rate: 60 per person for CEG, 120 per person for Other
     const calculateFee = () => {
         const rate = collegeType === 'ceg' ? 60 : 120;
-        const totalEvents = attendees.reduce((acc, curr) => acc + curr.events.length, 0);
-        return totalEvents * rate;
+        return attendees.length * rate;
     };
 
     const handleFileChange = (e) => {
@@ -397,7 +396,7 @@ const Register = () => {
                                 <div className="text-center md:text-left">
                                     <p className="text-gray-400 text-sm uppercase tracking-wider mb-2">Total Registration Fee</p>
                                     <p className="text-5xl font-mono font-bold text-white">₹{calculateFee()}</p>
-                                    <p className="text-sm text-gray-500 mt-2">{attendees.length} Attendees • {collegeType === 'ceg' ? '₹60' : '₹120'} / Event</p>
+                                    <p className="text-sm text-gray-500 mt-2">{attendees.length} Attendee{attendees.length > 1 ? 's' : ''} • {collegeType === 'ceg' ? '₹60' : '₹120'} / Person</p>
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <div className="bg-white p-2 rounded-xl w-40 h-40 mb-2">
