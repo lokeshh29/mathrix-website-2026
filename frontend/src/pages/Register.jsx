@@ -259,7 +259,7 @@ const Register = () => {
                                     onChange={(e) => setRulesAccepted(e.target.checked)}
                                     className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0 cursor-pointer group-hover:border-pink-500 transition-colors"
                                 />
-                                <span className="font-medium">I have read the instructions and agree to the rules.</span>
+                                <span className="font-medium">I have read the instructions and agree to follow the guidelines.</span>
                             </label>
                         </div>
 
