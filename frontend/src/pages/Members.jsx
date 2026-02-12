@@ -7,7 +7,7 @@ const Members = () => {
         {
             title: "PATRON",
             members: [
-                { name: "Dr. P. Loganathan", role: <>Professor & Head<br />Department of Mathematics</> }
+                { name: "Dr. P. Loganathan", role: <><span className="whitespace-nowrap">Professor & Head</span><br /><span className="whitespace-nowrap">Department of Mathematics</span></> }
             ]
         },
         {
@@ -129,11 +129,11 @@ const Members = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="glass-card group relative p-8 flex flex-col justify-center items-center w-full sm:w-80 md:w-72 hover:bg-white/5 border border-white/5 hover:border-pink-500/30 transition-all duration-300 hover:-translate-y-2 rounded-2xl shadow-lg"
+                                    className="glass-card group relative p-8 flex flex-col justify-center items-center w-full sm:w-auto sm:min-w-[18rem] hover:bg-white/5 border border-white/5 hover:border-pink-500/30 transition-all duration-300 hover:-translate-y-2 rounded-2xl shadow-lg"
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-br from-pink-500/0 via-pink-500/0 to-pink-500/0 group-hover:from-pink-500/5 group-hover:to-purple-500/10 transition-all duration-500" />
                                     <h3 className="text-2xl font-bold text-white mb-2 relative z-10 tracking-wide text-center whitespace-nowrap">{member.name}</h3>
-                                    <p className="text-pink-400/80 font-medium text-sm tracking-wider uppercase relative z-10 text-center">{member.role}</p>
+                                    <p className="text-pink-400/80 font-medium text-sm tracking-wider uppercase relative z-10 text-center whitespace-nowrap">{member.role}</p>
                                 </motion.div>
                             ))}
                         </div>
