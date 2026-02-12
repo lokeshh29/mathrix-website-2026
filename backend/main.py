@@ -120,6 +120,73 @@ async def register_user(
         logger.error(f"Registration error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.post("/register/bulk")
+async def register_bulk(
+    request: Request,
+    registrations: str = Form(...),
+    screenshot: UploadFile = File(...)
+):
+    try:
+        # Save file to GridFS
+        db = MongoDBService()
+        file_extension = screenshot.filename.split(".")[-1]
+        import uuid
+        group_id = str(uuid.uuid4())
+        filename = f"bulk_{group_id}.{file_extension}"
+        
+        file_content = await screenshot.read()
+        
+        if not db.save_file(file_content, filename, screenshot.content_type):
+             raise HTTPException(status_code=500, detail="Failed to save screenshot")
+
+        base_url = str(request.base_url).rstrip("/")
+        screenshot_url = f"{base_url}/uploads/{filename}"
+
+        attendees_list = json.loads(registrations)
+        if not isinstance(attendees_list, list):
+            raise HTTPException(status_code=400, detail="Invalid registrations format")
+            
+        generated_ids = []
+        import datetime
+        import random
+        timestamp = datetime.datetime.now().isoformat()
+
+        for attendee in attendees_list:
+            mathrix_id = str(random.randint(100000, 999999))
+            
+            data = {
+                "fullName": attendee.get('fullName'),
+                "email": attendee.get('email'),
+                "phone": attendee.get('phone'),
+                "college": attendee.get('college'),
+                "course": attendee.get('course'),
+                "specialization": attendee.get('specialization'),
+                "year": attendee.get('year'),
+                "transactionId": attendee.get('transactionId'),
+                "events": attendee.get('events', []),
+                "workshops": attendee.get('workshops', []),
+                "screenshotUrl": screenshot_url,
+                "timestamp": timestamp,
+                "mathrixId": mathrix_id,
+                "isBulk": True,
+                "groupId": group_id
+            }
+
+            if db.save_registration(data):
+                generated_ids.append(mathrix_id)
+            else:
+                 logger.error(f"Failed to save attendee {attendee.get('email')}")
+
+        return {
+            "status": "success", 
+            "message": "Bulk registration successful",
+            "ids": generated_ids
+        }
+            
+    except Exception as e:
+        logger.error(f"Bulk registration error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/uploads/{filename}")
 async def get_image(filename: str):
     try:
