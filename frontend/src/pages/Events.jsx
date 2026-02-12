@@ -210,13 +210,12 @@ const Events = () => {
         {
             id: 7,
             title: 'GoofyChess',
-            description: 'An exciting chess-based strategy event testing tactical thinking across different chess formats.',
+            description: 'An engaging chess-based strategy event testing tactical thinking, adaptability, and decision-making skills.',
             details: {
-                description: 'GoofyChess is an exciting chess-based strategy event designed to test players tactical thinking, adaptability, and decision-making under different chess formats. The event progresses from fast-paced online variants like Racing Kings and Crazyhouse to a classic offline Standard Chess showdown.',
+                description: 'GoofyChess is an engaging chess-based strategy event designed to test players\u2019 tactical thinking, adaptability, and decision-making skills. The event features Classic Chess played across both online and offline formats, offering participants a balanced challenge that emphasizes strategic depth, concentration, and sportsmanship.',
                 rounds: [
-                    { title: 'Round 1: Racing Kings (Online, 1 hr)', desc: 'Racing Kings is a fast-paced chess variant where both players race to bring their king to the opponent’s back rank. There are no checks or checkmates, making it a pure test of speed, planning, and positioning. First to reach target rank wins.' },
-                    { title: 'Round 2: Crazyhouse (Online, 1 hr)', desc: 'Crazyhouse is a dynamic chess variant where captured pieces can be dropped back onto the board and reused. This format encourages aggressive play, creativity, and quick tactical thinking, making every game unpredictable and exciting.' },
-                    { title: 'Final: Standard Chess (Offline, 1 hour)', desc: 'The final round will be conducted in classical standard chess format, following official chess rules. Top players will compete with longer time control, emphasizing deep strategy and endgame skills.' }
+                    { title: 'Round 1: Classic Chess (Online, 1 hr)', desc: 'Round 1 will be conducted in the standard Classic Chess format in online mode. All matches will be played according to standard chess rules. Players are expected to maintain fair play and sportsmanship throughout the games.' },
+                    { title: 'Round 2: Classic Chess (Offline, 1 hr)', desc: 'Round 2 will be conducted offline in the standard Classic Chess format. Matches will be played according to standard chess rules, and the decisions of the organizers shall be final.' }
                 ],
                 rules: [
                     'Any use of bots or external assistance will result in immediate disqualification.',
@@ -224,8 +223,8 @@ const Events = () => {
                     'Participants may approach the organizers for clarification in case of any doubts.'
                 ],
                 teamSize: 'Individual',
-                judging: 'Match results, completion time, standard chess scoring.',
-                prize: '1st, 2nd Prizes.',
+                judging: 'Match results, standard chess scoring.',
+                prize: '1st, 2nd, 3rd Prize + Certificate.',
                 coordinator: 'Bathmasree R (8608349376), Nandha kishore R R (8248227885), Ezhil Jeevana S (6369642347), Jeevika (9789384379)',
                 volunteers: 'Sundhar Balamoorthy (82486 29145), Ecilaise S (7200229041), Sahana Ramanathan (9962911497), Mohammad Nihal (6383366723)'
             },
