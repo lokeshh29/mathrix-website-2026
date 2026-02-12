@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Lock, Search, Download, Filter, RefreshCw } from 'lucide-react';
+import { Lock, Search, Download, Filter, RefreshCw, Trash2 } from 'lucide-react';
 
 const Admin = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -85,6 +85,26 @@ const Admin = () => {
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+    };
+
+    const handleDelete = async (transactionId) => {
+        if (!window.confirm("Are you sure you want to delete this registration? This action cannot be undone.")) {
+            return;
+        }
+
+        try {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/registrations/${transactionId}?secret=${password}`, {
+                method: 'DELETE'
+            });
+
+            if (!res.ok) throw new Error('Failed to delete');
+
+            // Refresh list
+            fetchRegistrations(password);
+            alert("Registration deleted successfully");
+        } catch (err) {
+            alert("Error deleting registration: " + err.message);
+        }
     };
 
     if (!isAuthenticated) {
@@ -194,11 +214,20 @@ const Admin = () => {
                                         <div className="font-mono text-sm">{reg.transactionId}</div>
                                     </td>
                                     <td className="p-4">
-                                        {reg.screenshotUrl && (
-                                            <a href={reg.screenshotUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline text-sm">
-                                                View Proof
-                                            </a>
-                                        )}
+                                        <div className="flex items-center gap-3">
+                                            {reg.screenshotUrl && (
+                                                <a href={reg.screenshotUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline text-sm" title="View Screenshot">
+                                                    View
+                                                </a>
+                                            )}
+                                            <button
+                                                onClick={() => handleDelete(reg.transactionId)}
+                                                className="text-red-400 hover:text-red-300 transition-colors p-1"
+                                                title="Delete Registration"
+                                            >
+                                                <Trash2 size={18} />
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
