@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, CheckCircle, AlertCircle, Loader, Download, Plus, Trash2, UserPlus, Users } from 'lucide-react';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 import qrCode from '../assets/qr_code.jpeg';
 
 const Register = () => {
@@ -172,7 +172,7 @@ const Register = () => {
             tableRows.push(row);
         });
 
-        doc.autoTable({
+        autoTable(doc, {
             head: [tableColumn],
             body: tableRows,
             startY: 45,
