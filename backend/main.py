@@ -151,6 +151,18 @@ async def get_all_registrations(secret: str = ""):
     
     return {"registrations": registrations}
 
+@app.delete("/registrations/{transactionId}")
+async def delete_registration(transactionId: str, secret: str = ""):
+    admin_secret = os.getenv("ADMIN_SECRET", "mathrix-admin-2026")
+    if secret != admin_secret:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    
+    db = MongoDBService()
+    if db.delete_registration(transactionId):
+        return {"status": "success", "message": "Registration deleted"}
+    else:
+        raise HTTPException(status_code=404, detail="Registration not found or failed to delete")
+
 from utils.pdf_service import generate_ticket
 # StreamingResponse is already imported above if strict organization, 
 # but ensuring it's available for both endpoints.
