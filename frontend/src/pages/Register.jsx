@@ -20,8 +20,8 @@ const Register = () => {
 
     // New States for Flow
     const [collegeType, setCollegeType] = useState('other'); // 'ceg' or 'other'
-    const [regType, setRegType] = useState('individual'); // 'individual' or 'combo'
-    const [selectedCombo, setSelectedCombo] = useState('');
+    // const [regType, setRegType] = useState('individual'); // Removed combo logic
+    // const [selectedCombo, setSelectedCombo] = useState(''); // Removed combo logic
 
     useEffect(() => {
         if (collegeType === 'ceg') {
@@ -41,13 +41,10 @@ const Register = () => {
         "Find The Fixed Points", "Mathkinator", "Treasure Hunt"
     ];
 
-    const comboPackages = {
-        "Combo 1": ["SQL – Query Quest", "Code Mathrix", "Mathkinator"],
-        "Combo 2": ["Treasure Hunt", "Math Quiz", "GoofyChess"],
-        "Combo 3 (Non-Tech)": ["Through the Lens", "IPL Auction", "Mathkinator"]
-    };
+    // const comboPackages = { ... }; // Removed combo packages
 
-    const currentFee = collegeType === 'ceg' ? 60 : 120;
+    // Dynamic fee calculation: Rate per event based on college type
+    const currentFee = (collegeType === 'ceg' ? 60 : 120) * (formData.events.length || 0);
 
     const workshopOptions = []; // No workshops currently
 
@@ -58,8 +55,9 @@ const Register = () => {
 
     const handleCheckboxChange = (e, type) => {
         const { value, checked } = e.target;
-        if (checked && type === 'events' && regType === 'individual' && formData.events.length >= 3) {
-            alert("You can select a maximum of 3 events for Individual Registration.");
+        // Max 3 events constraint
+        if (checked && type === 'events' && formData.events.length >= 3) {
+            alert("You can select a maximum of 3 events.");
             return;
         }
 
@@ -117,18 +115,6 @@ const Register = () => {
             // Auto-open PDF ticket
             const ticketUrl = `${import.meta.env.VITE_API_URL}/ticket/${formData.transactionId}`;
             window.open(ticketUrl, '_blank');
-
-            // Optional: Reset form or redirect
-            // setTimeout(() => { ... }, 3000); // Removed timeout to let them see the ticket
-            // setTimeout(() => {
-            //     // navigate('/'); 
-            //     setStatus('idle');
-            //     setFormData({
-            //         fullName: '', email: '', phone: '', college: '', dept: '', year: '',
-            //         events: [], workshops: [], transactionId: '', screenshotUrl: ''
-            //     });
-            //     setFile(null);
-            // }, 3000);
 
         } catch (error) {
             console.error("Error submitting form:", error);
@@ -227,93 +213,51 @@ const Register = () => {
                                     <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'ceg' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                         <input type="radio" name="collegeType" value="ceg" checked={collegeType === 'ceg'} onChange={() => setCollegeType('ceg')} className="hidden" />
                                         <div className="text-center font-bold">Yes, CEG Student</div>
-                                        <div className="text-center text-xs opacity-70 mt-1">Fee: ₹60</div>
+                                        <div className="text-center text-xs opacity-70 mt-1">₹60 / Event</div>
                                     </label>
                                     <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'other' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                         <input type="radio" name="collegeType" value="other" checked={collegeType === 'other'} onChange={() => setCollegeType('other')} className="hidden" />
                                         <div className="text-center font-bold">Other College</div>
-                                        <div className="text-center text-xs opacity-70 mt-1">Fee: ₹120</div>
+                                        <div className="text-center text-xs opacity-70 mt-1">₹120 / Event</div>
                                     </label>
                                 </div>
                             </div>
 
-                            {/* 2. Registration Type */}
-                            <div className="space-y-3">
-                                <label className="text-gray-300 text-sm font-medium">Registration Type</label>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <label className={`p-4 rounded-xl border cursor-pointer transition-all ${regType === 'combo' ? 'bg-purple-500/20 border-purple-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
-                                        <input type="radio" name="regType" value="combo" checked={regType === 'combo'} onChange={() => { setRegType('combo'); setFormData(p => ({ ...p, events: [] })); setSelectedCombo(''); }} className="hidden" />
-                                        <div className="text-center font-bold">Combo Package</div>
-                                        <div className="text-center text-xs opacity-70 mt-1">Best Value</div>
-                                    </label>
-                                    <label className={`p-4 rounded-xl border cursor-pointer transition-all ${regType === 'individual' ? 'bg-purple-500/20 border-purple-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
-                                        <input type="radio" name="regType" value="individual" checked={regType === 'individual'} onChange={() => { setRegType('individual'); setFormData(p => ({ ...p, events: [] })); setSelectedCombo(''); }} className="hidden" />
-                                        <div className="text-center font-bold">Individual Events</div>
-                                        <div className="text-center text-xs opacity-70 mt-1">Select Custom</div>
-                                    </label>
-                                </div>
-                            </div>
+                            {/* 2. Event Selection - Always Individual now */}
+                            <div className="space-y-4">
+                                <label className="text-gray-300 text-sm font-medium ml-1">Select Events (Max 3)</label>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
+                                    {eventOptions.map(event => {
+                                        const isMaxSelected = formData.events.length >= 3;
+                                        const isDisabled = isMaxSelected && !formData.events.includes(event);
 
-                            {/* 3. Event Selection */}
-                            {regType === 'combo' ? (
-                                <div className="space-y-3">
-                                    <label className="text-gray-300 text-sm font-medium">Select Combo Package</label>
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        {Object.entries(comboPackages).map(([name, events]) => (
-                                            <label key={name} className={`relative p-4 rounded-xl border cursor-pointer transition-all h-full ${selectedCombo === name ? 'bg-pink-500/20 border-pink-500' : 'bg-white/5 border-white/10 hover:bg-white/10'}`}>
+                                        return (
+                                            <label key={event} className={`flex items-center space-x-3 p-2 rounded-lg transition-colors ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5 cursor-pointer'}`}>
                                                 <input
-                                                    type="radio"
-                                                    name="combo"
-                                                    value={name}
-                                                    checked={selectedCombo === name}
-                                                    onChange={() => {
-                                                        setSelectedCombo(name);
-                                                        setFormData(prev => ({ ...prev, events: events }));
-                                                    }}
-                                                    className="hidden"
+                                                    type="checkbox"
+                                                    value={event}
+                                                    checked={formData.events.includes(event)}
+                                                    onChange={(e) => handleCheckboxChange(e, 'events')}
+                                                    disabled={isDisabled}
+                                                    className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0 disabled:opacity-50"
                                                 />
-                                                <div className="font-bold text-white mb-2">{name}</div>
-                                                <ul className="text-xs text-gray-400 space-y-1 list-disc list-inside">
-                                                    {events.map((ev, i) => <li key={i}>{ev}</li>)}
-                                                </ul>
-                                                {selectedCombo === name && (
-                                                    <div className="absolute top-2 right-2 text-pink-500"><CheckCircle size={16} /></div>
-                                                )}
+                                                <span className="text-gray-300">{event}</span>
                                             </label>
-                                        ))}
-                                    </div>
-                                    <div className="text-right text-sm text-pink-400 font-bold mt-2">
-                                        Selected Fee: ₹{currentFee}
-                                    </div>
+                                        );
+                                    })}
                                 </div>
-                            ) : (
-                                <div className="space-y-4">
-                                    <label className="text-gray-300 text-sm font-medium ml-1">Select Events</label>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
-                                        {eventOptions.map(event => {
-                                            const isMaxSelected = regType === 'individual' && formData.events.length >= 3;
-                                            const isDisabled = isMaxSelected && !formData.events.includes(event);
-
-                                            return (
-                                                <label key={event} className={`flex items-center space-x-3 p-2 rounded-lg transition-colors ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5 cursor-pointer'}`}>
-                                                    <input
-                                                        type="checkbox"
-                                                        value={event}
-                                                        checked={formData.events.includes(event)}
-                                                        onChange={(e) => handleCheckboxChange(e, 'events')}
-                                                        disabled={isDisabled}
-                                                        className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0 disabled:opacity-50"
-                                                    />
-                                                    <span className="text-gray-300">{event}</span>
-                                                </label>
-                                            );
-                                        })}
-                                    </div>
-                                    <div className="text-right text-sm text-pink-400 font-bold mt-2">
-                                        Registration Fee: ₹{currentFee}
-                                    </div>
+                                <div className="text-right text-sm text-pink-400 font-bold mt-2">
+                                    Registration Fee: ₹{currentFee}
                                 </div>
-                            )}
+                                <div className="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-lg text-sm text-yellow-200 mt-4">
+                                    <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
+                                    <p>
+                                        <span className="font-bold block mb-1">Disclaimer:</span>
+                                        If you qualify for the next rounds of an event and miss another registered event due to time constraints,
+                                        we are not responsible for the conflict.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="bg-white/5 p-6 rounded-xl border border-white/10 space-y-6">
