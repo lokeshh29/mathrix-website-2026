@@ -45,15 +45,19 @@ class MongoDBService:
 
     def save_registration(self, data: Dict) -> bool:
         try:
-            # Use email as the unique identifier for upsert
+            # Use mathrixId as unique identifier to prevent overwrites (especially in bulk)
+            mathrix_id = data.get('mathrixId')
             email = data.get('email')
-            if not email:
-                logger.error("No email provided for registration")
-                return False
+            
+            filter_query = {'mathrixId': mathrix_id} if mathrix_id else {'email': email}
+            
+            if not mathrix_id and not email:
+                 logger.error("No mathrixId or email provided")
+                 return False
 
             # Update if exists, insert if new
             self.collection.update_one(
-                {'email': email},
+                filter_query,
                 {'$set': data},
                 upsert=True
             )
