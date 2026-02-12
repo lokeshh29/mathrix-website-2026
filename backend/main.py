@@ -234,6 +234,29 @@ from utils.pdf_service import generate_ticket
 # StreamingResponse is already imported above if strict organization, 
 # but ensuring it's available for both endpoints.
 
+@app.get("/ticket/search")
+async def search_tickets(q: str = ""):
+    if not q or len(q) < 3:
+        raise HTTPException(status_code=400, detail="Please enter at least 3 characters")
+    
+    db = MongoDBService()
+    registrations = db.get_all_registrations()
+    
+    # Search by mathrixId or phone
+    matches = [
+        {
+            "fullName": r.get("fullName"),
+            "mathrixId": r.get("mathrixId"),
+            "phone": r.get("phone"),
+            "events": r.get("events", []),
+            "college": r.get("college"),
+        }
+        for r in registrations
+        if r.get("mathrixId") == q or r.get("phone") == q
+    ]
+    
+    return {"results": matches}
+
 @app.get("/ticket/{transactionId}")
 async def get_ticket(transactionId: str):
     db = MongoDBService()
