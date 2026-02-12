@@ -240,12 +240,12 @@ const Register = () => {
                                 <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'ceg' ? 'bg-pink-500/20 border-pink-500 text-white shadow-[0_0_15px_rgba(236,72,153,0.2)]' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                     <input type="radio" name="collegeType" value="ceg" checked={collegeType === 'ceg'} onChange={() => setCollegeType('ceg')} className="hidden" />
                                     <div className="text-center font-bold text-lg">CEG Student</div>
-                                    <div className="text-center text-sm opacity-70 mt-1">₹60 / Event</div>
+                                    <div className="text-center text-sm opacity-70 mt-1">₹60 / Person</div>
                                 </label>
                                 <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'other' ? 'bg-pink-500/20 border-pink-500 text-white shadow-[0_0_15px_rgba(236,72,153,0.2)]' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                     <input type="radio" name="collegeType" value="other" checked={collegeType === 'other'} onChange={() => setCollegeType('other')} className="hidden" />
                                     <div className="text-center font-bold text-lg">Other College</div>
-                                    <div className="text-center text-sm opacity-70 mt-1">₹120 / Event</div>
+                                    <div className="text-center text-sm opacity-70 mt-1">₹120 / Person</div>
                                 </label>
                             </div>
                         </div>
