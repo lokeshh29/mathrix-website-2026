@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Upload, CheckCircle, AlertCircle, Loader, Download } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Upload, CheckCircle, AlertCircle, Loader, Download, Plus, Trash2, UserPlus, Users } from 'lucide-react';
 import qrCode from '../assets/qr_code.jpeg';
 
 const Register = () => {
-    const [formData, setFormData] = useState({
+    // State for multiple attendees
+    const [attendees, setAttendees] = useState([{
+        id: 1,
         fullName: '',
         email: '',
         phone: '',
@@ -13,28 +15,19 @@ const Register = () => {
         specialization: '',
         year: '',
         events: [],
-        workshops: [],
-        transactionId: '',
-        screenshotUrl: ''
-    });
+        workshops: []
+    }]);
 
-    // New States for Flow
-    const [collegeType, setCollegeType] = useState('other'); // 'ceg' or 'other'
-    // const [regType, setRegType] = useState('individual'); // Removed combo logic
-    // const [selectedCombo, setSelectedCombo] = useState(''); // Removed combo logic
-
-    useEffect(() => {
-        if (collegeType === 'ceg') {
-            setFormData(prev => ({ ...prev, college: 'CEG, Anna University' }));
-        } else {
-            setFormData(prev => ({ ...prev, college: '' }));
-        }
-    }, [collegeType]);
-
+    // Common details
+    const [transactionId, setTransactionId] = useState('');
     const [file, setFile] = useState(null);
+
+    // UI State
+    const [collegeType, setCollegeType] = useState('other'); // 'ceg' or 'other'
     const [status, setStatus] = useState('idle');
-    const [rulesAccepted, setRulesAccepted] = useState(false); // idle, uploading, submitting, success, error
+    const [rulesAccepted, setRulesAccepted] = useState(false);
     const [message, setMessage] = useState('');
+    const [responseIds, setResponseIds] = useState([]);
 
     const eventOptions = [
         "SQL – Query Quest", "MagicMatix", "Code Mathrix", "Through the Lens",
@@ -42,34 +35,68 @@ const Register = () => {
         "Find The Fixed Points", "Mathkinator", "Treasure Hunt"
     ];
 
-    // const comboPackages = { ... }; // Removed combo packages
+    // Effect to update college for all attendees when type changes
+    useEffect(() => {
+        setAttendees(prev => prev.map(a => ({
+            ...a,
+            college: collegeType === 'ceg' ? 'CEG, Anna University' : ''
+        })));
+    }, [collegeType]);
 
-    // Dynamic fee calculation: Rate per event based on college type
-    const currentFee = (collegeType === 'ceg' ? 60 : 120) * (formData.events.length || 0);
-
-    const workshopOptions = []; // No workshops currently
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+    // Add new attendee
+    const addAttendee = () => {
+        setAttendees(prev => [...prev, {
+            id: Date.now(),
+            fullName: '',
+            email: '',
+            phone: '',
+            college: collegeType === 'ceg' ? 'CEG, Anna University' : '',
+            course: '',
+            specialization: '',
+            year: '',
+            events: [],
+            workshops: []
+        }]);
     };
 
-    const handleCheckboxChange = (e, type) => {
-        const { value, checked } = e.target;
-        // Max 3 events constraint
-        if (checked && type === 'events' && formData.events.length >= 3) {
-            alert("You can select a maximum of 3 events.");
-            return;
+    // Remove attendee
+    const removeAttendee = (id) => {
+        if (attendees.length > 1) {
+            setAttendees(prev => prev.filter(a => a.id !== id));
         }
+    };
 
-        setFormData(prev => {
-            const list = prev[type];
+    // Handle input change for specific attendee
+    const handleAttendeeChange = (id, field, value) => {
+        setAttendees(prev => prev.map(a =>
+            a.id === id ? { ...a, [field]: value } : a
+        ));
+    };
+
+    // Handle event selection for specific attendee
+    const handleEventChange = (id, event, checked) => {
+        setAttendees(prev => prev.map(a => {
+            if (a.id !== id) return a;
+
+            const currentEvents = a.events;
             if (checked) {
-                return { ...prev, [type]: [...list, value] };
+                if (currentEvents.length >= 3) {
+                    alert("Maximum 3 events per person allowed.");
+                    return a;
+                }
+                return { ...a, events: [...currentEvents, event] };
             } else {
-                return { ...prev, [type]: list.filter(item => item !== value) };
+                return { ...a, events: currentEvents.filter(e => e !== event) };
             }
-        });
+        }));
+    };
+
+    // Calculate total fee
+    // Rate: 60 for CEG, 120 for Other
+    const calculateFee = () => {
+        const rate = collegeType === 'ceg' ? 60 : 120;
+        const totalEvents = attendees.reduce((acc, curr) => acc + curr.events.length, 0);
+        return totalEvents * rate;
     };
 
     const handleFileChange = (e) => {
@@ -85,21 +112,20 @@ const Register = () => {
 
         try {
             if (!file) throw new Error("Please upload a payment screenshot");
+            if (!rulesAccepted) throw new Error("Please accept the rules");
 
             const submissionData = new FormData();
-            submissionData.append('fullName', formData.fullName);
-            submissionData.append('email', formData.email);
-            submissionData.append('phone', formData.phone);
-            submissionData.append('college', formData.college);
-            submissionData.append('course', formData.course);
-            submissionData.append('specialization', formData.specialization);
-            submissionData.append('year', formData.year);
-            submissionData.append('transactionId', formData.transactionId);
-            submissionData.append('events', JSON.stringify(formData.events));
-            submissionData.append('workshops', JSON.stringify(formData.workshops));
+
+            // Clean data before sending
+            const cleanAttendees = attendees.map(({ id, ...rest }) => ({
+                ...rest,
+                transactionId: transactionId // Attach unique transaction ID to each
+            }));
+
+            submissionData.append('registrations', JSON.stringify(cleanAttendees));
             submissionData.append('screenshot', file);
 
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/register/bulk`, {
                 method: 'POST',
                 body: submissionData
             });
@@ -111,11 +137,8 @@ const Register = () => {
             }
 
             setStatus('success');
-            setMessage(`Registration successful! ID: ${jsonResponse.mathrixId}`);
-
-            // Auto-open PDF ticket
-            const ticketUrl = `${import.meta.env.VITE_API_URL}/ticket/${formData.transactionId}`;
-            window.open(ticketUrl, '_blank');
+            setResponseIds(jsonResponse.ids);
+            setMessage(`Successfully registered ${jsonResponse.ids.length} attendees!`);
 
         } catch (error) {
             console.error("Error submitting form:", error);
@@ -129,175 +152,227 @@ const Register = () => {
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="max-w-3xl mx-auto glass-card p-6 md:p-12"
+                className="max-w-4xl mx-auto glass-card p-6 md:p-8"
             >
-                <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent break-words tracking-tight">Event Registration</h1>
+                <div className="text-center mb-8">
+                    <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mb-2 font-tech uppercase tracking-wide">
+                        Event Registration
+                    </h1>
+                    <p className="text-gray-400">Register individually or as a group. One payment for all.</p>
+                </div>
 
                 {status === 'success' ? (
                     <div className="text-center py-12">
                         <CheckCircle size={64} className="text-green-400 mx-auto mb-6" />
-                        <h2 className="text-3xl font-bold text-white mb-2">Registration Successful!</h2>
-                        <div className="bg-white/10 p-4 rounded-xl inline-block mb-6 border border-white/20">
-                            <p className="text-gray-300 text-sm uppercase tracking-wider mb-1">Your Mathrix ID</p>
-                            <p className="text-4xl font-mono font-bold text-pink-500 tracking-widest">{message.split("ID: ")[1] || "PENDING"}</p>
-                        </div>
-                        <p className="text-gray-300 max-w-md mx-auto mb-8">
-                            Thank you for registering. Please download your ticket below and present it at the registration desk.
-                        </p>
+                        <h2 className="text-3xl font-bold text-white mb-4">Registration Successful!</h2>
 
-                        <div className="flex justify-center gap-4">
-                            <a
-                                href={`${import.meta.env.VITE_API_URL}/ticket/${formData.transactionId}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="btn bg-purple-500 hover:bg-purple-600 text-white flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all"
-                            >
-                                <Download size={20} /> Download Ticket
-                            </a>
-                            <button onClick={() => setStatus('idle')} className="btn bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl transition-all">
-                                Register Another
-                            </button>
+                        <div className="space-y-4 mb-8">
+                            <p className="text-gray-300">Generated Mathrix IDs:</p>
+                            <div className="flex flex-wrap justify-center gap-3">
+                                {responseIds.map(id => (
+                                    <span key={id} className="bg-white/10 px-4 py-2 rounded-lg font-mono text-pink-400 font-bold border border-white/10">
+                                        {id}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
+
+                        <button onClick={() => window.location.reload()} className="btn bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 rounded-xl font-bold transition-all">
+                            Register More
+                        </button>
                     </div>
                 ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label className="text-gray-300 text-sm font-medium ml-1">Full Name</label>
-                                <input required type="text" name="fullName" value={formData.fullName} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="John Doe" />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-gray-300 text-sm font-medium ml-1">Email Address</label>
-                                <input required type="email" name="email" value={formData.email} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="john@example.com" />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-gray-300 text-sm font-medium ml-1">Phone Number</label>
-                                <input required type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="+91 98765 43210" />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-gray-300 text-sm font-medium ml-1">Year of Study</label>
-                                <select required name="year" value={formData.year} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all [&>option]:text-black">
-                                    <option value="" disabled>Select Year</option>
-                                    <option value="1">1st Year</option>
-                                    <option value="2">2nd Year</option>
-                                    <option value="3">3rd Year</option>
-                                    <option value="4">4th Year</option>
-                                    <option value="5">5th Year</option>
-                                </select>
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-gray-300 text-sm font-medium ml-1">Course / Degree</label>
-                                <input required type="text" name="course" value={formData.course} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="B.E. / B.Tech" />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-gray-300 text-sm font-medium ml-1">Specialization / Branch</label>
-                                <input required type="text" name="specialization" value={formData.specialization} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="CSE / IT / EEE" />
-                            </div>
-                            {collegeType === 'other' && (
-                                <div className="space-y-2">
-                                    <label className="text-gray-300 text-sm font-medium ml-1">College Name</label>
-                                    <input required={collegeType === 'other'} type="text" name="college" value={formData.college} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="Anna University" />
-                                </div>
-                            )}
-                        </div>
+                    <form onSubmit={handleSubmit} className="space-y-8">
 
-                        <div className="space-y-6 bg-white/5 p-6 rounded-xl border border-white/10">
+                        {/* 1. College Type Selection (Applies to all) */}
+                        <div className="bg-white/5 p-6 rounded-2xl border border-white/10">
                             <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                <span className="w-1 h-6 bg-purple-500 rounded-full"></span>
-                                Registration Details
+                                <Users className="text-pink-400" />
+                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                                    Step 1: College Category
+                                </span>
                             </h3>
-
-                            {/* 1. College Type */}
-                            <div className="space-y-3">
-                                <label className="text-gray-300 text-sm font-medium">Are you studying in CEG?</label>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'ceg' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
-                                        <input type="radio" name="collegeType" value="ceg" checked={collegeType === 'ceg'} onChange={() => setCollegeType('ceg')} className="hidden" />
-                                        <div className="text-center font-bold">Yes, CEG Student</div>
-                                        <div className="text-center text-xs opacity-70 mt-1">₹60 / Event</div>
-                                    </label>
-                                    <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'other' ? 'bg-pink-500/20 border-pink-500 text-white' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
-                                        <input type="radio" name="collegeType" value="other" checked={collegeType === 'other'} onChange={() => setCollegeType('other')} className="hidden" />
-                                        <div className="text-center font-bold">Other College</div>
-                                        <div className="text-center text-xs opacity-70 mt-1">₹120 / Event</div>
-                                    </label>
-                                </div>
-                            </div>
-
-                            {/* 2. Event Selection - Always Individual now */}
-                            <div className="space-y-4">
-                                <div className="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-xl space-y-3">
-                                    <h4 className="font-bold text-yellow-200 flex items-center gap-2 text-sm uppercase tracking-wide">
-                                        <AlertCircle size={18} /> Important Instructions
-                                    </h4>
-                                    <ul className="list-disc list-inside text-sm text-gray-300 space-y-1 pl-1">
-                                        <li>You can select a maximum of <strong className="text-white">3 events</strong>.</li>
-                                        <li>If you qualify for the next rounds of an event and miss another registered event due to time constraints, <strong className="text-white">we are not responsible for the conflict</strong>.</li>
-                                        <li>Please check the schedule carefully before registering.</li>
-                                        <li>Registration fee is not refundable.</li>
-                                    </ul>
-                                    <label className="flex items-center gap-3 p-3 bg-black/20 rounded-lg cursor-pointer hover:bg-black/30 transition-colors border border-white/5 select-none text-white">
-                                        <input
-                                            type="checkbox"
-                                            checked={rulesAccepted}
-                                            onChange={(e) => setRulesAccepted(e.target.checked)}
-                                            className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0 cursor-pointer"
-                                        />
-                                        <span className="text-sm font-medium">I have read the instructions and agree to the rules.</span>
-                                    </label>
-                                </div>
-
-                                <label className="text-gray-300 text-sm font-medium ml-1">Select Events (Max 3)</label>
-                                <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 bg-white/5 p-4 rounded-xl border border-white/10 ${!rulesAccepted ? 'opacity-50 pointer-events-none grayscale' : ''} transition-all duration-300`}>
-                                    {eventOptions.map(event => {
-                                        const isMaxSelected = formData.events.length >= 3;
-                                        const isDisabled = !rulesAccepted || (isMaxSelected && !formData.events.includes(event));
-
-                                        return (
-                                            <label key={event} className={`flex items-center space-x-3 p-2 rounded-lg transition-colors ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5 cursor-pointer'}`}>
-                                                <input
-                                                    type="checkbox"
-                                                    value={event}
-                                                    checked={formData.events.includes(event)}
-                                                    onChange={(e) => handleCheckboxChange(e, 'events')}
-                                                    disabled={isDisabled}
-                                                    className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0 disabled:opacity-50"
-                                                />
-                                                <span className="text-gray-300">{event}</span>
-                                            </label>
-                                        );
-                                    })}
-                                </div>
-                                <div className="text-right text-sm text-pink-400 font-bold mt-2">
-                                    Registration Fee: ₹{currentFee}
-                                </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'ceg' ? 'bg-pink-500/20 border-pink-500 text-white shadow-[0_0_15px_rgba(236,72,153,0.2)]' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                    <input type="radio" name="collegeType" value="ceg" checked={collegeType === 'ceg'} onChange={() => setCollegeType('ceg')} className="hidden" />
+                                    <div className="text-center font-bold text-lg">CEG Student</div>
+                                    <div className="text-center text-sm opacity-70 mt-1">₹60 / Event</div>
+                                </label>
+                                <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'other' ? 'bg-pink-500/20 border-pink-500 text-white shadow-[0_0_15px_rgba(236,72,153,0.2)]' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
+                                    <input type="radio" name="collegeType" value="other" checked={collegeType === 'other'} onChange={() => setCollegeType('other')} className="hidden" />
+                                    <div className="text-center font-bold text-lg">Other College</div>
+                                    <div className="text-center text-sm opacity-70 mt-1">₹120 / Event</div>
+                                </label>
                             </div>
                         </div>
 
-                        <div className="bg-white/5 p-6 rounded-xl border border-white/10 space-y-6">
-                            <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                        {/* 2. Instructions */}
+                        <div className="bg-yellow-500/10 border border-yellow-500/20 p-6 rounded-2xl space-y-4">
+                            <h4 className="font-bold text-yellow-200 flex items-center gap-2 text-lg uppercase tracking-wide">
+                                <AlertCircle size={20} /> Important Instructions
+                            </h4>
+                            <ul className="list-disc list-inside text-sm text-gray-300 space-y-2 pl-1 leading-relaxed">
+                                <li>You can select a maximum of <strong className="text-white">3 events per person</strong>.</li>
+                                <li>If you qualify for the next rounds of an event and miss another registered event due to time constraints, <strong className="text-white">we are not responsible for the conflict</strong>.</li>
+                                <li>Please check the schedule carefully before registering.</li>
+                                <li>Registration fee is non-refundable.</li>
+                            </ul>
+                            <label className="flex items-center gap-3 p-4 bg-black/20 rounded-xl cursor-pointer hover:bg-black/30 transition-colors border border-white/5 select-none text-white group">
+                                <input
+                                    type="checkbox"
+                                    checked={rulesAccepted}
+                                    onChange={(e) => setRulesAccepted(e.target.checked)}
+                                    className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0 cursor-pointer group-hover:border-pink-500 transition-colors"
+                                />
+                                <span className="font-medium">I have read the instructions and agree to the rules.</span>
+                            </label>
+                        </div>
+
+                        {/* 3. Attendees List */}
+                        <div className={`space-y-6 ${!rulesAccepted ? 'opacity-50 pointer-events-none grayscale' : ''} transition-all duration-300`}>
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                                    <UserPlus className="text-purple-400" />
+                                    Step 2: Attendee Details
+                                </h3>
+                                <button
+                                    type="button"
+                                    onClick={addAttendee}
+                                    className="btn btn-outline text-sm px-4 py-2 flex items-center gap-2 hover:bg-white/10"
+                                >
+                                    <Plus size={16} /> Add Another Person
+                                </button>
+                            </div>
+
+                            <AnimatePresence>
+                                {attendees.map((attendee, index) => (
+                                    <motion.div
+                                        key={attendee.id}
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        className="glass-card p-6 rounded-2xl border border-white/10 relative overflow-hidden"
+                                    >
+                                        <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-pink-500 to-purple-600" />
+
+                                        <div className="flex justify-between items-start mb-6">
+                                            <h4 className="text-lg font-bold text-gray-200">Attendee #{index + 1}</h4>
+                                            {attendees.length > 1 && (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => removeAttendee(attendee.id)}
+                                                    className="text-red-400 hover:text-red-300 p-2 hover:bg-red-400/10 rounded-lg transition-colors"
+                                                >
+                                                    <Trash2 size={18} />
+                                                </button>
+                                            )}
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                            <div className="space-y-1">
+                                                <label className="text-xs text-gray-400 uppercase font-bold tracking-wider ml-1">Full Name</label>
+                                                <input required type="text" value={attendee.fullName} onChange={(e) => handleAttendeeChange(attendee.id, 'fullName', e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="John Doe" />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <label className="text-xs text-gray-400 uppercase font-bold tracking-wider ml-1">Email</label>
+                                                <input required type="email" value={attendee.email} onChange={(e) => handleAttendeeChange(attendee.id, 'email', e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="john@example.com" />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <label className="text-xs text-gray-400 uppercase font-bold tracking-wider ml-1">Phone</label>
+                                                <input required type="tel" value={attendee.phone} onChange={(e) => handleAttendeeChange(attendee.id, 'phone', e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="+91 98765 43210" />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <label className="text-xs text-gray-400 uppercase font-bold tracking-wider ml-1">Year</label>
+                                                <select required value={attendee.year} onChange={(e) => handleAttendeeChange(attendee.id, 'year', e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all [&>option]:text-black">
+                                                    <option value="" disabled>Select Year</option>
+                                                    <option value="1">1st Year</option>
+                                                    <option value="2">2nd Year</option>
+                                                    <option value="3">3rd Year</option>
+                                                    <option value="4">4th Year</option>
+                                                    <option value="5">5th Year</option>
+                                                </select>
+                                            </div>
+                                            <div className="space-y-1">
+                                                <label className="text-xs text-gray-400 uppercase font-bold tracking-wider ml-1">Course</label>
+                                                <input required type="text" value={attendee.course} onChange={(e) => handleAttendeeChange(attendee.id, 'course', e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="B.E. / B.Tech" />
+                                            </div>
+                                            <div className="space-y-1">
+                                                <label className="text-xs text-gray-400 uppercase font-bold tracking-wider ml-1">Specialization</label>
+                                                <input required type="text" value={attendee.specialization} onChange={(e) => handleAttendeeChange(attendee.id, 'specialization', e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="CSE" />
+                                            </div>
+                                            {collegeType === 'other' && (
+                                                <div className="space-y-1 md:col-span-2">
+                                                    <label className="text-xs text-gray-400 uppercase font-bold tracking-wider ml-1">College Name</label>
+                                                    <input required type="text" value={attendee.college} onChange={(e) => handleAttendeeChange(attendee.id, 'college', e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="College Name" />
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="space-y-3">
+                                            <label className="text-gray-300 text-sm font-medium">Select Events (Max 3)</label>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+                                                {eventOptions.map(event => {
+                                                    const isSelected = attendee.events.includes(event);
+                                                    const isMaxReached = attendee.events.length >= 3;
+                                                    const isDisabled = isMaxReached && !isSelected;
+
+                                                    return (
+                                                        <label key={event} className={`flex items-center space-x-2 p-2 rounded-lg border text-sm cursor-pointer transition-all ${isSelected ? 'bg-pink-500/20 border-pink-500/50 text-white' : 'border-white/5 text-gray-400 hover:bg-white/5'} ${isDisabled ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                                                            <input
+                                                                type="checkbox"
+                                                                value={event}
+                                                                checked={isSelected}
+                                                                onChange={(e) => handleEventChange(attendee.id, event, e.target.checked)}
+                                                                disabled={isDisabled}
+                                                                className="hidden"
+                                                            />
+                                                            <div className={`w-4 h-4 rounded border flex items-center justify-center ${isSelected ? 'bg-pink-500 border-pink-500' : 'border-gray-500'}`}>
+                                                                {isSelected && <CheckCircle size={12} className="text-white" />}
+                                                            </div>
+                                                            <span>{event}</span>
+                                                        </label>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </AnimatePresence>
+                        </div>
+
+                        {/* 4. Payment Section */}
+                        <div className={`bg-white/5 p-8 rounded-2xl border border-white/10 space-y-8 ${!rulesAccepted ? 'opacity-50 pointer-events-none grayscale' : ''} transition-all duration-300`}>
+                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
                                 <span className="w-1 h-6 bg-pink-500 rounded-full"></span>
-                                Payment Details
+                                Step 3: Payment
                             </h3>
-                            <div className="space-y-2">
-                                <p className="text-gray-400 text-sm">UPI ID: <span className="text-white font-mono font-bold">mathrix.ceg@okaxis</span></p>
-                                <div className="p-2 bg-white rounded-xl w-48 h-48 flex items-center justify-center mx-auto my-4 overflow-hidden">
-                                    <img src={qrCode} alt="Payment QR Code" className="w-full h-full object-contain" />
+
+                            <div className="flex flex-col md:flex-row gap-8 items-center justify-between bg-black/20 p-6 rounded-xl">
+                                <div className="text-center md:text-left">
+                                    <p className="text-gray-400 text-sm uppercase tracking-wider mb-2">Total Registration Fee</p>
+                                    <p className="text-5xl font-mono font-bold text-white">₹{calculateFee()}</p>
+                                    <p className="text-sm text-gray-500 mt-2">{attendees.length} Attendees • {collegeType === 'ceg' ? '₹60' : '₹120'} / Event</p>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                    <div className="bg-white p-2 rounded-xl w-40 h-40 mb-2">
+                                        <img src={qrCode} alt="QR" className="w-full h-full object-contain" />
+                                    </div>
+                                    <p className="text-white font-mono font-bold text-sm bg-white/10 px-3 py-1 rounded-lg">mathrix.ceg@okaxis</p>
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <label className="text-gray-300 text-sm font-medium ml-1">Transaction ID</label>
-                                    <input required type="text" name="transactionId" value={formData.transactionId} onChange={handleChange} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="txn_1234567890" />
+                                    <input required type="text" value={transactionId} onChange={(e) => setTransactionId(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all font-mono" placeholder="txn_1234567890" />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-gray-300 text-sm font-medium ml-1">Payment Screenshot</label>
                                     <div className="relative">
                                         <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="file-upload" />
-                                        <label htmlFor="file-upload" className={`w-full flex items-center justify-center gap-2 bg-white/5 border border-dashed ${file ? 'border-green-500 text-green-400' : 'border-white/20 text-gray-400'} rounded-xl px-4 py-3 cursor-pointer hover:bg-white/10 transition-all`}>
+                                        <label htmlFor="file-upload" className={`w-full flex items-center justify-center gap-2 bg-white/5 border border-dashed ${file ? 'border-green-500 text-green-400' : 'border-white/20 text-gray-400'} rounded-xl px-4 py-3 cursor-pointer hover:bg-white/10 transition-all h-[50px]`}>
                                             <Upload size={20} />
-                                            {file ? file.name : "Upload Screenshot (Required)"}
+                                            <span className="truncate max-w-[200px]">{file ? file.name : "Upload Screenshot (Required)"}</span>
                                         </label>
                                     </div>
                                 </div>
@@ -305,18 +380,22 @@ const Register = () => {
                         </div>
 
                         {status === 'error' && (
-                            <div className="flex items-center gap-2 text-red-400 bg-red-400/10 p-4 rounded-xl">
+                            <div className="flex items-center gap-2 text-red-400 bg-red-400/10 p-4 rounded-xl border border-red-400/20">
                                 <AlertCircle size={20} />
                                 <p>{message}</p>
                             </div>
                         )}
 
-                        <button disabled={status === 'uploading' || status === 'submitting'} type="submit" className="w-full btn btn-primary py-4 text-lg font-bold shadow-lg shadow-pink-500/20 disabled:opacity-50 disabled:cursor-not-allowed">
-                            {status === 'uploading' || status === 'submitting' ? (
+                        <button
+                            disabled={status === 'uploading' || status === 'submitting' || !rulesAccepted}
+                            type="submit"
+                            className="w-full btn btn-primary py-4 text-xl font-bold shadow-[0_0_30px_rgba(236,72,153,0.3)] disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none hover:scale-[1.01] active:scale-[0.99] transition-all"
+                        >
+                            {status === 'uploading' ? (
                                 <span className="flex items-center justify-center gap-2">
-                                    <Loader className="animate-spin" /> Registering...
+                                    <Loader className="animate-spin" /> Processing Payment...
                                 </span>
-                            ) : "Complete Registration"}
+                            ) : `Pay ₹${calculateFee()} & Register`}
                         </button>
                     </form>
                 )}
