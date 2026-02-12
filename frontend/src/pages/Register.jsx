@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, CheckCircle, AlertCircle, Loader, Download, Plus, Trash2, UserPlus, Users } from 'lucide-react';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+import { Upload, CheckCircle, AlertCircle, Loader, Download, Plus, Trash2, UserPlus, Users, FileText } from 'lucide-react';
 import qrCode from '../assets/qr_code.jpeg';
 
 const Register = () => {
@@ -142,60 +140,6 @@ const Register = () => {
         }
     };
 
-    const generatePDF = (registrations) => {
-        const doc = new jsPDF();
-
-        // Title
-        doc.setFontSize(22);
-        doc.setTextColor(236, 72, 153); // Pink
-        doc.text("Mathrix 2026 Registration Receipt", 105, 20, null, null, "center");
-
-        // Metadata
-        doc.setFontSize(10);
-        doc.setTextColor(100);
-        doc.text(`Date: ${new Date().toLocaleString()}`, 14, 30);
-        doc.text(`Transaction ID: ${transactionId}`, 14, 35);
-        doc.text(`College Type: ${collegeType === 'ceg' ? 'CEG Student' : 'Other College'}`, 14, 40);
-
-        // Table
-        const tableColumn = ["Mathrix ID", "Name", "Events", "Fee"];
-        const tableRows = [];
-
-        registrations.forEach(reg => {
-            const fee = (reg.events.length * (collegeType === 'ceg' ? 60 : 120));
-            const row = [
-                reg.mathrixId,
-                reg.fullName,
-                reg.events.join(", "),
-                `Rs. ${fee}`
-            ];
-            tableRows.push(row);
-        });
-
-        autoTable(doc, {
-            head: [tableColumn],
-            body: tableRows,
-            startY: 45,
-            theme: 'grid',
-            headStyles: { fillColor: [236, 72, 153] },
-            styles: { fontSize: 10 }
-        });
-
-        // Total
-        const totalFee = calculateFee();
-        doc.setFontSize(14);
-        doc.setTextColor(0);
-        doc.text(`Total Amount Paid: Rs. ${totalFee}`, 14, doc.lastAutoTable.finalY + 15);
-
-        // Footer
-        doc.setFontSize(10);
-        doc.setTextColor(150);
-        doc.text("Thank you for registering for Mathrix 2026!", 105, 280, null, null, "center");
-        doc.text("For queries, contact: mathrix@annauniv.edu", 105, 285, null, null, "center");
-
-        doc.save("mathrix_receipt.pdf");
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('uploading');
@@ -231,13 +175,6 @@ const Register = () => {
             setResponseIds(jsonResponse.ids);
             setMessage(`Successfully registered ${jsonResponse.ids.length} attendees!`);
 
-            // Generate PDF with returned IDs
-            const completedRegistrations = cleanAttendees.map((att, index) => ({
-                ...att,
-                mathrixId: jsonResponse.ids[index]
-            }));
-            generatePDF(completedRegistrations);
-
         } catch (error) {
             console.error("Error submitting form:", error);
             setStatus('error');
@@ -265,12 +202,22 @@ const Register = () => {
                         <h2 className="text-3xl font-bold text-white mb-4">Registration Successful!</h2>
 
                         <div className="space-y-4 mb-8">
-                            <p className="text-gray-300">Generated Mathrix IDs:</p>
-                            <div className="flex flex-wrap justify-center gap-3">
+                            <p className="text-gray-300">Your Mathrix IDs & Tickets:</p>
+                            <div className="flex flex-wrap justify-center gap-4">
                                 {responseIds.map(id => (
-                                    <span key={id} className="bg-white/10 px-4 py-2 rounded-lg font-mono text-pink-400 font-bold border border-white/10">
-                                        {id}
-                                    </span>
+                                    <div key={id} className="flex flex-col items-center gap-2">
+                                        <span className="bg-white/10 px-4 py-2 rounded-lg font-mono text-pink-400 font-bold border border-white/10">
+                                            {id}
+                                        </span>
+                                        <a
+                                            href={`${import.meta.env.VITE_API_URL}/ticket/${id}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-xs flex items-center gap-1 text-gray-400 hover:text-white transition-colors"
+                                        >
+                                            <FileText size={12} /> Download Ticket
+                                        </a>
+                                    </div>
                                 ))}
                             </div>
                         </div>
