@@ -7,7 +7,7 @@ const Members = () => {
         {
             title: "PATRON",
             members: [
-                { name: "Dr. P. Loganathan", role: "Professor and Head, Dept. of Mathematics" }
+                { name: "Dr. P. Loganathan", role: <>Professor & Head<br />Department of Mathematics</> }
             ]
         },
         {

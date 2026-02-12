@@ -129,7 +129,7 @@ const Schedule = () => {
             coordinator: "Safrin S"
         },
         {
-            time: "10:00 AM (Feb 19)",
+            time: "Deadline: 10.00 AM (Feb, 19)",
             title: "Through the Lens",
             category: "Non Technical",
             location: "Online",
