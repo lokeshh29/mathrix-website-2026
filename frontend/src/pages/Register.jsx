@@ -393,7 +393,16 @@ const Register = () => {
                                     <div className="bg-white p-2 rounded-xl w-40 h-40 mb-2">
                                         <img src={qrCode} alt="QR" className="w-full h-full object-contain" />
                                     </div>
-                                    <p className="text-white font-mono font-bold text-sm bg-white/10 px-3 py-1 rounded-lg">mathrix.ceg@okaxis</p>
+                                    <p className="text-white font-mono font-bold text-sm bg-white/10 px-3 py-1 rounded-lg mb-4">mathrix.ceg@okaxis</p>
+
+                                    {/* Bank Details */}
+                                    <div className="text-left text-xs text-gray-400 bg-white/5 p-3 rounded-lg border border-white/10 w-full max-w-xs">
+                                        <p className="font-bold text-gray-300 mb-1 border-b border-white/10 pb-1">Alternative: Bank Transfer</p>
+                                        <p><span className="text-gray-500">Acc No:</span> <span className="text-white font-mono">10496975761</span></p>
+                                        <p><span className="text-gray-500">Name:</span> <span className="text-white">Mathematics Colloquim</span></p>
+                                        <p><span className="text-gray-500">Branch:</span> <span className="text-white">Anna University, Chennai</span></p>
+                                        <p><span className="text-gray-500">IFSC:</span> <span className="text-white font-mono">SBIN0006463</span></p>
+                                    </div>
                                 </div>
                             </div>
 
