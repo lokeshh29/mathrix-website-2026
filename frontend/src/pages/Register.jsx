@@ -32,7 +32,8 @@ const Register = () => {
     }, [collegeType]);
 
     const [file, setFile] = useState(null);
-    const [status, setStatus] = useState('idle'); // idle, uploading, submitting, success, error
+    const [status, setStatus] = useState('idle');
+    const [rulesAccepted, setRulesAccepted] = useState(false); // idle, uploading, submitting, success, error
     const [message, setMessage] = useState('');
 
     const eventOptions = [
@@ -225,11 +226,32 @@ const Register = () => {
 
                             {/* 2. Event Selection - Always Individual now */}
                             <div className="space-y-4">
+                                <div className="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-xl space-y-3">
+                                    <h4 className="font-bold text-yellow-200 flex items-center gap-2 text-sm uppercase tracking-wide">
+                                        <AlertCircle size={18} /> Important Instructions
+                                    </h4>
+                                    <ul className="list-disc list-inside text-sm text-gray-300 space-y-1 pl-1">
+                                        <li>You can select a maximum of <strong className="text-white">3 events</strong>.</li>
+                                        <li>If you qualify for the next rounds of an event and miss another registered event due to time constraints, <strong className="text-white">we are not responsible for the conflict</strong>.</li>
+                                        <li>Please check the schedule carefully before registering.</li>
+                                        <li>Registration fee is not refundable.</li>
+                                    </ul>
+                                    <label className="flex items-center gap-3 p-3 bg-black/20 rounded-lg cursor-pointer hover:bg-black/30 transition-colors border border-white/5 select-none text-white">
+                                        <input
+                                            type="checkbox"
+                                            checked={rulesAccepted}
+                                            onChange={(e) => setRulesAccepted(e.target.checked)}
+                                            className="form-checkbox h-5 w-5 text-pink-500 rounded border-gray-600 bg-gray-700 focus:ring-0 cursor-pointer"
+                                        />
+                                        <span className="text-sm font-medium">I have read the instructions and agree to the rules.</span>
+                                    </label>
+                                </div>
+
                                 <label className="text-gray-300 text-sm font-medium ml-1">Select Events (Max 3)</label>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 bg-white/5 p-4 rounded-xl border border-white/10">
+                                <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 bg-white/5 p-4 rounded-xl border border-white/10 ${!rulesAccepted ? 'opacity-50 pointer-events-none grayscale' : ''} transition-all duration-300`}>
                                     {eventOptions.map(event => {
                                         const isMaxSelected = formData.events.length >= 3;
-                                        const isDisabled = isMaxSelected && !formData.events.includes(event);
+                                        const isDisabled = !rulesAccepted || (isMaxSelected && !formData.events.includes(event));
 
                                         return (
                                             <label key={event} className={`flex items-center space-x-3 p-2 rounded-lg transition-colors ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-white/5 cursor-pointer'}`}>
@@ -248,14 +270,6 @@ const Register = () => {
                                 </div>
                                 <div className="text-right text-sm text-pink-400 font-bold mt-2">
                                     Registration Fee: ₹{currentFee}
-                                </div>
-                                <div className="flex items-start gap-2 bg-yellow-500/10 border border-yellow-500/20 p-3 rounded-lg text-sm text-yellow-200 mt-4">
-                                    <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
-                                    <p>
-                                        <span className="font-bold block mb-1">Disclaimer:</span>
-                                        If you qualify for the next rounds of an event and miss another registered event due to time constraints,
-                                        we are not responsible for the conflict.
-                                    </p>
                                 </div>
                             </div>
                         </div>
