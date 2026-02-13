@@ -12,6 +12,10 @@ const Admin = () => {
     const [selectedEvent, setSelectedEvent] = useState('All');
     const [sortOrder, setSortOrder] = useState('desc');
 
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [deleteId, setDeleteId] = useState(null);
+    const [deletePasswordInput, setDeletePasswordInput] = useState("");
+
     // Extract unique events for the filter dropdown
     const allEvents = ['All', ...new Set(registrations.flatMap(reg => reg.events || []))];
 
@@ -92,13 +96,21 @@ const Admin = () => {
         document.body.removeChild(link);
     };
 
-    const handleDelete = async (transactionId) => {
-        if (!window.confirm("Are you sure you want to delete this registration? This action cannot be undone.")) {
+    const initiateDelete = (transactionId) => {
+        setDeleteId(transactionId);
+        setDeletePasswordInput("");
+    };
+
+    const confirmDelete = async () => {
+        const secret = import.meta.env.VITE_DELETE_PASSWORD || "12345";
+        if (deletePasswordInput !== secret) {
+            alert("Incorrect Deletion Password!");
             return;
         }
 
+        // Proceed with deletion
         try {
-            const res = await fetch(`${import.meta.env.VITE_API_URL}/registrations/${encodeURIComponent(transactionId)}?secret=${password}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/registrations/${encodeURIComponent(deleteId)}?secret=${password}`, {
                 method: 'DELETE'
             });
 
@@ -115,10 +127,12 @@ const Admin = () => {
             // Refresh list
             fetchRegistrations(password);
             alert("Registration deleted successfully");
+            setDeleteId(null);
         } catch (err) {
             alert("Error deleting registration: " + err.message);
         }
     };
+
 
     if (!isAuthenticated) {
         return (
@@ -147,8 +161,6 @@ const Admin = () => {
             </div>
         );
     }
-
-    const [selectedImage, setSelectedImage] = useState(null);
 
 
     return (
@@ -179,6 +191,41 @@ const Admin = () => {
                         >
                             <Download size={20} /> Download Original
                         </a>
+                    </div>
+                </div>
+            )}
+
+            {/* Delete Confirmation Modal */}
+            {deleteId && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
+                    <div className="bg-[#0f0518] border border-red-500/30 p-8 rounded-2xl max-w-sm w-full shadow-2xl">
+                        <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <Trash2 className="text-red-500" /> Confirm Delete
+                        </h3>
+                        <p className="text-gray-400 mb-6 text-sm">
+                            Enter the deletion password to permanently remove this registration. This action cannot be undone.
+                        </p>
+                        <input
+                            type="password"
+                            placeholder="Enter Password"
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-red-500/50 mb-6"
+                            value={deletePasswordInput}
+                            onChange={(e) => setDeletePasswordInput(e.target.value)}
+                        />
+                        <div className="flex gap-4">
+                            <button
+                                onClick={() => setDeleteId(null)}
+                                className="flex-1 py-3 rounded-xl border border-white/10 text-gray-300 hover:bg-white/5 transition-colors font-medium"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={confirmDelete}
+                                className="flex-1 py-3 rounded-xl bg-red-500/20 text-red-400 hover:bg-red-500/30 border border-red-500/30 transition-colors font-bold"
+                            >
+                                Delete
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
@@ -281,7 +328,7 @@ const Admin = () => {
                                                 </button>
                                             )}
                                             <button
-                                                onClick={() => handleDelete(reg.transactionId)}
+                                                onClick={() => initiateDelete(reg.transactionId)}
                                                 className="text-red-400 hover:text-red-300 transition-colors p-1"
                                                 title="Delete Registration"
                                             >
