@@ -281,7 +281,7 @@ const Home = () => {
                         {
                             id: 10,
                             title: 'Mathkinator',
-                            description: 'Akinator-inspired event to identify mathematicians and concepts using strategic questioning.',
+                            description: 'Logical reasoning event testing pattern recognition through word transformations.',
                             date: 'February 20, 2026',
                             time: '12:00 PM – 01:00 PM',
                             location: 'LH-2',

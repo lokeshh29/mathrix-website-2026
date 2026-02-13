@@ -107,7 +107,7 @@ const Schedule = () => {
             category: "Non Technical",
             location: "LH-2",
             icon: Lightbulb,
-            description: "Interactive guessing game.",
+            description: "Logical reasoning & pattern recognition.",
             coordinator: "Madhan M"
         },
         {
