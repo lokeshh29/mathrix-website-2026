@@ -226,7 +226,8 @@ const Events = () => {
                 judging: 'Match results, standard chess scoring.',
                 prize: '1st, 2nd, 3rd Prize + Certificate.',
                 coordinator: 'Bathmasree R (8608349376), Nandha kishore R R (8248227885), Ezhil Jeevana S (6369642347), Jeevika (9789384379)',
-                volunteers: 'Sundhar Balamoorthy (82486 29145), Ecilaise S (7200229041), Sahana Ramanathan (9962911497), Mohammad Nihal (6383366723)'
+                volunteers: 'Sundhar Balamoorthy (82486 29145), Ecilaise S (7200229041), Sahana Ramanathan (9962911497), Mohammad Nihal (6383366723)',
+                note: "Note: Online event is about to be conducted on Wednesday, so register on or before 17.02.2026."
             },
             date: 'February 20, 2026',
             time: 'Online + On Day (12:00 PM – 1:00 PM)',
