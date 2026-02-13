@@ -31,15 +31,15 @@ const Register = () => {
 
     const eventOptions = [
         "SQL – Query Quest", "MagicMatix", "Code Mathrix", "Through the Lens",
-        "IPL Auction", "Paper Presentation", "GoofyChess", "Math Quiz",
-        "Find The Fixed Points", "Mathkinator", "Treasure Hunt"
+        "IPL Auction", "Paper Presentation", "GoofyChess", "Math Wizz",
+        "Mathkinator", "Treasure Hunt"
     ];
 
     const deadlines = {
         // Start 10:30 -> Close 10:00 AM
         "Code Mathrix": "2026-02-20T10:00:00+05:30",
         "IPL Auction": "2026-02-20T10:00:00+05:30",
-        "Math Quiz": "2026-02-20T10:00:00+05:30",
+        "Math Wizz": "2026-02-20T10:00:00+05:30",
 
         // Start 11:00 -> Close 10:45
         "SQL – Query Quest": "2026-02-20T10:45:00+05:30",
@@ -50,7 +50,6 @@ const Register = () => {
 
         // Start 11:40 -> Close 11:25
         "Treasure Hunt": "2026-02-20T11:25:00+05:30",
-        "Find The Fixed Points": "2026-02-20T11:25:00+05:30",
 
         // Start 12:00 -> Close 11:45
         "Mathkinator": "2026-02-20T11:45:00+05:30",

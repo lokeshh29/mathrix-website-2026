@@ -31,8 +31,8 @@ const Events = () => {
                 volunteers: 'Divya (9159676133), Bhavana (8056679807), Uma Maheswari (9159935736), Roshini (7904199432)'
             },
             date: 'February 20, 2026',
-            time: '10:30 AM & 12:00 PM',
-            location: 'LH-6 / RCC Lab',
+            time: 'R1: 11:00 AM - 11:30 AM | R2: 11:45 AM - 12:30 PM',
+            location: 'LH-6 (R1) / DOM Lab-Ext (R2)',
             category: 'Technical',
             icon: Database,
             color: 'text-emerald-400'
@@ -61,7 +61,7 @@ const Events = () => {
                 volunteers: 'Boobeswaran (99622 16367)'
             },
             date: 'February 20, 2026',
-            time: '10:30 AM & 12:00 PM',
+            time: 'R1: 11:30 AM - 12:00 PM | R2: 12:15 PM - 12:45 PM',
             location: 'LH-1',
             category: 'General',
             icon: Sparkles,
@@ -91,8 +91,8 @@ const Events = () => {
                 volunteers: '5 Volunteers'
             },
             date: 'February 20, 2026',
-            time: '11:00 AM – 12:30 PM',
-            location: 'Mathematics Dept Lab',
+            time: '10:30 AM – 12:00 PM',
+            location: 'Dept of Maths Lab',
             category: 'Technical',
             icon: Terminal,
             color: 'text-cyan-400'
@@ -156,7 +156,7 @@ const Events = () => {
                 volunteers: 'Nandakishore (8248227885), Soorya V (9080798813), Kishore B (6379869605), Ashvan P (9361248774), Harish B (9585890339), Santhosh J (6385422344), Arul Prasanth (8015636015), Madhavan M (8610824066)'
             },
             date: 'February 20, 2026',
-            time: '11:00 AM – 1:00 PM',
+            time: '10:30 AM – 01:00 PM',
             location: 'LH-5',
             category: 'Non Technical',
             icon: Crown,
@@ -201,7 +201,7 @@ const Events = () => {
                 coordinator: 'Kesavarthini J (9361733387), Jeysri G S (8438153565), Sri Aishwarya M (8825775704)'
             },
             date: 'February 20, 2026',
-            time: '11:20 AM – 1:00 PM',
+            time: '11:00 AM – 12:30 PM',
             location: 'Ramanujan Hall',
             category: 'General',
             icon: Projector,
@@ -229,18 +229,18 @@ const Events = () => {
                 volunteers: 'Sundhar Balamoorthy (82486 29145), Ecilaise S (7200229041), Sahana Ramanathan (9962911497), Mohammad Nihal (6383366723)'
             },
             date: 'February 20, 2026',
-            time: '12:00 PM – 1:00 PM',
-            location: 'Online + Drawing Hall-13',
+            time: 'Online + On Day (12:00 PM – 1:00 PM)',
+            location: 'LH-48',
             category: 'Non Technical',
             icon: Brain,
             color: 'text-orange-400'
         },
         {
             id: 8,
-            title: 'Math Quiz',
+            title: 'Math Wizz',
             description: 'Test your aptitude, mathematical knowledge, and speed in this competitive quiz event.',
             details: {
-                description: 'Math Quiz is a competitive and engaging technical event designed to test participants aptitude, mathematical knowledge, speed, and logical reasoning. The event consists of a preliminary written round followed by a main quiz round featuring various quiz formats.',
+                description: 'Math Wizz is a competitive and engaging technical event designed to test participants aptitude, mathematical knowledge, speed, and logical reasoning. The event consists of a preliminary written round followed by a main quiz round featuring various quiz formats.',
                 rounds: [
                     { title: 'Round 1: Prelims (20 mins)', desc: 'Written MCQ test covering Quantitative Aptitude, Core Mathematics, General Math.' },
                     { title: 'Round 2: Mains (1hr 45mins)', desc: 'Various formats: Identify Mathematician, Find Error in Theorem, Rapid Fire (10 Qs in 60s), Buzzer rounds.' }
@@ -258,18 +258,18 @@ const Events = () => {
                 volunteers: '5 Volunteers'
             },
             date: 'February 20, 2026',
-            time: '11:45 AM & 2:30 PM',
-            location: 'Drawing Hall / Vivek Audi',
+            time: 'R1: 10:30 AM – 11:30 AM | R2: 02:00 PM – 03:30 PM',
+            location: 'LH-72 (R1) / Vivek Audi (R2)',
             category: 'Math',
             icon: Sigma,
             color: 'text-indigo-400'
         },
         {
             id: 9,
-            title: 'Find The Fixed Points (Treasure Hunt)',
+            title: 'Treasure Hunt',
             description: 'An exploration-based team event blending logic, observation, teamwork, and quick decision-making.',
             details: {
-                description: 'The Find The Fixed Points is an exploration-based team event that blends logic, observation, teamwork, and quick decision-making. Participants follow clues, solve riddles, and navigate through checkpoints to uncover the final treasure. Speed matters—but strategy, accuracy, and coordination decide the champions.',
+                description: 'The Treasure Hunt is an exploration-based team event that blends logic, observation, teamwork, and quick decision-making. Participants follow clues, solve riddles, and navigate through checkpoints to uncover the final treasure. Speed matters—but strategy, accuracy, and coordination decide the champions.',
                 rounds: [
                     { title: 'Round 1: Prelims', desc: 'MCQ Aptitude Questions. 6 teams with maximum marks selected for next round.' },
                     { title: 'Round 2: Final Trail', desc: 'Follow clues, solve riddles at checkpoints. First team to reach final treasure with all clues solved wins.' }
@@ -288,7 +288,7 @@ const Events = () => {
                 volunteers: '8 Volunteers'
             },
             date: 'February 20, 2026',
-            time: '10:30 AM & 11:20 AM',
+            time: '11:40 AM – 01:00 PM',
             location: 'LH-48',
             category: 'Math',
             icon: Compass,
@@ -317,7 +317,7 @@ const Events = () => {
                 volunteers: '5 Volunteers'
             },
             date: 'February 20, 2026',
-            time: '11:30 AM – 1:00 PM',
+            time: '12:00 PM – 01:00 PM',
             location: 'LH-2',
             category: 'Non Technical',
             icon: Lightbulb,
