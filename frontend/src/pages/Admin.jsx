@@ -148,8 +148,41 @@ const Admin = () => {
         );
     }
 
+    const [selectedImage, setSelectedImage] = useState(null);
+
+
     return (
         <div className="container mx-auto px-4 py-24 min-h-screen">
+            {/* Image Modal */}
+            {selectedImage && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm" onClick={() => setSelectedImage(null)}>
+                    <div className="relative max-w-4xl max-h-[90vh] flex flex-col items-center">
+                        <button
+                            className="absolute -top-12 right-0 text-white hover:text-pink-500 transition-colors p-2"
+                            onClick={() => setSelectedImage(null)}
+                        >
+                            <Trash2 className="rotate-45" size={32} /> {/* Using Trash2 rotated as close icon or import X */}
+                        </button>
+                        <img
+                            src={selectedImage}
+                            alt="Payment Screenshot"
+                            className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl border border-white/10"
+                            onClick={(e) => e.stopPropagation()}
+                        />
+                        <a
+                            href={selectedImage}
+                            download
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-4 flex items-center gap-2 bg-white/10 hover:bg-white/20 px-6 py-2 rounded-full text-white transition-colors"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <Download size={20} /> Download Original
+                        </a>
+                    </div>
+                </div>
+            )}
+
             <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
                 <h1 className="text-3xl font-bold text-white">Registrations <span className="text-pink-500 text-lg">({registrations.length})</span></h1>
                 <div className="flex gap-4">
@@ -161,8 +194,6 @@ const Admin = () => {
                     </button>
                 </div>
             </div>
-
-
 
             <div className="glass-card p-6 mb-8 flex flex-col md:flex-row gap-4">
                 <div className="relative flex-1">
@@ -242,9 +273,12 @@ const Admin = () => {
                                     <td className="p-4">
                                         <div className="flex items-center gap-3">
                                             {reg.screenshotUrl && (
-                                                <a href={reg.screenshotUrl} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline text-sm" title="View Screenshot">
+                                                <button
+                                                    onClick={() => setSelectedImage(reg.screenshotUrl)}
+                                                    className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+                                                >
                                                     View
-                                                </a>
+                                                </button>
                                             )}
                                             <button
                                                 onClick={() => handleDelete(reg.transactionId)}
