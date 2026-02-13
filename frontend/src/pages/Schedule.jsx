@@ -144,7 +144,7 @@ const Schedule = () => {
             location: "Online",
             icon: Camera,
             description: "Online photography submission.",
-            coordinator: "Event Coordinator (TBA)"
+            coordinator: "Sivaguru S"
         }
     ];
 

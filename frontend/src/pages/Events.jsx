@@ -116,7 +116,7 @@ const Events = () => {
                 teamSize: 'Individual',
                 judging: 'Creativity, Composition, Theme relevance, Technical quality.',
                 prize: '1st, 2nd, 3rd Prizes + Certificates.',
-                coordinator: 'Event Coordinator (TBA)'
+                coordinator: 'Sivaguru S'
             },
             date: 'February 20, 2026',
             time: 'Online - Deadline: 19th Feb 6:00 PM',
