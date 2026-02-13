@@ -12,10 +12,20 @@ logger = logging.getLogger(__name__)
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 DB_NAME = "mathrix_db"
 
+# Global client variable to reuse connection
+_client = None
+
+def get_mongo_client():
+    global _client
+    if _client is None:
+         # Add connectTimeoutMS and socketTimeoutMS for better fail-fast behavior
+        _client = MongoClient(MONGO_URI, connectTimeoutMS=10000, socketTimeoutMS=10000)
+    return _client
+
 class MongoDBService:
     def __init__(self):
         try:
-            self.client = MongoClient(MONGO_URI)
+            self.client = get_mongo_client()
             self.db = self.client[DB_NAME]
             self.collection = self.db.registrations
             self.fs = gridfs.GridFS(self.db)
