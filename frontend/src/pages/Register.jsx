@@ -30,14 +30,14 @@ const Register = () => {
     const [responseIds, setResponseIds] = useState([]);
 
     const eventOptions = [
-        "SQL – Query Quest", "MagicMatix", "Code Mathrix", "Through the Lens",
+        "SQL – Query Quest", "MagicMatix", "Code Matrix", "Through the Lens",
         "IPL Auction", "Paper Presentation", "GoofyChess", "Math Wizz",
         "Mathkinator", "Treasure Hunt"
     ];
 
     const deadlines = {
         // Start 10:30 -> Close 10:00 AM
-        "Code Mathrix": "2026-02-20T10:00:00+05:30",
+        "Code Matrix": "2026-02-20T10:00:00+05:30",
         "IPL Auction": "2026-02-20T10:00:00+05:30",
         "Math Wizz": "2026-02-20T10:00:00+05:30",
 

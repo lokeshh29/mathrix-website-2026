@@ -203,7 +203,7 @@ const Home = () => {
                         },
                         {
                             id: 3,
-                            title: 'Code Mathrix',
+                            title: 'Code Matrix',
                             description: 'Decode. Divide. Conquer. Turn-based collaborative coding challenge.',
                             date: 'February 20, 2026',
                             time: '10:30 AM – 12:00 PM',

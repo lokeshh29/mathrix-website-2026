@@ -69,10 +69,10 @@ const Events = () => {
         },
         {
             id: 3,
-            title: 'Code Mathrix',
+            title: 'Code Matrix',
             description: 'Decode. Divide. Conquer. A collaborative coding challenge testing logic, coordination, and problem-solving.',
             details: {
-                description: 'Code Mathrix is a collaborative coding challenge that tests logic, coordination, and problem-solving. Teams solve two interconnected problems by completing partial code in turns under strict isolation rules. Success depends on clear thinking, teamwork, and seamless code continuity under time pressure.',
+                description: 'Code Matrix is a collaborative coding challenge that tests logic, coordination, and problem-solving. Teams solve two interconnected problems by completing partial code in turns under strict isolation rules. Success depends on clear thinking, teamwork, and seamless code continuity under time pressure.',
                 rounds: [
                     { title: 'Round 1: Prelims (30 mins)', desc: 'Logic-based MCQs and dry-run coding problems. Scored on accuracy and completion time.' },
                     { title: 'Round 2: Live Coding (40 mins)', desc: '2 DSA problems with turn-based coding (10 min swaps). Evaluated on logic, execution, and submission time.' }

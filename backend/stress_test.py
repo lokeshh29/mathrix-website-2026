@@ -9,7 +9,7 @@ NUM_REQUESTS = 20  # Reduced to avoid too much load, checking logic mainly
 
 # Valid data options
 EVENTS = [
-    "SQL – Query Quest", "MagicMatix", "Code Mathrix", "Through the Lens",
+    "SQL – Query Quest", "MagicMatix", "Code Matrix", "Through the Lens",
     "IPL Auction", "Paper Presentation", "GoofyChess", "Math Quiz",
     "Find The Fixed Points", "Mathkinator", "Treasure Hunt"
 ]
