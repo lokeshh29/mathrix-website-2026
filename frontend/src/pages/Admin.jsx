@@ -155,7 +155,20 @@ const Admin = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                         {error && <p className="text-red-400 text-sm">{error}</p>}
-                        <button type="submit" className="w-full btn btn-primary py-3">Login</button>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full btn btn-primary py-3 flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                            {loading ? (
+                                <>
+                                    <RefreshCw className="animate-spin" size={20} />
+                                    <span>Verifying...</span>
+                                </>
+                            ) : (
+                                "Login"
+                            )}
+                        </button>
                     </form>
                 </motion.div>
             </div>
