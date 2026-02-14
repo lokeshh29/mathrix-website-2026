@@ -28,7 +28,7 @@ const Home = () => {
                             <span className="h-px w-8 bg-pink-500/50"></span>
                         </h2>
                         <h1 className="text-4xl md:text-8xl font-extrabold mb-4 tracking-[0.05em] md:tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-b from-gray-100 to-gray-400 drop-shadow-[0_5px_15px_rgba(255,255,255,0.1)] leading-tight font-tech uppercase">
-                            MATHRIX 2026
+                            MATHRIX'26
                         </h1>
                         <h2 className="text-xl md:text-3xl font-bold text-pink-500 tracking-widest font-tech mb-8 uppercase">
                             Technical Symposium
@@ -91,8 +91,8 @@ const Home = () => {
                         <div className="md:w-1/2">
                             <h2 className="text-4xl font-bold mb-2">About Mathrix</h2>
 
-                            <p className="text-gray-300 mb-6 leading-relaxed">
-                                Mathrix 2026 is the annual intercollegiate technical symposium organised by the Department of Mathematics, College of Engineering Guindy (CEG), Anna University, Chennai. Mathrix is a one-of-a-kind fest that brings together logic, innovation, and problem-solving under one roof. Organized by the brilliant minds of M.Sc. Computer Science (5 years), M.Sc. Information Technology (5 years), and M.Sc. Mathematics (2 years), Mathrix is more than just a symposium—it's a fusion of numbers, algorithms, and cutting-edge tech.
+                            <p className="text-gray-300 mb-6 leading-relaxed text-justify">
+                                Mathrix'26 is the annual intercollegiate technical symposium organized by the Department of Mathematics, College of Engineering Guindy (CEG), Anna University, Chennai. Mathrix is a one-of-a-kind fest that brings together logic, innovation, and problem-solving under one roof. Organized by the brilliant minds of M.Sc. Integrated Computer Science, M.Sc. Integrated Information Technology, and M.Sc. Mathematics. Mathrix is more than just a symposium—it's a fusion of numbers, algorithms, and cutting-edge tech.
                             </p>
                             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center mt-8">
                                 <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
