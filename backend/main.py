@@ -170,7 +170,7 @@ async def register_bulk(
             "MagicMatix": 2,
             "Treasure Hunt": 3,
             "Code Matrix": 2,
-            "Paper Presentation": 1,
+            "Paper Presentation": 2,
             "Math Wizz": 3,
             "IPL Auction": 4,
             "Mathkinator": 2
@@ -271,7 +271,7 @@ async def get_event_availability(college: str = "other"):
         
         availability = {}
         all_events = [
-            "SQL – Query Quest", "MagicMatix", "Code Matrix", "Through the Lens",
+            "SQL – Query Quest", "MagicMatix", "Code Matrix",
             "IPL Auction", "Paper Presentation", "Math Wizz",
             "Mathkinator", "Treasure Hunt"
         ]

@@ -31,7 +31,7 @@ const Register = () => {
     const [closedEvents, setClosedEvents] = useState([]); // List of full events from DB
 
     const eventOptions = [
-        "SQL – Query Quest", "MagicMatix", "Code Matrix", "Through the Lens",
+        "SQL – Query Quest", "MagicMatix", "Code Matrix",
         "IPL Auction", "Paper Presentation", "Math Wizz",
         "Mathkinator", "Treasure Hunt"
     ];
@@ -53,10 +53,7 @@ const Register = () => {
         "Treasure Hunt": "2026-02-20T11:25:00+05:30",
 
         // Start 12:05 -> Close 11:50
-        "Mathkinator": "2026-02-20T11:50:00+05:30",
-
-        // Special
-        "Through the Lens": "2026-02-19T10:00:00+05:30"
+        "Mathkinator": "2026-02-20T11:50:00+05:30"
     };
 
     // Check time-based deadline
@@ -139,8 +136,9 @@ const Register = () => {
         // Event constraints
         const eventConstraints = {
             "Math Wizz": 2,
-            "IPL Auction": 4, // Updated to 4
-            "SQL – Query Quest": 2
+            "IPL Auction": 4,
+            "SQL – Query Quest": 1,
+            "Paper Presentation": 2
         };
 
         setAttendees(prev => {
@@ -208,6 +206,38 @@ const Register = () => {
             }
             if (!rulesAccepted) throw new Error("Please accept the rules");
 
+            // --- Validation: Check Minimum/Exact Team Constraints ---
+            const eventCounts = {};
+            attendees.forEach(a => {
+                a.events.forEach(ev => {
+                    eventCounts[ev] = (eventCounts[ev] || 0) + 1;
+                });
+            });
+
+            // Constraints: [Min, Max] (Max is already checked during selection, but checking here implies consistency)
+            const teamRules = {
+                "IPL Auction": { min: 4, max: 4, label: "exactly 4" },
+                "Math Wizz": { min: 2, max: 3, label: "2-3" },
+                "Treasure Hunt": { min: 2, max: 3, label: "2-3" },
+                // "MagicMatix": { min: 1, max: 2 }, // Assuming 1-2 is fine unless strict 2 required
+                // "Code Matrix": { min: 1, max: 2 },
+                // "Mathkinator": { min: 1, max: 2 }
+            };
+
+            for (const [event, count] of Object.entries(eventCounts)) {
+                const rule = teamRules[event];
+                if (rule) {
+                    if (count < rule.min) {
+                        throw new Error(`"${event}" requires ${rule.label} participants. You have selected it for ${count} attendee(s).`);
+                    }
+                    // Max check is technically redundant due to handleEventChange but good for safety
+                    if (count > rule.max) {
+                        throw new Error(`"${event}" allows max ${rule.max} participants.`);
+                    }
+                }
+            }
+            // ---------------------------------------------------------
+
             const submissionData = new FormData();
 
             // Clean data before sending
@@ -254,7 +284,7 @@ const Register = () => {
             case "Code Matrix": return "Code Matrix allows max 2 members.";
             case "Mathkinator": return "Mathkinator allows max 2 members.";
             case "SQL – Query Quest": return "Individual Event (1 participant).";
-            case "Paper Presentation": return "Individual Event (1 participant).";
+            case "Paper Presentation": return "Individual or Team of 2.";
             default: return null;
         }
     };
@@ -340,6 +370,7 @@ const Register = () => {
                                     <input type="radio" name="collegeType" value="other" checked={collegeType === 'other'} onChange={() => setCollegeType('other')} className="hidden" />
                                     <div className="text-center font-bold text-lg">Other College</div>
                                     <div className="text-center text-sm opacity-70 mt-1">₹100 / Person</div>
+                                    <div className="text-center text-xs text-green-300 mt-1 font-medium">(Lunch Provided both Veg and Non-Veg)</div>
                                 </label>
                             </div>
                         </div>
