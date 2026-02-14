@@ -320,7 +320,7 @@ const Events = () => {
                 volunteers: '5 Volunteers'
             },
             date: 'February 20, 2026',
-            time: '12:00 PM – 01:00 PM',
+            time: '12:05 PM – 01:00 PM',
             location: 'LH-2',
             category: 'Non Technical',
             icon: Lightbulb,

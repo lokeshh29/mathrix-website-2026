@@ -31,7 +31,7 @@ const Register = () => {
 
     const eventOptions = [
         "SQL – Query Quest", "MagicMatix", "Code Matrix", "Through the Lens",
-        "IPL Auction", "Paper Presentation", "GoofyChess", "Math Wizz",
+        "IPL Auction", "Paper Presentation", "Math Wizz",
         "Mathkinator", "Treasure Hunt"
     ];
 
@@ -51,9 +51,8 @@ const Register = () => {
         // Start 11:40 -> Close 11:25
         "Treasure Hunt": "2026-02-20T11:25:00+05:30",
 
-        // Start 12:00 -> Close 11:45
-        "Mathkinator": "2026-02-20T11:45:00+05:30",
-        "GoofyChess": "2026-02-20T11:45:00+05:30",
+        // Start 12:05 -> Close 11:50
+        "Mathkinator": "2026-02-20T11:50:00+05:30",
 
         // Special
         "Through the Lens": "2026-02-19T10:00:00+05:30"
@@ -233,6 +232,22 @@ const Register = () => {
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="space-y-8">
+
+                        {/* GoofyChess Special Notice */}
+                        <div className="bg-purple-500/10 border border-purple-500/20 p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div>
+                                <h3 className="text-xl font-bold text-purple-200">GoofyChess Registration</h3>
+                                <p className="text-gray-400 text-sm">Reviewing chess strategies? GoofyChess requires a separate registration.</p>
+                            </div>
+                            <a
+                                href="#"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-6 py-2 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-lg transition-colors whitespace-nowrap"
+                            >
+                                Register for GoofyChess
+                            </a>
+                        </div>
 
                         {/* 1. College Type Selection (Applies to all) */}
                         <div className="bg-white/5 p-6 rounded-2xl border border-white/10">

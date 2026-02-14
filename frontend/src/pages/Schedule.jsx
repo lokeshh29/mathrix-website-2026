@@ -102,7 +102,7 @@ const Schedule = () => {
             coordinator: "RM Menaka, Madhumitha V"
         },
         {
-            time: "12:00 PM – 01:00 PM",
+            time: "12:05 PM – 01:00 PM",
             title: "Mathkinator",
             category: "Non Technical",
             location: "LH-2",
