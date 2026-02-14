@@ -57,30 +57,42 @@ async def register_user(
     course: str = Form(...),
     specialization: str = Form(...),
     year: str = Form(...),
-    transactionId: str = Form(...),
+    transactionId: Optional[str] = Form(None),
     events: str = Form(...), # Received as JSON string
     workshops: str = Form(...), # Received as JSON string
-    screenshot: UploadFile = File(...)
+    screenshot: Optional[UploadFile] = File(None)
 ):
     try:
-        # Save file to GridFS
         db = MongoDBService()
-        file_extension = screenshot.filename.split(".")[-1]
-        filename = f"{transactionId}_{email}.{file_extension}"
-        
-        # Read file content
-        file_content = await screenshot.read()
-        
-        if not db.save_file(file_content, filename, screenshot.content_type):
-             raise HTTPException(status_code=500, detail="Failed to save screenshot")
+        screenshot_url = ""
 
-        # Construct URL dynamically pointing to our new endpoint
-        base_url = str(request.base_url).rstrip("/")
-        screenshot_url = f"{base_url}/uploads/{filename}"
+        if screenshot:
+            # Save file to GridFS
+            file_extension = screenshot.filename.split(".")[-1]
+            # If transactionId is None at this point, use email for filename
+            safe_tid = transactionId if transactionId else "NO_TID"
+            filename = f"{safe_tid}_{email}.{file_extension}"
+            
+            # Read file content
+            file_content = await screenshot.read()
+            
+            if not db.save_file(file_content, filename, screenshot.content_type):
+                 raise HTTPException(status_code=500, detail="Failed to save screenshot")
+    
+            # Construct URL dynamically pointing to our new endpoint
+            base_url = str(request.base_url).rstrip("/")
+            screenshot_url = f"{base_url}/uploads/{filename}"
 
         # Parse JSON fields
         events_list = json.loads(events)
         workshops_list = json.loads(workshops)
+        
+        # Generate Mathrix ID first to use in transactionId if needed
+        import random
+        mathrix_id = str(random.randint(100000, 999999))
+        
+        # If no transaction ID provided (e.g. CEG student), generate one
+        final_transaction_id = transactionId if transactionId else f"FREE-{mathrix_id}"
 
         data = {
             "fullName": fullName,
@@ -90,21 +102,17 @@ async def register_user(
             "course": course,
             "specialization": specialization,
             "year": year,
-            "transactionId": transactionId,
+            "transactionId": final_transaction_id,
             "events": events_list,
             "workshops": workshops_list,
             "screenshotUrl": screenshot_url,
-            "timestamp": None 
+            "timestamp": None,
+            "mathrixId": mathrix_id
         }
         
         # Add timestamp
         import datetime
-        import random
         data['timestamp'] = datetime.datetime.now().isoformat()
-        
-        # Generate Mathrix ID (Simple 6-digit random)
-        # In production, check for collision, but for now 6 digits is enough space
-        data['mathrixId'] = str(random.randint(100000, 999999))
 
         if db.save_registration(data):
             print(f"DEBUG: Registration Saved. ID: {data['mathrixId']}")
@@ -124,23 +132,26 @@ async def register_user(
 async def register_bulk(
     request: Request,
     registrations: str = Form(...),
-    screenshot: UploadFile = File(...)
+    screenshot: Optional[UploadFile] = File(None)
 ):
     try:
-        # Save file to GridFS
         db = MongoDBService()
-        file_extension = screenshot.filename.split(".")[-1]
-        import uuid
-        group_id = str(uuid.uuid4())
-        filename = f"bulk_{group_id}.{file_extension}"
+        screenshot_url = ""
         
-        file_content = await screenshot.read()
-        
-        if not db.save_file(file_content, filename, screenshot.content_type):
-             raise HTTPException(status_code=500, detail="Failed to save screenshot")
-
-        base_url = str(request.base_url).rstrip("/")
-        screenshot_url = f"{base_url}/uploads/{filename}"
+        if screenshot:
+            # Save file to GridFS
+            file_extension = screenshot.filename.split(".")[-1]
+            import uuid
+            group_id_file = str(uuid.uuid4())
+            filename = f"bulk_{group_id_file}.{file_extension}"
+            
+            file_content = await screenshot.read()
+            
+            if not db.save_file(file_content, filename, screenshot.content_type):
+                 raise HTTPException(status_code=500, detail="Failed to save screenshot")
+    
+            base_url = str(request.base_url).rstrip("/")
+            screenshot_url = f"{base_url}/uploads/{filename}"
 
         attendees_list = json.loads(registrations)
         if not isinstance(attendees_list, list):
@@ -149,10 +160,17 @@ async def register_bulk(
         generated_ids = []
         import datetime
         import random
+        import uuid
         timestamp = datetime.datetime.now().isoformat()
+        group_id = str(uuid.uuid4())
 
         for attendee in attendees_list:
             mathrix_id = str(random.randint(100000, 999999))
+            
+            # Handle empty transaction ID in bulk
+            txn_id = attendee.get('transactionId')
+            if not txn_id:
+                txn_id = f"FREE-{mathrix_id}"
             
             data = {
                 "fullName": attendee.get('fullName'),
@@ -162,7 +180,7 @@ async def register_bulk(
                 "course": attendee.get('course'),
                 "specialization": attendee.get('specialization'),
                 "year": attendee.get('year'),
-                "transactionId": attendee.get('transactionId'),
+                "transactionId": txn_id,
                 "events": attendee.get('events', []),
                 "workshops": attendee.get('workshops', []),
                 "screenshotUrl": screenshot_url,

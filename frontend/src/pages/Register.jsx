@@ -126,9 +126,9 @@ const Register = () => {
     };
 
     // Calculate total fee
-    // Rate: 60 per person for CEG, 120 per person for Other
+    // Rate: 0 per person for CEG, 100 per person for Other
     const calculateFee = () => {
-        const rate = collegeType === 'ceg' ? 60 : 120;
+        const rate = collegeType === 'ceg' ? 0 : 100;
         return attendees.length * rate;
     };
 
@@ -144,7 +144,11 @@ const Register = () => {
         setMessage('');
 
         try {
-            if (!file) throw new Error("Please upload a payment screenshot");
+            // fee validation only for non-CEG
+            if (collegeType !== 'ceg') {
+                if (!file) throw new Error("Please upload a payment screenshot");
+                if (!transactionId) throw new Error("Please enter a transaction ID");
+            }
             if (!rulesAccepted) throw new Error("Please accept the rules");
 
             const submissionData = new FormData();
@@ -152,11 +156,14 @@ const Register = () => {
             // Clean data before sending
             const cleanAttendees = attendees.map(({ id, ...rest }) => ({
                 ...rest,
-                transactionId: transactionId // Attach unique transaction ID to each
+                transactionId: collegeType === 'ceg' ? '' : transactionId // Attach unique transaction ID to each
             }));
 
             submissionData.append('registrations', JSON.stringify(cleanAttendees));
-            submissionData.append('screenshot', file);
+
+            if (collegeType !== 'ceg' && file) {
+                submissionData.append('screenshot', file);
+            }
 
             const response = await fetch(`${import.meta.env.VITE_API_URL}/register/bulk`, {
                 method: 'POST',
@@ -239,12 +246,12 @@ const Register = () => {
                                 <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'ceg' ? 'bg-pink-500/20 border-pink-500 text-white shadow-[0_0_15px_rgba(236,72,153,0.2)]' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                     <input type="radio" name="collegeType" value="ceg" checked={collegeType === 'ceg'} onChange={() => setCollegeType('ceg')} className="hidden" />
                                     <div className="text-center font-bold text-lg">CEG Student</div>
-                                    <div className="text-center text-sm opacity-70 mt-1">₹60 / Person</div>
+                                    <div className="text-center text-sm opacity-70 mt-1">Free</div>
                                 </label>
                                 <label className={`p-4 rounded-xl border cursor-pointer transition-all ${collegeType === 'other' ? 'bg-pink-500/20 border-pink-500 text-white shadow-[0_0_15px_rgba(236,72,153,0.2)]' : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'}`}>
                                     <input type="radio" name="collegeType" value="other" checked={collegeType === 'other'} onChange={() => setCollegeType('other')} className="hidden" />
                                     <div className="text-center font-bold text-lg">Other College</div>
-                                    <div className="text-center text-sm opacity-70 mt-1">₹120 / Person</div>
+                                    <div className="text-center text-sm opacity-70 mt-1">₹100 / Person</div>
                                 </label>
                             </div>
                         </div>
@@ -259,6 +266,7 @@ const Register = () => {
                                 <li>It is the responsibility of the participants to verify that the scheduled events do not overlap in schedule.</li>
                                 <li>Kindly refer the schedule before submission.</li>
                                 <li>Registration fee is non-refundable.</li>
+                                {collegeType === 'ceg' && <li className="text-pink-400 font-bold">Registration is free for CEG students. ID card verification required at the venue.</li>}
                             </ul>
                             <label className="flex items-center gap-3 p-4 bg-black/20 rounded-xl cursor-pointer hover:bg-black/30 transition-colors border border-white/5 select-none text-white group">
                                 <input
@@ -384,53 +392,55 @@ const Register = () => {
                             </AnimatePresence>
                         </div>
 
-                        {/* 4. Payment Section */}
-                        <div className={`bg-white/5 p-8 rounded-2xl border border-white/10 space-y-8 ${!rulesAccepted ? 'opacity-50 pointer-events-none grayscale' : ''} transition-all duration-300`}>
-                            <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                                <span className="w-1 h-6 bg-pink-500 rounded-full"></span>
-                                Step 3: Payment
-                            </h3>
+                        {/* 4. Payment Section - Only for Non-CEG */}
+                        {collegeType !== 'ceg' && (
+                            <div className={`bg-white/5 p-8 rounded-2xl border border-white/10 space-y-8 ${!rulesAccepted ? 'opacity-50 pointer-events-none grayscale' : ''} transition-all duration-300`}>
+                                <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                                    <span className="w-1 h-6 bg-pink-500 rounded-full"></span>
+                                    Step 3: Payment
+                                </h3>
 
-                            <div className="flex flex-col md:flex-row gap-8 items-center justify-between bg-black/20 p-6 rounded-xl">
-                                <div className="text-center md:text-left">
-                                    <p className="text-gray-400 text-sm uppercase tracking-wider mb-2">Total Registration Fee</p>
-                                    <p className="text-5xl font-mono font-bold text-white">₹{calculateFee()}</p>
-                                    <p className="text-sm text-gray-500 mt-2">{attendees.length} Attendee{attendees.length > 1 ? 's' : ''} • {collegeType === 'ceg' ? '₹60' : '₹120'} / Person</p>
-                                </div>
-                                <div className="flex flex-col items-center">
-                                    <div className="bg-white p-2 rounded-xl w-40 h-40 mb-2">
-                                        <img src={qrCode} alt="QR" className="w-full h-full object-contain" />
+                                <div className="flex flex-col md:flex-row gap-8 items-center justify-between bg-black/20 p-6 rounded-xl">
+                                    <div className="text-center md:text-left">
+                                        <p className="text-gray-400 text-sm uppercase tracking-wider mb-2">Total Registration Fee</p>
+                                        <p className="text-5xl font-mono font-bold text-white">₹{calculateFee()}</p>
+                                        <p className="text-sm text-gray-500 mt-2">{attendees.length} Attendee{attendees.length > 1 ? 's' : ''} • ₹100 / Person</p>
                                     </div>
-                                    <p className="text-white font-mono font-bold text-sm bg-white/10 px-3 py-1 rounded-lg mb-4">mathrix.ceg@okaxis</p>
+                                    <div className="flex flex-col items-center">
+                                        <div className="bg-white p-2 rounded-xl w-40 h-40 mb-2">
+                                            <img src={qrCode} alt="QR" className="w-full h-full object-contain" />
+                                        </div>
+                                        <p className="text-white font-mono font-bold text-sm bg-white/10 px-3 py-1 rounded-lg mb-4">mathrix.ceg@okaxis</p>
 
-                                    {/* Bank Details */}
-                                    <div className="text-left text-xs text-gray-400 bg-white/5 p-3 rounded-lg border border-white/10 w-full max-w-xs">
-                                        <p className="font-bold text-gray-300 mb-1 border-b border-white/10 pb-1">Alternative: Bank Transfer</p>
-                                        <p><span className="text-gray-500">Acc No:</span> <span className="text-white font-mono">10496975761</span></p>
-                                        <p><span className="text-gray-500">Name:</span> <span className="text-white">Mathematics Colloquim</span></p>
-                                        <p><span className="text-gray-500">Branch:</span> <span className="text-white">Anna University, Chennai</span></p>
-                                        <p><span className="text-gray-500">IFSC:</span> <span className="text-white font-mono">SBIN0006463</span></p>
+                                        {/* Bank Details */}
+                                        <div className="text-left text-xs text-gray-400 bg-white/5 p-3 rounded-lg border border-white/10 w-full max-w-xs">
+                                            <p className="font-bold text-gray-300 mb-1 border-b border-white/10 pb-1">Alternative: Bank Transfer</p>
+                                            <p><span className="text-gray-500">Acc No:</span> <span className="text-white font-mono">10496975761</span></p>
+                                            <p><span className="text-gray-500">Name:</span> <span className="text-white">Mathematics Colloquim</span></p>
+                                            <p><span className="text-gray-500">Branch:</span> <span className="text-white">Anna University, Chennai</span></p>
+                                            <p><span className="text-gray-500">IFSC:</span> <span className="text-white font-mono">SBIN0006463</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div className="space-y-2">
+                                        <label className="text-gray-300 text-sm font-medium ml-1">Transaction ID</label>
+                                        <input required type="text" value={transactionId} onChange={(e) => setTransactionId(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all font-mono" placeholder="txn_1234567890" />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-gray-300 text-sm font-medium ml-1">Payment Screenshot</label>
+                                        <div className="relative">
+                                            <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="file-upload" />
+                                            <label htmlFor="file-upload" className={`w-full flex items-center justify-center gap-2 bg-white/5 border border-dashed ${file ? 'border-green-500 text-green-400' : 'border-white/20 text-gray-400'} rounded-xl px-4 py-3 cursor-pointer hover:bg-white/10 transition-all h-[50px]`}>
+                                                <Upload size={20} />
+                                                <span className="truncate max-w-[200px]">{file ? file.name : "Upload Screenshot (Required)"}</span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-gray-300 text-sm font-medium ml-1">Transaction ID</label>
-                                    <input required type="text" value={transactionId} onChange={(e) => setTransactionId(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-pink-500/50 transition-all font-mono" placeholder="txn_1234567890" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-gray-300 text-sm font-medium ml-1">Payment Screenshot</label>
-                                    <div className="relative">
-                                        <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="file-upload" />
-                                        <label htmlFor="file-upload" className={`w-full flex items-center justify-center gap-2 bg-white/5 border border-dashed ${file ? 'border-green-500 text-green-400' : 'border-white/20 text-gray-400'} rounded-xl px-4 py-3 cursor-pointer hover:bg-white/10 transition-all h-[50px]`}>
-                                            <Upload size={20} />
-                                            <span className="truncate max-w-[200px]">{file ? file.name : "Upload Screenshot (Required)"}</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        )}
 
                         {status === 'error' && (
                             <div className="flex items-center gap-2 text-red-400 bg-red-400/10 p-4 rounded-xl border border-red-400/20">
@@ -448,7 +458,9 @@ const Register = () => {
                                 <span className="flex items-center justify-center gap-2">
                                     <Loader className="animate-spin" /> Processing Payment...
                                 </span>
-                            ) : `Pay ₹${calculateFee()} & Register`}
+                            ) : (
+                                collegeType === 'ceg' ? 'Register for Free' : `Pay ₹${calculateFee()} & Register`
+                            )}
                         </button>
                     </form>
                 )}
