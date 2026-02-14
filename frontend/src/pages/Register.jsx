@@ -29,6 +29,7 @@ const Register = () => {
     const [message, setMessage] = useState('');
     const [responseIds, setResponseIds] = useState([]);
     const [closedEvents, setClosedEvents] = useState([]); // List of full events from DB
+    const [showGoofyModal, setShowGoofyModal] = useState(false);
 
     const eventOptions = [
         "SQL – Query Quest", "MagicMatix", "Code Matrix",
@@ -337,19 +338,54 @@ const Register = () => {
                     <form onSubmit={handleSubmit} className="space-y-8">
 
                         {/* GoofyChess Special Notice */}
-                        <div className="bg-purple-500/10 border border-purple-500/20 p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                        {/* GoofyChess Special Notice */}
+                        <div className="bg-purple-500/10 border border-purple-500/20 p-6 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 relative z-20">
                             <div>
                                 <h3 className="text-xl font-bold text-purple-200">GoofyChess Registration</h3>
                                 <p className="text-gray-400 text-sm">Reviewing chess strategies? GoofyChess requires a separate registration.</p>
                             </div>
-                            <a
-                                href="#"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-6 py-2 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-lg transition-colors whitespace-nowrap"
-                            >
-                                Register for GoofyChess
-                            </a>
+
+                            <div className="relative">
+                                <button
+                                    type="button"
+                                    onClick={() => setShowGoofyModal(!showGoofyModal)}
+                                    className="px-6 py-2 bg-purple-500 hover:bg-purple-600 text-white font-bold rounded-lg transition-colors whitespace-nowrap flex items-center gap-2"
+                                >
+                                    Register for GoofyChess
+                                    <span className={`transition-transform duration-200 ${showGoofyModal ? 'rotate-180' : ''}`}>▼</span>
+                                </button>
+
+                                {/* GoofyChess Dropdown */}
+                                <AnimatePresence>
+                                    {showGoofyModal && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: -10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            className="absolute right-0 top-full mt-2 w-48 bg-gray-900 border border-purple-500/30 rounded-xl shadow-xl overflow-hidden z-50 flex flex-col"
+                                        >
+                                            <a
+                                                href="https://docs.google.com/forms/d/e/1FAIpQLSc9wm2KH6XahNNPJDH9FvxmeyhZpUc6InLuQ0etp-MCiwIkMQ/viewform"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="px-4 py-3 hover:bg-purple-500/20 text-gray-200 hover:text-white transition-colors text-sm font-bold border-b border-white/5"
+                                                onClick={() => setShowGoofyModal(false)}
+                                            >
+                                                CEG Student
+                                            </a>
+                                            <a
+                                                href="https://docs.google.com/forms/d/e/1FAIpQLSdV8tGhhyyg1GVBlFpGOsaJyGK1j9SZLRJW7xaH4sxfVBHQvA/viewform"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="px-4 py-3 hover:bg-purple-500/20 text-gray-200 hover:text-white transition-colors text-sm font-bold"
+                                                onClick={() => setShowGoofyModal(false)}
+                                            >
+                                                Other College
+                                            </a>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
                         </div>
 
                         {/* 1. College Type Selection (Applies to all) */}
