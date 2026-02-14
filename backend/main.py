@@ -165,20 +165,26 @@ async def register_bulk(
         group_id = str(uuid.uuid4())
         
         # 1. Event Constraints Validation (Per Team)
-        event_counts = {}
         event_limits = {
-            "Math Wizz": 2,
-            "IPL Auction": 3,
-            "SQL – Query Quest": 2
+            "SQL – Query Quest": 1,
+            "MagicMatix": 2,
+            "Treasure Hunt": 3,
+            "Code Matrix": 2,
+            "Paper Presentation": 1,
+            "Math Wizz": 3,
+            "IPL Auction": 4,
+            "Mathkinator": 2
         }
 
+
+        event_counts = {}
         for attendee in attendees_list:
             for event in attendee.get('events', []):
                 event_counts[event] = event_counts.get(event, 0) + 1
         
         for event, limit in event_limits.items():
             if event_counts.get(event, 0) > limit:
-                raise HTTPException(status_code=400, detail=f"Event '{event}' allows maximum {limit} participants per team.")
+                raise HTTPException(status_code=400, detail=f"Event '{event}' allows maximum {limit} participants per team. You selected {event_counts.get(event, 0)}.")
 
         # 2. Global Event Limit Check (DB-based)
         # Check if this is a CEG registration
@@ -189,7 +195,7 @@ async def register_bulk(
             # Check availability
             current_db_counts = db.get_event_counts(college_type='ceg')
             global_limits = {
-                "IPL Auction": 9,  # 3 teams * 3 members
+                "IPL Auction": 12,  # 3 teams * 4 members
                 "Math Wizz": 6     # 3 teams * 2 members
             }
             
@@ -259,7 +265,7 @@ async def get_event_availability(college: str = "other"):
         limits = {}
         if college == 'ceg':
             limits = {
-                "IPL Auction": 9,  # 3 teams * 3 members
+                "IPL Auction": 12,  # 3 teams * 4 members
                 "Math Wizz": 6     # 3 teams * 2 members
             }
         

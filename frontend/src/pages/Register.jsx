@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, CheckCircle, AlertCircle, Loader, Download, Plus, Trash2, UserPlus, Users, FileText } from 'lucide-react';
+import { Upload, CheckCircle, AlertCircle, Loader, Download, Plus, Trash2, UserPlus, Users, FileText, Info, Zap } from 'lucide-react';
 import qrCode from '../assets/qr_code.jpeg';
 
 const Register = () => {
@@ -97,8 +97,12 @@ const Register = () => {
 
     // Add new attendee
     const addAttendee = () => {
-        if (attendees.length >= 3) {
-            alert("Team registrations are limited to 3 members.");
+        // Dynamic limit based on selected events
+        const hasIPLAuction = attendees.some(a => a.events.includes("IPL Auction"));
+        const maxLimit = hasIPLAuction ? 4 : 3;
+
+        if (attendees.length >= maxLimit) {
+            alert(`Team registrations are limited to ${maxLimit} members${hasIPLAuction ? ' for IPL Auction' : ''}.`);
             return;
         }
 
@@ -132,30 +136,50 @@ const Register = () => {
 
     // Handle event selection for specific attendee
     const handleEventChange = (id, event, checked) => {
-        setAttendees(prev => prev.map(a => {
-            if (a.id !== id) return a;
+        // Event constraints
+        const eventConstraints = {
+            "Math Wizz": 2,
+            "IPL Auction": 4, // Updated to 4
+            "SQL – Query Quest": 2
+        };
 
-            const currentEvents = a.events;
-            if (checked) {
-                // Check deadline
-                if (isEventDeadlinePassed(event)) {
-                    alert("Registration for this event is closed (Deadline passed).");
-                    return a;
+        setAttendees(prev => {
+            // Calculate current count for this event (excluding current attendee if unchecking)
+            const currentCount = prev.filter(a => a.events.includes(event) && a.id !== id).length;
+
+            return prev.map(a => {
+                if (a.id !== id) return a;
+
+                const currentEvents = a.events;
+                if (checked) {
+                    // Check deadline
+                    if (isEventDeadlinePassed(event)) {
+                        alert("Registration for this event is closed (Deadline passed).");
+                        return a;
+                    }
+                    // Check database limit
+                    if (closedEvents.includes(event)) {
+                        alert("Registration for this event is full.");
+                        return a;
+                    }
+                    if (currentEvents.length >= 3) {
+                        alert("Maximum 3 events per person allowed.");
+                        return a;
+                    }
+
+                    // Check event participant limit
+                    const limit = eventConstraints[event];
+                    if (limit && (currentCount + 1) > limit) {
+                        alert(`"${event}" allows a maximum of ${limit} participants per team. You already have ${currentCount} selected.`);
+                        return a;
+                    }
+
+                    return { ...a, events: [...currentEvents, event] };
+                } else {
+                    return { ...a, events: currentEvents.filter(e => e !== event) };
                 }
-                // Check database limit
-                if (closedEvents.includes(event)) {
-                    alert("Registration for this event is full.");
-                    return a;
-                }
-                if (currentEvents.length >= 3) {
-                    alert("Maximum 3 events per person allowed.");
-                    return a;
-                }
-                return { ...a, events: [...currentEvents, event] };
-            } else {
-                return { ...a, events: currentEvents.filter(e => e !== event) };
-            }
-        }));
+            });
+        });
     };
 
     // Calculate total fee
@@ -217,6 +241,21 @@ const Register = () => {
             console.error("Error submitting form:", error);
             setStatus('error');
             setMessage(error.message || "An error occurred. Please try again.");
+        }
+    };
+
+    // Helper to get rule message
+    const getEventRuleMessage = (event) => {
+        switch (event) {
+            case "IPL Auction": return "IPL Auction requires a team of 4 members.";
+            case "Math Wizz": return "Math Wizz requires 2-3 members.";
+            case "Treasure Hunt": return "Treasure Hunt requires 2-3 members.";
+            case "MagicMatix": return "MagicMatix allows max 2 members.";
+            case "Code Matrix": return "Code Matrix allows max 2 members.";
+            case "Mathkinator": return "Mathkinator allows max 2 members.";
+            case "SQL – Query Quest": return "Individual Event (1 participant).";
+            case "Paper Presentation": return "Individual Event (1 participant).";
+            default: return null;
         }
     };
 
@@ -335,13 +374,15 @@ const Register = () => {
                                     <UserPlus className="text-purple-400" />
                                     Step 2: Attendee Details
                                 </h3>
-                                <button
-                                    type="button"
-                                    onClick={addAttendee}
-                                    className="btn btn-outline text-sm px-4 py-2 flex items-center gap-2 hover:bg-white/10"
-                                >
-                                    <Plus size={16} /> Add Another Person
-                                </button>
+                                {attendees.length < (attendees.some(a => a.events.includes("IPL Auction")) ? 4 : 3) && (
+                                    <button
+                                        type="button"
+                                        onClick={addAttendee}
+                                        className="btn btn-outline text-sm px-4 py-2 flex items-center gap-2 hover:bg-white/10"
+                                    >
+                                        <Plus size={16} /> Add Another Person
+                                    </button>
+                                )}
                             </div>
 
                             <AnimatePresence>
@@ -410,6 +451,18 @@ const Register = () => {
 
                                         <div className="space-y-3">
                                             <label className="text-gray-300 text-sm font-medium">Select Events (Max 3)</label>
+
+                                            {attendee.events.map(event => {
+                                                const msg = getEventRuleMessage(event);
+                                                if (!msg) return null;
+                                                return (
+                                                    <div key={event} className="mb-2 p-2 bg-yellow-500/10 border border-yellow-500/30 rounded-lg text-xs text-yellow-200 flex items-center gap-2">
+                                                        <Info size={14} className="shrink-0" />
+                                                        <span>{msg}</span>
+                                                    </div>
+                                                );
+                                            })}
+
                                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                                                 {eventOptions.map(event => {
                                                     const isSelected = attendee.events.includes(event);
