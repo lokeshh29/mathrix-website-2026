@@ -94,18 +94,25 @@ const Home = () => {
                             <p className="text-gray-300 mb-6 leading-relaxed text-justify">
                                 Mathrix'26 is the annual intercollegiate technical symposium organized by the Department of Mathematics, College of Engineering Guindy (CEG), Anna University, Chennai. Mathrix is a one-of-a-kind fest that brings together logic, innovation, and problem-solving under one roof. Organized by the brilliant minds of M.Sc. Integrated Computer Science, M.Sc. Integrated Information Technology, and M.Sc. Mathematics. Mathrix is more than just a symposium—it's a fusion of numbers, algorithms, and cutting-edge tech.
                             </p>
-                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center mt-8">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 text-center mt-8">
                                 <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
-                                    <div className="text-3xl font-bold text-rose-400 mb-1">10+</div>
+                                    <div className="text-3xl font-bold text-rose-400 mb-1">2</div>
                                     <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Tech Events</div>
                                 </div>
-                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
-                                    <div className="text-3xl font-bold text-pink-400 mb-1">4+</div>
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-blue-400/30 transition-colors">
+                                    <div className="text-3xl font-bold text-blue-400 mb-1">2</div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Math Events</div>
+                                </div>
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-purple-400/30 transition-colors">
+                                    <div className="text-3xl font-bold text-purple-400 mb-1">4</div>
                                     <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Non-Tech Events</div>
                                 </div>
-
-                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-pink-500/30 transition-colors">
-                                    <div className="text-3xl font-bold text-indigo-400 mb-1">500+</div>
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-400/30 transition-colors">
+                                    <div className="text-3xl font-bold text-yellow-400 mb-1">2</div>
+                                    <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">General Events</div>
+                                </div>
+                                <div className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-green-400/30 transition-colors col-span-2 md:col-span-1 lg:col-span-1">
+                                    <div className="text-3xl font-bold text-green-400 mb-1">500+</div>
                                     <div className="text-xs text-gray-400 uppercase tracking-wider font-semibold">Participants</div>
                                 </div>
                             </div>
