@@ -163,6 +163,50 @@ async def register_bulk(
         import uuid
         timestamp = datetime.datetime.now().isoformat()
         group_id = str(uuid.uuid4())
+        
+        # 1. Event Constraints Validation (Per Team)
+        event_counts = {}
+        event_limits = {
+            "Math Wizz": 2,
+            "IPL Auction": 3,
+            "SQL – Query Quest": 2
+        }
+
+        for attendee in attendees_list:
+            for event in attendee.get('events', []):
+                event_counts[event] = event_counts.get(event, 0) + 1
+        
+        for event, limit in event_limits.items():
+            if event_counts.get(event, 0) > limit:
+                raise HTTPException(status_code=400, detail=f"Event '{event}' allows maximum {limit} participants per team.")
+
+        # 2. Global Event Limit Check (DB-based)
+        # Check if this is a CEG registration
+        first_attendee_college = attendees_list[0].get('college', '')
+        is_ceg = 'ceg' in first_attendee_college.lower() if first_attendee_college else False
+        
+        if is_ceg:
+            # Check availability
+            current_db_counts = db.get_event_counts(college_type='ceg')
+            global_limits = {
+                "IPL Auction": 9,  # 3 teams * 3 members
+                "Math Wizz": 6     # 3 teams * 2 members
+            }
+            
+            # Events being registered for in this batch
+            batch_events = {}
+            for attendee in attendees_list:
+                for event in attendee.get('events', []):
+                    batch_events[event] = batch_events.get(event, 0) + 1
+            
+            for event, new_count in batch_events.items():
+                limit = global_limits.get(event)
+                if limit is not None:
+                    # Current count from DB (participants)
+                    current_participants = current_db_counts.get(event, 0)
+                    
+                    if (current_participants + new_count) > limit:
+                         raise HTTPException(status_code=400, detail=f"Registration for '{event}' is full (Max {limit} participants reached for CEG).")
 
         for attendee in attendees_list:
             mathrix_id = str(random.randint(100000, 999999))
@@ -204,6 +248,45 @@ async def register_bulk(
     except Exception as e:
         logger.error(f"Bulk registration error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/events/availability")
+async def get_event_availability(college: str = "other"):
+    try:
+        db = MongoDBService()
+        counts = db.get_event_counts(college_type=college)
+        
+        # Define limits (Only for CEG as per requirements)
+        limits = {}
+        if college == 'ceg':
+            limits = {
+                "IPL Auction": 9,  # 3 teams * 3 members
+                "Math Wizz": 6     # 3 teams * 2 members
+            }
+        
+        availability = {}
+        all_events = [
+            "SQL – Query Quest", "MagicMatix", "Code Matrix", "Through the Lens",
+            "IPL Auction", "Paper Presentation", "Math Wizz",
+            "Mathkinator", "Treasure Hunt"
+        ]
+        
+        for event in all_events:
+            current_count = counts.get(event, 0)
+            limit = limits.get(event)
+            is_full = False
+            if limit is not None and current_count >= limit:
+                is_full = True
+            
+            availability[event] = {
+                "count": current_count,
+                "limit": limit,
+                "isFull": is_full
+            }
+            
+        return availability
+    except Exception as e:
+        logger.error(f"Error checking availability: {e}")
+        raise HTTPException(status_code=500, detail="Could not check availability")
 
 @app.get("/uploads/{filename}")
 async def get_image(filename: str):

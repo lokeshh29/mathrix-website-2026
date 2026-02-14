@@ -92,3 +92,53 @@ class MongoDBService:
             logger.error(f"Error deleting registration from MongoDB: {e}")
             return False
 
+
+    def get_event_counts(self, college_type: Optional[str] = None) -> Dict[str, int]:
+        """
+        Returns a dictionary mapping event names to the number of registered 'teams'.
+        - For Team registrations (teamId is set): Counts distinct teamIds.
+        - For Solo registrations (teamId is None): Counts individual registrations.
+        """
+        try:
+            pipeline = []
+            
+            # Match stage: filter by college if provided
+            match_stage = {}
+            if college_type:
+                # Regex for case-insensitive 'ceg' or specific college string if needed
+                if college_type.lower() == 'ceg':
+                    match_stage['college'] = {'$regex': 'CEG', '$options': 'i'}
+                else:
+                    match_stage['college'] = {'$not': {'$regex': 'CEG', '$options': 'i'}}
+            
+            if match_stage:
+                pipeline.append({'$match': match_stage})
+
+            # Unwind events to count per event
+            pipeline.append({'$unwind': '$events'})
+            
+            # Group by event and count total participants (documents)
+            # Each document is one participant.
+            pipeline.append({
+                '$group': {
+                    '_id': '$events',
+                    'count': {'$sum': 1}
+                }
+            })
+            
+            # Project
+            pipeline.append({
+                '$project': {
+                    'event': '$_id',
+                    'count': 1,
+                    '_id': 0
+                }
+            })
+
+            cursor = self.collection.aggregate(pipeline)
+            counts = {doc['event']: doc['count'] for doc in cursor}
+            return counts
+
+        except PyMongoError as e:
+            logger.error(f"Error getting event counts: {e}")
+            return {}

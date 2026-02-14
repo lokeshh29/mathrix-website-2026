@@ -28,6 +28,7 @@ const Register = () => {
     const [rulesAccepted, setRulesAccepted] = useState(false);
     const [message, setMessage] = useState('');
     const [responseIds, setResponseIds] = useState([]);
+    const [closedEvents, setClosedEvents] = useState([]); // List of full events from DB
 
     const eventOptions = [
         "SQL – Query Quest", "MagicMatix", "Code Matrix", "Through the Lens",
@@ -58,11 +59,33 @@ const Register = () => {
         "Through the Lens": "2026-02-19T10:00:00+05:30"
     };
 
-    const isEventOpen = (eventName) => {
+    // Check time-based deadline
+    const isEventDeadlinePassed = (eventName) => {
         const deadline = deadlines[eventName];
-        if (!deadline) return true; // Open if no deadline defined
-        return new Date() < new Date(deadline);
+        if (!deadline) return false;
+        return new Date() > new Date(deadline);
     };
+
+    // Fetch availability from backend
+    useEffect(() => {
+        const fetchAvailability = async () => {
+            try {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/events/availability?college=${collegeType}`);
+                if (response.ok) {
+                    const data = await response.json();
+                    const fullEvents = Object.keys(data).filter(evt => data[evt].isFull);
+                    setClosedEvents(fullEvents);
+                }
+            } catch (error) {
+                console.error("Failed to fetch availability", error);
+            }
+        };
+
+        fetchAvailability();
+        // Poll every 30 seconds for updates
+        const interval = setInterval(fetchAvailability, 30000);
+        return () => clearInterval(interval);
+    }, [collegeType]);
 
     // Effect to update college for all attendees when type changes
     useEffect(() => {
@@ -74,6 +97,11 @@ const Register = () => {
 
     // Add new attendee
     const addAttendee = () => {
+        if (attendees.length >= 3) {
+            alert("Team registrations are limited to 3 members.");
+            return;
+        }
+
         setAttendees(prev => [...prev, {
             id: Date.now(),
             fullName: '',
@@ -109,8 +137,14 @@ const Register = () => {
 
             const currentEvents = a.events;
             if (checked) {
-                if (!isEventOpen(event)) {
-                    alert("Registration for this event is closed.");
+                // Check deadline
+                if (isEventDeadlinePassed(event)) {
+                    alert("Registration for this event is closed (Deadline passed).");
+                    return a;
+                }
+                // Check database limit
+                if (closedEvents.includes(event)) {
+                    alert("Registration for this event is full.");
                     return a;
                 }
                 if (currentEvents.length >= 3) {
@@ -379,7 +413,10 @@ const Register = () => {
                                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                                                 {eventOptions.map(event => {
                                                     const isSelected = attendee.events.includes(event);
-                                                    const isEventClosed = !isEventOpen(event);
+                                                    const deadlinePassed = isEventDeadlinePassed(event);
+                                                    const isFull = closedEvents.includes(event);
+                                                    const isEventClosed = deadlinePassed || isFull;
+
                                                     const isMaxReached = attendee.events.length >= 3;
                                                     const isDisabled = (isMaxReached && !isSelected) || isEventClosed;
 
@@ -396,7 +433,11 @@ const Register = () => {
                                                             <div className={`w-4 h-4 rounded border flex items-center justify-center ${isSelected ? 'bg-pink-500 border-pink-500' : 'border-gray-500'} ${isEventClosed ? 'border-gray-700 bg-gray-800' : ''}`}>
                                                                 {isSelected && <CheckCircle size={12} className="text-white" />}
                                                             </div>
-                                                            <span className={isEventClosed ? "line-through text-gray-600" : ""}>{event} {isEventClosed && <span className="text-red-500/80 text-xs ml-1 no-underline decoration-0 font-bold">(Closed)</span>}</span>
+                                                            <span className={isEventClosed ? "line-through text-gray-600" : ""}>
+                                                                {event}
+                                                                {deadlinePassed && <span className="text-red-500/80 text-xs ml-1 no-underline decoration-0 font-bold">(Closed)</span>}
+                                                                {isFull && <span className="text-orange-500/80 text-xs ml-1 no-underline decoration-0 font-bold">(Full)</span>}
+                                                            </span>
                                                         </label>
                                                     );
                                                 })}
