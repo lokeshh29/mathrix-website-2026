@@ -3,7 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, CheckCircle, AlertCircle, Loader, Download, Plus, Trash2, UserPlus, Users, FileText, Info, Zap } from 'lucide-react';
 import qrCode from '../assets/qr_code.jpeg';
 
+import rulebookPdf from '../assets/mathrix_rulebook.pdf';
+
 const Register = () => {
+
     // State for multiple attendees
     const [attendees, setAttendees] = useState([{
         id: 1,
@@ -227,9 +230,9 @@ const Register = () => {
                 "IPL Auction": { min: 4, max: 4, label: "exactly 4" },
                 "Math Wizz": { min: 2, max: 3, label: "2-3" },
                 "Treasure Hunt": { min: 2, max: 3, label: "2-3" },
-                // "MagicMatix": { min: 1, max: 2 }, // Assuming 1-2 is fine unless strict 2 required
-                // "Code Matrix": { min: 1, max: 2 },
-                // "Mathkinator": { min: 1, max: 2 }
+                // "MagicMatix": {min: 1, max: 2 }, // Assuming 1-2 is fine unless strict 2 required
+                // "Code Matrix": {min: 1, max: 2 },
+                // "Mathkinator": {min: 1, max: 2 }
             };
 
             for (const [event, count] of Object.entries(eventCounts)) {
@@ -431,6 +434,14 @@ const Register = () => {
                                 <li>Registration fee is non-refundable.</li>
                                 {collegeType === 'ceg' && <li className="text-pink-400 font-bold">Registration is free for CEG students. ID card verification required at the venue.</li>}
                             </ul>
+
+                            <a
+                                href={rulebookPdf}
+                                download="Mathrix_Rulebook_2026.pdf"
+                                className="inline-flex items-center gap-2 text-yellow-300 hover:text-yellow-200 underline underline-offset-4 text-sm font-medium transition-colors mb-4 ml-1"
+                            >
+                                <Download size={16} /> Download Official Rulebook (PDF)
+                            </a>
                             <label className="flex items-center gap-3 p-4 bg-black/20 rounded-xl cursor-pointer hover:bg-black/30 transition-colors border border-white/5 select-none text-white group">
                                 <input
                                     type="checkbox"
