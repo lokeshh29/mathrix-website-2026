@@ -207,6 +207,13 @@ const Register = () => {
             }
             if (!rulesAccepted) throw new Error("Please accept the rules");
 
+            // --- Validation: Check Event Selection ---
+            attendees.forEach((attendee, index) => {
+                if (attendee.events.length === 0) {
+                    throw new Error(`Attendee #${index + 1} (${attendee.fullName || 'Unnamed'}) must select at least one event.`);
+                }
+            });
+
             // --- Validation: Check Minimum/Exact Team Constraints ---
             const eventCounts = {};
             attendees.forEach(a => {
