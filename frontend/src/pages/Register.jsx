@@ -279,7 +279,7 @@ const Register = () => {
     const getEventRuleMessage = (event) => {
         switch (event) {
             case "IPL Auction": return "IPL Auction requires a team of 4 members.";
-            case "Math Wizz": return "2-3 members per team. (Max 2 teams per college - First come, first served).";
+            case "Math Wizz": return "eams must consist of 2–3 members. A maximum of two teams per college is allowed. If more than two teams register from the same college, selection will be on a first-come, first-served basis.";
             case "Treasure Hunt": return "Treasure Hunt requires 2-3 members.";
             case "MagicMatix": return "MagicMatix allows max 2 members.";
             case "Code Matrix": return "Code Matrix allows max 2 members.";
