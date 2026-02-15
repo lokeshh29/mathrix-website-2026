@@ -418,7 +418,7 @@ const Register = () => {
                             </h4>
                             <ul className="list-disc list-inside text-sm text-gray-300 space-y-2 pl-1 leading-relaxed">
                                 <li>Participants are permitted to register for a maximum of three events.</li>
-                                <li className="font-bold text-yellow-300">The winning team in Math Wizz will be awarded the overall shield.</li>
+                                <li>The winning team in Math Wizz will be awarded the overall shield.</li>
                                 <li>It is the responsibility of the participants to verify that the scheduled events do not overlap in schedule.</li>
                                 <li>Kindly refer the schedule before submission.</li>
                                 <li>Registration fee is non-refundable.</li>
