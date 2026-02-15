@@ -248,7 +248,6 @@ const Events = () => {
                 ],
                 rules: [
                     'Team Size: 3 members per team.',
-                    'The winning team in Math Wizz will be awarded the overall shield.',
                     'Prelims: Written MCQ test.',
                     'Mains: Visual rounds, rapid fire, buzzer rounds.',
                     'Malpractice leads to disqualification.'
