@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Search, Download, Filter, RefreshCw, Trash2, ChevronDown } from 'lucide-react';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 const Admin = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -71,39 +73,82 @@ const Admin = () => {
 
     const handleExport = (targetEvent) => {
         let exportData = [];
-        let filename = "mathrix_registrations.csv";
+        let title = "Mathrix Registrations";
+        let filename = "mathrix_registrations.pdf";
 
         if (targetEvent === "current") {
             exportData = filteredRegistrations;
+            title = "Mathrix Registrations (Filtered View)";
         } else {
             // Filter all registrations for the specific event
             exportData = registrations.filter(reg => (reg.events || []).includes(targetEvent));
-            filename = `mathrix_${targetEvent.replace(/\s+/g, '_')}.csv`;
+            title = `Mathrix Registrations - ${targetEvent}`;
+            filename = `mathrix_${targetEvent.replace(/\s+/g, '_')}.pdf`;
         }
 
-        const headers = ["Full Name", "Email", "Phone", "College", "Department", "Specialization", "Transaction ID", "Events"];
-        const rows = exportData.map(reg => [
-            reg.fullName,
-            reg.email,
-            reg.phone,
-            reg.college,
-            reg.dept,
-            reg.specialization,
-            reg.transactionId,
-            (reg.events || []).join(', ')
-        ]);
+        // Use Landscape orientation
+        const doc = new jsPDF({ orientation: 'landscape' });
 
-        const csvContent = "data:text/csv;charset=utf-8,"
-            + headers.join(",") + "\n"
-            + rows.map(e => e.join(",")).join("\n");
+        // Add Title
+        doc.setFontSize(18);
+        doc.text(title, 14, 22);
 
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", filename);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // Add Date
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+        const dateStr = new Date().toLocaleString();
+        doc.text(`Generated on: ${dateStr}`, 14, 28);
+
+        // Define Columns
+        const columns = [
+            { header: 'S.No', dataKey: 'sno' },
+            { header: 'MID', dataKey: 'mathrixId' },
+            { header: 'Full Name', dataKey: 'fullName' },
+            { header: 'Email', dataKey: 'email' },
+            { header: 'Phone', dataKey: 'phone' },
+            { header: 'College', dataKey: 'college' },
+            { header: 'Specialization', dataKey: 'specialization' },
+            { header: 'Txn ID', dataKey: 'transactionId' },
+            { header: 'Events', dataKey: 'events' },
+        ];
+
+        // Format Data Rows
+        const rows = exportData.map((reg, index) => ({
+            sno: index + 1,
+            mathrixId: reg.mathrixId || '-',
+            fullName: reg.fullName,
+            email: reg.email,
+            phone: reg.phone,
+            college: reg.college,
+            specialization: reg.specialization,
+            transactionId: reg.transactionId,
+            events: (reg.events || []).join(', ')
+        }));
+
+        // Generate Table
+        autoTable(doc, {
+            head: [columns.map(col => col.header)],
+            body: rows.map(row => columns.map(col => row[col.dataKey])),
+            startY: 35,
+            styles: { fontSize: 9, cellPadding: 3, overflow: 'linebreak' },
+            headStyles: { fillColor: [236, 72, 153], textColor: 255, fontStyle: 'bold' },
+            alternateRowStyles: { fillColor: [245, 245, 245] },
+            columnStyles: {
+                0: { cellWidth: 15, halign: 'center' }, // S.No
+                1: { cellWidth: 20, halign: 'center' }, // MID
+                2: { cellWidth: 35 }, // Full Name
+                3: { cellWidth: 55 }, // Email
+                4: { cellWidth: 25 }, // Phone
+                5: { cellWidth: 45 }, // College
+                6: { cellWidth: 25 }, // Specialization
+                7: { cellWidth: 30 }, // Txn ID
+                8: { cellWidth: 'auto' } // Events (Remaining space)
+            },
+            margin: { top: 35, left: 14, right: 14 }
+        });
+
+        // Save PDF
+        doc.save(filename);
         setShowExportMenu(false);
     };
 
@@ -265,7 +310,7 @@ const Admin = () => {
                             onClick={() => setShowExportMenu(!showExportMenu)}
                             className="btn bg-green-500/20 text-green-400 hover:bg-green-500/30 border-green-500/30 flex items-center gap-2"
                         >
-                            <Download size={18} /> Export CSV <ChevronDown size={16} />
+                            <Download size={18} /> Export PDF <ChevronDown size={16} />
                         </button>
 
                         {showExportMenu && (
