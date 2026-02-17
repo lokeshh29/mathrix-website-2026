@@ -298,6 +298,7 @@ const Admin = () => {
                     <table className="w-full text-left">
                         <thead className="bg-white/5 text-gray-400 font-medium">
                             <tr>
+                                <th className="p-4">S.No</th>
                                 <th className="p-4">Name</th>
                                 <th className="p-4">Contact</th>
                                 <th className="p-4">College/Dept</th>
@@ -309,6 +310,9 @@ const Admin = () => {
                         <tbody className="divide-y divide-white/10 text-gray-300">
                             {filteredRegistrations.map((reg, index) => (
                                 <tr key={index}>
+                                    <td className="p-4">
+                                        <div className="text-gray-400">{index + 1}</div>
+                                    </td>
                                     <td className="p-4">
                                         <div className="font-bold text-white">{reg.fullName}</div>
                                     </td>
@@ -353,7 +357,7 @@ const Admin = () => {
                             ))}
                             {filteredRegistrations.length === 0 && (
                                 <tr>
-                                    <td colSpan="6" className="p-8 text-center text-gray-500">
+                                    <td colSpan="7" className="p-8 text-center text-gray-500">
                                         No registrations found.
                                     </td>
                                 </tr>
