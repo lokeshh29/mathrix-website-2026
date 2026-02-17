@@ -69,18 +69,16 @@ const Admin = () => {
     });
 
     const downloadCSV = () => {
-        const headers = ["Full Name", "Email", "Phone", "College", "Dept", "Year", "Events", "Transaction ID", "Screenshot URL", "Timestamp"];
+        const headers = ["Full Name", "Email", "Phone", "College", "Department", "Specialization", "Transaction ID", "Events"];
         const rows = filteredRegistrations.map(reg => [
             reg.fullName,
             reg.email,
             reg.phone,
             reg.college,
             reg.dept,
-            reg.year,
-            (reg.events || []).join(', '),
+            reg.specialization,
             reg.transactionId,
-            reg.screenshotUrl,
-            reg.timestamp
+            (reg.events || []).join(', ')
         ]);
 
         const csvContent = "data:text/csv;charset=utf-8,"
