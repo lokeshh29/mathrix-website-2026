@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Lock, Search, Download, Filter, RefreshCw, Trash2 } from 'lucide-react';
+import { Lock, Search, Download, Filter, RefreshCw, Trash2, ChevronDown } from 'lucide-react';
 
 const Admin = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -15,6 +15,7 @@ const Admin = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [deleteId, setDeleteId] = useState(null);
     const [deletePasswordInput, setDeletePasswordInput] = useState("");
+    const [showExportMenu, setShowExportMenu] = useState(false);
 
     // Extract unique events for the filter dropdown
     const allEvents = ['All', ...new Set(registrations.flatMap(reg => reg.events || []))];
@@ -68,9 +69,20 @@ const Admin = () => {
         return sortOrder === 'desc' ? dateB - dateA : dateA - dateB;
     });
 
-    const downloadCSV = () => {
+    const handleExport = (targetEvent) => {
+        let exportData = [];
+        let filename = "mathrix_registrations.csv";
+
+        if (targetEvent === "current") {
+            exportData = filteredRegistrations;
+        } else {
+            // Filter all registrations for the specific event
+            exportData = registrations.filter(reg => (reg.events || []).includes(targetEvent));
+            filename = `mathrix_${targetEvent.replace(/\s+/g, '_')}.csv`;
+        }
+
         const headers = ["Full Name", "Email", "Phone", "College", "Department", "Specialization", "Transaction ID", "Events"];
-        const rows = filteredRegistrations.map(reg => [
+        const rows = exportData.map(reg => [
             reg.fullName,
             reg.email,
             reg.phone,
@@ -88,10 +100,11 @@ const Admin = () => {
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "mathrix_registrations.csv");
+        link.setAttribute("download", filename);
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
+        setShowExportMenu(false);
     };
 
     const initiateDelete = (transactionId) => {
@@ -247,9 +260,37 @@ const Admin = () => {
                     <button onClick={fetchRegistrations} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors text-white" title="Refresh">
                         <RefreshCw size={20} className={loading ? "animate-spin" : ""} />
                     </button>
-                    <button onClick={downloadCSV} className="btn bg-green-500/20 text-green-400 hover:bg-green-500/30 border-green-500/30 flex items-center gap-2">
-                        <Download size={18} /> Export CSV
-                    </button>
+                    <div className="relative">
+                        <button
+                            onClick={() => setShowExportMenu(!showExportMenu)}
+                            className="btn bg-green-500/20 text-green-400 hover:bg-green-500/30 border-green-500/30 flex items-center gap-2"
+                        >
+                            <Download size={18} /> Export CSV <ChevronDown size={16} />
+                        </button>
+
+                        {showExportMenu && (
+                            <div className="absolute right-0 mt-2 w-56 bg-[#0f0518] border border-white/10 rounded-xl shadow-xl z-50 overflow-hidden">
+                                <button
+                                    onClick={() => handleExport('current')}
+                                    className="w-full text-left px-4 py-3 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors"
+                                >
+                                    Current View
+                                </button>
+                                <div className="h-px bg-white/10 my-1"></div>
+                                <div className="max-h-60 overflow-y-auto">
+                                    {allEvents.filter(e => e !== 'All').map((event, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => handleExport(event)}
+                                            className="w-full text-left px-4 py-2 text-sm text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
+                                        >
+                                            {event}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
 
