@@ -41,23 +41,23 @@ const Register = () => {
     ];
 
     const deadlines = {
-        // Start 10:30 -> Close 10:00 AM
+        // 10:00 AM (Testing: 18:18 on 2026-02-17)
         "Code Matrix": "2026-02-20T10:00:00+05:30",
         "IPL Auction": "2026-02-20T10:00:00+05:30",
         "Math Wizz": "2026-02-20T10:00:00+05:30",
 
-        // Start 11:00 -> Close 10:45
-        "SQL – Query Quest": "2026-02-20T10:45:00+05:30",
-        "Paper Presentation": "2026-02-20T10:45:00+05:30",
+        // 10:30 AM
+        "Paper Presentation": "2026-02-20T10:30:00+05:30",
+        "SQL – Query Quest": "2026-02-20T10:30:00+05:30",
 
-        // Start 11:30 -> Close 11:15
-        "MagicMatix": "2026-02-20T11:15:00+05:30",
+        // 11:00 AM
+        "MagicMatix": "2026-02-20T11:00:00+05:30",
 
-        // Start 11:40 -> Close 11:25
-        "Treasure Hunt": "2026-02-20T11:25:00+05:30",
+        // 11:15 AM
+        "Treasure Hunt": "2026-02-20T11:15:00+05:30",
 
-        // Start 12:05 -> Close 11:50
-        "Mathkinator": "2026-02-20T11:50:00+05:30"
+        // 11:30 AM
+        "Mathkinator": "2026-02-20T11:30:00+05:30"
     };
 
     // Check time-based deadline
