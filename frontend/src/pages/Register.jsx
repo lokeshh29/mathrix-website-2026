@@ -41,24 +41,15 @@ const Register = () => {
     ];
 
     const deadlines = {
-        // 10:00 AM (Testing: 18:18 on 2026-02-17)
-        "Code Matrix": "2026-02-20T10:00:00+05:30",
-        "IPL Auction": "2026-02-20T10:00:00+05:30",
-        "Math Wizz": "2026-02-20T10:00:00+05:30",
-
-        // 10:30 AM
+        // Uniform Deadline: Feb 20, 10:30 AM
+        "Code Matrix": "2026-02-20T10:30:00+05:30",
+        "IPL Auction": "2026-02-20T10:30:00+05:30",
+        "Math Wizz": "2026-02-20T10:30:00+05:30",
         "Paper Presentation": "2026-02-20T10:30:00+05:30",
         "SQL – Query Quest": "2026-02-20T10:30:00+05:30",
-
-        // 11:00 AM
-        // Start 11:30 -> Close 11:15
-        "MagicMatix": "2026-02-20T11:15:00+05:30",
-
-        // Start 11:40 -> Close 11:25
-        "Treasure Hunt": "2025-02-17T21:20:00+05:30", // Disabled per request
-
-        // Start 12:05 -> Close 11:50
-        "Mathkinator": "2026-02-20T11:30:00+05:30"
+        "MagicMatix": "2026-02-20T10:30:00+05:30",
+        "Treasure Hunt": "2026-02-20T10:30:00+05:30",
+        "Mathkinator": "2026-02-20T10:30:00+05:30"
     };
 
     // Check time-based deadline
@@ -162,18 +153,6 @@ const Register = () => {
                     // Check deadline
                     if (isEventDeadlinePassed(event)) {
                         alert("Registration for this event is closed (Deadline passed).");
-                        return a;
-                    }
-
-                    // Check Restricted College (Sairam & St.Peter's - Math Wizz)
-                    const lowerCollege = (a.college || "").toLowerCase();
-                    if (event === "Math Wizz" && (
-                        lowerCollege.includes("sairam") ||
-                        lowerCollege.includes("sai ram") ||
-                        lowerCollege.includes("st.peter") ||
-                        lowerCollege.includes("st peter")
-                    )) {
-                        alert("Registration for Math Wizz is closed for Sairam & St.Peter's colleges.");
                         return a;
                     }
 
