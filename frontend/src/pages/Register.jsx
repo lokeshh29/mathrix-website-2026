@@ -45,11 +45,13 @@ const Register = () => {
         "Code Matrix": "2026-02-20T10:30:00+05:30",
         "IPL Auction": "2026-02-20T10:30:00+05:30",
         "Math Wizz": "2026-02-20T10:30:00+05:30",
-        "Paper Presentation": "2026-02-20T10:30:00+05:30",
         "SQL – Query Quest": "2026-02-20T10:30:00+05:30",
-        "MagicMatix": "2026-02-20T10:30:00+05:30",
-        "Treasure Hunt": "2026-02-20T10:30:00+05:30",
-        "Mathkinator": "2026-02-20T10:30:00+05:30"
+
+        // Closing Soon (Deadline: Feb 18, 00:25 AM)
+        "Paper Presentation": "2026-02-18T00:25:00+05:30",
+        "MagicMatix": "2026-02-18T00:25:00+05:30",
+        "Treasure Hunt": "2026-02-18T00:25:00+05:30",
+        "Mathkinator": "2026-02-18T00:25:00+05:30"
     };
 
     // Check time-based deadline
