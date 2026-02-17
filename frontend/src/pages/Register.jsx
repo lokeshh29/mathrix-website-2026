@@ -51,12 +51,13 @@ const Register = () => {
         "SQL – Query Quest": "2026-02-20T10:30:00+05:30",
 
         // 11:00 AM
-        "MagicMatix": "2026-02-20T11:00:00+05:30",
+        // Start 11:30 -> Close 11:15
+        "MagicMatix": "2026-02-20T11:15:00+05:30",
 
-        // 11:15 AM
-        "Treasure Hunt": "2026-02-20T11:15:00+05:30",
+        // Start 11:40 -> Close 11:25
+        "Treasure Hunt": "2025-02-17T21:20:00+05:30", // Disabled per request
 
-        // 11:30 AM
+        // Start 12:05 -> Close 11:50
         "Mathkinator": "2026-02-20T11:30:00+05:30"
     };
 
@@ -166,8 +167,13 @@ const Register = () => {
 
                     // Check Restricted College (Sairam & St.Peter's - Math Wizz)
                     const lowerCollege = (a.college || "").toLowerCase();
-                    if (event === "Math Wizz" && (lowerCollege.includes("sairam") || lowerCollege.includes("st.peter") || lowerCollege.includes("st peter"))) {
-                        alert("Registration for Math Wizz is closed for your colleges because of two limit.");
+                    if (event === "Math Wizz" && (
+                        lowerCollege.includes("sairam") ||
+                        lowerCollege.includes("sai ram") ||
+                        lowerCollege.includes("st.peter") ||
+                        lowerCollege.includes("st peter")
+                    )) {
+                        alert("Registration for Math Wizz is closed for Sairam & St.Peter's colleges.");
                         return a;
                     }
 
@@ -230,7 +236,12 @@ const Register = () => {
 
                 // Check Restricted College (Sairam & St.Peter's - Math Wizz)
                 const lowerCollege = (attendee.college || "").toLowerCase();
-                if (attendee.events.includes("Math Wizz") && (lowerCollege.includes("sairam") || lowerCollege.includes("st.peter") || lowerCollege.includes("st peter"))) {
+                if (attendee.events.includes("Math Wizz") && (
+                    lowerCollege.includes("sairam") ||
+                    lowerCollege.includes("sai ram") ||
+                    lowerCollege.includes("st.peter") ||
+                    lowerCollege.includes("st peter")
+                )) {
                     throw new Error(`Attendee #${index + 1}: Registration for "Math Wizz" is closed for Sairam & St.Peter's colleges.`);
                 }
             });
