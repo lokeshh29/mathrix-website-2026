@@ -5,6 +5,11 @@ import qrCode from '../assets/qr_code.jpeg';
 
 import rulebookPdf from '../assets/mathrix_rulebook.pdf';
 
+const COLLEGE_LIST = [
+    "SRI SAIRAM ENGINEERING COLLEGE",
+    "St Peter's College Of Engineering And Technology",
+];
+
 const Register = () => {
 
     // State for multiple attendees
@@ -33,6 +38,7 @@ const Register = () => {
     const [responseIds, setResponseIds] = useState([]);
     const [closedEvents, setClosedEvents] = useState([]); // List of full events from DB
     const [showGoofyModal, setShowGoofyModal] = useState(false);
+    const [collegeSuggestions, setCollegeSuggestions] = useState({});
 
     const eventOptions = [
         "SQL – Query Quest", "MagicMatix", "Code Matrix",
@@ -129,6 +135,35 @@ const Register = () => {
         ));
     };
 
+    // Autocomplete Logic
+    const handleCollegeInput = (id, value) => {
+        handleAttendeeChange(id, 'college', value);
+
+        if (!value) {
+            setCollegeSuggestions(prev => ({ ...prev, [id]: [] }));
+            return;
+        }
+
+        const lowerVal = value.toLowerCase();
+        // Trigger suggestions only for specific keywords as requested
+        const triggerKeywords = ["sai", "sri", "shri", "st", "peter"];
+        const shouldTrigger = triggerKeywords.some(keyword => lowerVal.includes(keyword));
+
+        if (shouldTrigger) {
+            const suggestions = COLLEGE_LIST.filter(college =>
+                college.toLowerCase().includes(lowerVal)
+            );
+            setCollegeSuggestions(prev => ({ ...prev, [id]: suggestions }));
+        } else {
+            setCollegeSuggestions(prev => ({ ...prev, [id]: [] }));
+        }
+    };
+
+    const selectCollege = (id, collegeName) => {
+        handleAttendeeChange(id, 'college', collegeName);
+        setCollegeSuggestions(prev => ({ ...prev, [id]: [] }));
+    };
+
     // Handle event selection for specific attendee
     const handleEventChange = (id, event, checked) => {
         // Event constraints (Max limits for selection feedback)
@@ -173,6 +208,18 @@ const Register = () => {
                     if (limit && (currentCount + 1) > limit) {
                         alert(`"${event}" allows a maximum of ${limit} participants per team. You already have ${currentCount} selected.`);
                         return a;
+                    }
+
+                    // Check Restricted College (Sairam & St.Peter's - Math Wizz)
+                    const lowerCollege = (a.college || "").toLowerCase();
+                    if (event === "Math Wizz" && (
+                        lowerCollege.includes("sairam") ||
+                        lowerCollege.includes("sai ram") ||
+                        lowerCollege.includes("st.peter") ||
+                        lowerCollege.includes("st peter")
+                    )) {
+                        alert(`Registration for "Math Wizz" is closed for ${a.college || "your college"} as 2 teams have already registered.`);
+                        return a; // Prevent selection
                     }
 
                     return { ...a, events: [...currentEvents, event] };
@@ -223,7 +270,7 @@ const Register = () => {
                     lowerCollege.includes("st.peter") ||
                     lowerCollege.includes("st peter")
                 )) {
-                    throw new Error(`Attendee #${index + 1}: Registration for "Math Wizz" is closed for Sairam & St.Peter's colleges.`);
+                    throw new Error(`Attendee #${index + 1}: Registration for "Math Wizz" is closed for ${attendee.college} as 2 teams have already registered.`);
                 }
             });
 
@@ -541,9 +588,30 @@ const Register = () => {
                                                 <input required type="text" value={attendee.specialization} onChange={(e) => handleAttendeeChange(attendee.id, 'specialization', e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="CSE" />
                                             </div>
                                             {collegeType === 'other' && (
-                                                <div className="space-y-1 md:col-span-2">
+                                                <div className="space-y-1 md:col-span-2 relative">
                                                     <label className="text-xs text-gray-400 uppercase font-bold tracking-wider ml-1">College Name</label>
-                                                    <input required type="text" value={attendee.college} onChange={(e) => handleAttendeeChange(attendee.id, 'college', e.target.value)} className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all" placeholder="College Name" />
+                                                    <input
+                                                        required
+                                                        type="text"
+                                                        value={attendee.college}
+                                                        onChange={(e) => handleCollegeInput(attendee.id, e.target.value)}
+                                                        onFocus={() => handleCollegeInput(attendee.id, attendee.college)}
+                                                        className="w-full bg-black/20 border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-pink-500/50 transition-all"
+                                                        placeholder="College Name"
+                                                    />
+                                                    {collegeSuggestions[attendee.id] && collegeSuggestions[attendee.id].length > 0 && (
+                                                        <div className="absolute z-50 w-full mt-1 bg-gray-900 border border-white/10 rounded-lg shadow-xl max-h-48 overflow-y-auto">
+                                                            {collegeSuggestions[attendee.id].map((college, i) => (
+                                                                <div
+                                                                    key={i}
+                                                                    className="px-4 py-2 text-sm text-gray-300 hover:bg-white/10 hover:text-white cursor-pointer transition-colors"
+                                                                    onClick={() => selectCollege(attendee.id, college)}
+                                                                >
+                                                                    {college}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    )}
                                                 </div>
                                             )}
                                         </div>
