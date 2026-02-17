@@ -6,17 +6,17 @@ const sponsorCategories = [
     { title: 'CO SPONSOR', color: 'text-indigo-400', border: 'border-indigo-500/30', sponsors: [] },
     { title: 'ASSOCIATE SPONSOR', color: 'text-blue-400', border: 'border-blue-500/30', sponsors: [] },
     { title: 'POWERED BY SPONSOR', color: 'text-cyan-400', border: 'border-cyan-500/30', sponsors: [] },
-    { title: 'APPAREL', color: 'text-pink-400', border: 'border-pink-500/30', sponsors: ['Bhumi NGO'] },
+    { title: 'APPAREL', color: 'text-pink-400', border: 'border-pink-500/30', sponsors: ['Topperfyai', 'Space Air'] },
     { title: 'PRIZE', color: 'text-yellow-400', border: 'border-yellow-500/30', sponsors: [] },
     { title: 'WORKSHOP', color: 'text-orange-400', border: 'border-orange-500/30', sponsors: [] },
-    { title: 'TECHNOLOGY', color: 'text-emerald-400', border: 'border-emerald-500/30', sponsors: ['AECC Study Abroad', 'RadioLinq'] },
+    { title: 'TECHNOLOGY', color: 'text-emerald-400', border: 'border-emerald-500/30', sponsors: ['Aecc', 'Radio Linq', 'Vertex', 'DSNL'] },
     { title: 'GUEST LECTURERS', color: 'text-teal-400', border: 'border-teal-500/30', sponsors: [] },
     { title: 'GIFTING/MEMENTO', color: 'text-rose-400', border: 'border-rose-500/30', sponsors: [] },
     { title: 'EVENT', color: 'text-green-400', border: 'border-green-500/30', sponsors: ['Agents Factory', 'Dynarch Studio'] },
     { title: 'COUPON/KIT', color: 'text-lime-400', border: 'border-lime-500/30', sponsors: [] },
     { title: 'BEVERAGES', color: 'text-amber-400', border: 'border-amber-500/30', sponsors: [] },
-    { title: 'PRINTING', color: 'text-slate-400', border: 'border-slate-500/30', sponsors: ['Rajams Printing'] },
-    { title: 'BANNER PARTNER', color: 'text-fuchsia-400', border: 'border-fuchsia-500/30', sponsors: ['Elite Printers'] },
+    { title: 'PRINTING', color: 'text-slate-400', border: 'border-slate-500/30', sponsors: ['Rajams'] },
+    { title: 'BANNER PARTNER', color: 'text-fuchsia-400', border: 'border-fuchsia-500/30', sponsors: ['Elite'] },
 ];
 
 const Sponsors = () => {

@@ -430,6 +430,7 @@ const Register = () => {
                                 <li>Participants are permitted to register for a maximum of three events.</li>
                                 <li>The winning team in Math Wizz will be awarded the overall shield.</li>
                                 <li>It is the responsibility of the participants to verify that the scheduled events do not overlap in schedule.</li>
+                                <li>Participation certificates will be distributed during the Valedictory Function.</li>
                                 <li>Kindly refer the schedule before submission.</li>
                                 <li>Registration fee is non-refundable.</li>
                                 {collegeType === 'ceg' && <li className="text-pink-400 font-bold">Registration is free for CEG students. ID card verification required at the venue.</li>}
