@@ -163,6 +163,13 @@ const Register = () => {
                         alert("Registration for this event is closed (Deadline passed).");
                         return a;
                     }
+
+                    // Check Restricted College (Sairam - Math Wizz)
+                    if (event === "Math Wizz" && (a.college || "").toLowerCase().includes("sairam")) {
+                        alert("Registration for Math Wizz is closed for Sairam college.");
+                        return a;
+                    }
+
                     // Check database limit
                     if (closedEvents.includes(event)) {
                         alert("Registration for this event is full.");
@@ -218,6 +225,11 @@ const Register = () => {
             attendees.forEach((attendee, index) => {
                 if (attendee.events.length === 0) {
                     throw new Error(`Attendee #${index + 1} (${attendee.fullName || 'Unnamed'}) must select at least one event.`);
+                }
+
+                // Check Restricted College (Sairam - Math Wizz)
+                if (attendee.events.includes("Math Wizz") && (attendee.college || "").toLowerCase().includes("sairam")) {
+                    throw new Error(`Attendee #${index + 1}: Registration for "Math Wizz" is closed for Sairam college.`);
                 }
             });
 
