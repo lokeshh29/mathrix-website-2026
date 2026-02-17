@@ -137,12 +137,16 @@ const Register = () => {
 
     // Handle event selection for specific attendee
     const handleEventChange = (id, event, checked) => {
-        // Event constraints
+        // Event constraints (Max limits for selection feedback)
         const eventConstraints = {
-            "Math Wizz": 2,
+            "Math Wizz": 3,
             "IPL Auction": 4,
             "SQL – Query Quest": 1,
-            "Paper Presentation": 2
+            "Paper Presentation": 2,
+            "MagicMatix": 2,
+            "Code Matrix": 2,
+            "Mathkinator": 2,
+            "Treasure Hunt": 3
         };
 
         setAttendees(prev => {
@@ -230,9 +234,11 @@ const Register = () => {
                 "IPL Auction": { min: 4, max: 4, label: "exactly 4" },
                 "Math Wizz": { min: 2, max: 3, label: "2-3" },
                 "Treasure Hunt": { min: 2, max: 3, label: "2-3" },
-                // "MagicMatix": {min: 1, max: 2 }, // Assuming 1-2 is fine unless strict 2 required
-                // "Code Matrix": {min: 1, max: 2 },
-                // "Mathkinator": {min: 1, max: 2 }
+                "MagicMatix": { min: 2, max: 2, label: "exactly 2" },
+                "Code Matrix": { min: 2, max: 2, label: "exactly 2" },
+                "Mathkinator": { min: 2, max: 2, label: "exactly 2" },
+                "SQL – Query Quest": { min: 1, max: 1, label: "exactly 1" },
+                "Paper Presentation": { min: 1, max: 2, label: "1-2" }
             };
 
             for (const [event, count] of Object.entries(eventCounts)) {
@@ -288,12 +294,12 @@ const Register = () => {
     // Helper to get rule message
     const getEventRuleMessage = (event) => {
         switch (event) {
-            case "IPL Auction": return "IPL Auction requires a team of 4 members.";
-            case "Math Wizz": return "Teams must consist of 2–3 members. A maximum of two teams per college is allowed. If more than two teams register from the same college, selection will be on a first-come, first-served basis.";
+            case "IPL Auction": return "IPL Auction requires exactly 4 members.";
+            case "Math Wizz": return "Teams must consist of 2–3 members.";
             case "Treasure Hunt": return "Treasure Hunt requires 2-3 members.";
-            case "MagicMatix": return "MagicMatix allows max 2 members.";
-            case "Code Matrix": return "Code Matrix allows max 2 members.";
-            case "Mathkinator": return "Mathkinator allows max 2 members.";
+            case "MagicMatix": return "MagicMatix requires exactly 2 members.";
+            case "Code Matrix": return "Code Matrix requires exactly 2 members.";
+            case "Mathkinator": return "Mathkinator requires exactly 2 members.";
             case "SQL – Query Quest": return "Individual Event (1 participant).";
             case "Paper Presentation": return "Individual or Team of 2.";
             default: return null;

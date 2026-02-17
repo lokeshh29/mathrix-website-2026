@@ -247,12 +247,12 @@ const Events = () => {
                     { title: 'Round 2: Mains (1hr 45mins)', desc: 'Various formats: Identify Mathematician, Find Error in Theorem, Rapid Fire (10 Qs in 60s), Buzzer rounds.' }
                 ],
                 rules: [
-                    'Team Size: 3 members per team.',
+                    'Team Size: 2 - 3 members per team.',
                     'Prelims: Written MCQ test.',
                     'Mains: Visual rounds, rapid fire, buzzer rounds.',
                     'Malpractice leads to disqualification.'
                 ],
-                teamSize: '3 Members per Team',
+                teamSize: '2 - 3 Members per Team',
                 judging: 'Accuracy, Speed, Logical Reasoning, Teamwork, Time Management.',
                 prize: '1st, 2nd, 3rd Prizes.',
                 coordinator: 'Safrin S (8667004235)',
