@@ -164,9 +164,10 @@ const Register = () => {
                         return a;
                     }
 
-                    // Check Restricted College (Sairam - Math Wizz)
-                    if (event === "Math Wizz" && (a.college || "").toLowerCase().includes("sairam")) {
-                        alert("Registration for Math Wizz is closed for Sairam college.");
+                    // Check Restricted College (Sairam & St.Peter's - Math Wizz)
+                    const lowerCollege = (a.college || "").toLowerCase();
+                    if (event === "Math Wizz" && (lowerCollege.includes("sairam") || lowerCollege.includes("st.peter") || lowerCollege.includes("st peter"))) {
+                        alert("Registration for Math Wizz is closed for your colleges because of two limit.");
                         return a;
                     }
 
@@ -227,9 +228,10 @@ const Register = () => {
                     throw new Error(`Attendee #${index + 1} (${attendee.fullName || 'Unnamed'}) must select at least one event.`);
                 }
 
-                // Check Restricted College (Sairam - Math Wizz)
-                if (attendee.events.includes("Math Wizz") && (attendee.college || "").toLowerCase().includes("sairam")) {
-                    throw new Error(`Attendee #${index + 1}: Registration for "Math Wizz" is closed for Sairam college.`);
+                // Check Restricted College (Sairam & St.Peter's - Math Wizz)
+                const lowerCollege = (attendee.college || "").toLowerCase();
+                if (attendee.events.includes("Math Wizz") && (lowerCollege.includes("sairam") || lowerCollege.includes("st.peter") || lowerCollege.includes("st peter"))) {
+                    throw new Error(`Attendee #${index + 1}: Registration for "Math Wizz" is closed for Sairam & St.Peter's colleges.`);
                 }
             });
 
