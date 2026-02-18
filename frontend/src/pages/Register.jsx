@@ -13,8 +13,9 @@ const COLLEGE_LIST = [
 const Register = () => {
 
     // --- CLOSING LOGIC ---
-    const REGISTRATION_DEADLINE = "2026-02-18T09:00:00+05:30";
-    const isRegistrationClosed = new Date() > new Date(REGISTRATION_DEADLINE);
+    // const REGISTRATION_DEADLINE = "2026-02-18T09:00:00+05:30";
+    // const isRegistrationClosed = new Date() > new Date(REGISTRATION_DEADLINE);
+    const isRegistrationClosed = true; // Force closed unconditionally
 
     if (isRegistrationClosed) {
         return (
