@@ -12,47 +12,6 @@ const COLLEGE_LIST = [
 
 const Register = () => {
 
-    // --- CLOSING LOGIC ---
-    // const REGISTRATION_DEADLINE = "2026-02-18T09:00:00+05:30";
-    // const isRegistrationClosed = new Date() > new Date(REGISTRATION_DEADLINE);
-    const isRegistrationClosed = true; // Force closed unconditionally
-
-    if (isRegistrationClosed) {
-        return (
-            <div className="container mx-auto px-4 py-24 min-h-screen flex items-center justify-center">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="max-w-2xl w-full glass-card p-8 md:p-12 text-center border border-white/10 shadow-2xl relative overflow-hidden"
-                >
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500"></div>
-
-                    <div className="bg-white/5 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 border border-white/10">
-                        <AlertCircle size={40} className="text-pink-400" />
-                    </div>
-
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 font-tech tracking-wide">
-                        Registration Closed
-                    </h1>
-
-                    <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-                        We have reached our maximum capacity for online registrations. <br />
-                        Thank you for your incredible interest in <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400 font-bold">Mathrix 2026</span>!
-                    </p>
-
-                    <div className="space-y-4">
-                        <div className="p-4 bg-white/5 rounded-xl border border-white/10">
-                            <p className="text-sm text-gray-500 uppercase tracking-wider font-bold mb-1">For Queries</p>
-                            <a href="mailto:mathrix@annauniv.edu" className="text-white hover:text-pink-400 transition-colors font-mono">
-                                mathrix.ceg@gmail.com
-                            </a>
-                        </div>
-                    </div>
-                </motion.div>
-            </div>
-        );
-    }
-
     // State for multiple attendees
     const [attendees, setAttendees] = useState([{
         id: 1,
@@ -88,17 +47,17 @@ const Register = () => {
     ];
 
     const deadlines = {
-        // Uniform Deadline: Feb 20, 10:30 AM
-        "Code Matrix": "2026-02-20T10:30:00+05:30",
-        "IPL Auction": "2026-02-20T10:30:00+05:30",
-        "Math Wizz": "2026-02-20T10:30:00+05:30",
-        "SQL – Query Quest": "2026-02-20T10:30:00+05:30",
+        // OPEN EVENTS (Deadline: Feb 22, 2026)
+        "IPL Auction": "2026-02-22T23:59:59+05:30",
+        "SQL – Query Quest": "2026-02-22T23:59:59+05:30",
 
-        // Closing Soon (Deadline: Feb 18, 00:25 AM)
-        "Paper Presentation": "2026-02-18T00:25:00+05:30",
-        "MagicMatix": "2026-02-18T00:25:00+05:30",
-        "Treasure Hunt": "2026-02-18T00:25:00+05:30",
-        "Mathkinator": "2026-02-18T00:25:00+05:30"
+        // CLOSED EVENTS (Deadline Passed)
+        "Code Matrix": "2026-02-18T09:00:00+05:30",
+        "Math Wizz": "2026-02-18T09:00:00+05:30",
+        "Paper Presentation": "2026-02-18T09:00:00+05:30",
+        "MagicMatix": "2026-02-18T09:00:00+05:30",
+        "Treasure Hunt": "2026-02-18T09:00:00+05:30",
+        "Mathkinator": "2026-02-18T09:00:00+05:30"
     };
 
     // Check time-based deadline
