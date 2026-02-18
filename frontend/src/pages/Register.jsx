@@ -48,10 +48,10 @@ const Register = () => {
 
     const deadlines = {
         // OPEN EVENTS (Deadline: Feb 22, 2026)
-        "IPL Auction": "2026-02-22T23:59:59+05:30",
         "SQL – Query Quest": "2026-02-22T23:59:59+05:30",
 
         // CLOSED EVENTS (Deadline Passed)
+        "IPL Auction": "2026-02-18T09:00:00+05:30",
         "Code Matrix": "2026-02-18T09:00:00+05:30",
         "Math Wizz": "2026-02-18T09:00:00+05:30",
         "Paper Presentation": "2026-02-18T09:00:00+05:30",
