@@ -43,7 +43,7 @@ const Register = () => {
                         <div className="p-4 bg-white/5 rounded-xl border border-white/10">
                             <p className="text-sm text-gray-500 uppercase tracking-wider font-bold mb-1">For Queries</p>
                             <a href="mailto:mathrix@annauniv.edu" className="text-white hover:text-pink-400 transition-colors font-mono">
-                                mathrix@annauniv.edu
+                                mathrix.ceg@gmail.com
                             </a>
                         </div>
                     </div>
