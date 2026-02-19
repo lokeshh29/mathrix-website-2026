@@ -394,6 +394,34 @@ async def get_ticket(transactionId: str):
         headers=headers
     )
 
+from receipt.generator import generate_receipt
+
+@app.get("/receipt/{transactionId}")
+async def get_receipt(transactionId: str):
+    db = MongoDBService()
+    registrations = db.get_all_registrations()
+    
+    # Find registration by mathrixId (preferred) or transactionId
+    user_data = next((r for r in registrations if r.get('mathrixId') == transactionId or r.get('transactionId') == transactionId), None)
+    
+    if not user_data:
+        raise HTTPException(status_code=404, detail="Registration not found")
+        
+    pdf_buffer = generate_receipt(user_data)
+    
+    if not pdf_buffer:
+        raise HTTPException(status_code=500, detail="Failed to generate receipt")
+    
+    headers = {
+        'Content-Disposition': f'attachment; filename="Mathrix_Receipt_{transactionId}.pdf"'
+    }
+    
+    return StreamingResponse(
+        pdf_buffer, 
+        media_type="application/pdf", 
+        headers=headers
+    )
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
