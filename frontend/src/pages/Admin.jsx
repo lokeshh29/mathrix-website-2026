@@ -18,6 +18,7 @@ const Admin = () => {
     const [deleteId, setDeleteId] = useState(null);
     const [deletePasswordInput, setDeletePasswordInput] = useState("");
     const [showExportMenu, setShowExportMenu] = useState(false);
+    const [showExcelMenu, setShowExcelMenu] = useState(false);
 
     // Extract unique events for the filter dropdown
     const allEvents = ['All', ...new Set(registrations.flatMap(reg => reg.events || []))];
@@ -107,6 +108,8 @@ const Admin = () => {
             { header: 'Email', dataKey: 'email' },
             { header: 'Phone', dataKey: 'phone' },
             { header: 'College', dataKey: 'college' },
+            { header: 'Course', dataKey: 'course' },
+            { header: 'Year', dataKey: 'year' },
             { header: 'Specialization', dataKey: 'specialization' },
             { header: 'Txn ID', dataKey: 'transactionId' },
             { header: 'Events', dataKey: 'events' },
@@ -120,6 +123,8 @@ const Admin = () => {
             email: reg.email,
             phone: reg.phone,
             college: reg.college,
+            course: reg.course || '-',
+            year: reg.year || '-',
             specialization: reg.specialization,
             transactionId: reg.transactionId,
             events: (reg.events || []).join(', ')
@@ -130,21 +135,23 @@ const Admin = () => {
             head: [columns.map(col => col.header)],
             body: rows.map(row => columns.map(col => row[col.dataKey])),
             startY: 35,
-            styles: { fontSize: 9, cellPadding: 3, overflow: 'linebreak' },
+            styles: { fontSize: 7, cellPadding: 2, overflow: 'linebreak' },
             headStyles: { fillColor: [236, 72, 153], textColor: 255, fontStyle: 'bold' },
             alternateRowStyles: { fillColor: [245, 245, 245] },
             columnStyles: {
-                0: { cellWidth: 15, halign: 'center' }, // S.No
-                1: { cellWidth: 20, halign: 'center' }, // MID
-                2: { cellWidth: 35 }, // Full Name
-                3: { cellWidth: 55 }, // Email
-                4: { cellWidth: 25 }, // Phone
-                5: { cellWidth: 45 }, // College
-                6: { cellWidth: 25 }, // Specialization
-                7: { cellWidth: 30 }, // Txn ID
-                8: { cellWidth: 'auto' } // Events (Remaining space)
+                0: { cellWidth: 8, halign: 'center' },  // S.No
+                1: { cellWidth: 15, halign: 'center' }, // MID
+                2: { cellWidth: 25 },                   // Full Name
+                3: { cellWidth: 35 },                   // Email
+                4: { cellWidth: 22 },                   // Phone
+                5: { cellWidth: 30 },                   // College
+                6: { cellWidth: 12 },                   // Course
+                7: { cellWidth: 8, halign: 'center' },  // Year
+                8: { cellWidth: 15 },                   // Specialization
+                9: { cellWidth: 30 },                   // Txn ID
+                10: { cellWidth: 'auto' }               // Events
             },
-            margin: { top: 35, left: 14, right: 14 }
+            margin: { top: 35, left: 10, right: 10 }
         });
 
         // Save PDF
@@ -305,6 +312,39 @@ const Admin = () => {
                     <button onClick={fetchRegistrations} className="p-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors text-white" title="Refresh">
                         <RefreshCw size={20} className={loading ? "animate-spin" : ""} />
                     </button>
+                    <div className="relative ml-2">
+                        <button
+                            onClick={() => setShowExcelMenu(!showExcelMenu)}
+                            className="btn bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 border-blue-500/30 flex items-center gap-2"
+                        >
+                            <Download size={18} /> Export Excel <ChevronDown size={16} />
+                        </button>
+                        {showExcelMenu && (
+                            <div className="absolute right-0 mt-2 w-56 bg-[#0f0518] border border-white/10 rounded-xl shadow-xl z-50 overflow-hidden max-h-60 overflow-y-auto">
+                                {(() => {
+                                    const batchSize = 60;
+                                    const total = filteredRegistrations.length;
+                                    const batches = [];
+                                    if (total === 0) {
+                                        return <div className="px-4 py-3 text-sm text-gray-500">No records</div>;
+                                    }
+                                    for (let i = 0; i < total; i += batchSize) {
+                                        const end = Math.min(i + batchSize, total);
+                                        batches.push(
+                                            <button
+                                                key={i}
+                                                onClick={() => handleExportCSV(i, end)}
+                                                className="w-full text-left px-4 py-2 text-sm text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
+                                            >
+                                                Rows {i + 1} - {end}
+                                            </button>
+                                        );
+                                    }
+                                    return batches;
+                                })()}
+                            </div>
+                        )}
+                    </div>
                     <div className="relative">
                         <button
                             onClick={() => setShowExportMenu(!showExportMenu)}

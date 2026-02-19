@@ -87,7 +87,6 @@ def draw_receipt_panel(c, x, y, width, height, data, copy_type):
     c.setFont("Helvetica", 7)
     c.drawString(x + MARGIN, footer_y, f"ID: {data.get('mathrixId', 'N/A')}")
     c.drawString(x + MARGIN, footer_y - 0.12 * inch, f"Date: {data.get('timestamp', '').split('T')[0]}")
-    c.drawString(x + MARGIN, footer_y - 0.24 * inch, f"Private Key: {data.get('serial_number', 'N/A')}")
 
 
 def draw_receipt_row(c, y, row_height, width, data):

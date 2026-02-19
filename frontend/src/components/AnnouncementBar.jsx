@@ -34,7 +34,7 @@ const AnnouncementBar = () => {
                         </span>
                         <span className="text-pink-500/50">•</span>
                         <span>
-                            For queries, contact: <span className="text-pink-300">mathrix@annauniv.edu</span>
+                            For queries, contact: <span className="text-pink-300">mathrix.ceg@gmail.com</span>
                         </span>
                         <span className="text-pink-500/50">•</span>
                         <span>

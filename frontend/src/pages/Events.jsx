@@ -74,11 +74,11 @@ const Events = () => {
             details: {
                 description: 'Code Matrix is a collaborative coding challenge that tests logic, coordination, and problem-solving. Teams solve two interconnected problems by completing partial code in turns under strict isolation rules. Success depends on clear thinking, teamwork, and seamless code continuity under time pressure.',
                 rounds: [
-                    { title: 'Round 1: Prelims (30 mins)', desc: 'Logic-based MCQs and dry-run coding problems. Scored on accuracy and completion time.' },
-                    { title: 'Round 2: Live Coding (40 mins)', desc: '2 DSA problems with turn-based coding (10 min swaps). Evaluated on logic, execution, and submission time.' }
+                    { title: 'Round 1: Prelims (15 mins)', desc: 'Logic-based MCQs and dry-run coding problems. Scored on accuracy and completion time.' },
+                    { title: 'Round 2: Live Coding (50 mins)', desc: 'Three DSA problems with turn-based coding (10 min swaps). Evaluated on logic, execution, and submission time.' }
                 ],
                 rules: [
-                    'Teams must consist of 2 members only.',
+                    'Teams must consist of two members only.',
                     'Problem statement split into two parts - each member gets different part.',
                     'Turn-Based: Player 1 codes 10 mins, then Player 2. Cycle repeats.',
                     'Isolation Rule: When one codes, other must stay away - no viewing, no communication.',
