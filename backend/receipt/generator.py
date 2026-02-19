@@ -41,10 +41,12 @@ def draw_receipt_panel(c, x, y, width, height, data, copy_type):
     c.drawCentredString(center_x, header_y, "MATHEMATICS COLLOQUIUM")
     
     c.setFont("Helvetica-Bold", 9)
-    c.drawCentredString(center_x, header_y - 0.15 * inch, "MATHRIX '26")
+    c.drawCentredString(center_x, header_y - 0.15 * inch, "Department of Mathematics")
+    c.drawCentredString(center_x, header_y - 0.30 * inch, "Anna University, Chennai - 600 025")
+    c.drawCentredString(center_x, header_y - 0.45 * inch, "MATHRIX '26")
     
     c.setFont("Helvetica-Oblique", 7)
-    c.drawCentredString(center_x, header_y - 0.3 * inch, f"({copy_type})")
+    c.drawCentredString(center_x, header_y - 0.60 * inch, f"({copy_type})")
     
     # --- Content ---
     content_y = y + height - 1.2 * inch
@@ -55,12 +57,14 @@ def draw_receipt_panel(c, x, y, width, height, data, copy_type):
     name = data.get('fullName', '__________________')
     
     c.setFont("Helvetica", 9)
-    line_height = 0.2 * inch
+    line_height = 0.25 * inch
     
     # Text Lines
     c.drawString(x + MARGIN, content_y, f"Received with thanks a sum of Rupees {amount}/-")
     content_y -= line_height
+    c.setFont("Helvetica-Bold", 9)
     c.drawString(x + MARGIN, content_y, f"from {name},")
+    c.setFont("Helvetica", 9)
     content_y -= line_height
     
     # College Line (Wrapped)
@@ -72,7 +76,7 @@ def draw_receipt_panel(c, x, y, width, height, data, copy_type):
         c.drawString(x + MARGIN, content_y, line)
         content_y -= line_height
 
-    c.drawString(x + MARGIN, content_y, "towards Mathrix '26 conducted on 20/02/2026.")
+    c.drawString(x + MARGIN, content_y, "towards Registration fee for Mathrix '26 conducted on 20/02/2026.")
     
     # --- Footer ---
     footer_y = y + 0.3 * inch
@@ -83,6 +87,7 @@ def draw_receipt_panel(c, x, y, width, height, data, copy_type):
     c.setFont("Helvetica", 7)
     c.drawString(x + MARGIN, footer_y, f"ID: {data.get('mathrixId', 'N/A')}")
     c.drawString(x + MARGIN, footer_y - 0.12 * inch, f"Date: {data.get('timestamp', '').split('T')[0]}")
+    c.drawString(x + MARGIN, footer_y - 0.24 * inch, f"Private Key: {data.get('serial_number', 'N/A')}")
 
 
 def draw_receipt_row(c, y, row_height, width, data):
