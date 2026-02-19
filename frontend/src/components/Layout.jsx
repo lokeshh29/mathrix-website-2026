@@ -4,13 +4,15 @@ import Navbar from './Navbar';
 import ThreeBackground from './ThreeBackground';
 
 import ChatBot from './ChatBot';
+import AnnouncementBar from './AnnouncementBar';
 
 const Layout = ({ children }) => {
     return (
         <div className="min-h-screen flex flex-col relative">
             <ThreeBackground />
             <Navbar />
-            <main className="flex-grow pt-24 md:pt-28 relative z-10">
+            <AnnouncementBar />
+            <main className="flex-grow pt-32 md:pt-36 relative z-10">
                 {children}
             </main>
             {/* <ChatBot /> */}
