@@ -24,7 +24,7 @@ const sponsorCategories = [
         color: 'text-pink-400',
         border: 'border-pink-500/30',
         sponsors: [
-            { name: 'Topperfyai', logo: topperfyLogo, link: '#' },
+            { name: 'Topperifyai', logo: topperfyLogo, link: '#' },
             { name: 'Space Air', logo: spaceAirLogo, link: '#' }
         ]
     },
